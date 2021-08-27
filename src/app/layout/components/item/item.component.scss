@@ -1,0 +1,15 @@
+.item-list-view{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1rem;
+    width:  calc(90% -3rem );
+    // min-width: var(--item-list-view-width );
+    padding-right: 1rem;
+}
+.price-column{
+    min-width: 4rem;
+}
+

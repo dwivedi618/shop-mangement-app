@@ -16,6 +16,8 @@ export class LayoutComponent implements OnInit {
     { path : 'calls',icon :'inventory', name : 'Purchase' },
     { path : 'sale',icon :'sell', name : 'Sale' },
     { path : 'neworder',icon :'add', name : 'New Order' },
+    { path : 'neworder',icon :'filter_vintage', name : 'New Jwellary Order' },
+
 
     { path : 'return',icon :'undo', name : 'Return' },
     { path : 'files',icon :'published_with_changes', name : 'Replace' },

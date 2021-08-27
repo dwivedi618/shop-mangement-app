@@ -25,15 +25,20 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ItemComponent implements OnInit{
   @Input() data;
+  @Input() view : Boolean;
+
   item = {};
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
+  isListView: Boolean;
   constructor() { 
 
   }
   ngOnInit(): void {
     this.item = this.data;
-    console.log("data",this.data)
+    this.isListView = this.view;
+
+    console.log("data",this.data, this.isListView)
   }
 }
 

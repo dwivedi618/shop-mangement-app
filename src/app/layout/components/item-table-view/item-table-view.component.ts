@@ -1,5 +1,7 @@
 
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 export interface PeriodicElement {
   name: string;
   description: number;
@@ -38,16 +40,49 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./item-table-view.component.scss']
 })
 export class ItemTableViewComponent implements OnInit {
+
   @Input() data;
   item = {};
-  displayedColumns: string[] = ['code','name','description',  'sellingPrice', ];
-  dataSource = ELEMENT_DATA;
+  dataSource = new MatTableDataSource<any>();
+  displayedColumns: string[] = ['select','code','name','description',  'sellingPrice', ];
+  
+  selection = new SelectionModel<any>(true, []);
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: any): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.sellingPrice + 1}`;
+  }
   constructor() { 
 
   }
   ngOnInit(): void {
-    this.item = this.data;
-    console.log("data",this.data)
+    this.dataSource = new MatTableDataSource();
+    // this.item = this.data;
+    console.log("data",this.selection.selected)
+    
+    this.dataSource.data = ELEMENT_DATA
+
+  
   }
 }
 

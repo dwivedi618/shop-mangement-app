@@ -22,7 +22,7 @@ header{
 
   }
   .sidenav-checkout{
-    width: 24rem;
+    width: var(--sidenav-lg-width);
     padding-bottom: 3rem;
   }
   .sidenav-item-details{

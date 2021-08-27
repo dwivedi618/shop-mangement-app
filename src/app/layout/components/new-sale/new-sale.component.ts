@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-customer.component';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
+import { ServiceListComponent } from '../service-list/service-list.component';
 
 @Component({
   selector: 'app-new-sale',
@@ -9,8 +10,9 @@ import { ItemDetailsComponent } from '../item-details/item-details.component';
   styleUrls: ['./new-sale.component.scss'],
 })
 export class NewSaleComponent implements OnInit {
+  filterOption : any
   value: any;
-  isListView = false;
+  isListView = true;
   primaryLinks = [
     { path: 'activity', icon: 'grid_view', name: 'Dashboard' },
     { path: 'chats', icon: 'dry_cleaning', name: 'Product' },
@@ -27,20 +29,20 @@ export class NewSaleComponent implements OnInit {
     {
       name: 'T-shirt',
       brand: 'Peter England',
-      sellingPrice: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
+      sellingPrice: 199,
+      description: '',
+      code : ''
     },
     {
       name: 'T-shirt',
       brand: 'Peter England',
-      sellingPrice: 1199,
+      sellingPrice: 19,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
       name: 'T-shirt',
       brand: 'Peter England',
-      sellingPrice: 1199,
+      sellingPrice: 9,
       description: 'Strechable ,cotton febric,replacement,free delivery',
       code : 'ST2021APR'
     },{
@@ -109,6 +111,7 @@ export class NewSaleComponent implements OnInit {
   ngOnInit(): void {
     // this.checkCustomer();
     // this.checkItemDetails();
+    this.checkServiceList()
   }
   checkCustomer() {
     const data = {};
@@ -130,4 +133,23 @@ export class NewSaleComponent implements OnInit {
       data: data,
     });
   }
+  checkServiceList() {
+    const data = {};
+    const dialogRef = this.dialog.open(ServiceListComponent, {
+      
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: true,
+      disableClose : true,
+      data: data,
+    });
+  }
+
+  getSearchText(searchText){
+    console.log(searchText)
+    this.filterOption = searchText
+    function getText() {
+      return  this.filterOption
+    }
+  } 
 }

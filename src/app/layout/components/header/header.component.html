@@ -12,7 +12,17 @@
           <!-- <app-search></app-search> -->
         </div>
         <span class="spacer"></span>
-       <app-avatar></app-avatar>
+       <!-- <app-avatar></app-avatar> -->
+       <button mat-icon-button >
+        <mat-icon>minimize</mat-icon>
+      </button>
+      <button mat-icon-button (click)="isFullScreen = !isFullScreen">
+        <mat-icon>{{isFullScreen ? 'fullscreen' : 'fullscreen_exit'}}</mat-icon>
+      </button>
+      <button mat-icon-button >
+        <mat-icon style="color: rgb(255, 104, 49);">cancel</mat-icon>
+      </button>
+
     </mat-toolbar>
   </header>
   

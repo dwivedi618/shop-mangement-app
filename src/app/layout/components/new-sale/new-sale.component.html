@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-newsale-container">
     <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="true" position="end">
         <mat-toolbar class="shadow" style="position: absolute;top: 0;z-index: 5;background: white;">
-            <button mat-button [mat-dialog-close]="true" class="bg-dark"><span>Cancel</span></button>
+            <button mat-button [mat-dialog-close]="true" class="bg-ultra-light"><span>Cancel</span></button>
             <div class="spacer"></div>
             <small>New Order</small>
             <div class="spacer"></div>
@@ -86,7 +86,7 @@
     <mat-sidenav-content>
         <mat-toolbar class="bg-white" style="position: absolute;top:0">
             <div class="layout w-100">
-                <app-search></app-search>
+                <app-search (onSearch)="getSearchText($event)"></app-search>
             </div>
             <span class="spacer"></span>
             <button mat-icon-button class="mx-2 rounded-lg" (click)="isListView = !isListView">
@@ -96,11 +96,13 @@
 
         <section *ngIf="isListView" class="items-container grid-view">
             <div *ngFor="let item of items">
-                <app-item [data]="item"></app-item>
+                <app-item [data]="item" [view]="isListView"></app-item>
             </div>
         </section>
         <section *ngIf="!isListView" class="items-container-table-view">
-            <app-item-table-view></app-item-table-view>
+            <div *ngFor="let item of items" style="width:100%">
+                <app-item [data]="item" [view]="isListView"></app-item>
+            </div>
         </section>
         <mat-toolbar class="mat-elevation-z16" style="position: absolute;bottom: 0;z-index: 15;background: white">
             <div class="spacer"></div>

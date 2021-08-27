@@ -1,0 +1,24 @@
+<mat-toolbar  class="bg-dark rounded-lg dialog-toolbar" style="margin: -24px -24px 24px -24px;padding: 0 .4rem;">
+    <!-- <button mat-button [mat-dialog-close]="true" class="bg-dark"><span>Cancel</span></button> -->
+    <div class="spacer"></div>
+    <small>Select Your Service</small>
+    <div class="spacer"></div>
+  
+</mat-toolbar>
+<mat-dialog-content>
+    <div class="layout">
+      <div class="d-flex justify-content-space-around" #service>
+        <mat-card style="width: 12rem;height: 12rem;overflow: hidden;margin: 1rem;padding: 0;" class="rounded-lg service_card shadow"  *ngFor="let service of typesOfService" [value]="service.value" (click)="selectServiceType(service)">
+         
+            <img src="{{service.imgUrl}}" class="thumbnail-lg" alt="...">
+            <div class="card-img-overlay layout">
+                
+              <h5  style="margin: 0;">{{service.viewValue}}</h5>
+            </div>
+          
+        </mat-card>
+        
+      </div>
+    </div>
+</mat-dialog-content>
+ 

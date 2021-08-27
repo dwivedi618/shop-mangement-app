@@ -17,6 +17,12 @@ import { SearchComponent } from './layout/components/search/search.component';
 import { ItemDetailsComponent } from './layout/components/item-details/item-details.component';
 import { ItemComponent } from './layout/components/item/item.component';
 import { ItemTableViewComponent } from './layout/components/item-table-view/item-table-view.component';
+import { SaleListComponent } from './layout/components/sale-list/sale-list.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { NewOrderCategoryComponent } from './layout/components/new-order-category/new-order-category.component';
+import { ServiceListComponent } from './layout/components/service-list/service-list.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +37,11 @@ import { ItemTableViewComponent } from './layout/components/item-table-view/item
     SearchComponent,
     ItemDetailsComponent,
     ItemComponent,
-    ItemTableViewComponent
+    ItemTableViewComponent,
+    SaleListComponent,
+    NewOrderCategoryComponent,
+    ServiceListComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -39,7 +49,10 @@ import { ItemTableViewComponent } from './layout/components/item-table-view/item
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,24 @@
-<article *ngIf="data" class="item shadow"  >
-    <small class="item-price">{{item.sellingPrice | currency : 'INR'}}</small>
-    <img class="thumbnail-lg" src="../../../../assets/images/cool-background.png" alt="">
-    <mat-list dense>
-        <mat-list-item class="text-wrap-sm">
+
+  <article *ngIf="data && isListView" class="item shadow"  >
+      <small class="item-price">{{item.sellingPrice | currency : 'INR'}}</small>
+      <img class="thumbnail-lg" src="../../../../assets/images/cool-background.png" alt="">
+      <mat-list dense>
+          <mat-list-item class="text-wrap-sm">
+            <h3 matLine> {{item.name}} </h3>
+            <p matLine class="">
+              <span> {{item.code}} </span>
+              <span class=""> -- {{item.description}} </span>
+            </p>
+          </mat-list-item>
+        </mat-list>
+  </article>
+
+
+
+<article *ngIf="data && !isListView" class="item-list-view shadow" >
+      <img class="thumbnail-sm" src="../../../../assets/images/cool-background.png" alt="">
+      <mat-list dense>
+        <mat-list-item class="text-wrap-lg">
           <h3 matLine> {{item.name}} </h3>
           <p matLine class="">
             <span> {{item.code}} </span>
@@ -10,5 +26,19 @@
           </p>
         </mat-list-item>
       </mat-list>
-</article>
+      <div class="spacer"></div>
+      <div class="price-column">
+        <mat-list dense>
+          <mat-list-item >
+            <span matLine style="color:var(--light)">MRP</span>
+            <h3 matLine style="font-weight: 600;"> {{item.sellingPrice | currency : 'INR'}}</h3>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      
+
+  
+      </article>
+   
+
 

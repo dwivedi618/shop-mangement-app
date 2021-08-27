@@ -19,7 +19,7 @@ header{
   }
   
   .sidenav {
-    width: 12rem;
+    width: var(--sidenav-sm-width );
   }
   mat-nav-list mat-icon,span,p{
       color : var(--dark);
