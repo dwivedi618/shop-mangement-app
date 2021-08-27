@@ -1,0 +1,33 @@
+
+
+<mat-toolbar  class="bg-dark rounded-lg dialog-toolbar" style="margin: -24px -24px 24px -24px;padding: 0 .4rem;">
+    <button mat-button [mat-dialog-close]="true" class="bg-dark"><span>Cancel</span></button>
+    <div class="spacer"></div>
+    <small>Customer</small>
+    <div class="spacer"></div>
+    <button mat-raised-button class="bg-green"><span>Done</span></button>
+</mat-toolbar>
+<div mat-dialog-content class="">
+    <div class="row justify-content-center py-5 layout">
+        <div class="col-md-8 layout">
+            <form [formGroup]="customerForm" class="w-100" style="font-size: 12px;">
+              
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Ex:Nikhil Ojha" >
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Contact</mat-label>
+                    <input matInput placeholder="Ex:7827458618" >
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Address</mat-label>
+                    <textarea matInput placeholder="Ex:Banjaria 274704" ></textarea>
+                </mat-form-field>
+            </form>
+            
+        </div>
+    </div>
+
+</div>
+

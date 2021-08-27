@@ -1,0 +1,11 @@
+<form  class="d-flex w-100 shadow search-container">
+    <input type="search" placeholder="Search" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}">
+    <button *ngIf="searchText" mat-icon-button  class="clear-search-btn rounded-lg" #clearSearch (click)="searchText = ''">
+        <mat-icon class="mat-icon-sm pt-1">cancel</mat-icon>
+    </button>
+    <div >
+        <button mat-icon-button  class="bg-ultra-light rounded-lg">
+            <mat-icon class="mat-icon-sm pt-1">search</mat-icon>
+        </button>
+    </div>
+</form>

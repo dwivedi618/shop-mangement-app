@@ -1,1 +1,171 @@
-/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: "Inter";
+    src: url(./assets/font/Inter/static/Inter-ExtraLight.ttf) format("truetype");
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src: url(./assets/font/Inter/static/Inter-Light.ttf) format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src:url(./assets/font/Inter/static/Inter-Regular.ttf) format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url(./assets/font/Inter/static/Inter-SemiBold.ttf) format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+/* VARIABLES*/
+@import './assets/style/_variable.scss';
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
+
+.shadow{
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(58, 57, 68, 0.2);
+}
+.shadow-1{
+    border-radius: 4px;
+    box-shadow: 0 12px 18px 2px rgba(34,0,51,.04),0 6px 22px 4px rgba(7,48,114,.12),0 6px 10px -4px rgba(14,13,26,.12);
+}
+
+// BACKGROUD
+.bg-blue{
+    color: var(--white);
+    background: var(--blue);
+}
+.bg-dark{
+    color: var(--white);
+
+    background: var(--dark);
+}
+.bg-ultra-light{
+    color: var(--dark);
+    background: var(--ultra-light);
+}
+.bg-light{
+    background: var(--light);
+}
+.bg-green{
+    color: var(--white)!important;
+    background: var(--green);
+}
+.bg-white{
+    
+    background: var(--white);
+}
+// /force center css
+.layout{
+    -webkit-box-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+  }
+
+// MATERIAL OVERWRITE CSS
+    mat-toolbar {
+        max-height: 48px!important;
+    }
+    mat-toolbar.dialog-toolbar{
+        min-width: calc(100% + 48px);
+    }
+    .mat-icon-sm{
+        font-size: 1rem;
+    }
+.w-100{
+    width: 100%;
+}
+.w-50{
+    width: 50%;
+}
+.h-100{
+    height: 100%;
+}
+
+.text-center{
+    text-align: center;
+}
+.rounded-lg{
+    border-radius: 4px!important;
+}
+.spacer{
+    flex: 1 1 auto;
+}
+.d-flex,.row{
+    display: flex;
+    align-items: center;
+}
+.fancy-text{
+    letter-spacing: 5px;
+    font-weight: 600;
+}
+.thumbnail-md{
+    height: 6rem;
+    width: 6rem;
+    border-radius: 0.2rem;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  .thumbnail-lg{
+    height: 12rem;
+    width: 12rem;
+    border-radius: 0.2rem;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  .text-wrap-sm{
+    max-width: 12rem;
+    padding: 2px .5rem;
+    text-overflow: ellipsis;
+    overflow: hidden!important;
+    white-space: nowrap;
+  }
+
+//   ITEM CARD PRICE TAG DETAILS
+.items-container{
+    
+    padding: 1rem 0;
+    margin: 3rem 0rem 2rem 0rem;
+    max-height: calc(100% - 8rem);
+    overflow-y: auto;
+}
+.grid-view{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+.item{
+    position: relative;
+    display: block;
+    min-width: 5rem;
+    min-height: 5rem;
+    margin: 1rem;
+    cursor: pointer;
+}
+.item:is(.active,:hover){
+  background: var(--ultra-light);
+}
+.item-price{
+    padding: .5rem 1rem;
+    border-radius: 4px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color : var(--white);
+    background: var(--ultra-light);
+    font-weight: 600;
+}

@@ -1,0 +1,42 @@
+header{
+    position: fixed;
+    display: block;
+    width: 100vw;
+    top : 0;
+    z-index: 2;
+  }
+  ::ng-deep mat-toolbar mat-toolbar-row .mat-toolbar-row{
+    max-height: 48px;
+  }
+  header mat-toolbar{
+    height: 48px;
+  }
+  .sidenav-container {
+    position: fixed;
+    top: 3rem;
+    width: 100vw;
+    height: calc(100% - 3rem);
+  }
+  
+  .sidenav {
+    width: 12rem;
+  }
+  mat-nav-list mat-icon,span,p{
+      color : var(--dark);
+      
+  }
+  mat-nav-list p{
+    font-weight: 600!important;
+  }
+  
+  .sidenav .mat-toolbar {
+    background: inherit;
+  }
+  
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+ 

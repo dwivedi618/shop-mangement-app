@@ -1,0 +1,19 @@
+<div>
+ 
+    <button mat-icon-button [matMenuTriggerFor]="userProfile" class="" style="border-radius: 5rem;">
+      <div style="width: 32px;height: 32px;">
+      <div class="avatar_small box_shadow_0 bg-primary text-white layout "><b>FD</b></div>
+    </div>
+    </button>
+    <mat-menu #userProfile="matMenu">
+    
+      <a mat-menu-item [routerLink]="['']">
+        <mat-icon mat-list-icon>help</mat-icon>
+        <span>Help</span>
+      </a>
+      <a mat-menu-item (click)="logout()">
+        <mat-icon mat-list-icon>lock</mat-icon>
+        <span>Logout</span>
+      </a>
+    </mat-menu>
+  </div>

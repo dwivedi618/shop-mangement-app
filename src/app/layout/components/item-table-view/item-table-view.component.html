@@ -1,0 +1,33 @@
+
+    <table mat-table [dataSource]="dataSource" class="shadow w-100 bg-white" >
+    
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+    
+        <!-- description Column -->
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+    
+        <!-- sellingPrice Column -->
+        <ng-container matColumnDef="sellingPrice">
+            <th mat-header-cell *matHeaderCellDef> Sale Price </th>
+            <td mat-cell *matCellDef="let element"> {{element.sellingPrice | currency :'INR'}} </td>
+        </ng-container>
+    
+        <!-- code Column -->
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef> Item Code </th>
+            <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>

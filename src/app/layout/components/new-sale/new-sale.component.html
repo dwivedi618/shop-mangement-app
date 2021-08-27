@@ -1,0 +1,115 @@
+<mat-sidenav-container class="sidenav-newsale-container">
+    <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="true" position="end">
+        <mat-toolbar class="shadow" style="position: absolute;top: 0;z-index: 5;background: white;">
+            <button mat-button [mat-dialog-close]="true" class="bg-dark"><span>Cancel</span></button>
+            <div class="spacer"></div>
+            <small>New Order</small>
+            <div class="spacer"></div>
+            <button mat-raised-button class="bg-green">
+                <mat-icon>add_shopping_cart</mat-icon>
+                <small>cart(6)</small>
+            </button>
+        </mat-toolbar>
+
+
+        <mat-selection-list #shoes dense class="question-ref-container">
+            <mat-list-option *ngFor="let link of primaryLinks">
+                <span>1 x ₹645/-</span>
+                <p matLine>
+                    <!-- <span matLine> {{link.name | titlecase}} </span> -->
+                    <small style="font-size: 10px;"> {{link.name }}</small>
+                </p>
+            </mat-list-option>
+        </mat-selection-list>
+        <!--           
+          <p>
+            Options selected: {{shoes.selectedOptions.selected.length}}
+          </p> -->
+        <details>
+            <summary>
+                <div style="display: flex;flex-direction: row;align-items: center;justify-content: space-between;">
+                    <small>Sub Total</small>
+                    <span>₹645/-</span>
+                </div>
+            </summary>
+            <p>
+                <mat-toolbar>
+                    <span>Total</span>
+                    <div class="spacer"></div>
+                    <span>₹645/-</span>
+                </mat-toolbar>
+                <mat-toolbar>
+                    <span>Discount</span>
+                    <div class="spacer"></div>
+                    <span>-₹45/-</span>
+                </mat-toolbar>
+            </p>
+        </details>
+        <details>
+            <summary>
+                <div style="display: flex;flex-direction: row;align-items: center;justify-content: space-between;">
+                    <small>Discount</small>
+                    <span>-₹45/-</span>
+                </div>
+            </summary>
+            <p>
+                <mat-toolbar style="font-size: 10px;" class="bg-white">
+                    <mat-form-field class="w-50" appearance="outline">
+                        <mat-label>Discount In ₹</mat-label>
+                        <input matInput type="text" [(ngModel)]="value">
+                        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <mat-form-field class="w-50" appearance="outline">
+                        <mat-label>Discount In %</mat-label>
+                        <input matInput type="text" [(ngModel)]="value">
+                        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </mat-toolbar>
+            </p>
+        </details>
+
+
+
+
+        <mat-toolbar style="position: absolute;bottom: 0;z-index: 5;background: white">
+            <button mat-raised-button class="bg-green w-100">
+                <span class="fancy-text">CHARGE</span>
+                <span>₹600/-</span>
+            </button>
+        </mat-toolbar>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar class="bg-white" style="position: absolute;top:0">
+            <div class="layout w-100">
+                <app-search></app-search>
+            </div>
+            <span class="spacer"></span>
+            <button mat-icon-button class="mx-2 rounded-lg" (click)="isListView = !isListView">
+                <mat-icon class="mat-icon-sm pt-0">{{isListView ? 'view_list' : 'grid_view'}}</mat-icon>
+            </button>
+        </mat-toolbar>
+
+        <section *ngIf="isListView" class="items-container grid-view">
+            <div *ngFor="let item of items">
+                <app-item [data]="item"></app-item>
+            </div>
+        </section>
+        <section *ngIf="!isListView" class="items-container-table-view">
+            <app-item-table-view></app-item-table-view>
+        </section>
+        <mat-toolbar class="mat-elevation-z16" style="position: absolute;bottom: 0;z-index: 15;background: white">
+            <div class="spacer"></div>
+            <mat-paginator 
+             [length]="items.length" 
+             [pageSize]="10" 
+             [pageSizeOptions]="[5, 10, 25, 100]" 
+             aria-label="Select page" style="max-height: 3rem;margin: 0;padding: 0;">
+            </mat-paginator>
+        </mat-toolbar>
+    </mat-sidenav-content>
+</mat-sidenav-container>

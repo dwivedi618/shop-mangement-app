@@ -1,0 +1,14 @@
+<article *ngIf="data" class="item shadow"  >
+    <small class="item-price">{{item.sellingPrice | currency : 'INR'}}</small>
+    <img class="thumbnail-lg" src="../../../../assets/images/cool-background.png" alt="">
+    <mat-list dense>
+        <mat-list-item class="text-wrap-sm">
+          <h3 matLine> {{item.name}} </h3>
+          <p matLine class="">
+            <span> {{item.code}} </span>
+            <span class=""> -- {{item.description}} </span>
+          </p>
+        </mat-list-item>
+      </mat-list>
+</article>
+
