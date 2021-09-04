@@ -10,7 +10,6 @@ import { HeaderComponent } from './layout/components/header/header.component';
 import { AvatarComponent } from './layout/components/avatar/avatar.component';
 import { LoginComponent } from './layout/components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SaleComponent } from './layout/components/sale/sale.component';
 import { NewSaleComponent } from './layout/components/new-sale/new-sale.component';
 import { AddUpdateCustomerComponent } from './layout/components/add-update-customer/add-update-customer.component';
 import { SearchComponent } from './layout/components/search/search.component';
@@ -31,7 +30,6 @@ import { ServiceListComponent } from './layout/components/service-list/service-l
     HeaderComponent,
     AvatarComponent,
     LoginComponent,
-    SaleComponent,
     NewSaleComponent,
     AddUpdateCustomerComponent,
     SearchComponent,

@@ -6,7 +6,7 @@
             <small>New Order</small>
             <div class="spacer"></div>
             <button mat-raised-button class="bg-green">
-                <mat-icon>add_shopping_cart</mat-icon>
+                <mat-icon>shopping_cart</mat-icon>
                 <small>cart(6)</small>
             </button>
         </mat-toolbar>
@@ -92,16 +92,27 @@
             <button mat-icon-button class="mx-2 rounded-lg" (click)="isListView = !isListView">
                 <mat-icon class="mat-icon-sm pt-0">{{isListView ? 'view_list' : 'grid_view'}}</mat-icon>
             </button>
+            <button mat-icon-button class="mx-2 rounded-lg" [matMenuTriggerFor]="moreTools">
+                <mat-icon class="mat-icon-sm pt-0">more_vert</mat-icon>
+            </button>
+            <mat-menu #moreTools="matMenu">
+                <mat-list dense>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon>refresh</mat-icon>
+                        <span>Refresh</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon>settings</mat-icon>
+                        <span>settings</span>
+                    </mat-list-item>
+                </mat-list>
+            </mat-menu>
         </mat-toolbar>
 
-        <section *ngIf="isListView" class="items-container grid-view">
-            <div *ngFor="let item of items">
-                <app-item [data]="item" [view]="isListView"></app-item>
-            </div>
-        </section>
-        <section *ngIf="!isListView" class="items-container-table-view">
-            <div *ngFor="let item of items" style="width:100%">
-                <app-item [data]="item" [view]="isListView"></app-item>
+       
+        <section  class="items-container-table-view">
+            <div  style="width:100%">
+                <app-item [data]="items" [(view)]="isListView"></app-item>
             </div>
         </section>
         <mat-toolbar class="mat-elevation-z16" style="position: absolute;bottom: 0;z-index: 15;background: white">

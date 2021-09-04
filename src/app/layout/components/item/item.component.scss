@@ -1,15 +1,62 @@
-.item-list-view{
-    position: relative;
+.items-container{
+    // padding: 1rem 0;
+    margin: 3rem 0rem 2rem 0rem;
+    max-height: calc(100% - 8rem);
+    overflow-y: auto;
+  }
+  .grid-view{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+//   .grid-view:last-child{
+//     display: flex;
+//     flex-wrap: wrap;
+//     align-items: center;
+//     justify-content: flex-start;
+//   }
+  .items-container-table-view{
+    margin: 3rem 0rem 2rem 0rem;
+    max-height: calc(100% - 6rem);
+    overflow-y: auto;
+  }
+.table-column{
+    min-width: 6rem;
+    max-width: 6rem;
+    padding: 0 1rem;
+    text-align: right;
+}
+button.btn-box{
+    max-height: 1.5rem!important;
+    max-width: 1.5rem!important;
+    min-width: 1.5rem!important;
+    
+    padding: 0;  
+    align-items: center;
+    justify-content: center;
+    display:flex ;
+    background: var(--ultra-light);
+}
+.item-count-container{
+    min-width: 5rem;
+    min-height: 1rem;
+    border: 1px solid var(--ultra-light);
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
-    margin: 1rem;
-    width:  calc(90% -3rem );
-    // min-width: var(--item-list-view-width );
-    padding-right: 1rem;
+    justify-content: center;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
 }
-.price-column{
-    min-width: 4rem;
+.item-count-box{
+    position: relative;
+    display: flex;
+    min-width: 2rem;
+    width: 100%;
+    padding: 0 .2rem;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
 }
-

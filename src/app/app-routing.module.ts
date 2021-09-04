@@ -2,7 +2,6 @@ import { LoginComponent } from './layout/components/login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SaleComponent } from './layout/components/sale/sale.component';
 import { NewSaleComponent } from './layout/components/new-sale/new-sale.component';
 import { SaleListComponent } from './layout/components/sale-list/sale-list.component';
 

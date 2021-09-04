@@ -104,6 +104,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 .spacer{
     flex: 1 1 auto;
 }
+.pt-1{
+    padding-top: 6px;
+}
 .d-flex,.row{
     display: flex;
     align-items: center;

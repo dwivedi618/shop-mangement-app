@@ -1,45 +1,106 @@
-import { Component, Input, OnInit, AfterViewInit } from '@angular/core';
-export interface PeriodicElement {
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import {
+  Component,
+  Input,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  OnChanges,
+} from '@angular/core';
+export interface CardItem {
+  id: number;
+  item: any;
   name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  quantity: number;
+  mrp: any;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
-  styleUrls: ['./item.component.scss']
+  styleUrls: ['./item.component.scss'],
 })
-export class ItemComponent implements OnInit{
+export class ItemComponent implements OnInit, OnChanges {
+  @ViewChild('decreamentbtn') decreamentbtn;
   @Input() data;
-  @Input() view : Boolean;
+  @Input() view: Boolean;
 
-  item = {};
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  items = [];
   isListView: Boolean;
-  constructor() { 
-
+  cart = [];
+  constructor() {}
+  ngOnChanges() {
+    this.isListView = this.view;
+    // console.log("data ng On changes",this.data, this.isListView)
   }
   ngOnInit(): void {
-    this.item = this.data;
+    this.items = this.data;
     this.isListView = this.view;
+    // console.log("data",this.data, this.isListView)
+  }
 
-    console.log("data",this.data, this.isListView)
+  onSelectItem(selectedItem) {
+    let cartItem = <CardItem>{};
+    cartItem.id = selectedItem?.id;
+    cartItem.item = selectedItem;
+    cartItem.quantity = 1;
+    cartItem.mrp = selectedItem?.mrp;
+
+    if (this.cart.length > 0) {
+      this.cart.find((item) => item.id == cartItem.id)
+        ? this.cart
+        : this.cart.unshift(cartItem);
+    } else {
+      this.cart.unshift(cartItem);
+    }
+    // for(let i=0;i<this.cart.length;i++){
+    //   if(this.cart[i]['id'] == selectedItem.id){
+    //     return true
+    //   }
+    // }
+    console.log('cart', this.cart);
+  }
+
+  isAddedToCart(item) {
+    if(this.cart.length){
+      for (let i = 0; i < this.cart.length; i++) {
+        if (this.cart[i]['id'] == item.id) {
+          return true;
+        }
+      }
+    }else{
+      return false
+    }
+  }
+  adjustCartItemQuantity(adjustType: number, selectedItem: any) {
+    if (adjustType === 0) {
+      //decrease cart item quantity
+      for (let i = 0; i < this.cart.length; i++) {
+        if (this.cart[i].id == selectedItem.id) {
+          if(this.cart[i].quantity == 1){
+            // this.cart.splice(i,1);
+            // this.cart = this.cart.slice(i,2);
+            // console.log("splice result",sliceResult);
+            console.log("reducer cart",this.cart);
+          }
+          return this.cart[i].quantity -= 1;
+        }
+      }
+    }
+    if (adjustType === 1) {
+      //increase cart item quantity
+      for (let i = 0; i < this.cart.length; i++) {
+        if (this.cart[i].id == selectedItem.id) {
+          return (this.cart[i].quantity += 1);
+        }
+      }
+    }
+  }
+  getThisItemQuantity(id) {
+    for (let i = 0; i < this.cart.length; i++) {
+      if (this.cart[i]['id'] == id) {
+        console.log('calculating size', this.cart[i].quantity);
+        return this.cart[i].quantity;
+      }
+    }
   }
 }
-
-

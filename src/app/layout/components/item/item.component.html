@@ -1,21 +1,53 @@
+<section *ngIf="isListView" class="items-container grid-view">
+  <div *ngFor="let item of items">
+    <article class="item shadow" (click)="onSelectItem(item)">
+      <div class="d-flex " style="">
+        <div class="price-column">
+          <mat-list dense>
+            <mat-list-item>
+              <span matLine style="color:var(--light)">MRP</span>
+              <h3 matLine style="font-weight: 600;"> {{item.sellingPrice | currency : 'INR'}}</h3>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div class="spacer"></div>
+        <div class="table-column">
+  
+          <button mat-button class="bg-ultra-light" *ngIf="!isAddedToCart(item)">
+            <small>Add to cart</small>
+            <mat-icon class="mat-icon-sm pt-1">add_shopping_cart</mat-icon>
+          </button>
+          <div class="item-count-container" *ngIf="isAddedToCart(item)">
+            <button mat-button #decreamentbtn class="btn-box" (click)="adjustCartItemQuantity(0,item)">
+              <mat-icon class="mat-icon-sm pt-1">remove</mat-icon>
+            </button>
+            <div class="item-count-box">
+              <small>{{getThisItemQuantity(item.id)}}</small>
+            </div>
+            <button mat-button #increamentbtn class="btn-box" (click)="adjustCartItemQuantity(1,item)">
+              <mat-icon class="mat-icon-sm pt-1">add</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
 
-  <article *ngIf="data && isListView" class="item shadow"  >
-      <small class="item-price">{{item.sellingPrice | currency : 'INR'}}</small>
       <img class="thumbnail-lg" src="../../../../assets/images/cool-background.png" alt="">
       <mat-list dense>
-          <mat-list-item class="text-wrap-sm">
-            <h3 matLine> {{item.name}} </h3>
-            <p matLine class="">
-              <span> {{item.code}} </span>
-              <span class=""> -- {{item.description}} </span>
-            </p>
-          </mat-list-item>
-        </mat-list>
-  </article>
+        <mat-list-item class="text-wrap-sm">
+          <h3 matLine> {{item.name}} </h3>
+          <p matLine class="">
+            <span> {{item.code}} </span>
+            <span class=""> -- {{item.description}} </span>
+          </p>
+        </mat-list-item>
+      </mat-list>
+    </article>
+  </div>
+</section>
 
-
-
-<article *ngIf="data && !isListView" class="item-list-view shadow" >
+<section *ngIf="!isListView" class="items-container-table-view">
+  <div *ngFor="let item of items">
+    <article class="item-list-view shadow" (click)="onSelectItem(item)">
       <img class="thumbnail-sm" src="../../../../assets/images/cool-background.png" alt="">
       <mat-list dense>
         <mat-list-item class="text-wrap-lg">
@@ -27,18 +59,33 @@
         </mat-list-item>
       </mat-list>
       <div class="spacer"></div>
+
       <div class="price-column">
         <mat-list dense>
-          <mat-list-item >
+          <mat-list-item>
             <span matLine style="color:var(--light)">MRP</span>
             <h3 matLine style="font-weight: 600;"> {{item.sellingPrice | currency : 'INR'}}</h3>
           </mat-list-item>
         </mat-list>
       </div>
-      
+      <div class="table-column">
 
-  
-      </article>
-   
-
-
+        <button mat-button class="bg-ultra-light" *ngIf="!isAddedToCart(item)">
+          <small>Add to cart</small>
+          <mat-icon class="mat-icon-sm pt-1">add_shopping_cart</mat-icon>
+        </button>
+        <div class="item-count-container" *ngIf="isAddedToCart(item)">
+          <button mat-button #decreamentbtn class="btn-box" (click)="adjustCartItemQuantity(0,item)">
+            <mat-icon class="mat-icon-sm pt-1">remove</mat-icon>
+          </button>
+          <div class="item-count-box">
+            <small>{{getThisItemQuantity(item.id)}}</small>
+          </div>
+          <button mat-button #increamentbtn class="btn-box" (click)="adjustCartItemQuantity(1,item)">
+            <mat-icon class="mat-icon-sm pt-1">add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

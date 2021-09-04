@@ -12,7 +12,7 @@ import { ServiceListComponent } from '../service-list/service-list.component';
 export class NewSaleComponent implements OnInit {
   filterOption : any
   value: any;
-  isListView = true;
+  isListView = false;
   primaryLinks = [
     { path: 'activity', icon: 'grid_view', name: 'Dashboard' },
     { path: 'chats', icon: 'dry_cleaning', name: 'Product' },
@@ -27,6 +27,7 @@ export class NewSaleComponent implements OnInit {
   ];
   items = [
     {
+      id : 1,
       name: 'T-shirt',
       brand: 'Peter England',
       sellingPrice: 199,
@@ -34,72 +35,63 @@ export class NewSaleComponent implements OnInit {
       code : ''
     },
     {
+      id : 2,
       name: 'T-shirt',
       brand: 'Peter England',
       sellingPrice: 19,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
+      id : 3,
       name: 'T-shirt',
       brand: 'Peter England',
       sellingPrice: 9,
       description: 'Strechable ,cotton febric,replacement,free delivery',
       code : 'ST2021APR'
     },{
+      id : 4,
       name: 'T-shirt',
       brand: 'Peter England',
       sellingPrice: 1199,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
+      id : 5,
       name: 'T-shirt',
       brand: 'Peter England',
       sellingPrice: 1199,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
+      id : 6,
       name: 'T-shirt',
       brand: 'Peter England',
       sellingPrice: 1199,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
+      id : 7,
       name: 'T-shirt',
       brand: 'Peter England',
       sellingPrice: 1199,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
+      id : 8,
       name: 'T-shirt',
       brand: 'Peter England',
       sellingPrice: 1199,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
+      id : 9,
       name: 'T-shirt',
       brand: 'Peter England',
       sellingPrice: 1199,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
-      name: 'T-shirt',
-      brand: 'Peter England',
-      sellingPrice: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      name: 'T-shirt',
-      brand: 'Peter England',
-      sellingPrice: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      name: 'T-shirt',
-      brand: 'Peter England',
-      sellingPrice: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
+      id : 10,
       name: 'T-shirt',
       brand: 'Peter England',
       sellingPrice: 1199,
@@ -111,7 +103,7 @@ export class NewSaleComponent implements OnInit {
   ngOnInit(): void {
     // this.checkCustomer();
     // this.checkItemDetails();
-    this.checkServiceList()
+    // this.checkServiceList()
   }
   checkCustomer() {
     const data = {};
