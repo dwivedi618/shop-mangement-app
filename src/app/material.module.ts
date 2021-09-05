@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {CdkTableModule} from '@angular/cdk/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [],
@@ -40,7 +41,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatDialogModule,
     MatSnackBarModule,
     CdkTableModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatBadgeModule
   
   ],
   exports: [
@@ -62,7 +64,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatDialogModule,
     MatSnackBarModule,
     CdkTableModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatBadgeModule
   ]
 })
 export class MaterialModule { }

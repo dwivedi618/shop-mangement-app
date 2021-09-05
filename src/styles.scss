@@ -61,6 +61,10 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     color: var(--white)!important;
     background: var(--green);
 }
+.bg-light-green{
+    color: var(--white)!important;
+    background: var(--light-green);
+}
 .bg-white{
     
     background: var(--white);
@@ -106,6 +110,15 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 }
 .pt-1{
     padding-top: 6px;
+}
+.px-5{
+    padding: 0 30px;
+}
+.px-2{
+    padding: 0 12px;
+}
+.text-uppercase{
+    text-transform:uppercase ;
 }
 .d-flex,.row{
     display: flex;
@@ -177,15 +190,31 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
   background: var(--ultra-light);
 }
 .item-price{
-    padding: .5rem 1rem;
-    border-radius: 4px;
     position: absolute;
+    width: 100%;
+    border-radius: 4px;
     top: 0;
     right: 0;
-    color : var(--white);
-    background: var(--ultra-light);
+    color : var(--white)!important;
+    // background: var(--ultra-light);
+    background: linear-gradient(180deg, #2100463f, rgba(0, 0, 0, 0)); 
     font-weight: 600;
 }
+.card-item-details{ 
+    position: absolute;
+    bottom: 3rem;
+    background: linear-gradient(0deg, #210046, rgba(0, 0, 0, 0)); 
+}
+.card-item-details mat-list-item  h3,p{ 
+   color: white;
+   font-size: 1rem;
+   font-weight: 600;
+}
+.list-view-details mat-list-item  h3,p{ 
+    color: light;
+    font-size: 1rem;
+    font-weight: 600;
+ }
 .item-list-view{
     position: relative;
     display: flex;
@@ -205,3 +234,51 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 .item-list-view:is(.active,:hover){
     background: var(--ultra-light);
   }
+  .items-container-table-view{
+    margin: 3rem 0rem 2rem 0rem;
+    max-height: calc(100% - 6rem);
+    overflow-y: auto;
+  }
+.table-column{
+    min-width: 6rem;
+    max-width: 6rem;
+    padding: 0 1rem;
+    text-align: right;
+}
+button.btn-box{
+    max-height: 1.5rem!important;
+    max-width: 1.5rem!important;
+    min-width: 1.5rem!important;
+    
+    padding: 0;  
+    align-items: center;
+    justify-content: center;
+    display:flex ;
+    background: var(--ultra-light);
+}
+.item-count-container{
+    min-width: 5rem;
+    min-height: 1rem;
+    border: 1px solid var(--ultra-light);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+.item-count-box{
+    position: relative;
+    display: flex;
+    min-width: 2rem;
+    width: 100%;
+    padding: 0 .2rem;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.selected{
+  background: var(--ultra-light-green);
+}

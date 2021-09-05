@@ -1,4 +1,4 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 import {
   Component,
   Input,
@@ -6,7 +6,10 @@ import {
   AfterViewInit,
   ViewChild,
   OnChanges,
+  Output,
+  EventEmitter,
 } from '@angular/core';
+
 export interface CardItem {
   id: number;
   item: any;
@@ -23,6 +26,9 @@ export class ItemComponent implements OnInit, OnChanges {
   @ViewChild('decreamentbtn') decreamentbtn;
   @Input() data;
   @Input() view: Boolean;
+  @Output() shareCart  = new EventEmitter<any>();
+
+
 
   items = [];
   isListView: Boolean;
@@ -39,6 +45,8 @@ export class ItemComponent implements OnInit, OnChanges {
   }
 
   onSelectItem(selectedItem) {
+    console.log('HHHHHHHHAARRRRRRRRBAARRA');
+    
     let cartItem = <CardItem>{};
     cartItem.id = selectedItem?.id;
     cartItem.item = selectedItem;
@@ -58,6 +66,7 @@ export class ItemComponent implements OnInit, OnChanges {
     //   }
     // }
     console.log('cart', this.cart);
+    this.onShareCart()
   }
 
   isAddedToCart(item) {
@@ -72,17 +81,28 @@ export class ItemComponent implements OnInit, OnChanges {
     }
   }
   adjustCartItemQuantity(adjustType: number, selectedItem: any) {
+    console.log('ADJUST VLUSIE IS ==============',adjustType);
+    
     if (adjustType === 0) {
       //decrease cart item quantity
       for (let i = 0; i < this.cart.length; i++) {
         if (this.cart[i].id == selectedItem.id) {
-          if(this.cart[i].quantity == 1){
-            // this.cart.splice(i,1);
-            // this.cart = this.cart.slice(i,2);
-            // console.log("splice result",sliceResult);
-            console.log("reducer cart",this.cart);
-          }
-          return this.cart[i].quantity -= 1;
+          console.log('SELCYTY___________',selectedItem,"-----------",i,'---',this.cart[i].quantity);
+          
+          ( this.cart[i].quantity > 1 ) ? this.cart[i].quantity-- : this.cart.splice(i,1);
+          console.log('SELCYTY___________',selectedItem,"-----------",i,'---',this.cart.length);
+
+          return;
+          // if(this.cart[i].quantity == 1){
+          //   // delete this.cart[i]
+          //   this.cart.splice(i,1);
+          //   // this.cart = this.cart.slice(i,2);
+          //   // console.log("splice result",sliceResult);
+          //   console.log("reducer cart--------------",this.cart.length);
+          //   this.onShareCart()
+          // }else{
+          //   this.cart[i].quantity--;
+          // }
         }
       }
     }
@@ -102,5 +122,10 @@ export class ItemComponent implements OnInit, OnChanges {
         return this.cart[i].quantity;
       }
     }
+  }
+
+  public onShareCart(){
+    console.log("emit------------ cart" ,this.cart.length)
+    this.shareCart.emit(this.cart)
   }
 }

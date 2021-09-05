@@ -60,23 +60,7 @@ details {
     cursor: pointer;
     padding: 0 1rem;
 }
-.items-container{
-  // padding: 1rem 0;
-  margin: 3rem 0rem 2rem 0rem;
-  max-height: calc(100% - 8rem);
-  overflow-y: auto;
-}
-.grid-view{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
-}
-.items-container-table-view{
-  margin: 3rem 0rem 2rem 0rem;
-  max-height: calc(100% - 6rem);
-  overflow-y: auto;
-}
+
 ::ng-deep mat-paginator .mat-paginator-container {
   max-height: 3rem!important;
   min-height: 3rem!important;

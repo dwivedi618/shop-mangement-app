@@ -1,5 +1,5 @@
 <mat-sidenav-container class="sidenav-newsale-container">
-    <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="true" position="end">
+    <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="false" position="end">
         <mat-toolbar class="shadow" style="position: absolute;top: 0;z-index: 5;background: white;">
             <button mat-button [mat-dialog-close]="true" class="bg-ultra-light"><span>Cancel</span></button>
             <div class="spacer"></div>
@@ -83,7 +83,7 @@
         </mat-toolbar>
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <mat-sidenav-content style="position: relative;">
         <mat-toolbar class="bg-white" style="position: absolute;top:0">
             <div class="layout w-100">
                 <app-search (onSearch)="getSearchText($event)"></app-search>
@@ -109,20 +109,30 @@
             </mat-menu>
         </mat-toolbar>
 
-       
-        <section  class="items-container-table-view">
-            <div  style="width:100%">
-                <app-item [data]="items" [(view)]="isListView"></app-item>
-            </div>
-        </section>
-        <mat-toolbar class="mat-elevation-z16" style="position: absolute;bottom: 0;z-index: 15;background: white">
+
+
+        <app-item [data]="items" [(view)]="isListView" (shareCart)="onCartData($event)"></app-item>
+
+
+        <mat-toolbar *ngIf="cart?.length"
+        class="mat-elevation-z16 bg-green" 
+        style="position: absolute;bottom: 0;z-index: 15;">
+
+            <span class="px-5">{{cart?.length || '0'}} | <small>Item</small></span>
+
             <div class="spacer"></div>
-            <mat-paginator 
+            <button mat-button class="w-100">
+                <mat-icon class="mat-icon-sm pt-1">shopping_cart</mat-icon>
+                <span class="px-3 fancy-text text-uppercase">view cart</span>
+            </button>
+            <div class="spacer"></div>
+            <span class="px-5">{{getCartTotal() | currency :'INR'}}</span>
+            <!-- <mat-paginator 
              [length]="items.length" 
              [pageSize]="10" 
              [pageSizeOptions]="[5, 10, 25, 100]" 
              aria-label="Select page" style="max-height: 3rem;margin: 0;padding: 0;">
-            </mat-paginator>
+            </mat-paginator> -->
         </mat-toolbar>
     </mat-sidenav-content>
 </mat-sidenav-container>

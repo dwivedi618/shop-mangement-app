@@ -30,7 +30,8 @@ export class NewSaleComponent implements OnInit {
       id : 1,
       name: 'T-shirt',
       brand: 'Peter England',
-      sellingPrice: 199,
+      mrp: 199,
+      
       description: '',
       code : ''
     },
@@ -38,67 +39,68 @@ export class NewSaleComponent implements OnInit {
       id : 2,
       name: 'T-shirt',
       brand: 'Peter England',
-      sellingPrice: 19,
+      mrp: 19,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
       id : 3,
       name: 'T-shirt',
       brand: 'Peter England',
-      sellingPrice: 9,
+      mrp: 9,
       description: 'Strechable ,cotton febric,replacement,free delivery',
       code : 'ST2021APR'
     },{
       id : 4,
       name: 'T-shirt',
       brand: 'Peter England',
-      sellingPrice: 1199,
+      mrp: 1199,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
       id : 5,
       name: 'T-shirt',
       brand: 'Peter England',
-      sellingPrice: 1199,
+      mrp: 1199,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
       id : 6,
       name: 'T-shirt',
       brand: 'Peter England',
-      sellingPrice: 1199,
+      mrp: 1199,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
       id : 7,
       name: 'T-shirt',
       brand: 'Peter England',
-      sellingPrice: 1199,
+      mrp: 1199,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
       id : 8,
       name: 'T-shirt',
       brand: 'Peter England',
-      sellingPrice: 1199,
+      mrp: 1199,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
       id : 9,
       name: 'T-shirt',
       brand: 'Peter England',
-      sellingPrice: 1199,
+      mrp: 1199,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },{
       id : 10,
       name: 'T-shirt',
       brand: 'Peter England',
-      sellingPrice: 1199,
+      mrp: 1199,
       description: 'Strechable ,cotton febric',
       code : 'ST2021APR'
     },
   ];
+  cart = [];
   constructor(private dialog: MatDialog) {}
   ngOnInit(): void {
     // this.checkCustomer();
@@ -143,5 +145,19 @@ export class NewSaleComponent implements OnInit {
     function getText() {
       return  this.filterOption
     }
-  } 
+  }
+
+  onCartData(cartItems){
+    this.cart = cartItems;
+    console.log("cart into parent",this.cart)
+  }
+  getCartTotal(){
+    let cartAmount = 0 ;
+    for(let i=0;i<this.cart.length;i++){
+      cartAmount = cartAmount + (this.cart[i].mrp)*this.cart[i].quantity
+      // console.log(this.cart[i]);
+      
+    }
+    return cartAmount
+  }
 }
