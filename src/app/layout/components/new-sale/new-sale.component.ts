@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-customer.component';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
@@ -13,17 +14,13 @@ export class NewSaleComponent implements OnInit {
   filterOption : any
   value: any;
   isListView = false;
-  primaryLinks = [
-    { path: 'activity', icon: 'grid_view', name: 'Dashboard' },
-    { path: 'chats', icon: 'dry_cleaning', name: 'Product' },
-    { path: 'groups', icon: 'groups', name: 'Customer' },
-    { path: 'calls', icon: 'inventory', name: 'Purchase' },
-    { path: 'sale', icon: 'sell', name: 'Sale' },
-    { path: ':new', icon: 'undo', name: 'Return' },
-    { path: 'files', icon: 'published_with_changes', name: 'Replace' },
-
-    { path: 'files', icon: 'summarize', name: 'Report' },
-    { path: 'files', icon: 'settings', name: 'Settings' },
+  garmentsCategory = [
+    { path: 'activity', icon: 'grid_view', name: 'Saree' },
+    { path: 'chats', icon: 'dry_cleaning', name: 'Pants' },
+    { path: 'calls', icon: 'inventory', name: 'Shirts' },
+    { path: 'groups', icon: 'groups', name: 'Shoes' },
+    { path: 'sale', icon: 'sell', name: 'Shoots' },
+  
   ];
   items = [
     {
@@ -101,8 +98,10 @@ export class NewSaleComponent implements OnInit {
     },
   ];
   cart = [];
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog,private router : Router) {}
   ngOnInit(): void {
+    let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
+    this.cart = loadCart
     // this.checkCustomer();
     // this.checkItemDetails();
     // this.checkServiceList()
@@ -159,5 +158,10 @@ export class NewSaleComponent implements OnInit {
       
     }
     return cartAmount
+  }
+
+  onViewCart(){
+    localStorage.setItem('currentCartDD',JSON.stringify(this.cart))
+    this.router.navigate(['../cart']);
   }
 }

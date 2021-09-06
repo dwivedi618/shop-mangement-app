@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 
 import {
   Component,
@@ -9,6 +10,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { ItemDetailsComponent } from '../item-details/item-details.component';
 
 export interface CardItem {
   id: number;
@@ -25,6 +27,7 @@ export interface CardItem {
 export class ItemComponent implements OnInit, OnChanges {
   @ViewChild('decreamentbtn') decreamentbtn;
   @Input() data;
+  @Input() cartItems;
   @Input() view: Boolean;
   @Output() shareCart  = new EventEmitter<any>();
 
@@ -33,13 +36,14 @@ export class ItemComponent implements OnInit, OnChanges {
   items = [];
   isListView: Boolean;
   cart = [];
-  constructor() {}
+  constructor(private dialog : MatDialog) {}
   ngOnChanges() {
     this.isListView = this.view;
     // console.log("data ng On changes",this.data, this.isListView)
   }
   ngOnInit(): void {
     this.items = this.data;
+    this.cart = this.cartItems?.length ? this.cartItems : [];
     this.isListView = this.view;
     // console.log("data",this.data, this.isListView)
   }
@@ -87,22 +91,9 @@ export class ItemComponent implements OnInit, OnChanges {
       //decrease cart item quantity
       for (let i = 0; i < this.cart.length; i++) {
         if (this.cart[i].id == selectedItem.id) {
-          console.log('SELCYTY___________',selectedItem,"-----------",i,'---',this.cart[i].quantity);
-          
           ( this.cart[i].quantity > 1 ) ? this.cart[i].quantity-- : this.cart.splice(i,1);
-          console.log('SELCYTY___________',selectedItem,"-----------",i,'---',this.cart.length);
-
+          // console.log('SELCYTY___________',selectedItem,"-----------",i,'---',this.cart.length);
           return;
-          // if(this.cart[i].quantity == 1){
-          //   // delete this.cart[i]
-          //   this.cart.splice(i,1);
-          //   // this.cart = this.cart.slice(i,2);
-          //   // console.log("splice result",sliceResult);
-          //   console.log("reducer cart--------------",this.cart.length);
-          //   this.onShareCart()
-          // }else{
-          //   this.cart[i].quantity--;
-          // }
         }
       }
     }
@@ -127,5 +118,15 @@ export class ItemComponent implements OnInit, OnChanges {
   public onShareCart(){
     console.log("emit------------ cart" ,this.cart.length)
     this.shareCart.emit(this.cart)
+  }
+  checkItemDetails() {
+    const data = {};
+    const dialogRef = this.dialog.open(ItemDetailsComponent, {
+      width: '40rem',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: false,
+      data: data,
+    });
   }
 }

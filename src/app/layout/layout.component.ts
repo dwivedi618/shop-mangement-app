@@ -1,4 +1,6 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
+import { ServiceListComponent } from './components/service-list/service-list.component';
 
 @Component({
   selector: 'app-layout',
@@ -27,9 +29,21 @@ export class LayoutComponent implements OnInit {
 
 
   ]  
-  constructor() { }
+  constructor(private dialog:MatDialog) { }
 
   ngOnInit(): void {
+    // this.checkServiceList();
+  }
+  checkServiceList() {
+    const data = {};
+    const dialogRef = this.dialog.open(ServiceListComponent, {
+      
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: true,
+      disableClose : true,
+      data: data,
+    });
   }
 
 }

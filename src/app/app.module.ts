@@ -22,6 +22,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { NewOrderCategoryComponent } from './layout/components/new-order-category/new-order-category.component';
 import { ServiceListComponent } from './layout/components/service-list/service-list.component';
+import { CartComponent } from './layout/components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ServiceListComponent } from './layout/components/service-list/service-l
     SaleListComponent,
     NewOrderCategoryComponent,
     ServiceListComponent,
+    CartComponent,
 
   ],
   imports: [

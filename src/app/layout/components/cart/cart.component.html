@@ -1,0 +1,130 @@
+<mat-sidenav-container class="sidenav-newsale-container">
+    <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="true" position="end">
+        <mat-toolbar class="shadow" style="position: absolute;top: 0;z-index: 5;background: white;">
+            <div class="spacer"></div>
+            <small>Billing Details</small>
+            <div class="spacer"></div>
+        </mat-toolbar>
+        <div class="d-flex flex-column">
+            <div class="cart-customer-details">
+                <div class="">
+                    <figure style="padding: 0;margin:1rem;">
+                        <img class="thumbnail-md" src="../../../../assets/images/cool-background.png" alt="">
+                    </figure>
+                </div>
+                <div>
+                    <mat-list dense class="w-100">
+                        <mat-list-item class="text-wrap-lg">
+
+                            <h1 matLine style="font-weight: 600;">Cutomer Unknow</h1>
+                            <p matLine><span>7827458618</span></p>
+                        </mat-list-item>
+                        <mat-list-item>
+                            <span>Vill Banjaria Pin 34534534 up deoria border</span>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+            </div>
+
+            <button (click)="checkCustomer()" mat-button class="w-100  shadow"><small>Add Customer
+                    Details</small></button>
+
+            <mat-accordion class="shadow">
+                <mat-expansion-panel class="mat-elevation-z0" >
+                    <mat-expansion-panel-header >
+                        <div class="spacer"></div>
+                        <small>Apply Discount</small>
+                        <div class="spacer"></div>
+                    </mat-expansion-panel-header>
+
+
+                    <mat-form-field class="w-50" appearance="outline">
+                        <mat-label>Discount In ₹</mat-label>
+                        <input matInput type="text" [(ngModel)]="value">
+                        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <mat-form-field class="w-50" appearance="outline">
+                        <mat-label>Discount In %</mat-label>
+                        <input matInput type="text" [(ngModel)]="value">
+                        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <div class="question-ref-container ">
+            <mat-list dense class="w-100">
+                <mat-list-item>
+                    <span>Item Total </span>
+                    <div class="spacer"></div>
+                    <span>{{getCartTotal() | currency :'INR'}}</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span>Taxes and Charges</span>
+                    <div class="spacer"></div>
+                    <span>{{getCartTotal() | currency :'INR'}}</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span>Discount</span>
+                    <div class="spacer"></div>
+                    <span>-{{getCartTotal() | currency :'INR'}}</span>
+                </mat-list-item>
+                <mat-list-item>
+                    <span style="font-weight: 600;">Total Pay</span>
+                    <div class="spacer"></div>
+                    <span style="font-weight: 600;">{{getCartTotal() | currency :'INR'}}</span>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <mat-toolbar style="position: absolute;bottom: 0;z-index: 5;background: white">
+            <button mat-stroked-button class="bg-ultra-light w-100 mr-1">
+                <span class="fancy-text text-uppercase">Cancel</span>
+            </button>
+            <button mat-button class="bg-green w-100">
+                <span class="fancy-text text-uppercase">Save</span>
+            </button>
+
+        </mat-toolbar>
+    </mat-sidenav>
+
+    <mat-sidenav-content style="position: relative;">
+        <mat-toolbar class="bg-white shadow" style="position: absolute;top:0">
+            <div class="layout w-100">
+                <app-search (onSearch)="getSearchText($event)"></app-search>
+            </div>
+            <span class="spacer"></span>
+            <button mat-icon-button class="mx-2 rounded-lg" (click)="isListView = !isListView">
+                <mat-icon class="mat-icon-sm pt-0">{{isListView ? 'view_list' : 'grid_view'}}</mat-icon>
+            </button>
+            <button mat-icon-button class="mx-2 rounded-lg" [matMenuTriggerFor]="moreTools">
+                <mat-icon class="mat-icon-sm pt-0">more_vert</mat-icon>
+            </button>
+            <mat-menu #moreTools="matMenu">
+                <mat-list dense>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon>refresh</mat-icon>
+                        <span>Refresh</span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon mat-list-icon>settings</mat-icon>
+                        <span>settings</span>
+                    </mat-list-item>
+                </mat-list>
+            </mat-menu>
+        </mat-toolbar>
+        <app-item [data]="cart" [cartItems]="cart" [(view)]="isListView" (shareCart)="onCartData($event)"></app-item>
+        <mat-toolbar class="mat-elevation-z16 " style="position: absolute;bottom: 0;z-index: 15;">
+            <span class="px-5">{{cart?.length || '0'}} | <small>Item</small></span>
+            <div class="spacer"></div>
+            <button mat-button class="w-100 bg-green">
+                <mat-icon class="mat-icon-sm pt-1">shopping_cart</mat-icon>
+                <span class="px-3 fancy-text text-uppercase">Cart</span>
+            </button>
+            <div class="spacer"></div>
+            <span class="px-5">{{getCartTotal() | currency :'INR'}}</span>
+        </mat-toolbar>
+    </mat-sidenav-content>
+</mat-sidenav-container>

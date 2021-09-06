@@ -1,6 +1,4 @@
-
-
-<mat-toolbar  class="bg-dark rounded-lg dialog-toolbar" style="margin: -24px -24px 24px -24px;padding: 0 .4rem;">
+<mat-toolbar class="bg-dark rounded-lg dialog-toolbar" style="margin: -24px -24px 24px -24px;padding: 0 .4rem;">
     <button mat-button [mat-dialog-close]="true" class="bg-dark"><span>Cancel</span></button>
     <div class="spacer"></div>
     <small>Customer</small>
@@ -8,26 +6,57 @@
     <button mat-raised-button class="bg-green"><span>Done</span></button>
 </mat-toolbar>
 <div mat-dialog-content class="">
-    <div class="row justify-content-center py-5 layout">
-        <div class="col-md-8 layout">
-            <form [formGroup]="customerForm" class="w-100" style="font-size: 12px;">
-              
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Name</mat-label>
-                    <input matInput placeholder="Ex:Nikhil Ojha" >
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Contact</mat-label>
-                    <input matInput placeholder="Ex:7827458618" >
-                </mat-form-field>
-                <mat-form-field appearance="outline" class="w-100">
-                    <mat-label>Address</mat-label>
-                    <textarea matInput placeholder="Ex:Banjaria 274704" ></textarea>
-                </mat-form-field>
+    <div class="">
+        <div class="layout">
+            <form class="w-100" style="font-size: 12px;">
+                <div class="d-flex">
+                    <div class="shadow photo-container layout rounded-lg"
+                        >
+                        <input type="file"  #fileUpload (change)="onImagePicked($event)"
+                                style="width: 0;height: 0;visibility: hidden;" accept="image/png,image/jpeg">
+                            <mat-toolbar style="position: absolute;bottom: 0px;z-index: 1000;padding: 0;">
+                                <div class="spacer"></div>
+                                <button mat-button class=" bg-ultra-light" (click)="fileUpload.click()">
+                                    <mat-icon class="mat-icon-sm">camera_alt</mat-icon>
+                                </button>
+                                <button mat-button class="" disabled="imagePreview!=='' && imagePreview">
+                                    <mat-icon class="mat-icon-sm" >crop</mat-icon>
+                                </button>
+                                <button mat-button class="" (click)="fileUploadReset()" disabled="imagePreview!=='' && imagePreview">
+                                    <mat-icon class="mat-icon-sm">delete_outline</mat-icon>
+                                </button>
+                                <div class="spacer"></div>
+                            </mat-toolbar>
+                            
+                        <!-- <div *ngIf="!imagePreview" (click)="fileUpload.click()" style="cursor: pointer;">
+                            
+                            <img src="../../../../assets/images/account_circle_black_48dp.svg" width="40">
+                            <p mat-line class="text-muted py-2">Candidate Photo</p>
+
+                        </div> -->
+                        <div *ngIf="imagePreview!=='' && imagePreview" style="margin-bottom: 3rem;">
+                            <img class="thumbnail-lg" [src]="imagePreview" style="border-radius: 4px;">
+                        </div>
+
+                    </div>
+                    <div class="px-5">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Name</mat-label>
+                            <input matInput placeholder="Ex:Nikhil Ojha">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Contact</mat-label>
+                            <input matInput placeholder="Ex:7827458618">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Address</mat-label>
+                            <textarea matInput placeholder="Ex:Banjaria 274704"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
             </form>
-            
+
         </div>
     </div>
 
 </div>
-

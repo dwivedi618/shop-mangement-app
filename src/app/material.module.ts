@@ -19,7 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {CdkTableModule} from '@angular/cdk/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatBadgeModule} from '@angular/material/badge';
-
+import {MatExpansionModule} from '@angular/material/expansion';
 @NgModule({
   declarations: [],
   imports: [
@@ -42,7 +42,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatSnackBarModule,
     CdkTableModule,
     MatCheckboxModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatExpansionModule
   
   ],
   exports: [
@@ -65,7 +66,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatSnackBarModule,
     CdkTableModule,
     MatCheckboxModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }
