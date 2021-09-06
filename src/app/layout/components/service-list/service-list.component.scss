@@ -1,0 +1,25 @@
+.service_card{height: 210px; overflow: hidden; cursor: pointer;position: relative;}
+.service_card img{ transform: scale(1); transition: all 0.2s linear ;position: absolute;}
+.card-img-overlay{
+   
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    z-index: 1000;
+    background: linear-gradient(45deg, #1a003e, #5300af42);
+           
+            text-align: center;
+            color: #fff;
+            transition: all 0.2s linear;
+}
+
+.service_card:hover img{transform: scale(1.2); transition: all 0.2s linear}
+// .service_card:hover .card-img-overlay{
+//     background: linear-gradient(45deg, #1a003e, #5300af42);
+//      padding-top: 5.8em; transition: all 0.2s linear}
+.justift-content-space-around{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}

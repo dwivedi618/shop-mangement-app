@@ -1,0 +1,19 @@
+.title{
+    color : var(--blue);
+    font-weight: 600;
+    // font-weight: 100;
+}
+
+.tile {
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(58, 57, 68, 0.2);
+    background-color: var(--newtab-topsites-background-color);
+    justify-content: center;
+    margin: 0 auto;
+    height: 80px;
+    width: 80px;
+}
+p{
+    color : var(--dark);
+    font-weight: 200;
+}

@@ -1,0 +1,311 @@
+
+@font-face {
+    font-family: "Inter";
+    src: url(./assets/font/Inter/static/Inter-ExtraLight.ttf) format("truetype");
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src: url(./assets/font/Inter/static/Inter-Light.ttf) format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Inter";
+    src:url(./assets/font/Inter/static/Inter-Regular.ttf) format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url(./assets/font/Inter/static/Inter-SemiBold.ttf) format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+/* VARIABLES*/
+@import './assets/style/_variable.scss';
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
+
+.shadow{
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(58, 57, 68, 0.2);
+}
+.shadow-1{
+    border-radius: 4px;
+    box-shadow: 0 12px 18px 2px rgba(34,0,51,.04),0 6px 22px 4px rgba(7,48,114,.12),0 6px 10px -4px rgba(14,13,26,.12);
+}
+
+// BACKGROUD
+.bg-blue{
+    color: var(--white);
+    background: var(--blue);
+}
+.bg-dark{
+    color: var(--white);
+
+    background: var(--dark);
+}
+.bg-ultra-light{
+    color: var(--dark);
+    background: var(--ultra-light);
+}
+.bg-light{
+    background: var(--light);
+}
+.bg-green{
+    color: var(--white)!important;
+    background: var(--green);
+}
+.bg-light-green{
+    color: var(--white)!important;
+    background: var(--light-green);
+}
+.bg-white{
+    
+    background: var(--white);
+}
+.text-light{
+    color: var(--light);
+}
+// /force center css
+.layout{
+    -webkit-box-align: center;
+    align-items: center;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+  }
+
+// MATERIAL OVERWRITE CSS
+    mat-toolbar {
+        max-height: 48px!important;
+    }
+    mat-toolbar.dialog-toolbar{
+        min-width: calc(100% + 48px);
+    }
+    .mat-icon-sm{
+        font-size: 1rem;
+    }
+.w-100{
+    width: 100%!important;
+}
+.w-50{
+    width: 50%;
+}
+.h-100{
+    height: 100%;
+}
+
+.text-center{
+    text-align: center;
+}
+.rounded-lg{
+    border-radius: 4px!important;
+}
+.spacer{
+    flex: 1 1 auto;
+}
+.pt-1{
+    padding-top: 6px;
+}
+.px-5{
+    padding: 0 30px;
+}
+.px-2{
+    padding: 0 12px;
+}
+.py-1{
+    padding: 6px 0;
+}
+.mr-1{
+    margin-right: 6px!important;
+}
+.my-1{
+    margin: 6px 0;
+}
+.text-uppercase{
+    text-transform:uppercase ;
+}
+.d-flex,.row{
+    display: flex;
+    align-items: center;
+}
+.flex-column{
+    flex-direction: column;
+}
+.justify-content-start{
+    justify-content: start;
+}
+.fancy-text{
+    letter-spacing: 5px;
+    font-weight: 600;
+}
+.strong{
+    font-weight: 600!important;
+}
+.thumbnail-md{
+    height: 6rem;
+    width: 6rem;
+    border-radius: 0.2rem;
+    flex-shrink: 0;
+    object-fit: cover;
+    transition: all 0.2s linear
+  }
+  .thumbnail-lg{
+    height: 12rem;
+    width: 12rem;
+    border-radius: 0.2rem;
+    flex-shrink: 0;
+    object-fit: cover;
+    transition: all 0.2s linear
+  }
+  .thumbnail-sm{
+    height: 4rem;
+    width: 4rem;
+    border-radius: 0.2rem;
+    flex-shrink: 0;
+    object-fit: cover;
+    transition: all 0.2s linear
+  }
+  .text-wrap-sm{
+    max-width: 12rem;
+    padding: 2px .5rem;
+    text-overflow: ellipsis;
+    overflow: hidden!important;
+    white-space: nowrap;
+  }
+  .text-wrap-lg{
+    max-width: 40rem;
+    padding: 2px .5rem;
+    text-overflow: ellipsis;
+    overflow: hidden!important;
+    white-space: nowrap;
+  }
+
+//   ITEM CARD PRICE TAG DETAILS
+.items-container{
+    
+    padding: 1rem 0;
+    margin: 3rem 0rem 2rem 0rem;
+    max-height: calc(100% - 8rem);
+    overflow-y: auto;
+}
+.grid-view{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+.item{
+    position: relative;
+    display: block;
+    min-width: 5rem;
+    min-height: 5rem;
+    margin: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.2s linear
+}
+.item:is(.active,:hover){
+  background: var(--ultra-light);
+}
+.item-price{
+    position: absolute;
+    width: 100%;
+    border-radius: 4px;
+    top: 0;
+    right: 0;
+    color : var(--white)!important;
+    z-index: 1000;
+    // background: var(--ultra-light);
+    background: linear-gradient(180deg, #210046d5, rgba(0, 0, 0, 0)); 
+    font-weight: 600;
+}
+.card-item-details{ 
+    position: absolute;
+    bottom: 3rem;
+    background: linear-gradient(0deg, #210046, rgba(0, 0, 0, 0)); 
+}
+.card-item-details mat-list-item  h3,p{ 
+   color: white;
+   font-size: 1rem;
+   font-weight: 600;
+}
+.list-view-details mat-list-item  h3,p{ 
+    color: light;
+    font-size: 1rem;
+    font-weight: 600;
+ }
+.item-list-view{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1rem;
+    width:  calc(90% -3rem );
+    // min-width: var(--item-list-view-width );
+    padding-right: 1rem;
+    cursor: pointer;
+}
+.item-list-view .price-column{
+    min-width: 4rem;
+    text-align: right;
+}
+.item-list-view:is(.active,:hover){
+    background: var(--ultra-light);
+  }
+  .items-container-table-view{
+    margin: 3rem 0rem 2rem 0rem;
+    max-height: calc(100% - 6rem);
+    overflow-y: auto;
+  }
+.table-column{
+    min-width: 6rem;
+    max-width: 6rem;
+    padding: 0 1rem;
+    text-align: right;
+}
+button.btn-box{
+    max-height: 1.5rem!important;
+    max-width: 1.5rem!important;
+    min-width: 1.5rem!important;
+    
+    padding: 0;  
+    align-items: center;
+    justify-content: center;
+    display:flex ;
+    background: var(--ultra-light);
+}
+.item-count-container{
+    min-width: 5rem;
+    min-height: 1rem;
+    border: 1px solid var(--ultra-light);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+.item-count-box{
+    position: relative;
+    display: flex;
+    min-width: 2rem;
+    width: 100%;
+    padding: 0 .2rem;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.selected{
+  background: var(--ultra-light-green);
+}

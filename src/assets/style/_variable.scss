@@ -1,0 +1,20 @@
+:root{
+    --blue : #1a73e8;
+    --light : #737373;
+    --dark : #424242;
+    --ultra-light : rgba(0,0,0,0.05);
+    --select-border-color: #b3b3b3;
+    --link : #0060DF;
+    --green :  #1ba94c;
+    --light-green : #c0dc91;
+    --ultra-light-green :  #1ba94d1f;;
+
+    --light-red: #f39ea2;
+    --red: #cb2a1d;
+    --white : rgb(255, 255, 255);
+    --sidenav-sm-width : 12rem;
+    --sidenav-lg-width : 24rem;
+    --item-list-view-width : calc(100% - var(--sidenav-lg-width) + var(--sidenav-sm-width))
+
+
+}

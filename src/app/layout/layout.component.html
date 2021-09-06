@@ -1,0 +1,20 @@
+<app-header></app-header>
+<mat-sidenav-container class="sidenav-container ">
+    <mat-sidenav #drawer class="sidenav" [mode]="'side'" [opened]="true">
+        <mat-nav-list dense>
+            <a mat-list-item *ngFor="let link of primaryLinks" routerLink="{{link.path}}" class="layout"
+                routerLinkActive #rla="routerLinkActive">
+                <mat-icon matListIcon [class.active_sublink]="rla.isActive">{{link.icon}}</mat-icon>
+                <p matLine > {{link.name | uppercase}}</p>
+            </a>
+        </mat-nav-list>
+        
+          
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+
+        <router-outlet></router-outlet>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

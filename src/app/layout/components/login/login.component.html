@@ -1,0 +1,47 @@
+<section class="login-section inner_banner layout">
+    <div class="">
+        <div class="">
+            <!-- <pre >{{loginForm.value | json}}</pre> -->
+            <form autoComplete="off" [formGroup]="loginForm" class=" " id="form"
+                style="width:20rem;position: relative;">
+                <mat-card class="mat-elevation-z0" style="font-size: 12px;background: transparent;padding-top: 100px;">
+                    <figure class="account-circle shadow-1 layout">
+                        <img src="../../../../assets/images/account_circle_black_48dp.svg" width="100" alt="" style="opacity: .5;">
+                    </figure>
+
+
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="{{isPasswordHidden ? 'password' :'text'}}" placeholder="Password"
+                            formControlName="password" autoComplete="off" readonly
+                            onfocus="this.removeAttribute('readonly');">
+                        <button mat-button type="button" matSuffix (click)="isPasswordHidden = !isPasswordHidden"
+                            class="">
+                            <small class="pt-0">{{(isPasswordHidden ? 'Show' : 'Hide') | uppercase}}</small>
+                        </button>
+                    </mat-form-field>
+
+
+                    <button  mat-raised-button type="submit" color="primary" routerLink="../"
+                        (click)="submitLoginCredential()" class="w-100">
+                        <small *ngIf='isLogging'>Please Wait...</small>
+                        <small *ngIf='!isLogging' class="fancy-text">ENTER↵</small>
+                    </button>
+
+
+                </mat-card>
+            </form>
+        </div>
+    </div>
+    <div class="login-help">
+        <button mat-mini-fab color="acct" [matMenuTriggerFor]="loginHelp">
+            <mat-icon>people</mat-icon>
+        </button>
+        <mat-menu #loginHelp="matMenu" class="layout">
+            <a mat-menu-item >
+                <mat-icon mat-list-icon>admin_panel_settings</mat-icon>
+                <span>Switch to Admin</span>
+              </a>
+        </mat-menu>
+    </div>
+</section>
