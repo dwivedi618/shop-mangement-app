@@ -23,6 +23,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { NewOrderCategoryComponent } from './layout/components/new-order-category/new-order-category.component';
 import { ServiceListComponent } from './layout/components/service-list/service-list.component';
 import { CartComponent } from './layout/components/cart/cart.component';
+import { CustomerListComponent } from './layout/components/customer-list/customer-list.component';
+import { CustomerComponent } from './layout/components/customer/customer.component';
+import { InventoryComponent } from './layout/components/inventory/inventory.component';
+import { InventoryItemComponent } from './layout/components/inventory-item/inventory-item.component';
+import { InventoryItemDetailsComponent } from './layout/components/inventory-item-details/inventory-item-details.component';
+import { HomeComponent } from './layout/components/home/home.component';
+import { DashboardComponent } from './layout/components/dashboard/dashboard.component';
+import { ProductComponent } from './layout/components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +49,14 @@ import { CartComponent } from './layout/components/cart/cart.component';
     NewOrderCategoryComponent,
     ServiceListComponent,
     CartComponent,
+    CustomerListComponent,
+    CustomerComponent,
+    InventoryComponent,
+    InventoryItemComponent,
+    InventoryItemDetailsComponent,
+    HomeComponent,
+    DashboardComponent,
+    ProductComponent,
 
   ],
   imports: [

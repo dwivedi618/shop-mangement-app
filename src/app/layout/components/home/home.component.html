@@ -1,0 +1,44 @@
+<section class="login-section inner_banner layout">
+    <div class="logo-container" style="position: absolute;top: 1rem;left: 1rem;">
+        <div class="d-flex">
+            <figure class="m-0 p-0">
+                <img class="thumbnail-md" src="../../../../assets/images/Platonic_4_-_Bucky0002.png" alt=""
+                    height="350">
+            </figure>
+            <div class="d-flex flex-column">
+                <span class="strong" style="font-size: 3rem;">R.K. JWELLERS <span
+                        style="font-size: 2rem;">&</span></span>
+                <span>KHUSI SAREE COLLECTION</span>
+            </div>
+        </div>
+    </div>
+    <div class="">
+
+        <div class="layout">
+            <div class="d-flex justify-content-space-around bg-white rounded-lg p-2" #service>
+                <mat-card style="width: 12rem;height: 12rem;overflow: hidden;margin: 1rem;padding: 0;"
+                    class="rounded-lg service_card shadow" *ngFor="let service of typesOfService"
+                    [value]="service.value" (click)="selectServiceType(service)">
+
+                    <img src="{{service.imgUrl}}" class="thumbnail-lg" alt="...">
+                    <div class="card-img-overlay layout">
+                        <h5 style="margin: 0;">{{service.viewValue}}</h5>
+                    </div>
+
+                </mat-card>
+
+            </div>
+        </div>
+    </div>
+    <div class="help">
+        <button mat-mini-fab color="acct" [matMenuTriggerFor]="loginHelp">
+            <mat-icon>people</mat-icon>
+        </button>
+        <mat-menu #loginHelp="matMenu" class="layout">
+            <a mat-menu-item>
+                <mat-icon mat-list-icon>admin_panel_settings</mat-icon>
+                <span>Switch to Admin</span>
+            </a>
+        </mat-menu>
+    </div>
+</section>

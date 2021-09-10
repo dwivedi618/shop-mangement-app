@@ -5,29 +5,36 @@
             <small>Billing Details</small>
             <div class="spacer"></div>
         </mat-toolbar>
-        <div class="d-flex flex-column">
-            <div class="cart-customer-details">
+        <div class="d-flex flex-column" style="margin-top: 3rem;">
+            <div class="cart-customer-details" *ngIf="currentCustomer?.name">
                 <div class="">
                     <figure style="padding: 0;margin:1rem;">
-                        <img class="thumbnail-md" src="../../../../assets/images/cool-background.png" alt="">
+                        <img class="thumbnail-md" src="{{currentCustomer?.photo}}" alt="...">
                     </figure>
                 </div>
-                <div>
+                <div class="w-100">
                     <mat-list dense class="w-100">
-                        <mat-list-item class="text-wrap-lg">
-
-                            <h1 matLine style="font-weight: 600;">Cutomer Unknow</h1>
-                            <p matLine><span>7827458618</span></p>
+                        <mat-list-item >
+                            <small>Name</small>
+                            <div class="spacer"></div>
+                            <span style="font-weight: 600;">{{currentCustomer?.name || 'Unknown'}}</span>
                         </mat-list-item>
-                        <mat-list-item>
-                            <span>Vill Banjaria Pin 34534534 up deoria border</span>
+                        <mat-list-item >
+                            <small>Phone</small>
+                            <div class="spacer"></div>
+                            <span style="font-weight: 600;">{{currentCustomer?.phone || 'Unknown'}}</span>
+                        </mat-list-item>
+                        <mat-list-item >
+                            <!-- <small>Address</small>
+                            <div class="spacer"></div> -->
+                            <span style="font-weight: 600;" class="mr-1">{{currentCustomer?.address || 'Unknown'}}</span>
                         </mat-list-item>
                     </mat-list>
                 </div>
             </div>
 
-            <button (click)="checkCustomer()" mat-button class="w-100  shadow"><small>Add Customer
-                    Details</small></button>
+            <button (click)="checkCustomer()"  *ngIf="!currentCustomer?.phone" mat-button class="w-100  shadow"><small>Add Customer
+                    For Bill</small></button>
 
             <mat-accordion class="shadow">
                 <mat-expansion-panel class="mat-elevation-z0" >

@@ -20,6 +20,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatRadioModule} from '@angular/material/radio';
 @NgModule({
   declarations: [],
   imports: [
@@ -43,7 +44,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     CdkTableModule,
     MatCheckboxModule,
     MatBadgeModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatRadioModule
   
   ],
   exports: [
@@ -67,7 +69,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     CdkTableModule,
     MatCheckboxModule,
     MatBadgeModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatRadioModule
   ]
 })
 export class MaterialModule { }

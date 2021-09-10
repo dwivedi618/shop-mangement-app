@@ -24,6 +24,8 @@ header{
   .sidenav-checkout{
     width: var(--sidenav-lg-width);
     padding-bottom: 3rem;
+    padding-top: 3rem;
+
   }
   .sidenav-item-details{
     width: 24rem;
@@ -65,21 +67,4 @@ details {
   max-height: 3rem!important;
   min-height: 3rem!important;
   height: 3rem!important;
-}
-
-.cart-customer-details{
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  position: relative;
-  width: 100%;
-}
-.cart-customer-details::before{
-  content: "";
-  position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;z-index:-1;
-  background:url(../../../../assets/images/pexels-pixabay-248077.jpg), linear-gradient(0deg,black,rgb(255, 255, 255)) ;
-  // background: url(../../../../assets/images/pexels-pixabay-248077.jpg);
-  opacity: .1;
-  width: 100%;
 }

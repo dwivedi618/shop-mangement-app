@@ -12,21 +12,18 @@ export class LayoutComponent implements OnInit {
    * primary links
    */
   primaryLinks = [
-    { path : 'activity',icon :'grid_view', name : 'Dashboard' },
-    { path : 'chats',icon :'dry_cleaning', name : 'Product' },
-    { path : 'groups',icon :'groups', name : 'Customer' },
+    { path : 'dashboard',icon :'grid_view', name : 'Dashboard' },
+    { path : 'inventory',icon :'inventory', name : 'Inventory' },
+    { path : 'product',icon :'dry_cleaning', name : 'Product' },
+    { path : 'customer',icon :'groups', name : 'Customer' },
     { path : 'calls',icon :'inventory', name : 'Purchase' },
     { path : 'sale',icon :'sell', name : 'Sale' },
     { path : 'neworder',icon :'add', name : 'New Order' },
-    { path : 'neworder',icon :'filter_vintage', name : 'New Jwellary Order' },
-
-
+    { path : 'newjwellorder',icon :'filter_vintage', name : 'New Jwellary Order' },
     { path : 'return',icon :'undo', name : 'Return' },
     { path : 'files',icon :'published_with_changes', name : 'Replace' },
-
     { path : 'files',icon :'summarize', name : 'Report' },
     { path : 'files',icon :'settings', name : 'Settings' },
-
 
   ]  
   constructor(private dialog:MatDialog) { }
@@ -37,7 +34,6 @@ export class LayoutComponent implements OnInit {
   checkServiceList() {
     const data = {};
     const dialogRef = this.dialog.open(ServiceListComponent, {
-      
       maxWidth: '100vw',
       maxHeight: '100vh',
       hasBackdrop: true,

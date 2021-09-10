@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   isFullScreen = true;
+  serviceType: any;
   constructor() { }
 
   ngOnInit(): void {
+    let service = localStorage.getItem('serviceType')
+    this.serviceType = JSON.parse(service) ;
   }
 
 }

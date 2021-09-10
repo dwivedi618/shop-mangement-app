@@ -1,14 +1,14 @@
 <mat-toolbar class="bg-dark rounded-lg dialog-toolbar" style="margin: -24px -24px 24px -24px;padding: 0 .4rem;">
-    <button mat-button [mat-dialog-close]="true" class="bg-dark"><span>Cancel</span></button>
+    <button mat-button [mat-dialog-close]="false" class="bg-dark"><span>Cancel</span></button>
     <div class="spacer"></div>
     <small>Customer</small>
     <div class="spacer"></div>
-    <button mat-raised-button class="bg-green"><span>Done</span></button>
+    <button mat-raised-button class="bg-green" (click)="onDone()"><span>Done</span></button>
 </mat-toolbar>
 <div mat-dialog-content class="">
     <div class="">
         <div class="layout">
-            <form class="w-100" style="font-size: 12px;">
+            <form [formGroup]="customerForm" class="w-100" style="font-size: 12px;">
                 <div class="d-flex">
                     <div class="shadow photo-container layout rounded-lg"
                         >
@@ -27,13 +27,6 @@
                                 </button>
                                 <div class="spacer"></div>
                             </mat-toolbar>
-                            
-                        <!-- <div *ngIf="!imagePreview" (click)="fileUpload.click()" style="cursor: pointer;">
-                            
-                            <img src="../../../../assets/images/account_circle_black_48dp.svg" width="40">
-                            <p mat-line class="text-muted py-2">Candidate Photo</p>
-
-                        </div> -->
                         <div *ngIf="imagePreview!=='' && imagePreview" style="margin-bottom: 3rem;">
                             <img class="thumbnail-lg" [src]="imagePreview" style="border-radius: 4px;">
                         </div>
@@ -42,15 +35,15 @@
                     <div class="px-5">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Name</mat-label>
-                            <input matInput placeholder="Ex:Nikhil Ojha">
+                            <input matInput placeholder="Ex:Nikhil Ojha" formControlName="name">
                         </mat-form-field>
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Contact</mat-label>
-                            <input matInput placeholder="Ex:7827458618">
+                            <input matInput placeholder="Ex:7827458618" formControlName="phone">
                         </mat-form-field>
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Address</mat-label>
-                            <textarea matInput placeholder="Ex:Banjaria 274704"></textarea>
+                            <textarea matInput placeholder="Ex:Banjaria 274704" formControlName="address"></textarea>
                         </mat-form-field>
                     </div>
                 </div>

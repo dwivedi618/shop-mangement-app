@@ -33,6 +33,11 @@ header{
   }
   mat-nav-list p{
     font-weight: 600!important;
+ 
+  }
+  mat-list-item {
+    font-weight: 600!important;
+    transition: 1s all;
   }
   
   .sidenav .mat-toolbar {
@@ -45,4 +50,6 @@ header{
     z-index: 1;
   }
   
- 
+ a:is(:active){
+   background: darkcyan;
+ }

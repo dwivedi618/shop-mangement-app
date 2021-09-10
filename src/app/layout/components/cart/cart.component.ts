@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-customer.component';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
+import { DialogService } from 'src/app/services/dialog-service';
 
 @Component({
   selector: 'app-cart',
@@ -15,26 +16,21 @@ export class CartComponent implements OnInit {
   value: any;
   isListView = false;
   cart = [];
-  constructor(private dialog: MatDialog) {}
+  currentCustomer: any;
+  constructor(private dialog: MatDialog,private dialogService : DialogService) {}
   ngOnInit(): void {
     let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
     this.cart = loadCart
     console.log("load cart from local storage",loadCart)
-    // this.checkCustomer();
+    this.checkCustomer();
     // this.checkItemDetails();
     // this.checkServiceList()
   }
   checkCustomer() {
-    const data = {};
-    const dialogRef = this.dialog.open(AddUpdateCustomerComponent, {
-      width: '30rem',
-      
-
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      hasBackdrop: false,
-      data: data,
-    });
+    this.dialogService.checkCustomer().subscribe(data=>{
+      console.log("received data",data);
+      this.currentCustomer = data
+    })
   }
   checkItemDetails() {
     const data = {};

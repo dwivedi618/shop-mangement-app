@@ -1,0 +1,131 @@
+<mat-toolbar class="bg-dark rounded-lg dialog-toolbar" style="margin: -24px -24px 0px -24px;padding: 0 .4rem;">
+    <button mat-button [mat-dialog-close]="true" class="bg-dark"><span>Cancel</span></button>
+    <div class="spacer"></div>
+    <small>Item Details</small>
+    <div class="spacer"></div>
+
+    <button mat-raised-button class="bg-green">
+        <!-- <mat-icon class="mat-icon-sm pt-1">inventory</mat-icon> -->
+        <small>Done</small>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content class="">
+    <div class="">
+       
+         <section class="container" style="min-height: 65vh;"> 
+            <mat-tab-group mat-align-tabs="start" animationDuration="0ms" >              
+                <mat-tab label="Basic">
+                    <div style="min-height: 50vh;">
+                        <div class="d-flex" style="align-items: flex-start;">
+                            <figure style="margin:1rem;">
+                                <img src=".../../../../../../assets/images/cool-background.png" alt="" class="thumbnail-lg">
+                            </figure>
+                            <mat-list dense class="w-100">
+                                <mat-list-item>
+                                    <span class="strong text-light">Item</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">T-shirt</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">MRP</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">300</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Stock Price</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">250</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Grade</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">Clothe</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Make</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">Unknown</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Meter</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">Unknown</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Availabilty</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">Out of Stock</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">pices</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">37</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">QR CODE</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong"><mat-icon>qr_code_2</mat-icon></span>
+                                </mat-list-item>
+            
+                            </mat-list>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Mange Stock">
+                    <div style="min-height: 50vh;" class="mange-stock-tab">
+                        <div class="d-flex" style="align-items: flex-start;">
+                            <figure style="margin:1rem;">
+                                <img src=".../../../../../../assets/images/cool-background.png" alt="" class="thumbnail-lg">
+                            </figure>
+                            <mat-list dense class="w-100 ">
+
+                                <mat-list-item>
+                                    <span class="strong text-light">Quantity</span>
+                                    <div class="spacer"></div>
+                                    <mat-form-field appearance="outline" class="">
+                                        <mat-label>Quantity</mat-label>
+                                        <input matInput placeholder="Qty.">
+                                    </mat-form-field>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Stock Price</span>
+                                    <div class="spacer"></div>
+                                    <mat-form-field appearance="outline" class="">
+                                        <mat-label>Price</mat-label>
+                                        <input matInput placeholder="Price">
+                                    </mat-form-field>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Date</span>
+                                    <div class="spacer"></div>
+                                    <mat-form-field appearance="outline" class="">
+                                        <mat-label>Date</mat-label>
+                                        <input matInput type="date" placeholder="Date">
+                                    </mat-form-field>
+                                </mat-list-item>
+                                <mat-list-item style="margin-top: 2rem;">
+                                    <span class="strong text-light">Notes</span>
+                                    <div class="spacer"></div>
+                                        <mat-form-field appearance="outline" class="">
+                                            <mat-label>Note</mat-label>
+                                            <textarea matInput placeholder="notes"></textarea>
+                                        </mat-form-field>        
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <mat-radio-group aria-label="Select an option" >
+                                        <mat-radio-button value="1">Add Stock</mat-radio-button>
+                                        <mat-radio-button value="2">Remove Stock</mat-radio-button>
+                                      </mat-radio-group>
+                                </mat-list-item>
+                            </mat-list>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Stock Transaction">
+                    <div style="min-height: 50vh;"></div>
+                </mat-tab>
+            </mat-tab-group>
+        </section>
+    </div>
+
+</div>

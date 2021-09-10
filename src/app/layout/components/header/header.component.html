@@ -8,9 +8,17 @@
             <mat-icon>chevron_right</mat-icon>
           </button>
         </div>
-        <div class="layout w-100">
-          <!-- <app-search></app-search> -->
-        </div>
+        <button mat-stroked-button class="mr-1" routerLink="">
+          <mat-icon class="mat-icon-sm pt-1">home</mat-icon>
+          <small class="" style="padding-right: 6px;">Home</small>
+        </button>
+        <button mat-stroked-button class="bg-mygradient-primary" >
+          <mat-icon class="mat-icon-sm pt-1">dry_cleaning</mat-icon>
+          <small class="" style="padding-right: 6px;">{{serviceType | titlecase}}</small>
+        </button>
+        <!-- <div class="layout w-100">
+          <app-search></app-search>
+        </div> -->
         <span class="spacer"></span>
        <!-- <app-avatar></app-avatar> -->
        <button mat-icon-button >

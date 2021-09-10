@@ -1,4 +1,5 @@
-import { FormGroup } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 export class AddUpdateCustomerComponent implements OnInit {
   customerForm : FormGroup
   imagePreview: string;
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+    private dialogRef : MatDialogRef<AddUpdateCustomerComponent>
+    ) { 
+
+  }
 
   ngOnInit(): void {
+    this.customerForm = this.fb.group({
+      name : ['',[Validators.required]],
+      phone : ['',[Validators.required]],
+      address : ['',[Validators.required]],
+      photo : [this.imagePreview || '']
+
+    })
   }
   fileUploadReset() {
     if (this.imagePreview) {
@@ -43,11 +56,25 @@ export class AddUpdateCustomerComponent implements OnInit {
     reader.onload = () => {
       console.log(reader.result);
       this.imagePreview = reader.result as string;
-      // this.studentForm.patchValue({ image : reader.result as string})
+      this.customerForm.patchValue({ photo : reader.result as string})
     };
     reader.onerror = (error) => {
       console.log('Error: ', error);
     };
+  }
+
+  onDone(){
+    if(this.customerForm.invalid){
+      console.log("invalid customer Form");
+      
+      return
+    }
+
+    //api call to save customer 
+
+    //return customer data to dialog
+    this.dialogRef.close(this.customerForm.value)
+
   }
 
 }

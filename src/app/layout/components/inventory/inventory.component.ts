@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -6,11 +7,11 @@ import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
 
 @Component({
-  selector: 'app-new-sale',
-  templateUrl: './new-sale.component.html',
-  styleUrls: ['./new-sale.component.scss'],
+  selector: 'app-inventory',
+  templateUrl: './inventory.component.html',
+  styleUrls: ['./inventory.component.scss']
 })
-export class NewSaleComponent implements OnInit {
+export class InventoryComponent implements OnInit {
   filterOption : any
   value: any;
   isListView = false;
@@ -100,10 +101,7 @@ export class NewSaleComponent implements OnInit {
   cart = [];
   constructor(private dialog: MatDialog,private router : Router) {}
   ngOnInit(): void {
-    let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
-    this.cart = loadCart;
-    console.log("recent cart",this.cart);
-    
+
     // this.checkCustomer();
     // this.checkItemDetails();
     // this.checkServiceList()
@@ -155,11 +153,10 @@ export class NewSaleComponent implements OnInit {
   getCartTotal(){
     let cartAmount = 0 ;
     for(let i=0;i<this.cart.length;i++){
-      cartAmount = cartAmount + Number((this.cart[i].mrp) || 0)*Number(this.cart[i].quantity)
+      cartAmount = cartAmount + (this.cart[i].mrp)*this.cart[i].quantity
       // console.log(this.cart[i]);
       
     }
-    console.log("cartAmount",cartAmount)
     return cartAmount
   }
 
