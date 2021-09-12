@@ -12,18 +12,17 @@ export class LayoutComponent implements OnInit {
    * primary links
    */
   primaryLinks = [
+    { path : 'neworder',icon :'add', name : 'New Order' },
     { path : 'dashboard',icon :'grid_view', name : 'Dashboard' },
     { path : 'inventory',icon :'inventory', name : 'Inventory' },
     { path : 'product',icon :'dry_cleaning', name : 'Product' },
     { path : 'customer',icon :'groups', name : 'Customer' },
-    { path : 'calls',icon :'inventory', name : 'Purchase' },
+    { path : 'purchase',icon :'money', name : 'Purchase' },
     { path : 'sale',icon :'sell', name : 'Sale' },
-    { path : 'neworder',icon :'add', name : 'New Order' },
-    { path : 'newjwellorder',icon :'filter_vintage', name : 'New Jwellary Order' },
-    { path : 'return',icon :'undo', name : 'Return' },
-    { path : 'files',icon :'published_with_changes', name : 'Replace' },
-    { path : 'files',icon :'summarize', name : 'Report' },
-    { path : 'files',icon :'settings', name : 'Settings' },
+    // { path : 'return',icon :'undo', name : 'Return' },
+    // { path : 'replace',icon :'published_with_changes', name : 'Replace' },
+    // { path : 'report',icon :'summarize', name : 'Report' },
+    { path : 'settings',icon :'settings', name : 'Settings' },
 
   ]  
   constructor(private dialog:MatDialog) { }

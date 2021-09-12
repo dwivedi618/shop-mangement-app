@@ -1,6 +1,7 @@
 <app-header></app-header>
 <mat-sidenav-container class="sidenav-container ">
     <mat-sidenav #drawer class="sidenav" [mode]="'side'" [opened]="true">
+        <div class="column-nav-layout" >
         <mat-nav-list dense>
             <a mat-list-item *ngFor="let link of primaryLinks" routerLink="{{link.path}}" class="layout" 
             routerLinkActive="bg-mygradient-secondary" #rla="routerLinkActive" >
@@ -8,7 +9,22 @@
                 <p matLine [class.activeLink]="rla.isActive"> {{link.name | uppercase}}</p>
             </a>
         </mat-nav-list>
-        
+        <div class="spacer"></div>
+        <div class="logo-container mat-elevation-z16" >
+            <div class="d-flex flex-column py-2">
+                <figure class="m-0 p-0">
+                    <img class="thumbnail-md" src="../../../../assets/images/Platonic_4_-_Bucky0002.png" alt=""
+                        height="250">
+                </figure>
+                <div class="d-flex flex-column">
+                    <span class="strong">R.K. JWELLERS <span
+                            >&</span></span>
+                    <small style="font-size: .7rem;">KHUSI SAREE COLLECTION</small>
+                </div>
+            </div>
+        </div>
+       
+    </div>
           
 
     </mat-sidenav>

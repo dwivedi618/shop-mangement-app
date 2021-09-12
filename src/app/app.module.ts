@@ -31,6 +31,8 @@ import { InventoryItemDetailsComponent } from './layout/components/inventory-ite
 import { HomeComponent } from './layout/components/home/home.component';
 import { DashboardComponent } from './layout/components/dashboard/dashboard.component';
 import { ProductComponent } from './layout/components/product/product.component';
+import { ProductItemComponent } from './layout/components/product-item/product-item.component';
+import { ProductItemDetailsComponent } from './layout/components/product-item-details/product-item-details.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { ProductComponent } from './layout/components/product/product.component'
     HomeComponent,
     DashboardComponent,
     ProductComponent,
+    ProductItemComponent,
+    ProductItemDetailsComponent,
 
   ],
   imports: [

@@ -47,7 +47,8 @@ export class CustomerListComponent implements OnInit {
       address: 'Nanital outer post,pin 200989,UttraKhand',
       description: '',
       photo : '../../../../assets/images/cool-background.png',
-      debt : 100
+      debt : 100,
+      date : new Date()
     },
     {
       id : 2,

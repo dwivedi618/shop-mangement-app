@@ -3,7 +3,8 @@
     <article class="item shadow"  [class.selected]="isAddedToCart(item)" (click)="checkItemDetails()">
       <div class="item-price d-flex">
         <div class="spacer"></div>
-        <span class="strong px-2 my-1" >{{item.mrp | currency : 'INR'}}</span>
+        <small class="px-2">In Stock</small>
+        <span class="strong px-2 my-1" >{{item?.quantity || 'N/A'}}</span>
       </div>
       <img class="thumbnail-lg" src="../../../../assets/images/pexels-markus-winkler-3812433.jpg" alt="">
       <div class="card-item-details w-100">
@@ -17,23 +18,13 @@
           </mat-list-item>
         </mat-list>
       </div>
-      <mat-toolbar style="padding: 0 5px;" [class.selected]="isAddedToCart(item)"  (click)="$event.stopPropagation();">
+      <mat-toolbar style="padding: 0 5px;"   (click)="$event.stopPropagation();">
         <div class="spacer"></div>
-          <button mat-button class="bg-ultra-light w-100" *ngIf="!isAddedToCart(item)" (click)="onSelectItem(item)">
-            <small>Add Stock</small>
-            <mat-icon class="mat-icon-sm pt-1">add_shopping_cart</mat-icon>
+          <button mat-button class="bg-ultra-light w-100"  (click)="onSelectItem(item)">
+            <small>Manage</small>
+            <mat-icon class="mat-icon-sm pt-1">inventory</mat-icon>
           </button>
-          <div class="item-count-container" *ngIf="isAddedToCart(item)">
-            <button mat-button #decreamentbtn class="btn-box" (click)="adjustCartItemQuantity(0,item)">
-              <mat-icon class="mat-icon-sm pt-1">remove</mat-icon>
-            </button>
-            <div class="item-count-box">
-              <small>{{getThisItemQuantity(item.id)}}</small>
-            </div>
-            <button mat-button #increamentbtn class="btn-box" (click)="adjustCartItemQuantity(1,item)">
-              <mat-icon class="mat-icon-sm pt-1">add</mat-icon>
-            </button>
-        </div>
+          
         <div class="spacer"></div>
       </mat-toolbar>
     </article>
@@ -42,7 +33,7 @@
 
 <section *ngIf="!isListView" class="items-container-table-view">
   <div *ngFor="let item of items;let i=index;">
-    <article class="item-list-view shadow "  [class.selected]="isAddedToCart(item)" (click)="checkItemDetails()">
+    <article class="item-list-view shadow "  (click)="checkItemDetails()">
       <div style="width: 2rem;" class="layout">
         <span class="strong">{{i+1}}</span>
       </div>
@@ -59,32 +50,28 @@
         </mat-list>
       </div>
       <div class="spacer"></div>
-
       <div class="price-column">
         <mat-list dense>
           <mat-list-item>
-            <span matLine style="color:var(--light)">MRP</span>
-            <h3 matLine style="font-weight: 600;"> {{item.mrp | currency : 'INR'}}</h3>
+            <span matLine style="color:var(--light)">In Stock</span>
+            <h3 matLine style="font-weight: 600;"> {{item?.quantity || 'unknown' }}</h3>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <div class="price-column">
+        <mat-list dense>
+          <mat-list-item>
+            <span matLine style="color:var(--light)">Stock Price</span>
+            <h3 matLine style="font-weight: 600;"> {{(item?.stockPrice | currency : 'INR') || 'unknown'}}</h3>
           </mat-list-item>
         </mat-list>
       </div>
       <div class="table-column" (click)="$event.stopPropagation();">
 
-        <button mat-button class="bg-ultra-light" *ngIf="!isAddedToCart(item)" (click)="onSelectItem(item);">
-          <small>Add Stock</small>
+        <button mat-button class="bg-ultra-light"  (click)="onSelectItem(item);">
+          <small>Manage</small>
           <mat-icon class="mat-icon-sm pt-1">inventory</mat-icon>
         </button>
-        <div class="item-count-container" *ngIf="isAddedToCart(item)">
-          <button mat-button #decreamentbtn class="btn-box" (click)="adjustCartItemQuantity(0,item);">
-            <mat-icon class="mat-icon-sm pt-1">remove</mat-icon>
-          </button>
-          <div class="item-count-box">
-            <small>{{getThisItemQuantity(item.id)}}</small>
-          </div>
-          <button mat-button #increamentbtn class="btn-box" (click)="adjustCartItemQuantity(1,item);">
-            <mat-icon class="mat-icon-sm pt-1">add</mat-icon>
-          </button>
-        </div>
       </div>
     </article>
   </div>

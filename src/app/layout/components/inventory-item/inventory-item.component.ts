@@ -1,3 +1,4 @@
+import { DialogService } from 'src/app/services/dialog-service';
 
 
 import { MatDialog } from '@angular/material/dialog';
@@ -38,7 +39,7 @@ export class InventoryItemComponent implements OnInit ,OnChanges{
   items = [];
   isListView: Boolean;
   cart = [];
-  constructor(private dialog : MatDialog) {}
+  constructor(private dialog : MatDialog,private dialogService : DialogService) {}
   ngOnChanges() {
     this.isListView = this.view;
     // this.checkItemDetails()
@@ -52,28 +53,9 @@ export class InventoryItemComponent implements OnInit ,OnChanges{
   }
 
   onSelectItem(selectedItem) {
-    console.log('HHHHHHHHAARRRRRRRRBAARRA');
-    
-    let cartItem = <CardItem>{};
-    cartItem.id = selectedItem?.id;
-    cartItem.item = selectedItem;
-    cartItem.quantity = 1;
-    cartItem.mrp = selectedItem?.mrp;
-
-    if (this.cart.length > 0) {
-      this.cart.find((item) => item.id == cartItem.id)
-        ? this.cart
-        : this.cart.unshift(cartItem);
-    } else {
-      this.cart.unshift(cartItem);
-    }
-    // for(let i=0;i<this.cart.length;i++){
-    //   if(this.cart[i]['id'] == selectedItem.id){
-    //     return true
-    //   }
-    // }
-    console.log('cart', this.cart);
-    this.onShareCart()
+    this.dialogService.checkInventoryItemDetails().subscribe(data=>{
+      console.log("Inventory Item details",data)
+    })
   }
 
   isAddedToCart(item) {

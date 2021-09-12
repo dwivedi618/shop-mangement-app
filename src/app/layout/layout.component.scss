@@ -27,6 +27,9 @@ header{
   .sidenav {
     width: var(--sidenav-sm-width );
   }
+  .column-nav-layout{
+    min-height: calc(100vh - 3rem);display:flex;flex-direction: column; justify-content: flex-start;align-self: start;
+  }
   mat-nav-list mat-icon,span,p{
       color : var(--dark);
       

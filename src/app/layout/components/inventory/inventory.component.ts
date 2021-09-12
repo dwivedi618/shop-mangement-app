@@ -28,74 +28,23 @@ export class InventoryComponent implements OnInit {
       id : 1,
       name: 'T-shirt',
       brand: 'Peter England',
-      mrp: 199,
-      
+      itemInStock : 26,
+      pricePerItem : 400,
+      totalStockPrice : 10400,
+      lastUpdate : new Date(),
       description: '',
       code : ''
     },
     {
-      id : 2,
-      name: 'T-shirt',
+      id : 1,
+      name: 'Flimingo Pink Saree',
       brand: 'Peter England',
-      mrp: 19,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 3,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 9,
-      description: 'Strechable ,cotton febric,replacement,free delivery',
-      code : 'ST2021APR'
-    },{
-      id : 4,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 5,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 6,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 7,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 8,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 9,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 10,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
+      quantity : 26,
+      pricePerItem : 400,
+      stockPrice : 10400,
+      lastUpdate : new Date(),
+      description: '',
+      code : ''
     },
   ];
   cart = [];

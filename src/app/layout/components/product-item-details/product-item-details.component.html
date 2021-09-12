@@ -1,7 +1,7 @@
 <mat-toolbar class="bg-dark rounded-lg dialog-toolbar" style="margin: -24px -24px 0px -24px;padding: 0 .4rem;">
     <button mat-button [mat-dialog-close]="false" class="bg-dark"><span>Cancel</span></button>
     <div class="spacer"></div>
-    <small>Inventory Item Details</small>
+    <small>Product Details</small>
     <div class="spacer"></div>
 
     <button mat-raised-button class="bg-green" (click)="onDone()">
@@ -25,56 +25,56 @@
                                 <mat-list-item>
                                     <span class="strong text-light">Item</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">T-shirt</span>
+                                    <span class="strong">{{localData?.name | titlecase}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
-                                    <span class="strong text-light">MRP</span>
+                                    <span class="strong text-light">Sale Price</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">300</span>
+                                    <span class="strong">{{localData?.salePrice | currency : 'INR'}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
-                                    <span class="strong text-light">Stock Price</span>
+                                    <span class="strong text-light">Discount %</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">250</span>
+                                    <span class="strong">20</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Discount Ruppee</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">{{localData?.discountInRuppee | currency : 'INR'}}</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Offer Price</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">{{localData?.offerPrice | currency : 'INR'}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
                                     <span class="strong text-light">Grade</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">Clothe</span>
+                                    <span class="strong">{{localData?.grade || 'unknown'}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
                                     <span class="strong text-light">Make</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">Unknown</span>
+                                    <span class="strong">{{localData?.make || 'unknown'}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
                                     <span class="strong text-light">Meter</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">Unknown</span>
+                                    <span class="strong">{{localData?.meter || 'unknown'}}</span>
                                 </mat-list-item>
+                               
                                 <mat-list-item>
-                                    <span class="strong text-light">Availabilty</span>
+                                    <span class="strong text-light">size</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">Out of Stock</span>
+                                    <span class="strong">{{localData?.size || 'unknown'}}</span>
                                 </mat-list-item>
-                                <mat-list-item>
-                                    <span class="strong text-light">pices</span>
-                                    <div class="spacer"></div>
-                                    <span class="strong">37</span>
-                                </mat-list-item>
-                                <mat-list-item>
-                                    <span class="strong text-light">QR CODE</span>
-                                    <div class="spacer"></div>
-                                    <span class="strong">
-                                        <mat-icon>qr_code_2</mat-icon>
-                                    </span>
-                                </mat-list-item>
+                              
 
                             </mat-list>
                         </div>
                     </div>
                 </mat-tab>
-                <mat-tab label="Mange Stock">
+                <mat-tab label="Manage All">
                     <div style="min-height: 50vh;" class="mange-stock-tab">
                         <div class="d-flex" style="align-items: flex-start;">
                             <figure style="margin:1rem;">
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                 </mat-tab>
-                <mat-tab label="Stock Transaction">
+                <mat-tab label="Qr Code">
                     <div style="min-height: 50vh;"></div>
                 </mat-tab>
             </mat-tab-group>

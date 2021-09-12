@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { AddUpdateCustomerComponent } from '../layout/components/add-update-customer/add-update-customer.component';
 import { ItemDetailsComponent } from '../layout/components/item-details/item-details.component';
 import { ServiceListComponent } from '../layout/components/service-list/service-list.component';
+import { InventoryItemDetailsComponent } from '../layout/components/inventory-item-details/inventory-item-details.component';
+import { ProductItemDetailsComponent } from '../layout/components/product-item-details/product-item-details.component';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +48,37 @@ export class DialogService {
       hasBackdrop: false,
       data: data,
     });
+  }
+  checkInventoryItemDetails() {
+    const data = {};
+    const dialogRef = this.dialog.open(InventoryItemDetailsComponent, {
+      width: '40rem',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: false,
+      data: data,
+    });
+    dialogRef.afterClosed().subscribe(result=>{
+      this.setData(result);
+    })
+    
+    return this.dialogCloseData.asObservable();
+  }
+
+  checkProductItemDetails(selectedItem) {
+    const data = {};
+    const dialogRef = this.dialog.open(ProductItemDetailsComponent, {
+      width: '40rem',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: false,
+      data: selectedItem,
+    });
+    dialogRef.afterClosed().subscribe(result=>{
+      this.setData(result);
+    })
+    
+    return this.dialogCloseData.asObservable();
   }
   checkServiceList() {
     const data = {};
