@@ -7,6 +7,12 @@
 # Only exists if Bazel was run
 /bazel-out
 
+#electron packaging outout
+/out
+
+#electron build
+electron/dist
+
 # dependencies
 /node_modules
 
