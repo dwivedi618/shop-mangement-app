@@ -33,20 +33,17 @@
                                     <span class="strong">{{localData?.salePrice | currency : 'INR'}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
-                                    <span class="strong text-light">Discount %</span>
-                                    <div class="spacer"></div>
-                                    <span class="strong">20</span>
-                                </mat-list-item>
-                                <mat-list-item>
-                                    <span class="strong text-light">Discount Ruppee</span>
-                                    <div class="spacer"></div>
-                                    <span class="strong">{{localData?.discountInRuppee | currency : 'INR'}}</span>
-                                </mat-list-item>
-                                <mat-list-item>
                                     <span class="strong text-light">Offer Price</span>
                                     <div class="spacer"></div>
                                     <span class="strong">{{localData?.offerPrice | currency : 'INR'}}</span>
                                 </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Discount</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">{{(localData?.discountInPercentage/100 | percent)}} <span>|
+                                            {{localData?.discountInRuppee | currency : 'INR'}}</span></span>
+                                </mat-list-item>
+
                                 <mat-list-item>
                                     <span class="strong text-light">Grade</span>
                                     <div class="spacer"></div>
@@ -62,13 +59,13 @@
                                     <div class="spacer"></div>
                                     <span class="strong">{{localData?.meter || 'unknown'}}</span>
                                 </mat-list-item>
-                               
+
                                 <mat-list-item>
                                     <span class="strong text-light">size</span>
                                     <div class="spacer"></div>
                                     <span class="strong">{{localData?.size || 'unknown'}}</span>
                                 </mat-list-item>
-                              
+
 
                             </mat-list>
                         </div>
@@ -77,10 +74,10 @@
                 <mat-tab label="Manage All">
                     <div style="min-height: 50vh;" class="mange-stock-tab">
                         <div class="d-flex" style="align-items: flex-start;">
-                            <figure style="margin:1rem;">
-                                <img src=".../../../../../../assets/images/cool-background.png" alt=""
-                                    class="thumbnail-lg">
-                            </figure>
+
+                            <div style="margin: 1rem;">
+                                <app-photo-upload></app-photo-upload>
+                            </div>
                             <form [formGroup]="manageStockForm" class="w-100">
                                 <mat-list dense class="w-100 ">
                                     <mat-list-item>

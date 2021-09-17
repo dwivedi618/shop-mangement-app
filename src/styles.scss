@@ -319,6 +319,12 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     padding: 0 1rem;
     text-align: right;
 }
+.table-column-sm{
+    min-width: 6rem;
+    max-width: 6rem;
+    padding: 0 1rem;
+    text-align: right;
+}
 button.btn-box{
     max-height: 1.5rem!important;
     max-width: 1.5rem!important;

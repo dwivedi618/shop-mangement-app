@@ -33,6 +33,8 @@ import { DashboardComponent } from './layout/components/dashboard/dashboard.comp
 import { ProductComponent } from './layout/components/product/product.component';
 import { ProductItemComponent } from './layout/components/product-item/product-item.component';
 import { ProductItemDetailsComponent } from './layout/components/product-item-details/product-item-details.component';
+import { PhotoUploadComponent } from './layout/components/photo-upload/photo-upload.component';
+import { CustomerDetailsComponent } from './layout/components/customer-details/customer-details.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { ProductItemDetailsComponent } from './layout/components/product-item-de
     ProductComponent,
     ProductItemComponent,
     ProductItemDetailsComponent,
+    PhotoUploadComponent,
+    CustomerDetailsComponent,
 
   ],
   imports: [

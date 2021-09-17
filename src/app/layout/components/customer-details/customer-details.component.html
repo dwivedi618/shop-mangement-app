@@ -1,0 +1,123 @@
+<mat-toolbar class="bg-dark rounded-lg dialog-toolbar" style="margin: -24px -24px 0px -24px;padding: 0 .4rem;">
+    <button mat-button [mat-dialog-close]="false" class="bg-dark"><span>Cancel</span></button>
+    <div class="spacer"></div>
+    <small>Customer Details</small>
+    <div class="spacer"></div>
+
+    <button mat-raised-button class="bg-green" (click)="onDone()">
+        <!-- <mat-icon class="mat-icon-sm pt-1">inventory</mat-icon> -->
+        <small>Done</small>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content class="">
+    <div class="">
+
+        <section class="container" style="min-height: 65vh;">
+            <mat-tab-group mat-align-tabs="start" animationDuration="0ms">
+                <mat-tab label="Basic">
+                    <div style="min-height: 50vh;">
+                        <div class="d-flex" style="align-items: flex-start;">
+                            <figure style="margin:1rem;">
+                                <img src=".../../../../../../assets/images/cool-background.png" alt=""
+                                    class="thumbnail-lg">
+                            </figure>
+                            <mat-list dense class="w-100">
+                                <mat-list-item>
+                                    <span class="strong text-light">Name</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">{{localData?.name | titlecase}}</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Phone</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">{{localData?.phone || 'unknown'}}</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Address</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">{{localData?.address || 'unknown'}}</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Pending Balance</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">{{localData?.debt | currency:'INR' || 'unknown'}}</span>
+                                </mat-list-item>
+                                
+
+
+                            </mat-list>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Manage All">
+                    <div style="min-height: 50vh;" class="mange-stock-tab">
+                        <div class="d-flex" style="align-items: flex-start;">
+
+                            <div style="margin: 1rem;">
+                                <app-photo-upload></app-photo-upload>
+                            </div>
+                            <form [formGroup]="customerForm" class="w-100">
+                                <mat-list dense class="w-100 ">
+                                    <mat-list-item>
+                                        <span class="strong text-light">Name</span>
+                                        <div class="spacer"></div>
+                                        <mat-form-field appearance="outline" class="">
+                                            <mat-label>Name</mat-label>
+                                            <input matInput placeholder="Name" formControlName="name">
+                                        </mat-form-field>
+                                    </mat-list-item>
+                                    <mat-list-item>
+                                        <span class="strong text-light">Phone</span>
+                                        <div class="spacer"></div>
+                                        <mat-form-field appearance="outline" class="">
+                                            <mat-label>Phone</mat-label>
+                                            <input matInput placeholder="conatct Number" formControlName="phone">
+                                        </mat-form-field>
+                                    </mat-list-item>
+                                    <mat-list-item>
+                                        <span class="strong text-light">Address</span>
+                                        <div class="spacer"></div>
+                                        <mat-form-field appearance="outline" class="">
+                                            <mat-label>Address</mat-label>
+                                            <input matInput type="text" placeholder="Date" formControlName="address">
+                                        </mat-form-field>
+                                    </mat-list-item>
+                                    
+                                </mat-list>
+                            </form>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Purchase History">
+                    <div style="min-height: 50vh;">
+                        <div class="d-flex" style="align-items: flex-start;">
+                            
+                            <mat-list dense class="w-100">
+                                <mat-list-item class="" style="margin-top: 1rem;" *ngFor="let list of customerPurchaseHistory">
+                                    <div class="text-wrap-sm">
+                                        <span matLine class="text-light">Item</span>
+                                        <span class="strong">{{list?.name}} </span>
+                                        <span class="text-warp-sm">-{{list?.description || '-'}} </span>
+                                        
+                                    </div>
+                                    <div class="spacer"></div>
+                                    <div class="table-column">
+                                        <span class="strong text-light">Pending Balance</span>
+                                        <div class="spacer"></div>
+                                        <span class="strong">{{list?.debt | currency:'INR' || 'unknown'}}</span>
+                                    </div>
+                                    <div class="date-column">
+                                        <span class="strong text-light">Date</span>
+                                        <div class="spacer"></div>
+                                        <span class="strong">{{list?.date | date:'short' || 'unknown'}}</span>
+                                    </div>
+                                  </mat-list-item>
+                            </mat-list>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </section>
+    </div>
+
+</div>

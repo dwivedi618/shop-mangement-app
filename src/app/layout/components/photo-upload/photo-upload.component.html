@@ -1,0 +1,22 @@
+<div class="shadow photo-container layout rounded-lg"
+                        >
+                        <input type="file"  #fileUpload (change)="onImagePicked($event)"
+                                style="width: 0;height: 0;visibility: hidden;" accept="image/png,image/jpeg">
+                            <mat-toolbar style="position: absolute;bottom: 0px;z-index: 1000;padding: 0;min-height: 3rem;max-height: 3rem;">
+                                <div class="spacer"></div>
+                                <button mat-button class=" bg-ultra-light" (click)="fileUpload.click()">
+                                    <mat-icon class="mat-icon-sm">camera_alt</mat-icon>
+                                </button>
+                                <button mat-button class="" disabled="imagePreview!=='' && imagePreview">
+                                    <mat-icon class="mat-icon-sm" >crop</mat-icon>
+                                </button>
+                                <button mat-button class="" (click)="fileUploadReset()" disabled="imagePreview!=='' && imagePreview">
+                                    <mat-icon class="mat-icon-sm">delete_outline</mat-icon>
+                                </button>
+                                <div class="spacer"></div>
+                            </mat-toolbar>
+                        <div *ngIf="imagePreview!=='' && imagePreview" style="margin-bottom: 3rem;">
+                            <img class="thumbnail-lg" [src]="imagePreview" style="border-radius: 4px;" alt="">
+                        </div>
+
+                    </div>

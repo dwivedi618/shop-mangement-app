@@ -1,6 +1,6 @@
 <section *ngIf="isListView" class="items-container grid-view">
     <div *ngFor="let item of items">
-      <article class="item shadow"  [class.bg-selected]="isSelected(item)" (click)="checkItemDetails()">
+      <article class="item shadow"   (click)="openCustomerDetails(item)">
         <div class="item-price d-flex">
           <div class="spacer"></div>
           <span class="strong px-2 my-1" >{{item.phone || 'unknown'}}</span>
@@ -12,12 +12,12 @@
               <h3 matLine> {{item.name}} </h3>
               <p matLine class="">
                 <small> {{item.code}} </small>
-                <small class=""> -- {{item.address}} </small>
+                <small class="">{{item.address}} </small>
               </p>
             </mat-list-item>
           </mat-list>
         </div>
-        <mat-toolbar style="padding: 0 5px;" [class.bg-selected]="isSelected(item)"  (click)="$event.stopPropagation();">
+        <mat-toolbar style="padding: 0 5px;"   (click)="$event.stopPropagation();">
           <div class="spacer"></div>
             <button mat-button class="bg-ultra-light w-100"  (click)="onSelectItem(item)">
                 <small>View More</small>
@@ -32,14 +32,14 @@
   
   <section *ngIf="!isListView" class="items-container-table-view">
     <div *ngFor="let item of items;let i=index;">
-      <article class="item-list-view shadow "  [class.bg-selected]="isSelected(item)" (click)="checkItemDetails()">
+      <article class="item-list-view shadow "   (click)="openCustomerDetails(item)">
         <div style="width: 2rem;" class="layout">
           <span class="strong">{{i+1}}</span>
         </div>
         <img class="thumbnail-sm" src="../../../../assets/images/cool-background.png" alt="">
         <div class="list-view-details">
           <mat-list dense>
-            <mat-list-item class=" text-wrap-lg">
+            <mat-list-item class=" text-wrap-sm">
               <h3 matLine> {{item.name}} </h3>
               <p matLine class="" style="color: var(--light);">
                 <span class="">{{item.address}} </span>

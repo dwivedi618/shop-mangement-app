@@ -12,6 +12,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
+import { DialogService } from 'src/app/services/dialog-service';
 
 export interface CardItem {
   id: number;
@@ -39,7 +40,7 @@ export class CustomerComponent implements OnInit ,OnChanges{
 
   actionOnCustomerSelection ;
   customerSelection = [];
-  constructor(private dialog : MatDialog) {}
+  constructor(private dialog : MatDialog,private dialogService : DialogService) {}
   ngOnChanges() {
     this.isListView = this.view;
     this.actionOnCustomerSelection = this.action
@@ -51,39 +52,19 @@ export class CustomerComponent implements OnInit ,OnChanges{
 
   }
 
-  onSelectItem(selectedItem) {
-    console.log('HHHHHHHHAARRRRRRRRBAARRA');
-    if (this.customerSelection.length > 0) {
-      this.customerSelection.find((item) => item.id == selectedItem.id)
-        ? this.customerSelection
-        : this.customerSelection.unshift(selectedItem);
-    } else {
-      this.customerSelection.unshift(selectedItem);
-    }
-    this.onShareCart()
+  onSelectItem(selectedCustomer) {
+    this.openCustomerDetails(selectedCustomer)
   }
-  isSelected(selection) {
-    if(this.customerSelection.length){
-      for (let i = 0; i < this.customerSelection.length; i++) {
-        if (this.customerSelection[i]['id'] == selection.id) {
-          return true;
-        }
-      }
-    }else{
-      return false
-    }
+
+  openCustomerDetails(selectedCustomer){
+    this.dialogService.checkCustomerDetails(selectedCustomer).subscribe(data=>{
+      console.log("customer details",data);
+      
+    })
   }
+
   public onShareCart(){
     this.shareCart.emit(this.customerSelection)
   }
-  checkItemDetails() {
-    const data = {};
-    const dialogRef = this.dialog.open(ItemDetailsComponent, {
-      width: '40rem',
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      hasBackdrop: false,
-      data: data,
-    });
-  }
+  
 }

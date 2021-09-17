@@ -6,6 +6,7 @@ import { ItemDetailsComponent } from '../layout/components/item-details/item-det
 import { ServiceListComponent } from '../layout/components/service-list/service-list.component';
 import { InventoryItemDetailsComponent } from '../layout/components/inventory-item-details/inventory-item-details.component';
 import { ProductItemDetailsComponent } from '../layout/components/product-item-details/product-item-details.component';
+import { CustomerDetailsComponent } from '../layout/components/customer-details/customer-details.component';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,22 @@ export class DialogService {
       maxHeight: '100vh',
       hasBackdrop: false,
       data: data,
+    });
+
+    dialogRef.afterClosed().subscribe(result=>{
+      this.setData(result);
+    })
+    
+    return this.dialogCloseData.asObservable();
+  }
+  checkCustomerDetails(selectedCustomer) : Observable<any> {
+    const data = {};
+    const dialogRef = this.dialog.open(CustomerDetailsComponent, {
+      width: '40rem',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: false,
+      data: selectedCustomer,
     });
 
     dialogRef.afterClosed().subscribe(result=>{
