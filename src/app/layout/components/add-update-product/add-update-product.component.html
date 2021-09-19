@@ -1,0 +1,120 @@
+<mat-toolbar class="bg-dark rounded-lg dialog-toolbar" style="margin: -24px -24px 24px -24px;padding: 0 .4rem;">
+    <button mat-button [mat-dialog-close]="false" class="bg-dark"><span>Cancel</span></button>
+    <div class="spacer"></div>
+    <small>{{action | titlecase }} Product</small>
+    <div class="spacer"></div>
+
+    <button mat-raised-button class="bg-green" (click)="onDone()">
+        <!-- <mat-icon class="mat-icon-sm pt-1">inventory</mat-icon> -->
+        <small>Done</small>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content class="">
+    <div class="">
+
+        <section class="container" style="min-height: 65vh;">
+            <div style="min-height: 50vh;" class="mange-stock-tab">
+                <div class="d-flex" style="align-items: flex-start;">
+
+                    <div style="margin: 1rem;" class="d-flex flex-column">
+                        <app-photo-upload></app-photo-upload>
+                    </div>
+                    <form [formGroup]="productForm" class="w-100 d-flex" style="align-items: flex-start;">
+                        <mat-list dense class="w-100 ">
+                            <mat-list-item>
+                                <span class="strong text-light">Grade</span>
+                                <div class="spacer"></div>
+                                <mat-form-field appearance="outline" class="">
+                                    <mat-label>Grade</mat-label>
+                                    <input matInput placeholder="Grade" formControlName="grade">
+                                </mat-form-field>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <span class="strong text-light">Make</span>
+                                <div class="spacer"></div>
+                                <mat-form-field appearance="outline" class="">
+                                    <mat-label>Make</mat-label>
+                                    <input matInput placeholder="Make" formControlName="make">
+                                </mat-form-field>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <span class="strong text-light">Length In Meter</span>
+                                <div class="spacer"></div>
+                                <mat-form-field appearance="outline" class="">
+                                    <mat-label>Length</mat-label>
+                                    <input matInput placeholder="length" formControlName="length">
+                                </mat-form-field>
+                            </mat-list-item>
+                            
+                            <mat-list-item>
+                                <span class="strong text-light">Price</span>
+                                <div class="spacer"></div>
+                                <mat-form-field appearance="outline" class="">
+                                    <mat-label>Price ₹</mat-label>
+                                    <input matInput type="number" placeholder="Price" formControlName="price">
+                                </mat-form-field>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <span class="strong text-light">Unit</span>
+                                <div class="spacer"></div>
+                                <mat-form-field appearance="outline" class="">
+                                    <mat-select formControlName="unit">
+                                        <mat-option value="">Select</mat-option>
+                                        <mat-option value="piece">Piece</mat-option>
+                                        <mat-option value="meter">Meter</mat-option>
+                                    </mat-select> 
+                                </mat-form-field>
+                            </mat-list-item>
+                            
+                          
+                            <mat-list-item>
+                                <span class="strong text-light">Preference</span>
+                                <div class="spacer"></div>
+                                <mat-form-field appearance="outline">
+                                    <mat-select formControlName="isSellByMeter">
+                                        <mat-option value="">Select Preference</mat-option>
+                                        <mat-option value="false">Sell by Pieces</mat-option>
+                                        <mat-option value="true">Sell by Meter</mat-option>
+                                    </mat-select>                                 
+                                </mat-form-field>
+                            </mat-list-item>
+                        </mat-list>
+                        <div class="w-100 mt-1" style="font-size: 12px;">
+                            
+
+                                <mat-list dense class="w-100">
+                                    <mat-list-item>
+                                        <span class="strong text-light">Discount In %</span>
+                                        <div class="spacer"></div>
+                                        <mat-form-field appearance="outline" class="">
+                                            <mat-label>%</mat-label>
+                                            <input matInput placeholder="%" formControlName="discountInPercent">
+                                        </mat-form-field>
+                                    </mat-list-item>
+                                    <mat-list-item>
+                                        <span class="strong text-light">Discount In Ruppee</span>
+                                        <div class="spacer"></div>
+                                        <mat-form-field appearance="outline" class="">
+                                            <mat-label>Ruppee</mat-label>
+                                            <input matInput placeholder="INR" formControlName="discountInRuppee">
+                                        </mat-form-field>
+                                    </mat-list-item>
+                                   
+                                </mat-list>
+                                <div class="d-flex flex-column px-3 mt-2" style="justify-content: start;align-items: flex-start;">
+                                    <span class="strong text-light">Description</span>
+                                    <mat-form-field appearance="outline" class="w-100 mt-2">
+                                        <!-- <mat-label>Description</mat-label> -->
+                                        <textarea matInput placeholder="Description" rows="11" formControlName="description"></textarea>
+                                    </mat-form-field>
+                                </div>
+                                
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>

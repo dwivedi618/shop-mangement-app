@@ -35,6 +35,7 @@ import { ProductItemComponent } from './layout/components/product-item/product-i
 import { ProductItemDetailsComponent } from './layout/components/product-item-details/product-item-details.component';
 import { PhotoUploadComponent } from './layout/components/photo-upload/photo-upload.component';
 import { CustomerDetailsComponent } from './layout/components/customer-details/customer-details.component';
+import { AddUpdateProductComponent } from './layout/components/add-update-product/add-update-product.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { CustomerDetailsComponent } from './layout/components/customer-details/c
     ProductItemDetailsComponent,
     PhotoUploadComponent,
     CustomerDetailsComponent,
+    AddUpdateProductComponent,
 
   ],
   imports: [

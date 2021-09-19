@@ -2,6 +2,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
+import { DialogService } from 'src/app/services/dialog-service';
 
 export interface productDetails{
   id : number,
@@ -24,7 +25,7 @@ export interface productDetails{
   styleUrls: ['./product-item-details.component.scss']
 })
 export class ProductItemDetailsComponent implements OnInit {
-  manageStockForm : FormGroup
+  productForm : FormGroup
   localData: any;
   constructor(
     private fb: FormBuilder,
@@ -36,17 +37,25 @@ export class ProductItemDetailsComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.manageStockForm = this.fb.group({
-      quantity : [''],
-      pricePerItem : [''],
-      date : [''],
-      notes : [''],
-      isAddingStock : []
+    this.productForm = this.fb.group({
+      grade : [''],
+      make : [''],
+      price : [''],
+      unit : [''],
+      discountInPercent : [''],
+      discountInRuppee : [''],
+      description : [''],
+      isSellByMeter : [''],
+      length : [''],
+      file : ['']
     })
   }
 
-  onDone(){
-    console.log("Mange Stock Form",this.manageStockForm.value)
+  onEdit(){
+    this.onClose();
+  }
+  onClose(){
+    this.dialogRef.close('update');
   }
 }
 

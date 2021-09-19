@@ -1,9 +1,9 @@
 <section *ngIf="isListView" class="items-container grid-view">
-  <div *ngFor="let item of items" >
-    <article class="item shadow"  [class.bg-selected]="isAddedToCart(item)" (click)="checkItemDetails()">
+  <div *ngFor="let item of items">
+    <article class="item shadow" [class.bg-selected]="isAddedToCart(item)" (click)="checkItemDetails()">
       <div class="item-price d-flex">
         <div class="spacer"></div>
-        <span class="strong px-2 my-1" >{{item.mrp | currency : 'INR'}}</span>
+        <span class="strong px-2 my-1">{{item.mrp | currency : 'INR'}}</span>
       </div>
       <img class="thumbnail-lg" src="../../../../assets/images/pexels-markus-winkler-3812433.jpg" alt="">
       <div class="card-item-details w-100">
@@ -17,22 +17,23 @@
           </mat-list-item>
         </mat-list>
       </div>
-      <mat-toolbar style="padding: 0 5px;" [class.bg-selected]="isAddedToCart(item)"  (click)="$event.stopPropagation();">
+      <mat-toolbar style="padding: 0 5px;" [class.bg-selected]="isAddedToCart(item)"
+        (click)="$event.stopPropagation();">
         <div class="spacer"></div>
-          <button mat-button class="bg-ultra-light w-100" *ngIf="!isAddedToCart(item)" (click)="onSelectItem(item)">
-            <small>Add to cart</small>
-            <mat-icon class="mat-icon-sm pt-1">add_shopping_cart</mat-icon>
+        <button mat-button class="bg-ultra-light w-100" *ngIf="!isAddedToCart(item)" (click)="onSelectItem(item)">
+          <small>Add to cart</small>
+          <mat-icon class="mat-icon-sm pt-1">add_shopping_cart</mat-icon>
+        </button>
+        <div class="item-count-container" *ngIf="isAddedToCart(item)">
+          <button mat-button #decreamentbtn class="btn-box" (click)="adjustCartItemQuantity(0,item)">
+            <mat-icon class="mat-icon-sm pt-1">remove</mat-icon>
           </button>
-          <div class="item-count-container" *ngIf="isAddedToCart(item)">
-            <button mat-button #decreamentbtn class="btn-box" (click)="adjustCartItemQuantity(0,item)">
-              <mat-icon class="mat-icon-sm pt-1">remove</mat-icon>
-            </button>
-            <div class="item-count-box">
-              <small>{{getThisItemQuantity(item.id)}}</small>
-            </div>
-            <button mat-button #increamentbtn class="btn-box" (click)="adjustCartItemQuantity(1,item)">
-              <mat-icon class="mat-icon-sm pt-1">add</mat-icon>
-            </button>
+          <div class="item-count-box">
+            <small>{{getThisItemQuantity(item.id)}}</small>
+          </div>
+          <button mat-button #increamentbtn class="btn-box" (click)="adjustCartItemQuantity(1,item)">
+            <mat-icon class="mat-icon-sm pt-1">add</mat-icon>
+          </button>
         </div>
         <div class="spacer"></div>
       </mat-toolbar>
@@ -42,18 +43,19 @@
 
 <section *ngIf="!isListView" class="items-container-table-view">
   <div *ngFor="let item of items;let i=index;">
-    <article class="item-list-view shadow bg-white"  [class.bg-selected]="isAddedToCart(item)" (click)="checkItemDetails()">
+    <article class="item-list-view shadow bg-white" [class.bg-selected]="isAddedToCart(item)"
+      (click)="checkItemDetails()">
       <div style="width: 2rem;" class="layout">
         <span class="strong">{{i+1}}</span>
       </div>
       <img class="thumbnail-sm" src="../../../../assets/images/cool-background.png" alt="">
       <div class="list-view-details">
         <mat-list dense>
-          <mat-list-item class=" text-wrap-lg">
-            <h3 matLine> {{item.name}} </h3>
+          <mat-list-item class=" text-wrap-sm">
+            <h3 matLine> {{item.name || item.item.name}} </h3>
             <p matLine class="" style="color: var(--light);">
               <span> {{item.code}} </span>
-              <span class=""> -- {{item.description}} </span>
+              <span class=""> -- {{item.description || item.item.description}} </span>
             </p>
           </mat-list-item>
         </mat-list>
@@ -63,8 +65,19 @@
       <div class="price-column">
         <mat-list dense>
           <mat-list-item>
-            <span matLine style="color:var(--light)">MRP</span>
-            <h3 matLine style="font-weight: 600;"> {{item.mrp | currency : 'INR'}}</h3>
+            <span matLine style="color:var(--light)">Discount</span>
+            <h3 matLine style="font-weight: 600;"> {{(item.discountInPercent/100 || item?.item.discountInPercent/100)|  percent}} | {{((item?.price*item.discountInPercent)/100) || ((item?.item?.price*item?.item?.discountInPercent)/100) | currency : 'INR'}}</h3>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <div class="price-column">
+        <mat-list dense>
+          <mat-list-item>
+            <span matLine style="color:var(--light)">Price/{{item?.unit || item.item?.unit}}</span>
+            <h3 matLine style="font-weight: 600;"> 
+              <del class="text-light">{{item.price | currency : 'INR'}}</del> 
+              <span matLine class="">{{((item.price - (item.price*item.discountInPercent)/100) || item?.priceAfterDiscount) | currency : 'INR'}}</span>
+            </h3>
           </mat-list-item>
         </mat-list>
       </div>
@@ -79,7 +92,8 @@
             <mat-icon class="mat-icon-sm pt-1">remove</mat-icon>
           </button>
           <div class="item-count-box">
-            <small>{{getThisItemQuantity(item.id)}}</small>
+            <input class="count-input" type="number" value={{getThisItemQuantity(item.id)}} min="1"
+              (keyup)="onCartItemQuantityChange($event.target.value,item.id)" [readonly]="item.unit == 'piece' || item.item.unit == 'piece'">
           </div>
           <button mat-button #increamentbtn class="btn-box" (click)="adjustCartItemQuantity(1,item);">
             <mat-icon class="mat-icon-sm pt-1">add</mat-icon>

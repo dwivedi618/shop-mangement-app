@@ -7,6 +7,7 @@ import { ServiceListComponent } from '../layout/components/service-list/service-
 import { InventoryItemDetailsComponent } from '../layout/components/inventory-item-details/inventory-item-details.component';
 import { ProductItemDetailsComponent } from '../layout/components/product-item-details/product-item-details.component';
 import { CustomerDetailsComponent } from '../layout/components/customer-details/customer-details.component';
+import { AddUpdateProductComponent } from '../layout/components/add-update-product/add-update-product.component';
 
 @Injectable({
   providedIn: 'root'
@@ -86,6 +87,21 @@ export class DialogService {
     const data = {};
     const dialogRef = this.dialog.open(ProductItemDetailsComponent, {
       width: '40rem',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: false,
+      data: selectedItem,
+    });
+    dialogRef.afterClosed().subscribe(result=>{
+      this.setData(result);
+    })
+    
+    return this.dialogCloseData.asObservable();
+  }
+  addUpdateProduct(selectedItem) {
+    const data = {};
+    const dialogRef = this.dialog.open(AddUpdateProductComponent, {
+      width: '70rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
       hasBackdrop: false,
