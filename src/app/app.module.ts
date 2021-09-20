@@ -35,6 +35,7 @@ import { ProductItemComponent } from './layout/components/product-item/product-i
 import { ProductItemDetailsComponent } from './layout/components/product-item-details/product-item-details.component';
 import { PhotoUploadComponent } from './layout/components/photo-upload/photo-upload.component';
 import { CustomerDetailsComponent } from './layout/components/customer-details/customer-details.component';
+import { IPCService } from './services/ipc.service';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,7 @@ import { CustomerDetailsComponent } from './layout/components/customer-details/c
     MatPaginatorModule,
     MatSortModule
   ],
-  providers: [],
+  providers: [IPCService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
