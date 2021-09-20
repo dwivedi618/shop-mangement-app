@@ -73,6 +73,9 @@
                 <app-search (onSearch)="getSearchText($event)"></app-search>
             </div>
             <span class="spacer"></span>
+            <button mat-icon-button class="mx-2 rounded-lg" (click)="openAddUpdateProduct()">
+                <mat-icon class="mat-icon-sm pt-0">add_box</mat-icon>
+            </button>
             <button mat-icon-button class="mx-2 rounded-lg" (click)="isListView = !isListView">
                 <mat-icon class="mat-icon-sm pt-0">{{isListView ? 'view_list' : 'grid_view'}}</mat-icon>
             </button>

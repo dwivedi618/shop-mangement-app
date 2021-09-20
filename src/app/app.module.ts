@@ -36,6 +36,7 @@ import { ProductItemDetailsComponent } from './layout/components/product-item-de
 import { PhotoUploadComponent } from './layout/components/photo-upload/photo-upload.component';
 import { CustomerDetailsComponent } from './layout/components/customer-details/customer-details.component';
 import { IPCService } from './services/ipc.service';
+import { AddUpdateProductComponent } from './layout/components/add-update-product/add-update-product.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { IPCService } from './services/ipc.service';
     ProductItemDetailsComponent,
     PhotoUploadComponent,
     CustomerDetailsComponent,
+    AddUpdateProductComponent
 
   ],
   imports: [

@@ -53,7 +53,7 @@
           <mat-list dense>
             <mat-list-item>
               <span matLine style="color:var(--light)">Discount</span>
-              <h3 matLine style="font-weight: 600;"> {{item.discountInPercentage/100 |  percent}}</h3>
+              <h3 matLine style="font-weight: 600;"> {{item.discountInPercent/100 |  percent}}</h3>
             </mat-list-item>
           </mat-list>
         </div>
@@ -62,8 +62,8 @@
             <mat-list-item>
               <span matLine style="color:var(--light)">Sale Price</span>
               <h3 matLine style="font-weight: 600;"> 
-                <del class="text-light">{{item.salePrice | currency : 'INR'}}</del> 
-                <span matLine class="">{{(item.salePrice - (item.salePrice*item.discountInPercentage)/100) | currency : 'INR'}}</span>
+                <del class="text-light">{{item.price | currency : 'INR'}}</del> 
+                <span matLine class="">{{(item.price - (item.price*item.discountInPercent)/100) | currency : 'INR'}}</span>
               </h3>
             </mat-list-item>
           </mat-list>

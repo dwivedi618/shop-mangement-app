@@ -69,7 +69,7 @@ export class CartComponent implements OnInit {
   getCartTotal(){
     let cartAmount = 0 ;
     for(let i=0;i<this.cart.length;i++){
-      cartAmount = cartAmount + (this.cart[i].mrp)*this.cart[i].quantity
+      cartAmount = cartAmount + (this.cart[i].priceAfterDiscount)*this.cart[i].quantity
       // console.log(this.cart[i]);
       
     }

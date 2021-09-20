@@ -25,81 +25,43 @@ export class NewSaleComponent implements OnInit {
   items = [
     {
       id : 1,
-      name: 'T-shirt',
+      name: 'Saree',
       brand: 'Peter England',
-      mrp: 199,
-      
-      description: '',
-      code : ''
+      salePrice: 199,
+      discountInPercent : 3,
+      discountInRuppee : 5.79,
+      price : 193.03,
+      unit : 'piece',
+      isSellByMeter : 'true',
+      grade : 'A grade',
+      description: 'Wine Purple Woven Kanjivaram Saree - Special Wedding Edition',
+      code : '',
+      make : 'Make for this item',
+      length : '',
+      size : '',
     },
     {
       id : 2,
-      name: 'T-shirt',
+      name: 'Saree',
       brand: 'Peter England',
-      mrp: 19,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 3,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 9,
-      description: 'Strechable ,cotton febric,replacement,free delivery',
-      code : 'ST2021APR'
-    },{
-      id : 4,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 5,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 6,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 7,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 8,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 9,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
-    },{
-      id : 10,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      mrp: 1199,
-      description: 'Strechable ,cotton febric',
-      code : 'ST2021APR'
+      salePrice: 199,
+      discountInPercent : 3,
+      discountInRuppee : 5.79,
+      price : 193.03,
+      unit : 'meter',
+      isSellByMeter : 'false',
+      grade : 'A grade',
+      description: 'Wine Purple Woven Kanjivaram Saree - Special Wedding Edition',
+      code : '',
+      make : 'Make for this item',
+      length : '',
+      size : '',
     },
   ];
   cart = [];
   constructor(private dialog: MatDialog,private router : Router) {}
   ngOnInit(): void {
+    // localStorage.removeItem('currentCartDD')
     let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
     this.cart = loadCart;
     console.log("recent cart",this.cart);
@@ -155,7 +117,7 @@ export class NewSaleComponent implements OnInit {
   getCartTotal(){
     let cartAmount = 0 ;
     for(let i=0;i<this.cart.length;i++){
-      cartAmount = cartAmount + Number((this.cart[i].mrp) || 0)*Number(this.cart[i].quantity)
+      cartAmount = cartAmount + Number((this.cart[i].priceAfterDiscount) || 0)*Number(this.cart[i].quantity)
       // console.log(this.cart[i]);
       
     }

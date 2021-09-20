@@ -17,7 +17,11 @@ export interface CardItem {
   item: any;
   name: string;
   quantity: number;
-  mrp: any;
+  price: number;
+  discountInPercent: any;
+  discountInRuppee: any;
+  priceAfterDiscount : number;
+
 }
 @Component({
   selector: 'app-item',
@@ -50,12 +54,14 @@ export class ItemComponent implements OnInit, OnChanges {
 
   onSelectItem(selectedItem) {
     console.log('HHHHHHHHAARRRRRRRRBAARRA');
-    
     let cartItem = <CardItem>{};
     cartItem.id = selectedItem?.id;
     cartItem.item = selectedItem;
     cartItem.quantity = 1;
-    cartItem.mrp = selectedItem?.mrp;
+    cartItem.price = selectedItem?.price;
+    cartItem.discountInRuppee = selectedItem?.discountInRuppee;
+    cartItem.priceAfterDiscount = selectedItem?.price - selectedItem?.discountInRuppee;
+
 
     if (this.cart.length > 0) {
       this.cart.find((item) => item.id == cartItem.id)
@@ -103,6 +109,16 @@ export class ItemComponent implements OnInit, OnChanges {
         if (this.cart[i].id == selectedItem.id) {
           return (this.cart[i].quantity += 1);
         }
+      }
+    }
+  }
+  onCartItemQuantityChange(newQuantity,itemId){
+    
+    for (let i = 0; i < this.cart.length; i++) {
+      if (this.cart[i]['id'] == itemId) {
+        //do not change quantity if new Quantity is less than 1
+        ( newQuantity < 1  ) ? (this.cart[i].quantity = 1) :  (this.cart[i].quantity = newQuantity);
+        console.log("new Quantity-----------",this.cart[i].quantity)
       }
     }
   }

@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DialogService } from 'src/app/services/dialog-service';
 import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-customer.component';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
@@ -30,24 +31,29 @@ export class ProductComponent implements OnInit {
       name: 'Saree',
       brand: 'Peter England',
       salePrice: 199,
-      discountInPercentage : 3,
+      discountInPercent : 3,
       discountInRuppee : 5.97,
-      offerPrice : 193.03,
+      price : 193.03,
+      unit : 'piece',
+      isSellByMeter : 'true',
       grade : 'A grade',
       description: 'Wine Purple Woven Kanjivaram Saree - Special Wedding Edition',
       code : '',
-      make : '',
+      make : 'Make for this item',
+      length : '',
       size : '',
     },
 
   ];
   cart = [];
-  constructor(private dialog: MatDialog,private router : Router) {}
+  constructor(private dialog: MatDialog,private dialogService: DialogService,private router : Router) {}
   ngOnInit(): void {
 
   }
 
-
+  openAddUpdateProduct(){
+    this.dialogService.addUpdateProduct('')
+  }
 
   getSearchText(searchText){
     console.log(searchText)

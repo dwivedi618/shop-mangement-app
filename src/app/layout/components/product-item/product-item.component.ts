@@ -53,12 +53,22 @@ export class ProductItemComponent implements OnInit,OnChanges {
   }
 
   onSelectItem(selectedItem) {
-    this.openProductItemDetails(selectedItem)
+    this.openAddUpdateProduct(selectedItem);
   }
 
   openProductItemDetails(selectedItem){
     this.dialogService.checkProductItemDetails(selectedItem).subscribe(data=>{
       console.log("product item details ",data)
+      data == 'update' ? this.openAddUpdateProduct(selectedItem) : doNothing()
     })
+
+    function doNothing(){
+      return
+    }
+  }
+
+  openAddUpdateProduct(selectedItem){
+    selectedItem.action = 'update'
+    this.dialogService.addUpdateProduct(selectedItem)
   }
 }
