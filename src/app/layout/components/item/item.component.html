@@ -73,7 +73,7 @@
       <div class="price-column">
         <mat-list dense>
           <mat-list-item>
-            <span matLine style="color:var(--light)">Price/{{item?.unit || item.item?.unit}}</span>
+            <span matLine style="color:var(--light)">Price/{{item?.unit || item?.item?.unit}}</span>
             <h3 matLine style="font-weight: 600;"> 
               <del class="text-light">{{item.price | currency : 'INR'}}</del> 
               <span matLine class="">{{((item.price - (item.price*item.discountInPercent)/100) || item?.priceAfterDiscount) | currency : 'INR'}}</span>
@@ -93,7 +93,7 @@
           </button>
           <div class="item-count-box">
             <input class="count-input" type="number" value={{getThisItemQuantity(item.id)}} min="1"
-              (keyup)="onCartItemQuantityChange($event.target.value,item.id)" [readonly]="item.unit == 'piece' || item.item.unit == 'piece'">
+              (keyup)="onCartItemQuantityChange($event.target.value,item.id)" [readonly]="item?.unit == 'piece' || item?.item?.unit == 'piece'">
           </div>
           <button mat-button #increamentbtn class="btn-box" (click)="adjustCartItemQuantity(1,item);">
             <mat-icon class="mat-icon-sm pt-1">add</mat-icon>

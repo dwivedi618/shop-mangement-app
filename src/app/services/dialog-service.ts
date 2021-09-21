@@ -8,6 +8,7 @@ import { InventoryItemDetailsComponent } from '../layout/components/inventory-it
 import { ProductItemDetailsComponent } from '../layout/components/product-item-details/product-item-details.component';
 import { CustomerDetailsComponent } from '../layout/components/customer-details/customer-details.component';
 import { AddUpdateProductComponent } from '../layout/components/add-update-product/add-update-product.component';
+import { BillPreviewComponent } from '../layout/components/bill-preview/bill-preview.component';
 
 @Injectable({
   providedIn: 'root'
@@ -123,6 +124,22 @@ export class DialogService {
       disableClose : true,
       data: data,
     });
+  }
+
+  openBillPreview(billingInfo) {
+    const data = {};
+    const dialogRef = this.dialog.open(BillPreviewComponent, {
+      width: '70rem',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: false,
+      data: billingInfo,
+    });
+    dialogRef.afterClosed().subscribe(result=>{
+      this.setData(result);
+    })
+    
+    return this.dialogCloseData.asObservable();
   }
 
 }

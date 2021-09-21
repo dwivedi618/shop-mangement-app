@@ -88,7 +88,7 @@
                                         <div class="spacer"></div>
                                         <mat-form-field appearance="outline" class="">
                                             <mat-label>%</mat-label>
-                                            <input matInput placeholder="%" formControlName="discountInPercent">
+                                            <input matInput placeholder="%" formControlName="discountInPercent" (keyup)="onDiscountChanged(productForm.value.price,$event.target.value,'percent')" >
                                         </mat-form-field>
                                     </mat-list-item>
                                     <mat-list-item>
@@ -96,7 +96,7 @@
                                         <div class="spacer"></div>
                                         <mat-form-field appearance="outline" class="">
                                             <mat-label>Ruppee</mat-label>
-                                            <input matInput placeholder="INR" formControlName="discountInRuppee">
+                                            <input matInput placeholder="INR" formControlName="discountInRuppee" (keyup)="onDiscountChanged(productForm.value.price,$event.target.value,'ruppee')">
                                         </mat-form-field>
                                     </mat-list-item>
                                    

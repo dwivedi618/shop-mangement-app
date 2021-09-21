@@ -1,6 +1,4 @@
-
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 
@@ -20,22 +18,21 @@ export interface productDetails{
 }
 
 @Component({
-  selector: 'app-add-update-product',
-  templateUrl: './add-update-product.component.html',
-  styleUrls: ['./add-update-product.component.scss']
+  selector: 'app-bill-preview',
+  templateUrl: './bill-preview.component.html',
+  styleUrls: ['./bill-preview.component.scss']
 })
-export class AddUpdateProductComponent implements OnInit {
+export class BillPreviewComponent implements OnInit {
   productForm : FormGroup
   localData: any;
   action: any;
   constructor(
     private fb: FormBuilder,
-    private dialogRef : MatDialogRef<AddUpdateProductComponent>,
+    private dialogRef : MatDialogRef<BillPreviewComponent>,
     @Inject(MAT_DIALOG_DATA) data : productDetails
     ) {
       this.localData = data || null;
       this.action = this.localData?.action || 'new';
-      
       console.log("data",data,this.localData)
      }
 

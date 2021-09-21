@@ -17,14 +17,19 @@ export class CartComponent implements OnInit {
   isListView = false;
   cart = [];
   currentCustomer: any;
+  discountInRuppee: number;
+  discountInPercent: number;
+  cartAmount: number;
+  finalPayableAmount:number
   constructor(private dialog: MatDialog,private dialogService : DialogService) {}
   ngOnInit(): void {
     let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
     this.cart = loadCart
     console.log("load cart from local storage",loadCart)
-    this.checkCustomer();
+    // this.checkCustomer();
     // this.checkItemDetails();
     // this.checkServiceList()
+    this.onTakePayment()
   }
   checkCustomer() {
     this.dialogService.checkCustomer().subscribe(data=>{
@@ -73,6 +78,39 @@ export class CartComponent implements OnInit {
       // console.log(this.cart[i]);
       
     }
+    this.cartAmount = cartAmount
+    this.getFinalPayableAmount()
     return cartAmount
+  }
+
+  onDiscountChanged(price:number,discountValue : number,type : string){
+    if(type == 'percent'){
+      this.discountInRuppee = Math.round((price * discountValue/100)*100)/100;
+      this.discountInPercent = discountValue;
+    }else{
+      this.discountInRuppee = discountValue
+      this.discountInPercent = Math.round((discountValue * 100 /price)*100)/100 
+    }
+  }
+
+  getFinalPayableAmount(){
+    return new Promise((resolve,reject)=>{
+      this.finalPayableAmount = this.cartAmount - (this.discountInRuppee || 0);
+      resolve( this.finalPayableAmount)
+    })
+  }
+
+  async onTakePayment(){
+    let billingInfo = <any>{};
+    billingInfo.cartItem = this.cart;
+    billingInfo.customer = 'Shivam Dwivedi'
+    billingInfo.phone = '7827458618'
+    billingInfo.address = 'C/o Shivam dwivedi ,Bankatiya Dubey,deoria UP'
+    billingInfo.discountInRuppee = this.discountInRuppee
+    billingInfo.discountInPercent = this.discountInPercent
+    billingInfo.finalPayableAmount = await this.getFinalPayableAmount();
+    this.dialogService.openBillPreview(billingInfo).subscribe(data=>{
+      console.log("bill Preview Closed",data);
+    })
   }
 }

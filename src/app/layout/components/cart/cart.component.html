@@ -46,17 +46,19 @@
 
 
                     <mat-form-field class="w-50" appearance="outline">
-                        <mat-label>Discount In ₹</mat-label>
-                        <input matInput type="text" [(ngModel)]="value">
-                        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                        <mat-label>Discount In %</mat-label>
+                        <input matInput type="text" placeholder="%" [(ngModel)]="discountInPercent" (ngModelChange)="onDiscountChanged(cartAmount,$event,'percent')">
+                        
+                        <button *ngIf="discountInPercent" matSuffix mat-icon-button aria-label="Clear" (click)="discountInPercent = ''">
                             <mat-icon>close</mat-icon>
                         </button>
                     </mat-form-field>
                     <mat-form-field class="w-50" appearance="outline">
-                        <mat-label>Discount In %</mat-label>
-                        <input matInput type="text" [(ngModel)]="value">
-                        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-                            <mat-icon>close</mat-icon>
+                        <mat-label>Discount In ₹</mat-label>
+                        <input matInput type="text" placeholder="INR" [(ngModel)]="discountInRuppee" (ngModelChange)="onDiscountChanged(cartAmount,$event,'ruppee')">
+                        
+                        <button *ngIf="discountInRuppee" matSuffix mat-icon-button aria-label="Clear" (click)="discountInRuppee = ''">
+                            <mat-icon class="mat-icon-sm pt-1">close</mat-icon>
                         </button>
                     </mat-form-field>
                 </mat-expansion-panel>
@@ -69,29 +71,25 @@
                     <div class="spacer"></div>
                     <span>{{getCartTotal() | currency :'INR'}}</span>
                 </mat-list-item>
-                <mat-list-item>
-                    <span>Taxes and Charges</span>
-                    <div class="spacer"></div>
-                    <span>{{getCartTotal() | currency :'INR'}}</span>
-                </mat-list-item>
+                
                 <mat-list-item>
                     <span>Discount</span>
                     <div class="spacer"></div>
-                    <span>-{{getCartTotal() | currency :'INR'}}</span>
+                    <span>- {{discountInRuppee || '0' | currency :'INR'}}</span>
                 </mat-list-item>
                 <mat-list-item>
                     <span style="font-weight: 600;">Total Pay</span>
                     <div class="spacer"></div>
-                    <span style="font-weight: 600;">{{getCartTotal() | currency :'INR'}}</span>
+                    <span style="font-weight: 600;">{{finalPayableAmount || '...' | currency :'INR'}}</span>
                 </mat-list-item>
             </mat-list>
         </div>
         <mat-toolbar style="position: absolute;bottom: 0;z-index: 5;background: white">
             <button mat-stroked-button class="bg-ultra-light w-100 mr-1">
-                <span class="fancy-text text-uppercase">Cancel</span>
+                <span class="text-uppercase">Cancel</span>
             </button>
-            <button mat-button class="bg-green w-100">
-                <span class="fancy-text text-uppercase">Save</span>
+            <button mat-button class="bg-green w-100" (click)="onTakePayment()">
+                <span class=" text-uppercase">Take Payment</span>
             </button>
 
         </mat-toolbar>

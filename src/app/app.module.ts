@@ -36,6 +36,7 @@ import { ProductItemDetailsComponent } from './layout/components/product-item-de
 import { PhotoUploadComponent } from './layout/components/photo-upload/photo-upload.component';
 import { CustomerDetailsComponent } from './layout/components/customer-details/customer-details.component';
 import { AddUpdateProductComponent } from './layout/components/add-update-product/add-update-product.component';
+import { BillPreviewComponent } from './layout/components/bill-preview/bill-preview.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { AddUpdateProductComponent } from './layout/components/add-update-produc
     PhotoUploadComponent,
     CustomerDetailsComponent,
     AddUpdateProductComponent,
+    BillPreviewComponent,
 
   ],
   imports: [
