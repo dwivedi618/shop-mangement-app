@@ -3,7 +3,10 @@
     <div class="spacer"></div>
     <small>Billing Preview</small>
     <div class="spacer"></div>
-
+    <button mat-raised-button class="bg-green" (click)="onShare()">
+        <mat-icon class="mat-icon-sm pt-1">print</mat-icon>
+        <small>share</small>
+    </button>
     <button mat-raised-button class="bg-green" (click)="onDone()">
         <mat-icon class="mat-icon-sm pt-1">print</mat-icon>
         <small>Print</small>
@@ -31,16 +34,16 @@
                             <tr>
                                 <td align="left">
                             <tr>
-                                <td><span class="text-light text-uppercase">Bill To</span></td>
+                                <td><span class="text-light">Bill To</span></td>
                             </tr>
                             <tr>
-                                <td> <span class="strong">Shivam dwivedi</span></td>
+                                <td> <span class="strong">{{localData?.customer | titlecase}}</span></td>
                             </tr>
                             <tr>
-                                <td><span class="text-light">94587563837</span></td>
+                                <td><span class="text-light">{{localData?.phone}}</span></td>
                             </tr>
                             <tr>
-                                <td><small class="">Bankatiya deoria up</small></td>
+                                <td><small class="">{{localData?.address}}</small></td>
                             </tr>
                             </td>
                             <td align="right">
@@ -61,7 +64,7 @@
                             </td>
                             <td align="left">
                                 <tr>
-                                    <td><span class="strong text-uppercase">111</span></td>
+                                    <td><span class="strong text-uppercase">1</span></td>
                                 </tr>
                                 <tr>
                                     <td> <span class="strong">25 oct 2021</span></td>
@@ -83,88 +86,21 @@
                                 <tr>
                                     <th align="left">Items</th>
                                     <th>Quantity</th>
-                                    <th>Discount</th>
-                                    <th>Discount INR</th>
+                                    
                                     <th align="right">Price</th>
+                                    <th>Discount INR</th>
                                     <th align="right">Amount</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr align="center">
-                                    <td align="left">saree</td>
-                                    <td>2</td>
-                                    <td>2%</td>
-                                    <td>- 20/-</td>
-                                    <td align="right">4003</td>
-                                    <td align="right">4003</td>
+                                <tr align="center" *ngFor="let item of localData?.cartItem">
+                                    <td align="left">{{item?.item?.grade || item?.item?.make }}</td>
+                                    <td>{{item?.quantity }}</td>                             
+                                    <td align="right">{{item?.item?.price | currency:'INR'}}</td>
+                                    <td>- {{item?.discountInRuppee | currency:'INR'}}</td>
+                                    <td align="right">{{ item?.quantity * item.priceAfterDiscount | currency:'INR'}}</td>
                                 </tr>
-                                <tr align="center">
-                                    <td align="left">saree</td>
-                                    <td>2</td>
-                                    <td>2%</td>
-                                    <td>- 20/-</td>
-                                    <td align="right">4003</td>
-                                    <td align="right">4003</td>
-                                </tr>
-                                <tr align="center">
-                                    <td align="left">saree</td>
-                                    <td>2</td>
-                                    <td>2%</td>
-                                    <td>- 20/-</td>
-                                    <td align="right">4003</td>
-                                    <td align="right">4003</td>
-                                </tr>
-                                <tr align="center">
-                                    <td align="left">saree</td>
-                                    <td>2</td>
-                                    <td>2%</td>
-                                    <td>- 20/-</td>
-                                    <td align="right">4003</td>
-                                    <td align="right">4003</td>
-                                </tr>
-                                <tr align="center">
-                                    <td align="left">saree</td>
-                                    <td>2</td>
-                                    <td>2%</td>
-                                    <td>- 20/-</td>
-                                    <td align="right">4003</td>
-                                    <td align="right">4003</td>
-                                </tr>
-                                <tr align="center">
-                                    <td align="left">saree</td>
-                                    <td>2</td>
-                                    <td>2%</td>
-                                    <td>- 20/-</td>
-                                    <td align="right">4003</td>
-                                    <td align="right">4003</td>
-                                </tr>
-                                <tr align="center">
-                                    <td align="left">saree</td>
-                                    <td>2</td>
-                                    <td>2%</td>
-                                    <td>- 20/-</td>
-                                    <td align="right">4003</td>
-                                    <td align="right">4003</td>
-                                </tr>
-                                <tr align="center">
-                                    <td align="left">saree</td>
-                                    <td>2</td>
-                                    <td>2%</td>
-                                    <td>- 20/-</td>
-                                    <td align="right">4003</td>
-                                    <td align="right">4003</td>
-                                </tr>
-                                <tr align="center">
-                                    <td align="left">saree</td>
-                                    <td>2</td>
-                                    <td>2%</td>
-                                    <td>- 20/-</td>
-                                    <td align="right">4003</td>
-                                    <td align="right">4003</td>
-                                </tr>
-
-
                             </tbody>
                         </table>
                         <table class="w-100">
@@ -187,7 +123,7 @@
                             </td>
                             <td align="right">
                                 <tr>
-                                    <td><span class="strong text-uppercase">111</span></td>
+                                    <td><span class="strong text-uppercase">{{localData?.finalPayableAmount}}</span></td>
                                 </tr>
                                 <tr>
                                     <td> <span class="text-light">- 74rs</span></td>

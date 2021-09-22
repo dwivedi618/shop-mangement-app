@@ -75,7 +75,7 @@ export class ItemComponent implements OnInit, OnChanges {
     //     return true
     //   }
     // }
-    console.log('cart', this.cart);
+    // console.log('cart', this.cart);
     this.onShareCart()
   }
 
@@ -118,21 +118,21 @@ export class ItemComponent implements OnInit, OnChanges {
       if (this.cart[i]['id'] == itemId) {
         //do not change quantity if new Quantity is less than 1
         ( newQuantity < 1  ) ? (this.cart[i].quantity = 1) :  (this.cart[i].quantity = newQuantity);
-        console.log("new Quantity-----------",this.cart[i].quantity)
+        // console.log("new Quantity-----------",this.cart[i].quantity)
       }
     }
   }
   getThisItemQuantity(id) {
     for (let i = 0; i < this.cart.length; i++) {
       if (this.cart[i]['id'] == id) {
-        console.log('calculating size', this.cart[i].quantity);
+        // console.log('calculating size', this.cart[i].quantity);
         return this.cart[i].quantity;
       }
     }
   }
 
   public onShareCart(){
-    console.log("emit------------ cart" ,this.cart.length)
+    // console.log("emit------------ cart" ,this.cart.length)
     this.shareCart.emit(this.cart)
   }
   checkItemDetails() {
