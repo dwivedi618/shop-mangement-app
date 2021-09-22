@@ -34,7 +34,7 @@ export class BillPreviewComponent implements OnInit {
     ) {
       this.localData = data || null;
       this.action = this.localData?.action || 'new';
-      console.log("data",data,this.localData)
+      console.log("billing info",data,this.localData)
      }
 
   ngOnInit(): void {
@@ -132,7 +132,7 @@ export class BillPreviewComponent implements OnInit {
     let a = document.createElement('a');
     a.href = `https://web.whatsapp.com/send?phone=${phone}&attachment=${filePath}`
     a.click();
-    console.log("a",a)
+    console.log("a",a);
   }
 }
 

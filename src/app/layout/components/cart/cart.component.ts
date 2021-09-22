@@ -23,12 +23,12 @@ export class CartComponent implements OnInit {
   finalPayableAmount:number
   constructor(private dialog: MatDialog,private dialogService : DialogService) {}
   ngOnInit(): void {
+    console.log("NG ON IN IT TTTTTTTTTTTTTTT");
+
     let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
     this.cart = loadCart
     console.log("load cart from local storage",loadCart)
-    // this.checkCustomer();
-    // this.checkItemDetails();
-    // this.checkServiceList()
+   
     this.onTakePayment()
   }
   checkCustomer() {
@@ -72,6 +72,7 @@ export class CartComponent implements OnInit {
     console.log("cart into parent",this.cart)
   }
   getCartTotal(){
+    console.log("CARTTTTTTTTTTT");
     let cartAmount = 0 ;
     for(let i=0;i<this.cart.length;i++){
       cartAmount = cartAmount + (this.cart[i].priceAfterDiscount)*this.cart[i].quantity
@@ -95,6 +96,8 @@ export class CartComponent implements OnInit {
 
   getFinalPayableAmount(){
     return new Promise((resolve,reject)=>{
+      console.log("this.cartAmount ",this.cartAmount );
+      
       this.finalPayableAmount = this.cartAmount - (this.discountInRuppee || 0);
       resolve( this.finalPayableAmount)
     })
