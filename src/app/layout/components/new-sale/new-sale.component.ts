@@ -64,7 +64,7 @@ export class NewSaleComponent implements OnInit {
     // localStorage.removeItem('currentCartDD')
     let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
     this.cart = loadCart;
-    console.log("recent cart",this.cart);
+    // console.log("recent cart",this.cart);
     
     // this.checkCustomer();
     // this.checkItemDetails();
@@ -112,7 +112,7 @@ export class NewSaleComponent implements OnInit {
 
   onCartData(cartItems){
     this.cart = cartItems;
-    console.log("cart into parent",this.cart)
+    // console.log("cart into parent",this.cart)
   }
   getCartTotal(){
     let cartAmount = 0 ;
@@ -121,7 +121,7 @@ export class NewSaleComponent implements OnInit {
       // console.log(this.cart[i]);
       
     }
-    console.log("cartAmount",cartAmount)
+    // console.log("cartAmount",cartAmount)
     return cartAmount
   }
 

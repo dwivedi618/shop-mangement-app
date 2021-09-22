@@ -24,7 +24,7 @@
 }
 .inner_banner::before{
     content: ""; 
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(1px);
     background: -webkit-linear-gradient(45deg, #210046, #0017b952); 
     background: linear-gradient(45deg, #21004641, var(--ultra-light)); 
     position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;}
