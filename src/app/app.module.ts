@@ -35,6 +35,7 @@ import { ProductItemComponent } from './layout/components/product-item/product-i
 import { ProductItemDetailsComponent } from './layout/components/product-item-details/product-item-details.component';
 import { PhotoUploadComponent } from './layout/components/photo-upload/photo-upload.component';
 import { CustomerDetailsComponent } from './layout/components/customer-details/customer-details.component';
+import { IPCService } from './services/ipc.service';
 import { AddUpdateProductComponent } from './layout/components/add-update-product/add-update-product.component';
 import { BillPreviewComponent } from './layout/components/bill-preview/bill-preview.component';
 
@@ -82,7 +83,7 @@ import { BillPreviewComponent } from './layout/components/bill-preview/bill-prev
     MatPaginatorModule,
     MatSortModule
   ],
-  providers: [],
+  providers: [IPCService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

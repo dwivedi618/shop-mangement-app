@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { DialogService } from 'src/app/services/dialog-service';
+import { IPCService } from 'src/app/services/ipc.service';
 
 export interface CardItem {
   id: number;
@@ -40,10 +41,16 @@ export class CustomerComponent implements OnInit ,OnChanges{
 
   actionOnCustomerSelection ;
   customerSelection = [];
-  constructor(private dialog : MatDialog,private dialogService : DialogService) {}
+  constructor(
+    private dialog : MatDialog,
+    private dialogService : DialogService,
+    private ipcService: IPCService
+  ) {
+    
+  }
   ngOnChanges() {
     this.isListView = this.view;
-    this.actionOnCustomerSelection = this.action
+    this.actionOnCustomerSelection = this.action;
     // console.log("data ng On changes",this.data, this.isListView)
   }
   ngOnInit(): void {

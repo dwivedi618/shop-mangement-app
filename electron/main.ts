@@ -1,29 +1,37 @@
-import { app, BrowserWindow, ipcMain} from "electron";
-import * as path from 'path';
-import { URL }  from 'url';
-import * as fs from 'fs';
-import * as express from 'express'
+import { app, BrowserWindow, ipcMain, screen} from "electron";
+import AppConfig from 'config/app.config';
+import execute from './db';
+
 let win: BrowserWindow;
 
+/**
+ * createWindow create a native window
+ * when electron app will reday
+ */
 function createWindow(){
-    const { screen } = require('electron')
-    const primaryDisplay = screen.getPrimaryDisplay()
-    const { width, height } = primaryDisplay.workAreaSize
 
-    win = new BrowserWindow({width, height, icon: path.join(__dirname, `../../dist/shop-management-app/assets/images/Platonic_4_-_Bucky0002.png`)});
-    let pathToIndexFile = path.join(__dirname, `/../../dist/shop-management-app/index.html`);
-    let url = new URL(`file://${pathToIndexFile}`);
-    console.log('src/assets/images/Platonic_4_-_Bucky0002.png');
-    // win.loadURL(`http://localhost:3001/index.html`);
-    win.loadURL(url.href);
+    //Getting the screen area of the display
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize
+
+    win = new BrowserWindow({
+        width, 
+        height,
+        webPreferences: {
+            preload: AppConfig.preloadPath
+        },
+        icon: AppConfig.iconPath
+    });
+
+    win.loadURL(AppConfig.indexURL);
 
 
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     win.on("closed", () => {
         win = null;
     });
 }
+
 
 app.on("ready", createWindow);
 
@@ -40,7 +48,33 @@ app.on('window-all-closed', () => {
     }
 });
 
-// let exApp = express();
-// exApp.use(express.static(path.join(__dirname,`../../dist/shop-management-app/`)))
-// exApp.listen(3001);
+
+
+
+/**
+ * Handle requests on renderer invocation
+ */
+ipcMain.handle('fetch', async (event, arg) => {
+    console.log(event, arg);
+    let query = `SELECT * FROM products;`
+    let data = []
+    let res = await execute(query);
+    return res;
+});
+
+ipcMain.handle('insert', async (event, arg) => {
+    console.log(event, arg);
+});
+
+ipcMain.handle('update', async (event, arg) => {
+    console.log(event, arg);
+});
+
+ipcMain.handle('delete', async (event, arg) => {
+    console.log(event, arg);
+});
+
+
+
+
 
