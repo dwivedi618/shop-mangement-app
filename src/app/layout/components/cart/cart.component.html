@@ -2,7 +2,7 @@
     <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="true" position="end">
         <mat-toolbar class="shadow" style="position: absolute;top: 0;z-index: 5;background: white;">
             <div class="spacer"></div>
-            <small>Billing Details</small>
+            <small>Order Bill</small>
             <div class="spacer"></div>
         </mat-toolbar>
         <div class="d-flex flex-column" style="margin-top: 3rem;">
@@ -14,31 +14,30 @@
                 </div>
                 <div class="w-100">
                     <mat-list dense class="w-100">
-                        <mat-list-item >
+                        <mat-list-item>
                             <small>Name</small>
                             <div class="spacer"></div>
                             <span style="font-weight: 600;">{{currentCustomer?.name || 'Unknown'}}</span>
                         </mat-list-item>
-                        <mat-list-item >
+                        <mat-list-item>
                             <small>Phone</small>
                             <div class="spacer"></div>
                             <span style="font-weight: 600;">{{currentCustomer?.phone || 'Unknown'}}</span>
                         </mat-list-item>
-                        <mat-list-item >
+                        <mat-list-item>
                             <!-- <small>Address</small>
                             <div class="spacer"></div> -->
-                            <span style="font-weight: 600;" class="mr-1">{{currentCustomer?.address || 'Unknown'}}</span>
+                            <span style="font-weight: 600;" class="mr-1">{{currentCustomer?.address ||
+                                'Unknown'}}</span>
                         </mat-list-item>
                     </mat-list>
                 </div>
             </div>
 
-            <button (click)="checkCustomer()"  *ngIf="!currentCustomer?.phone" mat-button class="w-100  shadow"><small>Add Customer
-                    For Bill</small></button>
 
             <mat-accordion class="shadow">
-                <mat-expansion-panel class="mat-elevation-z0" >
-                    <mat-expansion-panel-header >
+                <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
                         <div class="spacer"></div>
                         <small>Apply Discount</small>
                         <div class="spacer"></div>
@@ -47,17 +46,21 @@
 
                     <mat-form-field class="w-50" appearance="outline">
                         <mat-label>Discount In %</mat-label>
-                        <input matInput type="text" placeholder="%" [(ngModel)]="discountInPercent" (ngModelChange)="onDiscountChanged(cartAmount,$event,'percent')">
-                        
-                        <button *ngIf="discountInPercent" matSuffix mat-icon-button aria-label="Clear" (click)="discountInPercent = ''">
+                        <input matInput type="text" placeholder="%" [(ngModel)]="discountInPercent"
+                            (ngModelChange)="onDiscountChanged(cartAmount,$event,'percent')">
+
+                        <button *ngIf="discountInPercent" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="discountInPercent = ''">
                             <mat-icon>close</mat-icon>
                         </button>
                     </mat-form-field>
                     <mat-form-field class="w-50" appearance="outline">
                         <mat-label>Discount In ₹</mat-label>
-                        <input matInput type="text" placeholder="INR" [(ngModel)]="discountInRuppee" (ngModelChange)="onDiscountChanged(cartAmount,$event,'ruppee')">
-                        
-                        <button *ngIf="discountInRuppee" matSuffix mat-icon-button aria-label="Clear" (click)="discountInRuppee = ''">
+                        <input matInput type="text" placeholder="INR" [(ngModel)]="discountInRuppee"
+                            (ngModelChange)="onDiscountChanged(cartAmount,$event,'ruppee')">
+
+                        <button *ngIf="discountInRuppee" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="discountInRuppee = ''">
                             <mat-icon class="mat-icon-sm pt-1">close</mat-icon>
                         </button>
                     </mat-form-field>
@@ -71,7 +74,7 @@
                     <div class="spacer"></div>
                     <span>{{getCartTotal() | currency :'INR'}}</span>
                 </mat-list-item>
-                
+
                 <mat-list-item>
                     <span>Discount</span>
                     <div class="spacer"></div>
@@ -97,10 +100,13 @@
 
     <mat-sidenav-content style="position: relative;">
         <mat-toolbar class="bg-white shadow" style="position: absolute;top:0">
-            <div class="layout w-100">
+            <!-- <div class="layout w-100">
                 <app-search (onSearch)="getSearchText($event)"></app-search>
-            </div>
+            </div> -->
             <span class="spacer"></span>
+            <button mat-icon-button class="mx-2 rounded-lg" disabled>
+                <mat-icon class="mat-icon-sm pt-0">search</mat-icon>
+            </button>
             <button mat-icon-button class="mx-2 rounded-lg" (click)="isListView = !isListView">
                 <mat-icon class="mat-icon-sm pt-0">{{isListView ? 'view_list' : 'grid_view'}}</mat-icon>
             </button>
@@ -123,13 +129,19 @@
         <app-item [data]="cart" [cartItems]="cart" [(view)]="isListView" (shareCart)="onCartData($event)"></app-item>
         <mat-toolbar class="mat-elevation-z16 " style="position: absolute;bottom: 0;z-index: 15;">
             <span class="px-5">{{cart?.length || '0'}} | <small>Item</small></span>
-            <div class="spacer"></div>
-            <button mat-button class="w-100 bg-green">
-                <mat-icon class="mat-icon-sm pt-1">shopping_cart</mat-icon>
-                <span class="px-3 fancy-text text-uppercase">Cart</span>
-            </button>
-            <div class="spacer"></div>
             <span class="px-5">{{getCartTotal() | currency :'INR'}}</span>
+            <div class="spacer"></div>
+            <button mat-stroked-button class="mr-1" routerLink="../">
+                <span class="px-3 fancy-text text-uppercase">Back</span>
+            </button>
+            <button *ngIf="!currentCustomer?.name"  mat-button class="bg-green" (click)="onCartNext()">
+                <mat-icon class="mat-icon-sm pt-1">person_add</mat-icon>
+                <span  class="px-3 fancy-text text-uppercase">Next</span>
+            </button>
+            <button *ngIf="currentCustomer?.name" mat-button class="bg-green" (click)="onCartNext()">       
+                <span class="px-3 fancy-text text-uppercase">Take Payment</span>
+            </button>
+
         </mat-toolbar>
     </mat-sidenav-content>
 </mat-sidenav-container>

@@ -224,6 +224,14 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     object-fit: cover;
     transition: all 0.2s linear
   }
+  .thumbnail-xs{
+    height: 2rem;
+    width: 2rem;
+    border-radius: 0.2rem;
+    flex-shrink: 0;
+    object-fit: cover;
+    transition: all 0.2s linear;
+  }
   .text-wrap-sm{
     max-width: 12rem;
     padding: 2px .5rem;

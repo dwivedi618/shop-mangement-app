@@ -26,9 +26,10 @@ export class DialogService {
   constructor(private dialog : MatDialog) { }
 
   checkCustomer() : Observable<any> {
+    this.resetData();
     let afterCloseData ;
     const data = {};
-    const dialogRef = this.dialog.open(AddUpdateCustomerComponent, {
+    const cdialogRef = this.dialog.open(AddUpdateCustomerComponent, {
       width: '30rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
@@ -36,7 +37,7 @@ export class DialogService {
       data: data,
     });
 
-    dialogRef.afterClosed().subscribe(result=>{
+    cdialogRef.afterClosed().subscribe(result=>{
       this.setData(result);
     })
     
@@ -127,15 +128,16 @@ export class DialogService {
   }
 
   openBillPreview(billingInfo) {
+    this.resetData();
     const data = {};
-    const dialogRef = this.dialog.open(BillPreviewComponent, {
+    const bdialogRef = this.dialog.open(BillPreviewComponent, {
       width: '70rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
       hasBackdrop: false,
       data: billingInfo,
     });
-    dialogRef.afterClosed().subscribe(result=>{
+    bdialogRef.afterClosed().subscribe(result=>{
       this.setData(result);
     })
     

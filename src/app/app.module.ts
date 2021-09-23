@@ -38,6 +38,8 @@ import { CustomerDetailsComponent } from './layout/components/customer-details/c
 import { IPCService } from './services/ipc.service';
 import { AddUpdateProductComponent } from './layout/components/add-update-product/add-update-product.component';
 import { BillPreviewComponent } from './layout/components/bill-preview/bill-preview.component';
+import { BreadcrumbComponent } from './layout/components/breadcrumb/breadcrumb.component';
+import { NewOrderlayoutComponent } from './layout/components/new-orderlayout/new-orderlayout.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,8 @@ import { BillPreviewComponent } from './layout/components/bill-preview/bill-prev
     CustomerDetailsComponent,
     AddUpdateProductComponent,
     BillPreviewComponent,
+    BreadcrumbComponent,
+    NewOrderlayoutComponent,
 
   ],
   imports: [

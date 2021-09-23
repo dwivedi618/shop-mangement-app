@@ -43,6 +43,8 @@ export class ItemComponent implements OnInit, OnChanges {
   constructor(private dialog : MatDialog) {}
   ngOnChanges() {
     this.isListView = this.view;
+    this.cart = this.cartItems?.length ? this.cartItems : [];
+
     // console.log("data ng On changes",this.data, this.isListView)
   }
   ngOnInit(): void {

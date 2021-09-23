@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
-export interface productDetails{
+export interface ProductDetails{
   id : number,
   name: string,
   brand: string,
@@ -30,7 +30,7 @@ export class BillPreviewComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dialogRef : MatDialogRef<BillPreviewComponent>,
-    @Inject(MAT_DIALOG_DATA) data : productDetails
+    @Inject(MAT_DIALOG_DATA) data : ProductDetails
     ) {
       this.localData = data || null;
       this.action = this.localData?.action || 'new';
