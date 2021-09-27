@@ -40,6 +40,9 @@ import { AddUpdateProductComponent } from './layout/components/add-update-produc
 import { BillPreviewComponent } from './layout/components/bill-preview/bill-preview.component';
 import { BreadcrumbComponent } from './layout/components/breadcrumb/breadcrumb.component';
 import { NewOrderlayoutComponent } from './layout/components/new-orderlayout/new-orderlayout.component';
+import { SettingsLayoutComponent } from './layout/components/settings-layout/settings-layout.component';
+import { GeneralSettingsComponent } from './layout/components/general-settings/general-settings.component';
+import { AppearanceSettingsComponent } from './layout/components/appearance-settings/appearance-settings.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +77,9 @@ import { NewOrderlayoutComponent } from './layout/components/new-orderlayout/new
     BillPreviewComponent,
     BreadcrumbComponent,
     NewOrderlayoutComponent,
+    SettingsLayoutComponent,
+    GeneralSettingsComponent,
+    AppearanceSettingsComponent,
 
   ],
   imports: [

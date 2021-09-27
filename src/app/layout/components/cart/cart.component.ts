@@ -31,6 +31,8 @@ export class CartComponent implements OnInit {
     console.log("NG ON IN IT TTTTTTTTTTTTTTT");
 
     let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
+    let loadCustomer = JSON.parse(localStorage.getItem('currentCustomer'))
+    this.currentCustomer = loadCustomer 
     this.cart = loadCart
     console.log("load cart from local storage",loadCart)
    
@@ -38,7 +40,8 @@ export class CartComponent implements OnInit {
   }
   checkCustomer() {
     this.dialogService.checkCustomer().subscribe(data=>{
-      // console.log("received data",data);
+      console.log("received data",data);
+      localStorage.setItem('currentCustomer',JSON.stringify(data))
       this.currentCustomer = data 
     })
   }
