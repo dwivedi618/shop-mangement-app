@@ -1,5 +1,5 @@
 import { app, BrowserWindow, ipcMain, screen} from "electron";
-import AppConfig from 'config/app.config';
+import { AppConfig } from './config/app.conf';
 import execute from './db';
 
 let win: BrowserWindow;
@@ -55,9 +55,9 @@ app.on('window-all-closed', () => {
  * Handle requests on renderer invocation
  */
 ipcMain.handle('fetch', async (event, arg) => {
-    console.log(event, arg);
+    console.log(arg);
+    const [ item, condition ] = arg;
     let query = `SELECT * FROM products;`
-    let data = []
     let res = await execute(query);
     return res;
 });
@@ -73,8 +73,3 @@ ipcMain.handle('update', async (event, arg) => {
 ipcMain.handle('delete', async (event, arg) => {
     console.log(event, arg);
 });
-
-
-
-
-

@@ -12,13 +12,11 @@
       "target": "es2015",
       "module": "commonjs",
       "skipLibCheck": true,
+      "allowJs": false,
       "lib": [
         "es2018",
         "dom"
       ]
     },
-    "angularCompilerOptions": {
-      "enableI18nLegacyMessageIdFormat": false
-    }
   }
   

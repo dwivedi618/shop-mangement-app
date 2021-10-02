@@ -1,6 +1,4 @@
-
 import { MatDialog } from '@angular/material/dialog';
-
 import {
   Component,
   Input,
@@ -51,6 +49,7 @@ export class CustomerComponent implements OnInit ,OnChanges{
   ngOnChanges() {
     this.isListView = this.view;
     this.actionOnCustomerSelection = this.action;
+    this.ipcService.fetch('customer', {name: 'satyam'});
     // console.log("data ng On changes",this.data, this.isListView)
   }
   ngOnInit(): void {

@@ -1,4 +1,4 @@
-export default class DbConfig {
+export class DbConfig {
 
     static host: string = 'localhost';
     static user: string = 'root';
