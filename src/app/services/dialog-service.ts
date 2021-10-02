@@ -16,33 +16,34 @@ import { BillPreviewComponent } from '../layout/components/bill-preview/bill-pre
 export class DialogService {
 
   dialogCloseData = new Subject;
-  setData(data){
-    this.dialogCloseData.next(data) 
+  setData(data) {
+    this.dialogCloseData.next(data)
   }
-  resetData(){
+  resetData() {
     this.dialogCloseData.next()
   }
 
-  constructor(private dialog : MatDialog) { }
+  constructor(private dialog: MatDialog) { }
 
-  checkCustomer() : Observable<any> {
-    let afterCloseData ;
+  checkCustomer(): Observable<any> {
+
+    let afterCloseResult = new Subject;
     const data = {};
-    const dialogRef = this.dialog.open(AddUpdateCustomerComponent, {
+    const cdialogRef = this.dialog.open(AddUpdateCustomerComponent, {
       width: '30rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
       hasBackdrop: false,
       data: data,
     });
-
-    dialogRef.afterClosed().subscribe(result=>{
-      this.setData(result);
+    cdialogRef.afterClosed().subscribe(result => {
+      afterCloseResult.next(result)
     })
-    
-    return this.dialogCloseData.asObservable();
+    return afterCloseResult.asObservable();
   }
-  checkCustomerDetails(selectedCustomer) : Observable<any> {
+
+  checkCustomerDetails(selectedCustomer): Observable<any> {
+    let afterCloseResult = new Subject;
     const data = {};
     const dialogRef = this.dialog.open(CustomerDetailsComponent, {
       width: '40rem',
@@ -51,14 +52,14 @@ export class DialogService {
       hasBackdrop: false,
       data: selectedCustomer,
     });
-
-    dialogRef.afterClosed().subscribe(result=>{
-      this.setData(result);
+    dialogRef.afterClosed().subscribe(result => {
+      afterCloseResult.next(result)
     })
-    
-    return this.dialogCloseData.asObservable();
+    return afterCloseResult.asObservable();
   }
+
   checkItemDetails() {
+    let afterCloseResult = new Subject;
     const data = {};
     const dialogRef = this.dialog.open(ItemDetailsComponent, {
       width: '40rem',
@@ -68,7 +69,9 @@ export class DialogService {
       data: data,
     });
   }
+
   checkInventoryItemDetails() {
+    let afterCloseResult = new Subject;
     const data = {};
     const dialogRef = this.dialog.open(InventoryItemDetailsComponent, {
       width: '40rem',
@@ -77,14 +80,14 @@ export class DialogService {
       hasBackdrop: false,
       data: data,
     });
-    dialogRef.afterClosed().subscribe(result=>{
-      this.setData(result);
+    dialogRef.afterClosed().subscribe(result => {
+      afterCloseResult.next(result)
     })
-    
-    return this.dialogCloseData.asObservable();
+    return afterCloseResult.asObservable();
   }
 
   checkProductItemDetails(selectedItem) {
+    let afterCloseResult = new Subject;
     const data = {};
     const dialogRef = this.dialog.open(ProductItemDetailsComponent, {
       width: '40rem',
@@ -93,13 +96,14 @@ export class DialogService {
       hasBackdrop: false,
       data: selectedItem,
     });
-    dialogRef.afterClosed().subscribe(result=>{
-      this.setData(result);
+    dialogRef.afterClosed().subscribe(result => {
+      afterCloseResult.next(result)
     })
-    
-    return this.dialogCloseData.asObservable();
+    return afterCloseResult.asObservable();
   }
+
   addUpdateProduct(selectedItem) {
+    let afterCloseResult = new Subject;
     const data = {};
     const dialogRef = this.dialog.open(AddUpdateProductComponent, {
       width: '70rem',
@@ -108,38 +112,39 @@ export class DialogService {
       hasBackdrop: false,
       data: selectedItem,
     });
-    dialogRef.afterClosed().subscribe(result=>{
-      this.setData(result);
+    dialogRef.afterClosed().subscribe(result => {
+      afterCloseResult.next(result)
     })
-    
-    return this.dialogCloseData.asObservable();
+
+    return afterCloseResult.asObservable();
   }
+
   checkServiceList() {
+    let afterCloseResult = new Subject;
     const data = {};
     const dialogRef = this.dialog.open(ServiceListComponent, {
-      
       maxWidth: '100vw',
       maxHeight: '100vh',
       hasBackdrop: true,
-      disableClose : true,
+      disableClose: true,
       data: data,
     });
   }
 
   openBillPreview(billingInfo) {
+    let afterCloseResult = new Subject;
     const data = {};
-    const dialogRef = this.dialog.open(BillPreviewComponent, {
+    const bdialogRef = this.dialog.open(BillPreviewComponent, {
       width: '70rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
       hasBackdrop: false,
       data: billingInfo,
     });
-    dialogRef.afterClosed().subscribe(result=>{
-      this.setData(result);
+    bdialogRef.afterClosed().subscribe(result => {
+      afterCloseResult.next(result)
     })
-    
-    return this.dialogCloseData.asObservable();
+    return afterCloseResult.asObservable();
   }
 
 }

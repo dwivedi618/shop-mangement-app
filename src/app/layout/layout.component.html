@@ -10,6 +10,31 @@
             </a>
         </mat-nav-list>
         <div class="spacer"></div>
+        <figure *ngIf="this.currentPath === 'cart'" class="m-0 p-0">
+            <img class="" style="width: inherit;" src="assets/images/onlineshopping.svg" alt=""
+                >
+        </figure>
+        <div *ngIf="this.currentPath === 'cart'" class="d-flex flex-column w-100 text-light" >
+            <mat-list dense style="font-weight: 200!important;">
+                <mat-list-item>
+                    <mat-icon matListIcon >checked</mat-icon>
+                    <p matLine > Adjust Item</p>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon matListIcon >checked</mat-icon>
+                    <p matLine > Add customer</p>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon matListIcon >checked</mat-icon>
+                    <p matLine > Take payment</p>
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon matListIcon >checked</mat-icon>
+                    <p matLine > Finish</p>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <div class="spacer"></div>
         <div class="logo-container mat-elevation-z16" >
             <div class="d-flex flex-column py-2">
                 <figure class="m-0 p-0">

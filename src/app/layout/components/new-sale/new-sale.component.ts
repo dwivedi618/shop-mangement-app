@@ -127,6 +127,10 @@ export class NewSaleComponent implements OnInit {
 
   onViewCart(){
     localStorage.setItem('currentCartDD',JSON.stringify(this.cart))
-    this.router.navigate(['../cart']);
+    this.router.navigate(['neworder/cart']);
+  }
+  onResetOrder(){
+    localStorage.removeItem('currentCartDD')
+    this.cart = [];
   }
 }

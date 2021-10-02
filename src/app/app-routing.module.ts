@@ -10,23 +10,44 @@ import { InventoryComponent } from './layout/components/inventory/inventory.comp
 import { HomeComponent } from './layout/components/home/home.component';
 import { DashboardComponent } from './layout/components/dashboard/dashboard.component';
 import { ProductComponent } from './layout/components/product/product.component';
+import { NewOrderlayoutComponent } from './layout/components/new-orderlayout/new-orderlayout.component';
+import { GeneralSettingsComponent } from './layout/components/general-settings/general-settings.component';
+import { SettingsLayoutComponent } from './layout/components/settings-layout/settings-layout.component';
+import { AppearanceSettingsComponent } from './layout/components/appearance-settings/appearance-settings.component';
 
 const routes: Routes = [
-  { path: 'login',component:LoginComponent},
-  { path: '',component:HomeComponent },
-  { path: '', component:LayoutComponent,
-  children : [
-    { path: 'dashboard',component:DashboardComponent },
-    { path: 'inventory',component:InventoryComponent },
-    { path: 'product',component:ProductComponent },
-    { path: 'customer',component:CustomerListComponent },
-    { path: 'sale',component:SaleListComponent },
-    { path: 'neworder',component:NewSaleComponent },
-    { path: 'cart',component:CartComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
+  {
+    path: '', component: LayoutComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard', icon: 'grid_view' } },
+      { path: 'inventory', component: InventoryComponent, data: { breadcrumb: 'Inventory', icon: 'inventory' } },
+      { path: 'product', component: ProductComponent, data: { breadcrumb: 'Product', icon: 'dry_cleaning' } },
+      { path: 'customer', component: CustomerListComponent, data: { breadcrumb: 'Customer', icon: 'groups' } },
+      { path: 'sale', component: SaleListComponent, data: { breadcrumb: 'Sale', icon: 'sell' } },
+      {
+        path: 'neworder', component: NewOrderlayoutComponent, data: { breadcrumb: 'New Order', icon: 'add', },
+        children: [
+          { path: '', component: NewSaleComponent },
+          { path: 'neworder', component: NewSaleComponent, data: { breadcrumb: 'New Order', icon: 'add', } },
+          { path: 'cart', component: CartComponent, data: { breadcrumb: 'Cart', icon: 'shopping_cart' } },
+        ]
+      },
+      {
+        path: 'settings', component: SettingsLayoutComponent, data: {
+          breadcrumb: 'Settings', icon: 'settings',},
+          children: [
+            { path: '', component: GeneralSettingsComponent, data: { breadcrumb: 'General Settings', icon: 'settings', } },         
+            { path: 'generalsettings', component: GeneralSettingsComponent, data: { breadcrumb: 'General Settings', icon: 'settings', } },
+            { path: 'appearancesettings', component: AppearanceSettingsComponent, data: { breadcrumb: 'Appearance', icon: 'settings', } },
 
+          ]
+        },
 
+    // { path: 'cart',component:CartComponent ,data : {breadcrumb : 'Cart'}},
   ]
-}
+  }
 
 ];
 

@@ -5,7 +5,12 @@ import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-cu
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
 import { DialogService } from 'src/app/services/dialog-service';
-
+export interface Customers{
+  photo : any;
+  name : string;
+  phone : any;
+  address : string;
+}
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -16,7 +21,7 @@ export class CartComponent implements OnInit {
   value: any;
   isListView = false;
   cart = [];
-  currentCustomer: any;
+  currentCustomer = <Customers>{};
   discountInRuppee: number;
   discountInPercent: number;
   cartAmount: number;
@@ -26,15 +31,18 @@ export class CartComponent implements OnInit {
     console.log("NG ON IN IT TTTTTTTTTTTTTTT");
 
     let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
+    let loadCustomer = JSON.parse(localStorage.getItem('currentCustomer'))
+    this.currentCustomer = loadCustomer 
     this.cart = loadCart
     console.log("load cart from local storage",loadCart)
    
-    this.onTakePayment()
+    // this.onTakePayment()
   }
   checkCustomer() {
     this.dialogService.checkCustomer().subscribe(data=>{
       console.log("received data",data);
-      this.currentCustomer = data
+      localStorage.setItem('currentCustomer',JSON.stringify(data))
+      this.currentCustomer = data 
     })
   }
   checkItemDetails() {
@@ -69,10 +77,10 @@ export class CartComponent implements OnInit {
 
   onCartData(cartItems){
     this.cart = cartItems;
-    console.log("cart into parent",this.cart)
+    // console.log("cart into parent",this.cart)
   }
   getCartTotal(){
-    console.log("CARTTTTTTTTTTT");
+    // console.log("CARTTTTTTTTTTT");
     let cartAmount = 0 ;
     for(let i=0;i<this.cart.length;i++){
       cartAmount = cartAmount + (this.cart[i].priceAfterDiscount)*this.cart[i].quantity
@@ -94,13 +102,23 @@ export class CartComponent implements OnInit {
     }
   }
 
-  getFinalPayableAmount(){
+  private getFinalPayableAmount(){
     return new Promise((resolve,reject)=>{
-      console.log("this.cartAmount ",this.cartAmount );
+      // console.log("this.cartAmount ",this.cartAmount );
       
       this.finalPayableAmount = this.cartAmount - (this.discountInRuppee || 0);
       resolve( this.finalPayableAmount)
     })
+  }
+
+  onCartNext(){
+    if(this.currentCustomer?.name &&  this.currentCustomer.phone){
+      //if customer added for this order goto final billings else
+      this.onTakePayment();
+    }else{
+      //add customer for current order
+      this.checkCustomer()
+    }
   }
 
   async onTakePayment(){
@@ -113,7 +131,7 @@ export class CartComponent implements OnInit {
     billingInfo.discountInPercent = this.discountInPercent
     billingInfo.finalPayableAmount = await this.getFinalPayableAmount();
     this.dialogService.openBillPreview(billingInfo).subscribe(data=>{
-      console.log("bill Preview Closed",data);
+      console.log("bill Preview Closed",data,this.currentCustomer);
     })
   }
 }

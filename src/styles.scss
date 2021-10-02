@@ -101,6 +101,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 .text-light{
     color: var(--light);
 }
+.text-thin{
+    font-weight: 200!important;
+}
 // /force center css
 .layout{
     -webkit-box-align: center;
@@ -223,6 +226,14 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     flex-shrink: 0;
     object-fit: cover;
     transition: all 0.2s linear
+  }
+  .thumbnail-xs{
+    height: 2rem;
+    width: 2rem;
+    border-radius: 0.2rem;
+    flex-shrink: 0;
+    object-fit: cover;
+    transition: all 0.2s linear;
   }
   .text-wrap-sm{
     max-width: 12rem;

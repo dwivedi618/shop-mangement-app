@@ -1,0 +1,32 @@
+
+<section class="w-100 px-5" style="display: flex;flex-direction: column;align-items: flex-start;box-sizing: border-box;">
+    <h4>General</h4>
+    <figure>
+        <img style="width: inherit;" src="../../../../assets/images/cool-background.png" alt="">
+    </figure>
+    <mat-list dense class="w-100 text-light shadow">
+        <mat-list-item>
+            <div>
+                <span class="strong">Theme</span>
+                <small matLine class="text-light">classic</small>
+            </div>
+            <div class="spacer"></div>
+            <mat-slide-toggle></mat-slide-toggle>
+        </mat-list-item>
+        <mat-list-item>
+            <div>
+                <span class="strong">Front size</span>
+                <small matLine class="text-light">medium</small>
+            </div>
+            <div class="spacer"></div>
+            <mat-form-field appearance="outline">
+                <mat-select >
+                    <mat-option value="" >Select</mat-option>
+                    <mat-option value="12px">Small</mat-option>
+                    <mat-option value="16px" selected>Medium</mat-option>
+                    <mat-option value="18px">Large</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-list-item>
+    </mat-list>
+</section>
