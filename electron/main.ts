@@ -7,7 +7,7 @@ import { AppConfig } from './config/app.conf';
 import { customer, product, inventory, sale } from './db';
 
 let win: BrowserWindow;
-
+console.log(AppConfig.preloadPath);
 /**
  * createWindow create a native window
  * when electron app will reday
@@ -33,7 +33,6 @@ async function createWindow(){
         process.exit();
     }
 
-    console.log(path.join(__dirname,'/entities/*.js'))
     //Getting the screen area of the display
     const { width, height } = screen.getPrimaryDisplay().workAreaSize
 
