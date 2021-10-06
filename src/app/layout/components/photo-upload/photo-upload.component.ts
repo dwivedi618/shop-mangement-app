@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IPCService } from 'src/app/services/ipc.service';
 
 @Component({
   selector: 'app-photo-upload',
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class PhotoUploadComponent implements OnInit {
   imagePreview: string;
 
-  constructor() { }
+  constructor( 
+    private ipcService: IPCService
+   ) { }
 
   ngOnInit(): void {
   }
@@ -38,6 +41,8 @@ export class PhotoUploadComponent implements OnInit {
     reader.onload = () => {
       console.log(reader.result);
       this.imagePreview = reader.result as string;
+      this.ipcService.upload(reader.result as string);
+
       
     };
     reader.onerror = (error) => {

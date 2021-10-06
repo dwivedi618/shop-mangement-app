@@ -1,23 +1,102 @@
-import * as promise from 'mysql2/promise';
-const bluebird = require('bluebird');
-import { DbConfig }  from './config/db.conf';
+import { getConnection } from "typeorm";
+import { Customer } from './entities/customer'
+import { Product } from './entities/product'
+import { Inventory } from './entities/inventory'
+import { Sale } from './entities/sale'
 
-export default async function execute(query: string, data?: Array<any>) {
+// const connection = getConnection();
 
-    try {
+export async function customer(connection, action: string, data?: any) {
+    const repository = connection.getRepository( Customer );
+    const customer = new Customer(); 
 
-        const connection = await promise.createConnection({
-            host: DbConfig.host,
-            user: DbConfig.user,
-            database: DbConfig.database,
-            password: DbConfig.password
-        });
+    switch( action ) {
+        case 'create':
+            return await repository.save( data );
 
-        const [result, fields] = await connection.execute( query );
-        return result;
-    } catch( err ) {
-        console.log('Error from db:', err);
-        throw new Error('Error in database');
+        case 'update':
+            return await repository.save( data );
+
+        case 'fetch':
+            return await repository.find( data );
+
+        case 'delete':
+            return await repository.remove( data );
+
+        default:
+            console.log('This is the default option')
+    }
+}
+
+export async function inventory(connection, action: string, data?: any) {
+    const repository = connection.getRepository( Inventory );
+    const inventory = new Inventory(); 
+
+    switch( action ) {
+        case 'create':
+            return await repository.save( data );
+            
+        case 'update':
+            return await repository.save( data );
+
+        case 'fetch':
+            return await repository.find( data );
+
+        case 'delete':
+            return await repository.remove( data );
+
+        default:
+            console.log('This is the default option')
+    }
+
+}
+
+
+export async function product( connection, action: string, data?: any ) {
+
+    const repository = connection.getRepository( Product );
+    const product = new Product(); 
+
+    switch( action ) {
+        case 'create':
+            return await repository.save( data );
+            
+        case 'update':
+            return await repository.save( data );
+
+        case 'fetch':
+            return await repository.find( data );
+
+        case 'delete':
+            return await repository.remove( data );
+
+        default:
+            console.log('This is the default option')
+    }
+
+}
+
+
+export async function sale(connection, action: string, data?: any) {
+
+    const repository = connection.getRepository( Sale );
+    const sale = new Sale(); 
+
+    switch( action ) {
+        case 'create':
+            return await repository.save( data );
+            
+        case 'update':
+            return await repository.save( data );
+
+        case 'fetch':
+            return await repository.find( data );
+
+        case 'delete':
+            return await repository.remove( data );
+
+        default:
+            console.log('This is the default option')
     }
 
 }

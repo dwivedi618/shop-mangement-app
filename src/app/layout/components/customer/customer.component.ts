@@ -49,7 +49,7 @@ export class CustomerComponent implements OnInit ,OnChanges{
   ngOnChanges() {
     this.isListView = this.view;
     this.actionOnCustomerSelection = this.action;
-    this.ipcService.fetch('customer', {name: 'satyam'});
+    this.ipcService.database('customer', 'fetch', {name: 'satyam'})
     // console.log("data ng On changes",this.data, this.isListView)
   }
   ngOnInit(): void {
@@ -65,6 +65,7 @@ export class CustomerComponent implements OnInit ,OnChanges{
   openCustomerDetails(selectedCustomer){
     this.dialogService.checkCustomerDetails(selectedCustomer).subscribe(data=>{
       console.log("customer details",data);
+      this.ipcService.database('customer', data);
       
     })
   }

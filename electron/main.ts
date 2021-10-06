@@ -1,6 +1,10 @@
+import "reflect-metadata";
+import * as path from 'path';
 import { app, BrowserWindow, ipcMain, screen} from "electron";
+import {createConnection, Connection, getConnection, Db } from "typeorm";
+import { DbConfig }  from './config/db.conf';
 import { AppConfig } from './config/app.conf';
-import execute from './db';
+import { customer, product, inventory, sale } from './db';
 
 let win: BrowserWindow;
 
@@ -8,8 +12,28 @@ let win: BrowserWindow;
  * createWindow create a native window
  * when electron app will reday
  */
-function createWindow(){
+async function createWindow(){
 
+    try {
+
+        const connection = await createConnection({
+            type: "mysql",
+            host: DbConfig.host,
+            port: 3306,
+            username: DbConfig.user,
+            database: DbConfig.database,
+            password: DbConfig.password,
+            entities: ["electron/dist/entities/*.js"],
+            synchronize: true,
+            logging: true
+        });
+    } catch( err ) {
+        console.log('Error from db:', err, 'this is config', DbConfig);
+        app.quit();
+        process.exit();
+    }
+
+    console.log(path.join(__dirname,'/entities/*.js'))
     //Getting the screen area of the display
     const { width, height } = screen.getPrimaryDisplay().workAreaSize
 
@@ -50,26 +74,40 @@ app.on('window-all-closed', () => {
 
 
 
-
 /**
  * Handle requests on renderer invocation
  */
-ipcMain.handle('fetch', async (event, arg) => {
+ipcMain.handle('database', async (event, arg) => {
+    const connection = getConnection();
     console.log(arg);
-    const [ item, condition ] = arg;
-    let query = `SELECT * FROM products;`
-    let res = await execute(query);
-    return res;
+    const [ item, action, data ] = arg;
+    switch( item ) {
+        case 'customer':
+            return await customer(connection, action, data);
+
+        case 'product':
+            return await product(connection, action, data);
+
+        case 'inventory':
+            return await inventory(connection, action, data);
+
+        case 'sale':
+            return await sale(connection, action, data);
+
+        default:
+            return 'Invalid item name'
+            console.log('This is the default option')
+    }
 });
 
-ipcMain.handle('insert', async (event, arg) => {
-    console.log(event, arg);
-});
+// ipcMain.handle('insert', async (event, arg) => {
+//     console.log(event, arg);
+// });
 
-ipcMain.handle('update', async (event, arg) => {
-    console.log(event, arg);
-});
+// ipcMain.handle('update', async (event, arg) => {
+//     console.log(event, arg);
+// });
 
-ipcMain.handle('delete', async (event, arg) => {
-    console.log(event, arg);
-});
+// ipcMain.handle('delete', async (event, arg) => {
+//     console.log(event, arg);
+// });

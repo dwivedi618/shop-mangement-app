@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
+import { IPCService } from 'src/app/services/ipc.service';
 
 export interface CustomerDetails{
   id : number,
@@ -65,6 +66,7 @@ export class CustomerDetailsComponent implements OnInit {
   ];
   constructor(
     private fb: FormBuilder,
+    private ipcService: IPCService,
     private dialogRef : MatDialogRef<CustomerDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) data : CustomerDetails
     ) {
@@ -84,6 +86,7 @@ export class CustomerDetailsComponent implements OnInit {
 
   onDone(){
     console.log("Mange Stock Form",this.customerForm.value)
+    this.ipcService.database('customer', 'create', this.customerForm.value);
   }
 }
 

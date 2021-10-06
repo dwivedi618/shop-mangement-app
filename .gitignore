@@ -13,6 +13,9 @@
 #electron build
 electron/dist
 
+#uploaded file
+/src/assests/uploads
+
 # dependencies
 /node_modules
 
