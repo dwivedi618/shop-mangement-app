@@ -15,7 +15,7 @@ import { ServiceListComponent } from '../service-list/service-list.component';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  filterOption : any
+  filterOption: any
   value: any;
   isListView = false;
   garmentsCategory = [
@@ -24,73 +24,75 @@ export class ProductComponent implements OnInit {
     { path: 'calls', icon: 'inventory', name: 'Shirts' },
     { path: 'groups', icon: 'groups', name: 'Shoes' },
     { path: 'sale', icon: 'sell', name: 'Shoots' },
-  
+
   ];
   items = [
     {
-      id : 1,
+      id: 1,
       name: 'Saree',
       brand: 'Peter England',
       salePrice: 199,
-      discountInPercent : 3,
-      discountInRuppee : 5.97,
-      price : 193.03,
-      unit : 'piece',
-      isSellByMeter : 'true',
-      grade : 'A grade',
+      discountInPercent: 3,
+      discountInRuppee: 5.97,
+      price: 193.03,
+      unit: 'piece',
+      isSellByMeter: 'true',
+      grade: 'A grade',
       description: 'Wine Purple Woven Kanjivaram Saree - Special Wedding Edition',
-      code : '',
-      make : 'Make for this item',
-      length : '',
-      size : '',
+      code: '',
+      make: 'Make for this item',
+      length: '',
+      size: '',
     },
 
   ];
   cart = [];
   constructor(private dialog: MatDialog,
     private dialogService: DialogService,
-    private router : Router,
-    private ipcService : IPCService
-    ){}
+    private router: Router,
+    private ipcService: IPCService
+  ) { }
   ngOnInit(): void {
     this.fetchProduct();
   }
 
-  private fetchProduct(){
-    this.ipcService.database('product','fetch','').then((data)=>{
+  private fetchProduct() {
+    this.ipcService.database('product', 'fetch', '').then((data) => {
       this.items = data;
-      console.log("ftech product",data);
+      console.log("ftech product", data);
     })
   }
-  openAddUpdateProduct(){
-    this.dialogService.addUpdateProduct('')
+  openAddUpdateProduct() {
+    this.dialogService.addUpdateProduct('').subscribe(() => {
+      this.fetchProduct();
+    })
   }
 
-  getSearchText(searchText){
+  getSearchText(searchText) {
     console.log(searchText)
     this.filterOption = searchText
     function getText() {
-      return  this.filterOption
+      return this.filterOption
     }
   }
 
-  onCartData(cartItems){
+  onCartData(cartItems) {
     this.cart = cartItems;
-    console.log("cart into parent",this.cart)
+    console.log("cart into parent", this.cart)
   }
-  getCartTotal(){
-    let cartAmount = 0 ;
-    for(let i=0;i<this.cart.length;i++){
-      cartAmount = cartAmount + Number((this.cart[i].mrp) || 0)*Number(this.cart[i].quantity)
+  getCartTotal() {
+    let cartAmount = 0;
+    for (let i = 0; i < this.cart.length; i++) {
+      cartAmount = cartAmount + Number((this.cart[i].mrp) || 0) * Number(this.cart[i].quantity)
       // console.log(this.cart[i]);
-      
+
     }
-    console.log("cartAmount",cartAmount)
+    console.log("cartAmount", cartAmount)
     return cartAmount
   }
 
-  onViewCart(){
-    localStorage.setItem('currentCartDD',JSON.stringify(this.cart))
+  onViewCart() {
+    localStorage.setItem('currentCartDD', JSON.stringify(this.cart))
     this.router.navigate(['../cart']);
   }
 }

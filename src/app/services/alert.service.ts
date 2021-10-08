@@ -89,7 +89,7 @@ alertActionDialog(message ,action): Observable<any> {
     width: '20rem',
     maxWidth: '100vw',
     maxHeight: '100vh',
-    disableClose : false,
+    disableClose : true,
     hasBackdrop: true,
     data: { message , action },
   });

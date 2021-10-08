@@ -44,21 +44,21 @@ export class AddUpdateProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm= this.fb.group({
-      grade : ['d'],
-      name : ['nane of the product'],
-      salePrice : [675],
-      brand: ['unknown'],
-      productCode: ['unknown'],
-      size: [6],
-      make : ['d'],
-      price : [868],
-      unit : ['meter'],
-      discountInPercent : [5],
-      discountInRuppee : [67],
-      description : ['no descr'],
-      isSellByMeter : [true],
-      length : [67],
-      file : ['']
+      grade : [],
+      name : [],
+      salePrice : [],
+      brand: [],
+      productCode: [],
+      size: [],
+      make : [],
+      price : [],
+      unit : [],
+      discountInPercent : [],
+      discountInRuppee : [],
+      description : [],
+      isSellByMeter : [],
+      length : [],
+      file : []
     })
 
     if(this.action == 'update'){
@@ -67,13 +67,12 @@ export class AddUpdateProductComponent implements OnInit {
   }
 
   patchProductDataInForm(){
-    
-    this.productForm.patchValue({name : this.localData?.grade})
+    this.productForm.patchValue({id : this.localData?.id})
+    this.productForm.patchValue({name : this.localData?.name})
     this.productForm.patchValue({salePrice : this.localData?.salePrice})
     this.productForm.patchValue({brand : this.localData?.brand})
     this.productForm.patchValue({productCode : this.localData?.productCode})
     this.productForm.patchValue({size : this.localData?.size})
-
     this.productForm.patchValue({grade : this.localData?.grade})
     this.productForm.patchValue({make : this.localData?.make})
     this.productForm.patchValue({price : this.localData?.price})
@@ -107,9 +106,12 @@ export class AddUpdateProductComponent implements OnInit {
     console.log("Mange Stock Form",this.productForm.value)
     this.ipcService.database('product',action,data).then(
       data=>{
-        console.log(`after ${action}  product`,data)
+        console.log(`after ${action}  product`,data);
+        this.dialogRef.close(data);
       }
-    )
+    ).catch(err => { console.log(err) });
   }
+
+  
 }
 

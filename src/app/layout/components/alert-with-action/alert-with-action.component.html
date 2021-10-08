@@ -5,20 +5,12 @@
     </div>
     
 </mat-dialog-content>
-<!-- <mat-toolbar mat-dialog-action class="bg-dark rounded-lg dialog-toolbar" style="margin: -24px -24px 24px -24px;padding: 0 .4rem;">
-    <button mat-button [mat-dialog-close]="false" class="bg-dark w-50"><span>Cancel</span></button>
-   
 
-    <button mat-raised-button class="bg-green w-50" >
-
-        <small>Done</small>
-    </button>
-</mat-toolbar> -->
 <div mat-dialog-action class="d-flex" style="margin: 24px -24px -24px -24px;">
-    <button  mat-button [mat-dialog-close]="false" class="w-50 bg-ultra-light">
+    <button  mat-button [mat-dialog-close]="false" class="w-50 bg-ultra-light right-radius" >
         <small>Close</small>
     </button>
-    <button mat-raised-button  [mat-dialog-close]="false" class="w-50 bg-dark" cdkFocusInitial>
+    <button mat-raised-button  [mat-dialog-close]="true" class="w-50 bg-dark left-radius" cdkFocusInitial>
         <small>{{action | titlecase}}</small>
     </button>
 </div>
