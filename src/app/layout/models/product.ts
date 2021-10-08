@@ -14,6 +14,6 @@ export class Product{
       productCode : any ;
       make : string;
       length : string;
-      size : '';
+      size : string;
       file : any;  
 }

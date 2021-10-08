@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DialogService } from 'src/app/services/dialog-service';
+import { IPCService } from 'src/app/services/ipc.service';
 import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-customer.component';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
@@ -46,11 +47,21 @@ export class ProductComponent implements OnInit {
 
   ];
   cart = [];
-  constructor(private dialog: MatDialog,private dialogService: DialogService,private router : Router) {}
+  constructor(private dialog: MatDialog,
+    private dialogService: DialogService,
+    private router : Router,
+    private ipcService : IPCService
+    ){}
   ngOnInit(): void {
-
+    this.fetchProduct();
   }
 
+  private fetchProduct(){
+    this.ipcService.database('product','fetch','').then((data)=>{
+      this.items = data;
+      console.log("ftech product",data);
+    })
+  }
   openAddUpdateProduct(){
     this.dialogService.addUpdateProduct('')
   }

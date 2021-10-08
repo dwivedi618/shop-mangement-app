@@ -82,7 +82,7 @@
                 </mat-list>
             </mat-menu>
         </mat-toolbar>
-        <app-customer [data]="items" [(action)]="action"  [(view)]="isListView" (shareCart)="onCartData($event)" ></app-customer>
+        <app-customer [(data)]="items" [(action)]="action"  [(view)]="isListView" (shareCart)="onCartData($event)" ></app-customer>
         <mat-toolbar *ngIf="cart?.length"
         class="mat-elevation-z16 " 
         style="position: absolute;bottom: 0;z-index: 15;">

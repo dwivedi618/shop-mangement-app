@@ -23,7 +23,6 @@ export class AddUpdateCustomerComponent implements OnInit {
       phone : ['',[Validators.required]],
       address : ['',[Validators.required]],
       photo : [this.imagePreview || '']
-
     })
   }
   fileUploadReset() {

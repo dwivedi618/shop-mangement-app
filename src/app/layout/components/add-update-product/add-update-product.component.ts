@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
+import { IPCService } from 'src/app/services/ipc.service';
+import { Product } from '../../models/product';
 
 export interface productDetails{
   id : number,
@@ -30,6 +32,7 @@ export class AddUpdateProductComponent implements OnInit {
   action: any;
   constructor(
     private fb: FormBuilder,
+    private ipcService : IPCService,
     private dialogRef : MatDialogRef<AddUpdateProductComponent>,
     @Inject(MAT_DIALOG_DATA) data : productDetails
     ) {
@@ -40,16 +43,21 @@ export class AddUpdateProductComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.productForm = this.fb.group({
-      grade : [''],
-      make : [''],
-      price : [''],
-      unit : [''],
-      discountInPercent : [''],
-      discountInRuppee : [''],
-      description : [''],
-      isSellByMeter : [''],
-      length : [''],
+    this.productForm= this.fb.group({
+      grade : ['d'],
+      name : ['nane of the product'],
+      salePrice : [675],
+      brand: ['unknown'],
+      productCode: ['unknown'],
+      size: [6],
+      make : ['d'],
+      price : [868],
+      unit : ['meter'],
+      discountInPercent : [5],
+      discountInRuppee : [67],
+      description : ['no descr'],
+      isSellByMeter : [true],
+      length : [67],
       file : ['']
     })
 
@@ -59,13 +67,19 @@ export class AddUpdateProductComponent implements OnInit {
   }
 
   patchProductDataInForm(){
+    
+    this.productForm.patchValue({name : this.localData?.grade})
+    this.productForm.patchValue({salePrice : this.localData?.salePrice})
+    this.productForm.patchValue({brand : this.localData?.brand})
+    this.productForm.patchValue({productCode : this.localData?.productCode})
+    this.productForm.patchValue({size : this.localData?.size})
+
     this.productForm.patchValue({grade : this.localData?.grade})
     this.productForm.patchValue({make : this.localData?.make})
     this.productForm.patchValue({price : this.localData?.price})
     this.productForm.patchValue({unit : this.localData?.unit})
     this.productForm.patchValue({discountInPercent : this.localData?.discountInPercent})
     this.productForm.patchValue({discountInRuppee : this.localData?.discountInRuppee})
-
     this.productForm.patchValue({length : this.localData?.length})
     this.productForm.patchValue({description : this.localData?.description})
     this.productForm.patchValue({isSellByMeter : this.localData?.isSellByMeter})
@@ -88,7 +102,14 @@ export class AddUpdateProductComponent implements OnInit {
   }
 
   onDone(){
+    let data : Product =  this.productForm.value;
+    let action  = this.action == 'add' ? 'create' : 'update'
     console.log("Mange Stock Form",this.productForm.value)
+    this.ipcService.database('product',action,data).then(
+      data=>{
+        console.log(`after ${action}  product`,data)
+      }
+    )
   }
 }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/services/alert.service';
+import { IPCService } from 'src/app/services/ipc.service';
 import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-customer.component';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
@@ -59,16 +61,23 @@ export class NewSaleComponent implements OnInit {
     },
   ];
   cart = [];
-  constructor(private dialog: MatDialog,private router : Router) {}
+  constructor(private dialog: MatDialog,
+    private router : Router, 
+    private alertService : AlertService,
+    private ipcService : IPCService) {}
   ngOnInit(): void {
-    // localStorage.removeItem('currentCartDD')
+
     let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
     this.cart = loadCart;
-    // console.log("recent cart",this.cart);
-    
-    // this.checkCustomer();
-    // this.checkItemDetails();
-    // this.checkServiceList()
+
+    this.fetchProduct();
+    this.onResetOrder()
+  }
+  private fetchProduct(){
+    this.ipcService.database('product','fetch','').then((data)=>{
+      this.items = data;
+      console.log("ftech product",data);
+    })
   }
   checkCustomer() {
     const data = {};
@@ -130,7 +139,14 @@ export class NewSaleComponent implements OnInit {
     this.router.navigate(['neworder/cart']);
   }
   onResetOrder(){
-    localStorage.removeItem('currentCartDD')
-    this.cart = [];
+    this.alertService.alertActionDialog("Do not forget to select standard/class",'okay').subscribe(action =>{
+      console.log("action----->",action)
+      // let selectStandardbtn : HTMLElement = document.getElementById('selectStandardbtn') as HTMLElement
+      // selectStandardbtn.click()
+
+
+      localStorage.removeItem('currentCartDD')
+      this.cart = [];
+    })
   }
 }

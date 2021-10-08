@@ -48,13 +48,17 @@ export class CustomerComponent implements OnInit ,OnChanges{
   }
   ngOnChanges() {
     this.isListView = this.view;
+    this.items = this.data;
     this.actionOnCustomerSelection = this.action;
-    this.ipcService.database('customer', 'fetch', {name: 'satyam'})
     // console.log("data ng On changes",this.data, this.isListView)
   }
   ngOnInit(): void {
     this.items = this.data;
     this.isListView = this.view;
+   
+
+
+
 
   }
 

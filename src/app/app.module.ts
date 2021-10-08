@@ -43,6 +43,11 @@ import { NewOrderlayoutComponent } from './layout/components/new-orderlayout/new
 import { SettingsLayoutComponent } from './layout/components/settings-layout/settings-layout.component';
 import { GeneralSettingsComponent } from './layout/components/general-settings/general-settings.component';
 import { AppearanceSettingsComponent } from './layout/components/appearance-settings/appearance-settings.component';
+import { AlertComponent } from './layout/components/alert/alert.component';
+import { AlertWithActionComponent } from './layout/components/alert-with-action/alert-with-action.component';
+import { AlertService } from './services/alert.service';
+import { MatSnackBarRef } from '@angular/material/snack-bar';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -80,6 +85,8 @@ import { AppearanceSettingsComponent } from './layout/components/appearance-sett
     SettingsLayoutComponent,
     GeneralSettingsComponent,
     AppearanceSettingsComponent,
+    AlertComponent,
+    AlertWithActionComponent,
 
   ],
   imports: [
@@ -93,7 +100,15 @@ import { AppearanceSettingsComponent } from './layout/components/appearance-sett
     MatPaginatorModule,
     MatSortModule
   ],
-  providers: [IPCService],
+  providers: [IPCService, AlertService,
+    {
+      provide: MatSnackBarRef,
+      useValue: {}
+    },
+    { provide: MatDialogRef, useValue: {} },
+
+    { provide: MAT_DIALOG_DATA, useValue: {} }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
