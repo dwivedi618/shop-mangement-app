@@ -65,8 +65,12 @@
       "packagerConfig": {},
       "makers": [
         {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "iconUrl": "src/favicon.ico",
+            "exe": "tridev.exe",
+            "name": "Tridev"
+          }
         }
       ]
     }

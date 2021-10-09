@@ -14,7 +14,9 @@ export async function customer(connection, action: string, data?: any) {
             return await repository.save( data );
 
         case 'update':
-            return await repository.update( data.id, data );
+            const id = data.id;
+            delete data.id;
+            return await repository.update( id, data );
 
         case 'fetch':
             return await repository.find( data );
@@ -36,7 +38,9 @@ export async function inventory(connection, action: string, data?: any) {
             return await repository.save( data );
             
         case 'update':
-            return await repository.update( data.id, data );
+            const id = data.id;
+            delete data.id;
+            return await repository.update( id, data );
 
         case 'fetch':
             return await repository.find( { relations: ["item"] } );
@@ -78,7 +82,9 @@ export async function product( connection, action: string, data?: any ) {
             return await repository.save( product );
             
         case 'update':
-            return await repository.update( data.id, data );
+            const id = data.id;
+            delete data.id;
+            return await repository.update( id, data );
 
         case 'fetch':
             return await repository.find( data );
@@ -103,7 +109,9 @@ export async function sale(connection, action: string, data?: any) {
             return await repository.save( data );
             
         case 'update':
-            return await repository.update( data.id, data );
+            const id = data.id;
+            delete data.id;
+            return await repository.update( id, data );
 
         case 'fetch':
             return await repository.find( data );
