@@ -58,6 +58,7 @@ export async function product( connection, action: string, data?: any ) {
     switch( action ) {
         case 'create':
             const product = new Product();
+            const inventory = new Inventory(); 
             product.name = data.name;
             product.description = data.description;
             product.brand = data.brand;
@@ -72,9 +73,8 @@ export async function product( connection, action: string, data?: any ) {
             product.size = data.size;
             product.salePrice = data.salePrice;
             product.unit = data.unit;
+            product.inventory = inventory;
 
-            const inventory = new Inventory(); 
-            inventory.item = product;
             return await repository.save( product );
             
         case 'update':
