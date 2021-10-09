@@ -2,7 +2,7 @@
 <mat-sidenav-container class="sidenav-container ">
     <mat-sidenav #drawer class="sidenav" [mode]="'side'" [opened]="true">
         <div class="column-nav-layout" >
-        <mat-nav-list dense>
+        <mat-nav-list dense style="padding-top:0">
             <a mat-list-item *ngFor="let link of primaryLinks" routerLink="{{link.path}}" class="layout" 
             routerLinkActive="bg-mygradient-secondary" #rla="routerLinkActive" >
                 <mat-icon matListIcon [class.activeLink]="rla.isActive">{{link.icon}}</mat-icon>
