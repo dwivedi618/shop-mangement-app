@@ -9,12 +9,18 @@ export class Customer{
     @Column()
     name: string;
 
-    @Column()
+    @Column({
+        nullable: true
+  })
     photo: string;
 
-    @Column()
+    @Column({
+        nullable: true
+  })
     phone: string;
 
-    @Column()
+    @Column({
+        nullable: true
+  })
     address: string;
 }

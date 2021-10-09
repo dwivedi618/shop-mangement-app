@@ -37,7 +37,7 @@ export class AddUpdateProductComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data : productDetails
     ) {
       this.localData = data || null;
-      this.action = this.localData?.action || 'new';
+      this.action = this.localData?.action || 'add';
       
       console.log("data",data,this.localData)
      }

@@ -1,4 +1,3 @@
-import { getConnection } from "typeorm";
 import { Customer } from './entities/customer'
 import { Product } from './entities/product'
 import { Inventory } from './entities/inventory'
@@ -15,7 +14,7 @@ export async function customer(connection, action: string, data?: any) {
             return await repository.save( data );
 
         case 'update':
-            return await repository.save( data );
+            return await repository.update( data.id, data );
 
         case 'fetch':
             return await repository.find( data );
@@ -30,17 +29,17 @@ export async function customer(connection, action: string, data?: any) {
 
 export async function inventory(connection, action: string, data?: any) {
     const repository = connection.getRepository( Inventory );
-    const inventory = new Inventory(); 
+    
 
     switch( action ) {
         case 'create':
             return await repository.save( data );
             
         case 'update':
-            return await repository.save( data );
+            return await repository.update( data.id, data );
 
         case 'fetch':
-            return await repository.find( data );
+            return await repository.find( { relations: ["item"] } );
 
         case 'delete':
             return await repository.remove( data );
@@ -55,14 +54,31 @@ export async function inventory(connection, action: string, data?: any) {
 export async function product( connection, action: string, data?: any ) {
 
     const repository = connection.getRepository( Product );
-    const product = new Product(); 
 
     switch( action ) {
         case 'create':
-            return await repository.save( data );
+            const product = new Product();
+            product.name = data.name;
+            product.description = data.description;
+            product.brand = data.brand;
+            product.discountInPercent = data.discountInPercent;
+            product.discountInRuppee = data.discountInRuppee;
+            product.grade = data.grade;
+            product.make = data.make;
+            product.isSellByMeter = data.isSellByMeter;
+            product.length = data.length;
+            product.price = data.price;
+            product.productCode = data.productCode;
+            product.size = data.size;
+            product.salePrice = data.salePrice;
+            product.unit = data.unit;
+
+            const inventory = new Inventory(); 
+            inventory.item = product;
+            return await repository.save( product );
             
         case 'update':
-            return await repository.save( data );
+            return await repository.update( data.id, data );
 
         case 'fetch':
             return await repository.find( data );
@@ -87,7 +103,7 @@ export async function sale(connection, action: string, data?: any) {
             return await repository.save( data );
             
         case 'update':
-            return await repository.save( data );
+            return await repository.update( data.id, data );
 
         case 'fetch':
             return await repository.find( data );

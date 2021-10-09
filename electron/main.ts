@@ -77,25 +77,31 @@ app.on('window-all-closed', () => {
  * Handle requests on renderer invocation
  */
 ipcMain.handle('database', async (event, arg) => {
-    const connection = getConnection();
-    console.log(arg);
-    const [ item, action, data ] = arg;
-    switch( item ) {
-        case 'customer':
-            return await customer(connection, action, data);
+    try {
 
-        case 'product':
-            return await product(connection, action, data);
-
-        case 'inventory':
-            return await inventory(connection, action, data);
-
-        case 'sale':
-            return await sale(connection, action, data);
-
-        default:
-            return 'Invalid item name'
-            console.log('This is the default option')
+        const connection = getConnection();
+        console.log(arg);
+        const [ item, action, data ] = arg;
+        switch( item ) {
+            case 'customer':
+                return await customer(connection, action, data);
+    
+            case 'product':
+                return await product(connection, action, data);
+    
+            case 'inventory':
+                return await inventory(connection, action, data);
+    
+            case 'sale':
+                return await sale(connection, action, data);
+    
+            default:
+                console.log('This is the default option')
+                return 'Invalid item name'
+        }
+    } catch (err) {
+        console.log('Error in db handle:', err );
+        return { state: 1 }
     }
 });
 
