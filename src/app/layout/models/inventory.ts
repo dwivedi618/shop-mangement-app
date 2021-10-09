@@ -1,4 +1,5 @@
-import { Product } from "electron/main";
+import { Product } from "./product";
+
 
 export class Inventory{
         id : 1;

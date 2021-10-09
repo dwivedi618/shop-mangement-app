@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AlertService } from 'src/app/services/alert.service';
 import { IPCService } from 'src/app/services/ipc.service';
+import { Constant } from '../../constant/constant';
 import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-customer.component';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
@@ -70,8 +71,8 @@ export class NewSaleComponent implements OnInit {
     let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
     this.cart = loadCart;
 
-    this.fetchProduct();
-    this.onResetOrder()
+    // this.fetchProduct();
+  
   }
   private fetchProduct(){
     this.ipcService.database('product','fetch','').then((data)=>{
@@ -139,14 +140,13 @@ export class NewSaleComponent implements OnInit {
     this.router.navigate(['neworder/cart']);
   }
   onResetOrder(){
-    this.alertService.alertActionDialog("Do not forget to select standard/class",'okay').subscribe(action =>{
+    this.alertService.alertActionDialog(Constant.RESET_ORDER_WARNING_MSG,'Reset').subscribe(action =>{
       console.log("action----->",action)
-      // let selectStandardbtn : HTMLElement = document.getElementById('selectStandardbtn') as HTMLElement
-      // selectStandardbtn.click()
-
-
-      localStorage.removeItem('currentCartDD')
-      this.cart = [];
+      if(action == true){
+        localStorage.removeItem('currentCartDD');
+        localStorage.removeItem('currentCustomer');
+        this.cart = [];
+      }
     })
   }
 }

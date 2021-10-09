@@ -37,13 +37,14 @@ export class AddUpdateProductComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data : productDetails
     ) {
       this.localData = data || null;
-      this.action = this.localData?.action || 'new';
+      this.action = this.localData?.action || 'add';
       
       console.log("data",data,this.localData)
      }
 
   ngOnInit(): void {
     this.productForm= this.fb.group({
+      id : null,
       grade : [],
       name : [],
       salePrice : [],
@@ -83,6 +84,8 @@ export class AddUpdateProductComponent implements OnInit {
     this.productForm.patchValue({description : this.localData?.description})
     this.productForm.patchValue({isSellByMeter : this.localData?.isSellByMeter})
     this.productForm.patchValue({file : this.localData?.file})
+    console.log("Mange Stock Form",this.productForm.value)
+
   }
 
   onDiscountChanged(price:number,discountValue : number,type : string){
@@ -101,10 +104,10 @@ export class AddUpdateProductComponent implements OnInit {
   }
 
   onDone(){
-    let data : Product =  this.productForm.value;
+    let data  =  this.productForm.value;
     let action  = this.action == 'add' ? 'create' : 'update'
     console.log("Mange Stock Form",this.productForm.value)
-    this.ipcService.database('product','create',data).then(
+    this.ipcService.database('product',action,data).then(
       data=>{
         console.log(`after ${action}  product`,data);
         this.dialogRef.close(data);

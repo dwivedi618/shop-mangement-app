@@ -1,7 +1,12 @@
-<mat-dialog-content class="text-center" >
-    <div class="text-center d-flex justify-centent-start align-items-center mb-2">
-        <mat-icon>lightbulb</mat-icon>
-        <small class="px-2 text-light">{{message}}</small>
+<mat-dialog-content class="" >
+    <div class=" d-flex mb-2 w-100" style="text-align: left;align-items: flex-start;">
+        <div >
+            <mat-icon>lightbulb</mat-icon>
+        </div>
+        <div class="px-2" style="justify-content: start;flex-direction: column;">
+            <small matLine class="text-light strong">Are you sure?</small><br>
+            <small matLine class="text-light">{{message}}</small>
+        </div>
     </div>
     
 </mat-dialog-content>
