@@ -44,6 +44,7 @@ export class AddUpdateProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productForm= this.fb.group({
+      id : null,
       grade : [],
       name : [],
       salePrice : [],
@@ -83,6 +84,8 @@ export class AddUpdateProductComponent implements OnInit {
     this.productForm.patchValue({description : this.localData?.description})
     this.productForm.patchValue({isSellByMeter : this.localData?.isSellByMeter})
     this.productForm.patchValue({file : this.localData?.file})
+    console.log("Mange Stock Form",this.productForm.value)
+
   }
 
   onDiscountChanged(price:number,discountValue : number,type : string){
@@ -101,7 +104,7 @@ export class AddUpdateProductComponent implements OnInit {
   }
 
   onDone(){
-    let data : Product =  this.productForm.value;
+    let data  =  this.productForm.value;
     let action  = this.action == 'add' ? 'create' : 'update'
     console.log("Mange Stock Form",this.productForm.value)
     this.ipcService.database('product',action,data).then(

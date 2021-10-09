@@ -53,7 +53,7 @@ export class ProductComponent implements OnInit {
     private ipcService: IPCService
   ) { }
   ngOnInit(): void {
-    // this.fetchProduct();
+    this.fetchProduct();
   }
 
   private fetchProduct() {
