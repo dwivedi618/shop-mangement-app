@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm";
 import { Inventory } from "./inventory";
 
 @Entity()
@@ -7,51 +7,84 @@ export class Product{
       @PrimaryGeneratedColumn()
       id: number;
 
-      @Column()
+      @Column({
+            unique: true,
+            nullable: true
+      })
       name: string;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       brand: string;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       salePrice: number;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       discountInPercent : number;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       discountInRuppee : number;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       price : number;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       unit : string;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       isSellByMeter : boolean;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       grade : string;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       description: string;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       productCode: string;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       make: string;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       length: string;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       size: number;
 
-      @Column()
+      @Column({
+            nullable: true
+      })
       file: string;
 
-      @OneToMany(type => Inventory, inventory => inventory.item )
-      inventories: Inventory[];
+      @OneToOne(type => Inventory, inventory => inventory.item, {
+            cascade: true
+      } )
+      inventory: Inventory;
 }

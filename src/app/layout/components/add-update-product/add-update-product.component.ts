@@ -104,7 +104,7 @@ export class AddUpdateProductComponent implements OnInit {
     let data : Product =  this.productForm.value;
     let action  = this.action == 'add' ? 'create' : 'update'
     console.log("Mange Stock Form",this.productForm.value)
-    this.ipcService.database('product',action,data).then(
+    this.ipcService.database('product','create',data).then(
       data=>{
         console.log(`after ${action}  product`,data);
         this.dialogRef.close(data);

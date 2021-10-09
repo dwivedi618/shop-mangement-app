@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
 import { Product } from './product';
 
 @Entity()
@@ -7,24 +7,37 @@ export class Inventory{
         @PrimaryGeneratedColumn()
         id: number;
 
-        @ManyToOne(type => Product, product => product.inventories)
+        @OneToOne(type => Product, product => product.inventory)
+        @JoinColumn()
         item: Product;       //foriegn key references to product
 
-        @Column()
+        @Column({
+                nullable: true
+        })
         itemInStock: number;
 
-        @Column()
+        @Column({
+                nullable: true
+        })
         pricePerItem: number;
 
-        @Column()
+        @Column({
+                default: 0
+        })
         totalStockPrice: number;
 
-        @Column()
+        @Column({
+                nullable: true
+        })
         lastUpdate: Date;
 
-        @Column()
+        @Column({
+                nullable: true
+        })
         description: string;
 
-        @Column()
+        @Column({
+                nullable: true
+        })
         code : string
 }
