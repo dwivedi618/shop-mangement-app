@@ -14,6 +14,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { InventoryItemDetailsComponent } from '../inventory-item-details/inventory-item-details.component';
+import { IPCService } from 'src/app/services/ipc.service';
 
 export interface CardItem {
   id: number;
@@ -32,78 +33,35 @@ export class InventoryItemComponent implements OnInit ,OnChanges{
   @Input() data;
   @Input() cartItems;
   @Input() view: Boolean;
-  @Output() shareCart  = new EventEmitter<any>();
+  @Output() onDialogClose  = new EventEmitter<any>();
 
 
 
   items = [];
   isListView: Boolean;
-  cart = [];
-  constructor(private dialog : MatDialog,private dialogService : DialogService) {}
+
+  constructor(private dialog : MatDialog,private dialogService : DialogService,private ipcService : IPCService) {}
   ngOnChanges() {
     this.isListView = this.view;
+    this.items = this.data;
+
     // this.checkItemDetails()
     // console.log("data ng On changes",this.data, this.isListView)
   }
   ngOnInit(): void {
     this.items = this.data;
-    this.cart = this.cartItems?.length ? this.cartItems : [];
     this.isListView = this.view;
     // console.log("data",this.data, this.isListView)
   }
 
   onSelectItem(selectedItem) {
-    this.dialogService.checkInventoryItemDetails().subscribe(data=>{
-      console.log("Inventory Item details",data)
+    this.dialogService.checkInventoryItemDetails(selectedItem).subscribe(data=>{
+      console.log("Inventory Item details",data);
+      this.onDialogClose.emit(data)
     })
   }
 
-  isAddedToCart(item) {
-    if(this.cart.length){
-      for (let i = 0; i < this.cart.length; i++) {
-        if (this.cart[i]['id'] == item.id) {
-          return true;
-        }
-      }
-    }else{
-      return false
-    }
-  }
-  adjustCartItemQuantity(adjustType: number, selectedItem: any) {
-    console.log('ADJUST VLUSIE IS ==============',adjustType);
-    
-    if (adjustType === 0) {
-      //decrease cart item quantity
-      for (let i = 0; i < this.cart.length; i++) {
-        if (this.cart[i].id == selectedItem.id) {
-          ( this.cart[i].quantity > 1 ) ? this.cart[i].quantity-- : this.cart.splice(i,1);
-          // console.log('SELCYTY___________',selectedItem,"-----------",i,'---',this.cart.length);
-          return;
-        }
-      }
-    }
-    if (adjustType === 1) {
-      //increase cart item quantity
-      for (let i = 0; i < this.cart.length; i++) {
-        if (this.cart[i].id == selectedItem.id) {
-          return (this.cart[i].quantity += 1);
-        }
-      }
-    }
-  }
-  getThisItemQuantity(id) {
-    for (let i = 0; i < this.cart.length; i++) {
-      if (this.cart[i]['id'] == id) {
-        console.log('calculating size', this.cart[i].quantity);
-        return this.cart[i].quantity;
-      }
-    }
-  }
 
-  public onShareCart(){
-    console.log("emit------------ cart" ,this.cart.length)
-    this.shareCart.emit(this.cart)
-  }
   checkItemDetails() {
     const data = {};
     const dialogRef = this.dialog.open(InventoryItemDetailsComponent, {

@@ -70,9 +70,8 @@ export class DialogService {
     });
   }
 
-  checkInventoryItemDetails() {
+  checkInventoryItemDetails(data) {
     let afterCloseResult = new Subject;
-    const data = {};
     const dialogRef = this.dialog.open(InventoryItemDetailsComponent, {
       width: '40rem',
       maxWidth: '100vw',

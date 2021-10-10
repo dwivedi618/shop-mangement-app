@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne } from "typeorm";
+import { InventoryHistory } from "./inventoryHistory";
 import { Product } from './product';
 
 @Entity()
@@ -8,6 +9,8 @@ export class Inventory{
         id: number;
 
         @OneToOne(type => Product, product => product.inventory)
+        
+
         @JoinColumn()
         item: Product;       //foriegn key references to product
 
@@ -40,4 +43,27 @@ export class Inventory{
                 nullable: true
         })
         code : string
+
+        @ManyToOne(type => InventoryHistory, inventoryHistory => inventoryHistory.inventory)
+        history : InventoryHistory
+
+        @Column({
+                nullable:true
+        })
+        quantity: any
+
+        @Column({
+                nullable:true
+        })
+        isAddingStock : boolean
+      
+        @Column({
+                nullable:true
+        })
+        isSellByMeter : any
+
+        @Column({
+                nullable:true
+        })
+        length : number
 }

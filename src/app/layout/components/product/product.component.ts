@@ -63,7 +63,9 @@ export class ProductComponent implements OnInit {
     })
   }
   openAddUpdateProduct() {
-    this.dialogService.addUpdateProduct('').subscribe(() => {
+    this.dialogService.addUpdateProduct('').subscribe((data) => {
+      console.log("after close",data);
+      
       this.fetchProduct();
     })
   }
@@ -95,4 +97,9 @@ export class ProductComponent implements OnInit {
     localStorage.setItem('currentCartDD', JSON.stringify(this.cart))
     this.router.navigate(['../cart']);
   }
+  onDialogClose(data){
+    console.log("after close**********************",data);
+      this.fetchProduct();
+  }
+
 }
