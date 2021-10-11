@@ -27,7 +27,7 @@ export class InventoryItemDetailsComponent implements OnInit {
     // id : 1;
     // item : Product;
     // itemInStock : number;
-    // pricePerItem : number;
+    // pricePerItem : number; 
     // totalStockPrice : number;
     // lastUpdate : Date;
     // description: '';
@@ -37,28 +37,28 @@ export class InventoryItemDetailsComponent implements OnInit {
       quantity: [''],
       item: [],
       pricePerItem: [''],
-      date: [''],
-      notes: [''],
+      lastUpdate: [''],
+      description: [''],
       isAddingStock: []
     })
 
-    // this.patchDataInForm();
+    this.patchDataInForm();
   }
 
-  // private patchDataInForm(){
-  //   this.manageStockForm.patchValue({id : this.localData?.id})
-  //   this.manageStockForm.patchValue({quantity : this.localData?.quantity})
-  //   this.manageStockForm.patchValue({pricePerItem : this.localData?.pricePerItem})
-  //   this.manageStockForm.patchValue({notes : this.localData?.notes})
-  //   this.manageStockForm.patchValue({id : this.localData?.id})
+  private patchDataInForm(){
+    this.manageStockForm.patchValue({id : this.localData?.id})
+    this.manageStockForm.patchValue({quantity : this.localData?.quantity})
+    this.manageStockForm.patchValue({pricePerItem : this.localData?.pricePerItem})
+    this.manageStockForm.patchValue({notes : this.localData?.description})
+    this.manageStockForm.patchValue({id : this.localData?.id})
 
-  // }
+  }
 
   onDone(){
     let data  =  this.manageStockForm.value;
     let action  = this.action == 'add' ? 'create' : 'update'
     console.log("Mange Stock Form",this.manageStockForm.value)
-    this.ipcService.database('inventory',action,data).then(
+    this.ipcService.database('inventory','update',data).then(
       data=>{
         console.log(`after ${action}  inventory`,data);
         this.dialogRef.close(data);

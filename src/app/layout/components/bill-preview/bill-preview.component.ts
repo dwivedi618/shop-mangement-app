@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
+import { IPCService } from 'src/app/services/ipc.service';
+import { AlertService } from 'src/app/services/alert.service';
+import { Constant } from '../../constant/constant';
 export interface ProductDetails{
   id : number,
   name: string,
@@ -25,10 +28,21 @@ export interface ProductDetails{
 })
 export class BillPreviewComponent implements OnInit {
   productForm : FormGroup
+  orderDate = new Date()
   localData: any;
   action: any;
+  receivedAmount : number = 0;
+  paymentMode : string;
+  
+
+  dueAmount : number;
+  isLoading: boolean;
+  isSavingOrder : boolean;
+
   constructor(
     private fb: FormBuilder,
+    private ipcService : IPCService,
+    private alertService : AlertService,
     private dialogRef : MatDialogRef<BillPreviewComponent>,
     @Inject(MAT_DIALOG_DATA) data : ProductDetails
     ) {
@@ -38,6 +52,7 @@ export class BillPreviewComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.receivedAmount = this.localData?.finalPayableAmount - (this.localData?.discountInRuppee || 0)
   }
 
   
@@ -45,10 +60,24 @@ export class BillPreviewComponent implements OnInit {
 
 
   onDone(){
-    console.log("Mange Stock Form",this.productForm.value)
+   
     this.exportAsPDF()
   }
+
+  onApply(){
+    this.isSavingOrder = true;
+    this.alertService.alertActionDialog(Constant.ORDER_SUBMIT_WARNING_MSG,'Yes , Save').subscribe(data=>{
+      console.log("confirmation",data);
+      this.ipcService.database('sale','create',this.localData).then(data=>{
+      console.log("order saved",data);
+        this.isSavingOrder = false;
+      })
+      .catch(err=>{ this.isSavingOrder = false;})
+    })
+  }
+
   exportAsPDF() {
+    this.isLoading = true
 		console.log("name->", )
 
 	
@@ -82,6 +111,8 @@ export class BillPreviewComponent implements OnInit {
 		}).then((doc) => {
 			const fileName = "invoice"
 			doc.save(fileName + new Date().getDate() + '.pdf');
+      this.isLoading = false
+
 		});
 
 	}

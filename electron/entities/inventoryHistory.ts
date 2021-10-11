@@ -47,7 +47,7 @@ export class InventoryHistory {
     @Column({
         nullable: true
     })
-    quantity: any
+    quantity: number
 
     @Column({
         nullable: true
@@ -57,7 +57,7 @@ export class InventoryHistory {
     @Column({
         nullable: true
     })
-    isSellByMeter: any
+    isSellByMeter: string
 
     @Column({
         nullable: true

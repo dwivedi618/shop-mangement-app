@@ -83,3 +83,8 @@ details {
   opacity: .1;
   width: 100%;
 }
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 16px 16px 16px!important;
+  background-color: var(--ultra-light)
+}
