@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import * as path from 'path';
-import { app, BrowserWindow, ipcMain, screen} from "electron";
+import { app, BrowserWindow, ipcMain, screen, Menu} from "electron";
 import {createConnection, Connection, getConnection, Db } from "typeorm";
 import { DbConfig }  from './config/db.conf';
 import { AppConfig } from './config/app.conf';
@@ -48,7 +48,9 @@ async function createWindow(){
     win.loadURL(AppConfig.indexURL);
 
 
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
+    Menu.setApplicationMenu(null);
+    win.maximize();
 
     win.on("closed", () => {
         win = null;

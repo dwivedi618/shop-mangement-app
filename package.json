@@ -27,6 +27,9 @@
     "@angular/platform-browser-dynamic": "~11.2.6",
     "@angular/router": "~11.2.6",
     "electron-squirrel-startup": "^1.0.0",
+    "imagemin": "^8.0.1",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-pngquant": "^9.0.2",
     "jspdf": "^2.4.0",
     "mysql2": "^2.3.0",
     "reflect-metadata": "^0.1.13",
@@ -62,14 +65,24 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "icon": "./src/app.ico"
+      },
       "makers": [
         {
-          "name": "@electron-forge/maker-squirrel",
+          "name": "@electron-forge/maker-deb",
           "config": {
-            "iconUrl": "src/favicon.ico",
-            "exe": "tridev.exe",
             "name": "Tridev"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "platforms": [
+            "win32"
+          ],
+          "config": {
+            "name": "Tridev",
+            "exe": "tridev.exe"
           }
         }
       ]
