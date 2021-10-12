@@ -1,10 +1,10 @@
 import "reflect-metadata";
 import * as path from 'path';
-import { app, BrowserWindow, ipcMain, screen} from "electron";
-import {createConnection, Connection, getConnection, Db } from "typeorm";
-import { DbConfig }  from './config/db.conf';
+import { app, BrowserWindow, ipcMain, screen } from "electron";
+import { createConnection, Connection, getConnection, Db } from "typeorm";
+import { DbConfig } from './config/db.conf';
 import { AppConfig } from './config/app.conf';
-import { customer, product, inventory, sale } from './db';
+import { customer, product, inventory, sale, settings, user } from './db';
 
 let win: BrowserWindow;
 console.log(AppConfig.preloadPath);
@@ -12,7 +12,7 @@ console.log(AppConfig.preloadPath);
  * createWindow create a native window
  * when electron app will reday
  */
-async function createWindow(){
+async function createWindow() {
 
     try {
 
@@ -27,7 +27,7 @@ async function createWindow(){
             synchronize: true,
             logging: true
         });
-    } catch( err ) {
+    } catch (err) {
         console.log('Error from db:', err, 'this is config', DbConfig);
         app.quit();
         process.exit();
@@ -37,7 +37,7 @@ async function createWindow(){
     const { width, height } = screen.getPrimaryDisplay().workAreaSize
 
     win = new BrowserWindow({
-        width, 
+        width,
         height,
         webPreferences: {
             preload: AppConfig.preloadPath
@@ -81,26 +81,30 @@ ipcMain.handle('database', async (event, arg) => {
 
         const connection = getConnection();
         console.log(arg);
-        const [ item, action, data ] = arg;
-        switch( item ) {
+        const [item, action, data] = arg;
+        switch (item) {
             case 'customer':
                 return await customer(connection, action, data);
-    
+
             case 'product':
                 return await product(connection, action, data);
-    
+
             case 'inventory':
                 return await inventory(connection, action, data);
-    
+
             case 'sale':
                 return await sale(connection, action, data);
-    
+            case 'user':
+                return await user(connection, action, data);
+
+            case 'settings':
+                return await settings(connection, action, data);
             default:
                 console.log('This is the default option')
                 return 'Invalid item name'
         }
     } catch (err) {
-        console.log('Error in db handle:', err );
+        console.log('Error in db handle:', err);
         return { state: 1 }
     }
 });

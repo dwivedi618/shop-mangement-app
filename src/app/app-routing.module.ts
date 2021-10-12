@@ -14,12 +14,13 @@ import { NewOrderlayoutComponent } from './layout/components/new-orderlayout/new
 import { GeneralSettingsComponent } from './layout/components/general-settings/general-settings.component';
 import { SettingsLayoutComponent } from './layout/components/settings-layout/settings-layout.component';
 import { AppearanceSettingsComponent } from './layout/components/appearance-settings/appearance-settings.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: '', component: HomeComponent, data: { breadcrumb: 'Home' } },
+  { path: '', component: HomeComponent, data: { breadcrumb: 'Home' }  ,canActivate: [AuthGuard]},
   {
-    path: '', component: LayoutComponent,
+    path: '', component: LayoutComponent, canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent, data: { breadcrumb: 'Dashboard', icon: 'grid_view' } },
       { path: 'inventory', component: InventoryComponent, data: { breadcrumb: 'Inventory', icon: 'inventory' } },

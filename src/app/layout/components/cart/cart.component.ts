@@ -30,9 +30,9 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     console.log("NG ON IN IT TTTTTTTTTTTTTTT");
 
-    let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
-    let loadCustomer = JSON.parse(localStorage.getItem('currentCustomer'))
-    this.currentCustomer = loadCustomer
+    let loadCart = JSON.parse(localStorage.getItem('currentCartDD')) || []
+    let loadCustomer = JSON.parse(localStorage.getItem('currentCustomer')) || {}
+    this.currentCustomer = loadCustomer 
     this.cart = loadCart
     console.log("load cart from local storage", loadCart)
 

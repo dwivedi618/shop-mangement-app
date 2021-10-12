@@ -77,12 +77,12 @@
                 <mat-list-item>
                     <span>Discount</span>
                     <div class="spacer"></div>
-                    <span>- {{discountInRuppee || '0' | currency :'INR'}}</span>
+                    <span>- {{(discountInRuppee | currency :'INR') || '0'}}</span>
                 </mat-list-item>
                 <mat-list-item>
                     <span style="font-weight: 600;">Total Pay</span>
                     <div class="spacer"></div>
-                    <span style="font-weight: 600;">{{finalPayableAmount || '...' | currency :'INR'}}</span>
+                    <span style="font-weight: 600;">{{(finalPayableAmount  | currency :'INR') || '...'}}</span>
                 </mat-list-item>
             </mat-list>
         </div>
