@@ -35,7 +35,7 @@
             </div>
 
 
-            <mat-accordion class="shadow">
+            <mat-accordion class="shadow" style="position: relative;width: inherit;">
                 <mat-expansion-panel class="mat-elevation-z0">
                     <mat-expansion-panel-header>
                         <div class="spacer"></div>
@@ -43,27 +43,26 @@
                         <div class="spacer"></div>
                     </mat-expansion-panel-header>
 
-
-                    <mat-form-field class="w-50" appearance="outline">
+                    <mat-form-field class="mr-1" appearance="outline" style="font-size: 10px;width: 48%;">
                         <mat-label>Discount In %</mat-label>
                         <input matInput type="text" placeholder="%" [(ngModel)]="discountInPercent"
                             (ngModelChange)="onDiscountChanged(cartAmount,$event,'percent')">
-
-                        <button *ngIf="discountInPercent" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="discountInPercent = ''">
-                            <mat-icon>close</mat-icon>
-                        </button>
                     </mat-form-field>
-                    <mat-form-field class="w-50" appearance="outline">
+
+                    <mat-form-field class="" appearance="outline" style="font-size: 10px;width: 48%;">
                         <mat-label>Discount In ₹</mat-label>
                         <input matInput type="text" placeholder="INR" [(ngModel)]="discountInRuppee"
                             (ngModelChange)="onDiscountChanged(cartAmount,$event,'ruppee')">
-
-                        <button *ngIf="discountInRuppee" matSuffix mat-icon-button aria-label="Clear"
-                            (click)="discountInRuppee = ''">
-                            <mat-icon class="mat-icon-sm pt-1">close</mat-icon>
-                        </button>
                     </mat-form-field>
+                    <button mat-button (click)="discountInRuppee = 0;discountInPercent = 0" class="w-100 bg-ultra-light">
+                        <small class="text-light px-2">clear</small>
+                    </button>
+
+
+
+
+
+
                 </mat-expansion-panel>
             </mat-accordion>
         </div>
@@ -88,12 +87,12 @@
             </mat-list>
         </div>
         <mat-toolbar style="position: absolute;bottom: 0;z-index: 5;background: white">
-            <button mat-stroked-button class="bg-ultra-light w-100 mr-1">
+            <!-- <button mat-stroked-button class="bg-ultra-light w-100 mr-1">
                 <span class="text-uppercase">Cancel</span>
             </button>
             <button mat-button class="bg-green w-100" (click)="onTakePayment()">
                 <span class=" text-uppercase">Take Payment</span>
-            </button>
+            </button> -->
 
         </mat-toolbar>
     </mat-sidenav>
@@ -134,11 +133,11 @@
             <button mat-stroked-button class="mr-1" routerLink="../">
                 <span class="px-3 fancy-text text-uppercase">Back</span>
             </button>
-            <button *ngIf="!currentCustomer?.name"  mat-button class="bg-green" (click)="onCartNext()">
+            <button *ngIf="!currentCustomer?.name" mat-button class="bg-green" (click)="onCartNext()">
                 <mat-icon class="mat-icon-sm pt-1">person_add</mat-icon>
-                <span  class="px-3 fancy-text text-uppercase">Next</span>
+                <span class="px-3 fancy-text text-uppercase">Next</span>
             </button>
-            <button *ngIf="currentCustomer?.name" mat-button class="bg-green" (click)="onCartNext()">       
+            <button *ngIf="currentCustomer?.name" mat-button class="bg-green" (click)="onCartNext()">
                 <span class="px-3 fancy-text text-uppercase">Take Payment</span>
             </button>
 

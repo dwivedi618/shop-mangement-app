@@ -34,6 +34,8 @@ export class ProductItemComponent implements OnInit,OnChanges {
   @Input() cartItems;
   @Input() view: Boolean;
   @Output() shareCart  = new EventEmitter<any>();
+  @Output() onDialogClose  = new EventEmitter<any>();
+
 
 
 
@@ -70,6 +72,8 @@ export class ProductItemComponent implements OnInit,OnChanges {
 
   openAddUpdateProduct(selectedItem){
     selectedItem.action = 'update'
-    this.dialogService.addUpdateProduct(selectedItem)
+    this.dialogService.addUpdateProduct(selectedItem).subscribe(result=>{
+      this.onDialogClose.emit(result)
+    })
   }
 }

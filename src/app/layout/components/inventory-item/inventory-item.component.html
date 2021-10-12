@@ -1,6 +1,6 @@
 <section *ngIf="isListView" class="items-container grid-view">
   <div *ngFor="let item of items">
-    <article class="item shadow"  [class.selected]="isAddedToCart(item)" (click)="checkItemDetails()">
+    <article class="item shadow"  (click)="checkItemDetails()">
       <div class="item-price d-flex">
         <div class="spacer"></div>
         <small class="px-2">In Stock</small>
@@ -10,10 +10,10 @@
       <div class="card-item-details w-100">
         <mat-list dense class="w-100">
           <mat-list-item class="text-wrap-sm">
-            <h3 matLine> {{item.name}} </h3>
+            <h3 matLine> {{item?.item?.name}} </h3>
             <p matLine class="">
-              <small> {{item.code}} </small>
-              <small class=""> -- {{item.description}} </small>
+              <small> {{item?.item?.code}} </small>
+              <small class="">{{item?.item?.description}} </small>
             </p>
           </mat-list-item>
         </mat-list>
@@ -41,10 +41,10 @@
       <div class="list-view-details">
         <mat-list dense>
           <mat-list-item class=" text-wrap-lg">
-            <h3 matLine> {{item.name}} </h3>
+            <h3 matLine> {{(item?.item?.name | titlecase) ||'unknown'}} </h3>
             <p matLine class="" style="color: var(--light);">
-              <span> {{item.code}} </span>
-              <span class=""> -- {{item.description}} </span>
+              <span> {{item?.item?.code | titlecase}} </span>
+              <span class="">{{item?.item?.description}} </span>
             </p>
           </mat-list-item>
         </mat-list>

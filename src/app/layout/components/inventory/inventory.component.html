@@ -69,10 +69,15 @@
 
     <mat-sidenav-content style="position: relative;">
         <mat-toolbar class="bg-white shadow" style="position: absolute;top:0">
-            <div class="layout w-100">
+            <!-- <div class="layout w-100">
                 <app-search (onSearch)="getSearchText($event)"></app-search>
-            </div>
+            </div> -->
             <span class="spacer"></span>
+            <button mat-icon-button class="mx-2 rounded-lg" disabled>
+                <mat-icon class="mat-icon-sm pt-0">search</mat-icon>
+            </button>
+            <button mat-icon-button class="mx-2 rounded-lg" >
+                <mat-icon class="mat-icon-sm pt-0">refresh</mat-icon></button>
             <button mat-icon-button class="mx-2 rounded-lg" (click)="isListView = !isListView">
                 <mat-icon class="mat-icon-sm pt-0">{{isListView ? 'view_list' : 'grid_view'}}</mat-icon>
             </button>
@@ -92,21 +97,12 @@
                 </mat-list>
             </mat-menu>
         </mat-toolbar>
-        <app-inventory-item [data]="items" [(view)]="isListView"  ></app-inventory-item>
-        <mat-toolbar *ngIf="cart?.length"
+        <app-inventory-item [(data)]="items" [(view)]="isListView"  (onDialogClose)="onDialogClose($event)"></app-inventory-item>
+        <mat-toolbar 
         class="mat-elevation-z16 " 
         style="position: absolute;bottom: 0;z-index: 15;">
 
-            <span class="px-5">{{cart?.length || '0'}} | <small>Item</small></span>
-
-            <div class="spacer"></div>
-            <button mat-button class="w-100 bg-green" (click)="onViewCart()" >
-                <mat-icon class="mat-icon-sm pt-1">shopping_cart</mat-icon>
-                <span class="px-3 fancy-text text-uppercase">view cart</span>
-            </button>
-            <div class="spacer"></div>
-            <span class="px-5">{{getCartTotal() | currency :'INR'}}</span>
-
+         
         </mat-toolbar>
     </mat-sidenav-content>
 </mat-sidenav-container>

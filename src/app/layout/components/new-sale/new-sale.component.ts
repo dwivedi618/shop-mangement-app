@@ -71,7 +71,7 @@ export class NewSaleComponent implements OnInit {
     let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
     this.cart = loadCart;
 
-    // this.fetchProduct();
+    this.fetchProduct();
   
   }
   private fetchProduct(){

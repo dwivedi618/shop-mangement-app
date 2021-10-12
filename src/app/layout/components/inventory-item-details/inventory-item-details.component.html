@@ -25,50 +25,32 @@
                                 <mat-list-item>
                                     <span class="strong text-light">Item</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">T-shirt</span>
+                                    <span class="strong">{{(localData?.item?.name | titlecase) || 'unknown'}}</span>
                                 </mat-list-item>
-                                <mat-list-item>
-                                    <span class="strong text-light">MRP</span>
-                                    <div class="spacer"></div>
-                                    <span class="strong">300</span>
-                                </mat-list-item>
+                             
                                 <mat-list-item>
                                     <span class="strong text-light">Stock Price</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">250</span>
+                                    <span class="strong">{{(localData?.totalStockPrice | currency:'INR') || 'unknown'}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
                                     <span class="strong text-light">Grade</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">Clothe</span>
+                                    <span class="strong">{{(localData?.item?.grade | titlecase) || 'unknown'}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
                                     <span class="strong text-light">Make</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">Unknown</span>
+                                    <span class="strong">{{(localData?.item?.make | titlecase) || 'unknown'}}</span>
                                 </mat-list-item>
-                                <mat-list-item>
-                                    <span class="strong text-light">Meter</span>
-                                    <div class="spacer"></div>
-                                    <span class="strong">Unknown</span>
-                                </mat-list-item>
-                                <mat-list-item>
-                                    <span class="strong text-light">Availabilty</span>
-                                    <div class="spacer"></div>
-                                    <span class="strong">Out of Stock</span>
-                                </mat-list-item>
+                                
+                                
                                 <mat-list-item>
                                     <span class="strong text-light">pices</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">37</span>
+                                    <span class="strong">{{(localData?.itemInStock ) || 'unknown'}}</span>
                                 </mat-list-item>
-                                <mat-list-item>
-                                    <span class="strong text-light">QR CODE</span>
-                                    <div class="spacer"></div>
-                                    <span class="strong">
-                                        <mat-icon>qr_code_2</mat-icon>
-                                    </span>
-                                </mat-list-item>
+                               
 
                             </mat-list>
                         </div>
@@ -104,7 +86,7 @@
                                         <div class="spacer"></div>
                                         <mat-form-field appearance="outline" class="">
                                             <mat-label>Date</mat-label>
-                                            <input matInput type="date" placeholder="Date" formControlName="date">
+                                            <input matInput type="date" placeholder="Date" formControlName="lastUpdate">
                                         </mat-form-field>
                                     </mat-list-item>
                                     <mat-list-item style="margin-top: 2rem;">

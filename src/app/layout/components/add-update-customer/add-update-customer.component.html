@@ -7,31 +7,12 @@
 </mat-toolbar>
 <div mat-dialog-content class="">
     <div class="">
-        <div class="layout">
+        <div class="d-flex " >
+            <div style="margin-bottom: 1rem;">
+                <app-photo-upload (onImageChange)="onImageChange($event)"></app-photo-upload>
+            </div>
             <form [formGroup]="customerForm" class="w-100" style="font-size: 12px;">
-                <div class="d-flex">
-                    <div class="shadow photo-container layout rounded-lg"
-                        >
-                        <input type="file"  #fileUpload (change)="onImagePicked($event)"
-                                style="width: 0;height: 0;visibility: hidden;" accept="image/png,image/jpeg">
-                            <mat-toolbar style="position: absolute;bottom: 0px;z-index: 1000;padding: 0;">
-                                <div class="spacer"></div>
-                                <button mat-button class=" bg-ultra-light" (click)="fileUpload.click()">
-                                    <mat-icon class="mat-icon-sm">camera_alt</mat-icon>
-                                </button>
-                                <button mat-button class="" disabled="imagePreview!=='' && imagePreview">
-                                    <mat-icon class="mat-icon-sm" >crop</mat-icon>
-                                </button>
-                                <button mat-button class="" (click)="fileUploadReset()" disabled="imagePreview!=='' && imagePreview">
-                                    <mat-icon class="mat-icon-sm">delete_outline</mat-icon>
-                                </button>
-                                <div class="spacer"></div>
-                            </mat-toolbar>
-                        <div *ngIf="imagePreview!=='' && imagePreview" style="margin-bottom: 3rem;">
-                            <img class="thumbnail-lg" [src]="imagePreview" style="border-radius: 4px;">
-                        </div>
-
-                    </div>
+               
                     <div class="px-5">
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Name</mat-label>
@@ -46,7 +27,7 @@
                             <textarea matInput placeholder="Ex:Banjaria 274704" formControlName="address"></textarea>
                         </mat-form-field>
                     </div>
-                </div>
+                
             </form>
 
         </div>

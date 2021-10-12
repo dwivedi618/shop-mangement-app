@@ -25,10 +25,9 @@ export class DialogService {
 
   constructor(private dialog: MatDialog) { }
 
-  checkCustomer(): Observable<any> {
+  checkCustomer(data): Observable<any> {
 
     let afterCloseResult = new Subject;
-    const data = {};
     const cdialogRef = this.dialog.open(AddUpdateCustomerComponent, {
       width: '30rem',
       maxWidth: '100vw',
@@ -70,9 +69,8 @@ export class DialogService {
     });
   }
 
-  checkInventoryItemDetails() {
+  checkInventoryItemDetails(data) {
     let afterCloseResult = new Subject;
-    const data = {};
     const dialogRef = this.dialog.open(InventoryItemDetailsComponent, {
       width: '40rem',
       maxWidth: '100vw',
@@ -138,7 +136,7 @@ export class DialogService {
       width: '70rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
-      hasBackdrop: false,
+      hasBackdrop: true,
       data: billingInfo,
     });
     bdialogRef.afterClosed().subscribe(result => {
