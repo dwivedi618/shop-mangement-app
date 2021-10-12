@@ -84,7 +84,8 @@
           ],
           "config": {
             "name": "Tridev",
-            "exe": "tridev.exe"
+            "exe": "shop-app",
+            "author": "Tridev"
           }
         }
       ]
