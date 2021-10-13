@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { InventoryHistory } from "./inventoryHistory";
 import { Product } from './product';
 
@@ -18,42 +18,36 @@ export class Inventory {
         @Column({ type: "float", nullable: true})
         pricePerItem: number;
 
-        @Column({ default: 0 })
+        @Column({ type: "double", default: 0 })
         totalStockPrice: number;
 
         @Column({ nullable: true })
         lastUpdate: Date;
 
-        @Column({
-                nullable: true
-        })
+        @Column({ nullable: true })
         description: string;
 
-        @Column({
-                nullable: true
-        })
-        code: string
+        @Column({ nullable: true })
+        code: string;
 
         @ManyToOne(type => InventoryHistory, inventoryHistory => inventoryHistory.inventory)
         history: InventoryHistory
 
-        @Column({
-                nullable: true
-        })
-        quantity: number
+        @Column({ nullable: true })
+        quantity: number;
 
-        @Column({
-                nullable: true
-        })
-        isAddingStock: boolean
+        @Column({ nullable: true })
+        isAddingStock: boolean;
 
-        @Column({
-                nullable: true
-        })
-        isSellByMeter: string
+        @Column({ nullable: true })
+        isSellByMeter: string;
 
-        @Column({
-                nullable: true
-        })
-        length: number
+        @Column({ nullable: true })
+        length: number;
+
+        @CreateDateColumn()
+        createdAt: Date;
+
+        @UpdateDateColumn()
+        updatedAt: Date;
 }

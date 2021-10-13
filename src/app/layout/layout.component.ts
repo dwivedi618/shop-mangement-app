@@ -19,7 +19,7 @@ export class LayoutComponent implements OnInit {
     { path : 'product',icon :'dry_cleaning', name : 'Product' },
     { path : 'customer',icon :'groups', name : 'Customer' },
     // { path : 'purchase',icon :'money', name : 'Purchase' },
-    { path : 'sell',icon :'sell', name : 'Sell' },
+    { path : 'sale',icon :'sale', name : 'sale' },
     { path : 'settings',icon :'settings', name : 'Settings' },
   ]  
   settingLinks = [

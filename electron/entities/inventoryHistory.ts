@@ -1,6 +1,6 @@
 
 
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { Inventory } from "./inventory";
 import { Product } from './product';
 
@@ -66,4 +66,10 @@ export class InventoryHistory {
 
     @OneToMany(type => Inventory, inventory => inventory.history)
     inventory: Inventory;
+
+    @CreateDateColumn()
+    createdAt: Date;
+
+    @UpdateDateColumn()
+    updatedAt: Date;
 }

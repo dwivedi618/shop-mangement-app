@@ -4,6 +4,7 @@ import { Inventory } from './entities/inventory'
 import { Sell } from './entities/sell'
 import { User } from './entities/user';
 import { Settings } from './entities/settings';
+import { SelledProduct } from './entities/selled-product';
 
 // const connection = getConnection();
 
@@ -89,7 +90,7 @@ export async function product( connection, action: string, data?: any ) {
             return await repository.update( id, data );
 
         case 'fetch':
-            return await repository.find( data );
+            return await repository.find( data);
 
         case 'delete':
             return await repository.remove( data );
@@ -104,11 +105,48 @@ export async function product( connection, action: string, data?: any ) {
 export async function sell(connection, action: string, data?: any) {
 
     const repository = connection.getRepository( Sell );
-    const sell = new Sell(); 
-
+    
     switch( action ) {
         case 'create':
-            return await repository.save( data );
+            const sell = new Sell();
+            const selledProducts: SelledProduct [] = [];
+            sell.selledProducts = selledProducts;
+            
+            //Setting keys of sell object.
+            sell.currentCustomer = data.currentCustomer;
+            sell.receiptNumber = data.receiptNumber;
+            sell.discountInPercent = data.discountInPercent;
+            sell.discountInRuppee = data.discountInRuppee;
+            sell.cartAmount = data.cartAmount;
+            sell.finalPayableAmount = data.finalPayableAmount;
+            sell.recievedAmount = data.recievedAmount;
+            sell.paymentMode = data.paymentMode;
+            
+            const items = data.items;
+            //Creating selled products and linking with sell object.
+            for(let i = 0; i < items.length; i++) {
+                const selledproduct = new SelledProduct();
+                selledproduct.sell = sell;   //Linking with sell object
+
+                selledproduct.brand = items[i].brand;
+                selledproduct.grade = items[i].grade;
+                selledproduct.make = items[i].make;
+                selledproduct.isSellByMeter = items[i].isSellByMeter;
+                selledproduct.productCode = items[i].productCode;
+                selledproduct.description = items[i].description;
+
+                selledproduct.item = await connection.getRepository(Product).find({ where: { id: items[i].id } } );
+                selledproduct.discountInPercent = items[i].discountInPercent;
+                selledproduct.discountInRuppee = items[i].discountInRuppee;
+                selledproduct.length = items[i].length;
+                selledproduct.price = items[i].price;
+                selledproduct.salePrice = items[i].salePrice;
+                selledproduct.size = items[i].size;
+                selledproduct.unit = items[i].unit;
+
+                selledProducts.push(selledproduct);
+            }
+            return await repository.save( sell );
             
         case 'update':
             const id = data.id;
@@ -116,7 +154,7 @@ export async function sell(connection, action: string, data?: any) {
             return await repository.update( id, data );
 
         case 'fetch':
-            return await repository.find( data );
+            return await repository.find({ relations: ["selledProducts"] });
 
         case 'delete':
             return await repository.remove( data );

@@ -23,7 +23,7 @@ export class ProductComponent implements OnInit {
     { path: 'chats', icon: 'dry_cleaning', name: 'Pants' },
     { path: 'calls', icon: 'inventory', name: 'Shirts' },
     { path: 'groups', icon: 'groups', name: 'Shoes' },
-    { path: 'sell', icon: 'sell', name: 'Shoots' },
+    { path: 'sale', icon: 'sale', name: 'Shoots' },
 
   ];
   items = [
@@ -36,7 +36,7 @@ export class ProductComponent implements OnInit {
       discountInRuppee: 5.97,
       price: 193.03,
       unit: 'piece',
-      isSellByMeter: 'true',
+      issaleByMeter: 'true',
       grade: 'A grade',
       description: 'Wine Purple Woven Kanjivaram Saree - Special Wedding Edition',
       code: '',

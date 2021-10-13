@@ -9,9 +9,9 @@ import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
 
 @Component({
-  selector: 'app-new-sell',
-  templateUrl: './new-sell.component.html',
-  styleUrls: ['./new-sell.component.scss'],
+  selector: 'app-new-sale',
+  templateUrl: './new-sale.component.html',
+  styleUrls: ['./new-sale.component.scss'],
 })
 export class NewSaleComponent implements OnInit {
   filterOption : any
@@ -22,7 +22,7 @@ export class NewSaleComponent implements OnInit {
     { path: 'chats', icon: 'dry_cleaning', name: 'Pants' },
     { path: 'calls', icon: 'inventory', name: 'Shirts' },
     { path: 'groups', icon: 'groups', name: 'Shoes' },
-    { path: 'sell', icon: 'sell', name: 'Shoots' },
+    { path: 'sale', icon: 'sale', name: 'Shoots' },
   
   ];
   items = [
@@ -35,7 +35,7 @@ export class NewSaleComponent implements OnInit {
       discountInRuppee : 5.79,
       price : 193.03,
       unit : 'piece',
-      isSellByMeter : 'true',
+      issaleByMeter : 'true',
       grade : 'A grade',
       description: 'Wine Purple Woven Kanjivaram Saree - Special Wedding Edition',
       code : '',
@@ -52,7 +52,7 @@ export class NewSaleComponent implements OnInit {
       discountInRuppee : 5.79,
       price : 193.03,
       unit : 'meter',
-      isSellByMeter : 'false',
+      issaleByMeter : 'false',
       grade : 'A grade',
       description: 'Wine Purple Woven Kanjivaram Saree - Special Wedding Edition',
       code : '',

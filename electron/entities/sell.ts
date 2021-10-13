@@ -1,6 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from "typeorm";
+import { 
+    Entity, 
+    PrimaryGeneratedColumn, 
+    Column, 
+    OneToOne, 
+    JoinColumn, 
+    UpdateDateColumn, 
+    CreateDateColumn, 
+    OneToMany 
+} from "typeorm";
 import { Customer } from "./customer";
-import { SellItem } from "./sell-item";
+import { SelledProduct } from "./selled-product";
 
 @Entity()
 export class Sell {
@@ -15,9 +24,10 @@ export class Sell {
     @Column()
     receiptNumber: string;
 
-    @OneToMany(type => SellItem, sellItem => sellItem.sell)
-    @JoinColumn()
-    sellItems: SellItem []
+    @OneToMany(type => SelledProduct, selledProducts => selledProducts.sell, {
+        cascade: true
+    })
+    selledProducts: SelledProduct [];
 
     @Column()
     discountInPercent: number;
@@ -37,9 +47,9 @@ export class Sell {
     @Column()
     paymentMode: number;
 
-    @Column()
+    @CreateDateColumn()
     date: Date;
 
-    @Column()
+    @UpdateDateColumn()
     paymentDate: Date;
 }
