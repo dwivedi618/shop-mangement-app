@@ -42,8 +42,10 @@ export async function inventory(connection, action: string, data?: any) {
             
         case 'update':
             const id = data.id;
+            const inventory = await repository.find({ where: {id : id} })
             delete data.id;
-            return await repository.update( id, data );
+            Object.keys(data).forEach(key => inventory[key] = data[key]);
+            return await repository.update( id, inventory );
 
         case 'fetch':
             return await repository.find( { relations: ["item"] } );
