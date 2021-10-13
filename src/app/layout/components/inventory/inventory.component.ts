@@ -21,7 +21,7 @@ export class InventoryComponent implements OnInit {
     { path: 'chats', icon: 'dry_cleaning', name: 'Pants' },
     { path: 'calls', icon: 'inventory', name: 'Shirts' },
     { path: 'groups', icon: 'groups', name: 'Shoes' },
-    { path: 'sale', icon: 'sell', name: 'Shoots' },
+    { path: 'sell', icon: 'sell', name: 'Shoots' },
 
   ];
   items = [

@@ -9,9 +9,9 @@ import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
 
 @Component({
-  selector: 'app-new-sale',
-  templateUrl: './new-sale.component.html',
-  styleUrls: ['./new-sale.component.scss'],
+  selector: 'app-new-sell',
+  templateUrl: './new-sell.component.html',
+  styleUrls: ['./new-sell.component.scss'],
 })
 export class NewSaleComponent implements OnInit {
   filterOption : any
@@ -22,7 +22,7 @@ export class NewSaleComponent implements OnInit {
     { path: 'chats', icon: 'dry_cleaning', name: 'Pants' },
     { path: 'calls', icon: 'inventory', name: 'Shirts' },
     { path: 'groups', icon: 'groups', name: 'Shoes' },
-    { path: 'sale', icon: 'sell', name: 'Shoots' },
+    { path: 'sell', icon: 'sell', name: 'Shoots' },
   
   ];
   items = [

@@ -2,8 +2,8 @@ import { LoginComponent } from './layout/components/login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NewSaleComponent } from './layout/components/new-sale/new-sale.component';
-import { SaleListComponent } from './layout/components/sale-list/sale-list.component';
+import { NewSaleComponent } from './layout/components/new-sell/new-sell.component';
+import { SaleListComponent } from './layout/components/sell-list/sell-list.component';
 import { CartComponent } from './layout/components/cart/cart.component';
 import { CustomerListComponent } from './layout/components/customer-list/customer-list.component';
 import { InventoryComponent } from './layout/components/inventory/inventory.component';
@@ -27,7 +27,7 @@ const routes: Routes = [
       { path: 'inventory', component: InventoryComponent, data: { breadcrumb: 'Inventory', icon: 'inventory' } },
       { path: 'product', component: ProductComponent, data: { breadcrumb: 'Product', icon: 'dry_cleaning' } },
       { path: 'customer', component: CustomerListComponent, data: { breadcrumb: 'Customer', icon: 'groups' } },
-      { path: 'sale', component: SaleListComponent, data: { breadcrumb: 'Sale', icon: 'sell' } },
+      { path: 'sell', component: SaleListComponent, data: { breadcrumb: 'Sell', icon: 'sell' } },
       {
         path: 'neworder', component: NewOrderlayoutComponent, data: { breadcrumb: 'New Order', icon: 'add', },
         children: [

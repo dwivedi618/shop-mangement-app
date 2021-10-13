@@ -3,12 +3,12 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { SaleListDataSource, SaleListItem } from './sale-list-datasource';
+import { SaleListDataSource, SaleListItem } from './sell-list-datasource';
 
 @Component({
-  selector: 'app-sale-list',
-  templateUrl: './sale-list.component.html',
-  styleUrls: ['./sale-list.component.scss']
+  selector: 'app-sell-list',
+  templateUrl: './sell-list.component.html',
+  styleUrls: ['./sell-list.component.scss']
 })
 export class SaleListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

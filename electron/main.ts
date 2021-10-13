@@ -4,7 +4,7 @@ import { app, BrowserWindow, ipcMain, screen, Menu} from "electron";
 import {createConnection, Connection, getConnection, Db } from "typeorm";
 import { DbConfig }  from './config/db.conf';
 import { AppConfig } from './config/app.conf';
-import { customer, product, inventory, sale, settings, user } from './db';
+import { customer, product, inventory, sell, settings, user } from './db';
 
 let win: BrowserWindow;
 console.log(AppConfig.preloadPath);
@@ -94,8 +94,8 @@ ipcMain.handle('database', async (event, arg) => {
             case 'inventory':
                 return await inventory(connection, action, data);
 
-            case 'sale':
-                return await sale(connection, action, data);
+            case 'sell':
+                return await sell(connection, action, data);
             case 'user':
                 return await user(connection, action, data);
 

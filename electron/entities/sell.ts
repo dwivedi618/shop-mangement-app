@@ -1,25 +1,23 @@
-import { type } from "os";
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import { Customer } from "./customer";
-import { Product } from "./product";
+import { SellItem } from "./sell-item";
 
 @Entity()
-export class Sale {
+export class Sell {
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(type => Product)
-    @JoinColumn()
-    item: Product;   //Foriegin key references to product
-
     @OneToOne(type => Customer)
-    
     @JoinColumn()
     currentCustomer : Customer;   //Foriegin key references to customer
 
     @Column()
     receiptNumber: string;
+
+    @OneToMany(type => SellItem, sellItem => sellItem.sell)
+    @JoinColumn()
+    sellItems: SellItem []
 
     @Column()
     discountInPercent: number;
@@ -28,11 +26,20 @@ export class Sale {
     discountInRuppee: number;
 
     @Column()
-    priceAfterDiscount: number;
-
-    @Column()
     cartAmount: number;
 
     @Column()
     finalPayableAmount: number;
+
+    @Column()
+    recievedAmount: number;
+
+    @Column()
+    paymentMode: number;
+
+    @Column()
+    date: Date;
+
+    @Column()
+    paymentDate: Date;
 }

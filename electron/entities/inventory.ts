@@ -3,35 +3,25 @@ import { InventoryHistory } from "./inventoryHistory";
 import { Product } from './product';
 
 @Entity()
-export class Inventory{
+export class Inventory {
 
         @PrimaryGeneratedColumn()
         id: number;
 
         @OneToOne(type => Product, product => product.inventory)
-        
-
         @JoinColumn()
         item: Product;       //foriegn key references to product
 
-        @Column({
-                nullable: true
-        })
+        @Column({ nullable: true })
         itemInStock: number;
 
-        @Column({
-                nullable: true
-        })
+        @Column({ type: "float", nullable: true})
         pricePerItem: number;
 
-        @Column({
-                default: 0
-        })
+        @Column({ default: 0 })
         totalStockPrice: number;
 
-        @Column({
-                nullable: true
-        })
+        @Column({ nullable: true })
         lastUpdate: Date;
 
         @Column({
@@ -42,28 +32,28 @@ export class Inventory{
         @Column({
                 nullable: true
         })
-        code : string
+        code: string
 
         @ManyToOne(type => InventoryHistory, inventoryHistory => inventoryHistory.inventory)
-        history : InventoryHistory
+        history: InventoryHistory
 
         @Column({
-                nullable:true
+                nullable: true
         })
         quantity: number
 
         @Column({
-                nullable:true
+                nullable: true
         })
-        isAddingStock : boolean
-      
-        @Column({
-                nullable:true
-        })
-        isSellByMeter : string
+        isAddingStock: boolean
 
         @Column({
-                nullable:true
+                nullable: true
         })
-        length : number
+        isSellByMeter: string
+
+        @Column({
+                nullable: true
+        })
+        length: number
 }

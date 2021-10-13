@@ -1,26 +1,26 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
-export class Customer{
+export class Customer {
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @Column({
-        nullable: true
+  @Column({
+    nullable: true
   })
-    photo: string;
+  photo: string;
 
-    @Column({
-        nullable: true
+  @Column({
+    nullable: true
   })
-    phone: string;
+  phone: string;
 
-    @Column({
-        nullable: true
+  @Column({
+    nullable: true
   })
-    address: string;
+  address: string;
 }

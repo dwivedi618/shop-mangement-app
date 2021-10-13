@@ -1,7 +1,7 @@
 import { Customer } from './entities/customer'
 import { Product } from './entities/product'
 import { Inventory } from './entities/inventory'
-import { Sale } from './entities/sale'
+import { Sell } from './entities/sell'
 import { User } from './entities/user';
 import { Settings } from './entities/settings';
 
@@ -101,10 +101,10 @@ export async function product( connection, action: string, data?: any ) {
 }
 
 
-export async function sale(connection, action: string, data?: any) {
+export async function sell(connection, action: string, data?: any) {
 
-    const repository = connection.getRepository( Sale );
-    const sale = new Sale(); 
+    const repository = connection.getRepository( Sell );
+    const sell = new Sell(); 
 
     switch( action ) {
         case 'create':
