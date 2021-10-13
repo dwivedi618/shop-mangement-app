@@ -59,10 +59,10 @@ export class SelledProduct {
     @Column({ nullable: true })
     make: string;
 
-    @Column({ nullable: true })
-    length: string;
-
     @Column({ type: "float", nullable: true })
-    size: number;
+    length: number;
+
+    @Column({ nullable: true })
+    size: string;
 
 }

@@ -26,7 +26,7 @@ export class Product {
       price: number;
 
       @Column({ nullable: true })
-      unit: number;
+      unit: string;
 
       @Column({ nullable: true })
       isSellByMeter: boolean;
@@ -46,8 +46,8 @@ export class Product {
       @Column({ type: "float", nullable: true })
       length: number;
 
-      @Column({ type: "float", nullable: true })
-      size: number;
+      @Column({ nullable: true })
+      size: string;
 
       @Column({ type: "longtext", nullable: true })
       file: string;

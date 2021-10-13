@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { rejects } from 'assert';
 import { IPCService } from 'src/app/services/ipc.service';
+import { UtilityService } from 'src/app/services/utility.service';
 
 
 @Component({
@@ -13,7 +14,8 @@ export class PhotoUploadComponent implements OnInit {
   onImageChange = new EventEmitter
 
   constructor( 
-    private ipcService: IPCService
+    private ipcService: IPCService,
+    private utliltService : UtilityService
    ) { }
 
   ngOnInit(): void {
@@ -34,13 +36,19 @@ export class PhotoUploadComponent implements OnInit {
     }
     return null;
   }
-  onImagePicked(event: Event) {
+  async onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
+    console.log("selected file",file);
+
+    // let fileBuffer = Buffer.from(file)
+    // this.utliltService.compress(fileBuffer , 150,150)
     this.getBase64(file).then((data : string)=>{
       console.log("after image ---mini uploadeer",data);
+
       this.onImageChange.emit(data);
     })
   }
+  
   getBase64(file) {
     
     return new Promise(resolve=>{

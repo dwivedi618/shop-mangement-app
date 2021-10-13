@@ -115,6 +115,10 @@ export class AddUpdateProductComponent implements OnInit {
     ).catch(err => { console.log(err) });
   }
 
+  onImageChange(image){
+    this.productForm.patchValue({ file : image})
+  }
+
   
 }
 

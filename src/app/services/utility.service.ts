@@ -1,7 +1,7 @@
 // import imagemin from 'imagemin';
 // import imageminJpegtran from 'imagemin-jpegtran';
 // import imageminPngquant from 'imagemin-pngquant';
-import sharp from 'sharp';
+// import sharp from 'sharp';
 
 export class UtilityService {
 
@@ -17,7 +17,7 @@ export class UtilityService {
     //     });
     // }
 
-    async compress(data: Buffer, heigth: number, width: number){
-        return await sharp.resize(heigth, width).toBuffer();
-    }
+    // async compress(data: any, heigth: number, width: number){
+    //     return await sharp.resize(heigth, width).toBuffer();
+    // }
 }
