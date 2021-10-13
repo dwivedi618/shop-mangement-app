@@ -14,17 +14,12 @@ export class Sale {
     item: Product;   //Foriegin key references to product
 
     @OneToOne(type => Customer)
+    
     @JoinColumn()
     currentCustomer : Customer;   //Foriegin key references to customer
 
     @Column()
-    name: string;
-
-    @Column()
-    quantity: number;
-
-    @Column()
-    price: number;
+    receiptNumber: string;
 
     @Column()
     discountInPercent: number;

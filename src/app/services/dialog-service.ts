@@ -9,6 +9,7 @@ import { ProductItemDetailsComponent } from '../layout/components/product-item-d
 import { CustomerDetailsComponent } from '../layout/components/customer-details/customer-details.component';
 import { AddUpdateProductComponent } from '../layout/components/add-update-product/add-update-product.component';
 import { BillPreviewComponent } from '../layout/components/bill-preview/bill-preview.component';
+import { ChangePasswordComponent } from '../layout/components/change-password/change-password.component';
 
 @Injectable({
   providedIn: 'root'
@@ -138,6 +139,22 @@ export class DialogService {
       maxHeight: '100vh',
       hasBackdrop: true,
       data: billingInfo,
+    });
+    bdialogRef.afterClosed().subscribe(result => {
+      afterCloseResult.next(result)
+    })
+    return afterCloseResult.asObservable();
+  }
+
+  openChangePassword(credential) {
+    let afterCloseResult = new Subject;
+    const data = {};
+    const bdialogRef = this.dialog.open(ChangePasswordComponent, {
+      width: '30rem',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: true,
+      data: credential,
     });
     bdialogRef.afterClosed().subscribe(result => {
       afterCloseResult.next(result)

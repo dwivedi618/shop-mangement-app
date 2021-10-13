@@ -15,6 +15,7 @@ import { GeneralSettingsComponent } from './layout/components/general-settings/g
 import { SettingsLayoutComponent } from './layout/components/settings-layout/settings-layout.component';
 import { AppearanceSettingsComponent } from './layout/components/appearance-settings/appearance-settings.component';
 import { AuthGuard } from './auth.guard';
+import { AccountSettingsComponent } from './layout/components/account-settings/account-settings.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -42,6 +43,8 @@ const routes: Routes = [
             { path: '', component: GeneralSettingsComponent, data: { breadcrumb: 'General Settings', icon: 'settings', } },         
             { path: 'generalsettings', component: GeneralSettingsComponent, data: { breadcrumb: 'General Settings', icon: 'settings', } },
             { path: 'appearancesettings', component: AppearanceSettingsComponent, data: { breadcrumb: 'Appearance', icon: 'settings', } },
+            { path: 'accountsettings', component: AccountSettingsComponent, data: { breadcrumb: 'Accounts', icon: 'admin_panel_settings', } },
+
 
           ]
         },

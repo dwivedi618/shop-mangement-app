@@ -48,7 +48,7 @@ async function createWindow() {
     win.loadURL(AppConfig.indexURL);
 
 
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
     Menu.setApplicationMenu(null);
     win.maximize();
 
