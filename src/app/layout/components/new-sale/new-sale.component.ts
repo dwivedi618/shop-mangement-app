@@ -28,7 +28,7 @@ export class NewSaleComponent implements OnInit {
     { path: 'chats', icon: 'dry_cleaning', name: 'Pants' },
     { path: 'calls', icon: 'inventory', name: 'Shirts' },
     { path: 'groups', icon: 'groups', name: 'Shoes' },
-    { path: 'sale', icon: 'sell', name: 'Shoots' },
+    { path: 'sale', icon: 'sale', name: 'Shoots' },
   
   ];
   items = [
@@ -41,7 +41,7 @@ export class NewSaleComponent implements OnInit {
       discountInRuppee : 5.79,
       price : 193.03,
       unit : 'piece',
-      isSellByMeter : 'true',
+      issaleByMeter : 'true',
       grade : 'A grade',
       description: 'Wine Purple Woven Kanjivaram Saree - Special Wedding Edition',
       code : '',
@@ -58,7 +58,7 @@ export class NewSaleComponent implements OnInit {
       discountInRuppee : 5.79,
       price : 193.03,
       unit : 'meter',
-      isSellByMeter : 'false',
+      issaleByMeter : 'false',
       grade : 'A grade',
       description: 'Wine Purple Woven Kanjivaram Saree - Special Wedding Edition',
       code : '',

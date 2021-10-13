@@ -27,7 +27,7 @@ const routes: Routes = [
       { path: 'inventory', component: InventoryComponent, data: { breadcrumb: 'Inventory', icon: 'inventory' } },
       { path: 'product', component: ProductComponent, data: { breadcrumb: 'Product', icon: 'dry_cleaning' } },
       { path: 'customer', component: CustomerListComponent, data: { breadcrumb: 'Customer', icon: 'groups' } },
-      { path: 'sale', component: SaleListComponent, data: { breadcrumb: 'Sale', icon: 'sell' } },
+      { path: 'sale', component: SaleListComponent, data: { breadcrumb: 'sale', icon: 'sale' } },
       {
         path: 'neworder', component: NewOrderlayoutComponent, data: { breadcrumb: 'New Order', icon: 'add', },
         children: [

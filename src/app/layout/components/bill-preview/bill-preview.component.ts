@@ -68,7 +68,7 @@ export class BillPreviewComponent implements OnInit {
     this.isSavingOrder = true;
     this.alertService.alertActionDialog(Constant.ORDER_SUBMIT_WARNING_MSG,'Yes , Save').subscribe(data=>{
       console.log("confirmation",data);
-      this.ipcService.database('sale','create',this.localData).then(data=>{
+      this.ipcService.database('sell','create',this.localData).then(data=>{
       console.log("order saved",data);
         this.isSavingOrder = false;
       })
