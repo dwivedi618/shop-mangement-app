@@ -1,3 +1,4 @@
+import { type } from "os";
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
@@ -9,7 +10,7 @@ export class Customer {
   @Column()
   name: string;
 
-  @Column({ nullable: true })
+  @Column({type: "longtext", nullable: true })
   photo: string;
 
   @Column({ nullable: true })
