@@ -50,6 +50,7 @@ import { MatSnackBarRef } from '@angular/material/snack-bar';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AccountSettingsComponent } from './layout/components/account-settings/account-settings.component';
 import { ChangePasswordComponent } from './layout/components/change-password/change-password.component';
+import { DataMissingInstructionComponent } from './layout/components/data-missing-instruction/data-missing-instruction.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { ChangePasswordComponent } from './layout/components/change-password/cha
     AlertWithActionComponent,
     AccountSettingsComponent,
     ChangePasswordComponent,
+    DataMissingInstructionComponent,
 
   ],
   imports: [

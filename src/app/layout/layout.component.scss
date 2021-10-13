@@ -26,6 +26,7 @@ header{
   
   .sidenav {
     width: var(--sidenav-sm-width );
+    // background: transparent!important;
   }
   .column-nav-layout{
     min-height: calc(100vh - 3rem);display:flex;flex-direction: column; justify-content: flex-start;align-self: start;

@@ -1,1 +1,32 @@
-<p>dashboard works!</p>
+<section class="login-section inner_banner layout">
+    <div class="">
+        <div class="layout">
+
+            <div class="clock">
+                <div class="layout">
+                    <div class="content">
+                        <p class='days'>
+                            <span *ngFor="let day of daysofweek;let i=index" [style.color]="++i == daytoday ? 'white' : ''">{{ day | uppercase}}</span>&nbsp;
+                        <br>
+                        <p class='text'><span id='hours'></span>:<span id='min'></span>:<span
+                                id='sec'></span>&nbsp;&nbsp;<span id='time'></span></p>
+                        <p class="text-center">
+                            {{today | date}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="login-help">
+        <button mat-mini-fab color="acct" routerLink="/neworder">
+            <mat-icon>add</mat-icon>
+        </button>
+        <!-- <mat-menu #loginHelp="matMenu" class="layout">
+            <a mat-menu-item>
+                <mat-icon mat-list-icon>admin_panel_settings</mat-icon>
+                <span>Switch to Admin</span>
+            </a>
+        </mat-menu> -->
+    </div>
+</section>

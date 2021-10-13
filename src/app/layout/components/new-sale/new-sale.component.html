@@ -99,6 +99,7 @@
             </mat-menu>
         </mat-toolbar>
         <app-item [(data)]="items" [(cartItems)]="cart" [(view)]="isListView" (shareCart)="onCartData($event)" ></app-item>
+        <app-data-missing-instruction *ngIf="!items?.length" [(instructions)]="newOrderInstruction"></app-data-missing-instruction>
         <mat-toolbar *ngIf="cart?.length"
         class="mat-elevation-z16 " 
         style="position: absolute;bottom: 0;z-index: 15;">                     

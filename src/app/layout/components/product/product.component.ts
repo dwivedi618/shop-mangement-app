@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DialogService } from 'src/app/services/dialog-service';
 import { IPCService } from 'src/app/services/ipc.service';
+import { Constant } from '../../constant/constant';
 import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-customer.component';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
@@ -15,6 +16,12 @@ import { ServiceListComponent } from '../service-list/service-list.component';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
+  missingDataInstruction = {
+    text1 : Constant.PRODUCT_MISSING_INS1,
+    text2 : Constant.PRODUCT_MISSING_INS2,
+    action : '../product'
+  }
+  
   filterOption: any
   value: any;
   isListView = false;

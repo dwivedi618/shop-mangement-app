@@ -14,6 +14,12 @@ import { ServiceListComponent } from '../service-list/service-list.component';
   styleUrls: ['./new-sale.component.scss'],
 })
 export class NewSaleComponent implements OnInit {
+  newOrderInstruction = {
+    text1 : Constant.PRODUCT_MISSING_INS1,
+    text2 : Constant.PRODUCT_MISSING_INS2,
+    action : '../product'
+  }
+  
   filterOption : any
   value: any;
   isListView = false;
