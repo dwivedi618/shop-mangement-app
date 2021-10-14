@@ -83,7 +83,7 @@ alertWithAction(message ,action ) : Observable<any>{
 }
 
 
-alertActionDialog(message ,action): Observable<any> {
+alertActionDialog(alertTitle , message ,action): Observable<any> {
   let afterCloseResult = new Subject;
   const dialogRef = this.dialog.open(AlertWithActionComponent, {
     width: '20rem',
@@ -91,12 +91,15 @@ alertActionDialog(message ,action): Observable<any> {
     maxHeight: '100vh',
     disableClose : true,
     hasBackdrop: true,
-    data: { message , action },
+    data: {alertTitle, message , action },
   });
   dialogRef.afterClosed().subscribe(result => {
     afterCloseResult.next(result)
   })
   return afterCloseResult.asObservable();
 }
+
+
+
   
 }

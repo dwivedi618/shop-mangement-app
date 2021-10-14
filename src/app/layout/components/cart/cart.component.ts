@@ -6,6 +6,7 @@ import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
 import { DialogService } from 'src/app/services/dialog-service';
 import { Customer } from '../../models/customer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -22,7 +23,7 @@ export class CartComponent implements OnInit {
   discountInPercent: number;
   cartAmount: number;
   finalPayableAmount: number
-  constructor(private dialog: MatDialog, private dialogService: DialogService) { }
+  constructor(private dialog: MatDialog, private dialogService: DialogService,private router : Router) { }
   ngOnInit(): void {
     console.log("NG ON IN IT TTTTTTTTTTTTTTT");
 
@@ -139,6 +140,7 @@ export class CartComponent implements OnInit {
     billingInfo.finalPayableAmount = await this.getFinalPayableAmount();
     this.dialogService.openBillPreview(billingInfo).subscribe(data => {
       console.log("bill Preview Closed", data, this.currentCustomer);
+      if(data == true) { this.router.navigate(['']) }
     })
   }
 }

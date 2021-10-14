@@ -41,6 +41,7 @@ export class BillPreviewComponent implements OnInit {
   dueAmount : number;
   isLoading: boolean;
   isSavingOrder : boolean;
+  msg: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -51,6 +52,9 @@ export class BillPreviewComponent implements OnInit {
     ) {
       this.localData = data || null;
       this.action = this.localData?.action || 'new';
+      this.receiptNumber =  this.localData?.receiptNumber || `RCN${Date.now()}` ;
+      if(this.localData?.id) { this.action = "update" }
+      else { this.action = 'create' }
       console.log("billing info",data,this.localData)
      }
 
@@ -68,20 +72,29 @@ export class BillPreviewComponent implements OnInit {
   }
 
   onApply(){
+    if(this.action == 'update') {
+      this.alertService.alertActionDialog('Notification','Update not available','Okay').subscribe(data=>{
+        this.dialogRef.close(true);
+      })
+      return
+    }
     this.isSavingOrder = true;
-    this.alertService.alertActionDialog(Constant.ORDER_SUBMIT_WARNING_MSG,'Yes , Save')
+    this.alertService.alertActionDialog('Are you sure?',Constant.ORDER_SUBMIT_WARNING_MSG,'Yes , Save')
     .subscribe( data => {
       console.log("confirmation",data);
       let sell = this.localData;
       let dateNow = Date.now()
       sell.receivedAmount = this.receivedAmount || null;
       sell.paymentMode = this.paymentMode || null;
-      sell.receiptNumber = `RCN${dateNow}`;
+      sell.receiptNumber = this.receiptNumber;
 
       console.log("before save sell",sell)
-      this.ipcService.database('sell', 'create', this.localData)
+      this.ipcService.database('sell', this.action, this.localData)
       .then(data=>{
         console.log("order saved",data);
+        this.alertService.alertActionDialog('Saved successfully',Constant.ORDER_SAVED_MSG,'Go to Home').subscribe((data : Boolean)=>{
+          if(data) { this.dialogRef.close(true)}
+        })
         this.isSavingOrder = false;
       })
       .catch(err=>{ this.isSavingOrder = false;})

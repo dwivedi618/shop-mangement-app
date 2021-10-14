@@ -113,7 +113,7 @@ export class NewSaleComponent implements OnInit {
     this.router.navigate(['neworder/cart']);
   }
   onResetOrder(){
-    this.alertService.alertActionDialog(Constant.RESET_ORDER_WARNING_MSG,'Reset').subscribe(action =>{
+    this.alertService.alertActionDialog('Are you sure?',Constant.RESET_ORDER_WARNING_MSG,'Reset').subscribe(action =>{
       console.log("action----->",action)
       if(action == true){
         localStorage.removeItem('currentCartDD');

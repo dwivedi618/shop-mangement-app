@@ -40,10 +40,10 @@
         <div class="list-view-details">
           <mat-list dense>
             <mat-list-item class="text-wrap-sm">
-              <h3 matLine> {{item?.name}} </h3>
+              <h3 matLine> {{item?.receiptNumber | uppercase }} </h3>
               <p matLine class="" style="color: var(--light);">
-                <span> {{item?.code}} </span>
-                <span class="">{{item?.description}} </span>
+                <span> {{item?.paymentMode | uppercase}} </span>
+                <span class="">{{item?.receivedAmount | currency:'INR'}} </span>
               </p>
             </mat-list-item>
           </mat-list>
@@ -52,18 +52,22 @@
         <div class="price-column">
           <mat-list dense>
             <mat-list-item>
-              <span matLine style="color:var(--light)">Discount</span>
-              <h3 matLine style="font-weight: 600;"> {{item?.discountInPercent || '0'}}%</h3>
+              <span matLine style="color:var(--light)">Customer</span>
+              
+              <h3 matLine style="font-weight: 600;"> 
+                <span class="text-light">{{item?.customer?.name | titlecase}}</span> 
+                <span matLine class="">{{(item?.receivedAmount == item?.finalPayableAmount) ? 'Paid' : 'Due' }}</span>
+              </h3>
             </mat-list-item>
           </mat-list>
         </div>
         <div class="price-column">
           <mat-list dense>
             <mat-list-item>
-              <span matLine style="color:var(--light)">Sell Price</span>
+              <span matLine style="color:var(--light)">Date</span>
               <h3 matLine style="font-weight: 600;"> 
-                <del class="text-light">{{item?.price | currency : 'INR'}}</del> 
-                <span matLine class="">{{(item?.price - (item?.price*item?.discountInPercent)/100) | currency : 'INR'}}</span>
+                <span class="text-light">{{item?.date | date : 'medium'}}</span> 
+                <!-- <span matLine class="">{{(item?.price - (item?.price*item?.discountInPercent)/100) | currency : 'INR'}}</span> -->
               </h3>
             </mat-list-item>
           </mat-list>

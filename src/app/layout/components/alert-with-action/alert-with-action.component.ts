@@ -11,6 +11,8 @@ import { MatSnackBar, MatSnackBarRef, MAT_SNACK_BAR_DATA } from '@angular/materi
 export class AlertWithActionComponent implements OnInit {
   local_data: string;
   message: any;
+  alertTitle: any;
+
   status: number;
   action: any;
 
@@ -23,8 +25,10 @@ export class AlertWithActionComponent implements OnInit {
       if(data){
         this.message = data['message'];
         this.action = data['action'] ;
+        this.alertTitle = data['alertTitle']  ;
+
       }
-      console.log(data,this.message,this.action);
+      console.log(data,this.alertTitle,this.message,this.action);
 
     }
 

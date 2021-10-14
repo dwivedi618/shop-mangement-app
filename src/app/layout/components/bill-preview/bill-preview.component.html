@@ -92,11 +92,11 @@
                             </thead>
                             <tbody>
                                 <tr align="center" *ngFor="let item of localData?.cartItem">
-                                    <td align="left">{{item?.item?.grade || item?.item?.make }}</td>
+                                    <td align="left">{{item?.item?.grade || item?.item?.make || item.name }}</td>
                                     <td>{{item?.quantity }}</td>
-                                    <td align="right">{{item?.item?.price | currency:'INR'}}</td>
+                                    <td align="right">{{(item?.item?.price || item?.price) | currency:'INR'}}</td>
                                     <td>- {{item?.discountInRuppee | currency:'INR'}}</td>
-                                    <td align="right">{{ item?.quantity * item.priceAfterDiscount | currency:'INR'}}
+                                    <td align="right">{{ (item?.quantity * (item?.price - item?.discountInRuppee)) | currency:'INR'}}
                                     </td>
                                 </tr>
                             </tbody>
@@ -179,7 +179,7 @@
                         </table>
                         
                         <div  style="position: absolute;bottom: 0rem;width: 100%;">
-                            <button class="w-100 bg-green" mat-button (click)="onApply()">{{isSavingOrder? 'please wait...' : 'Apply'}}</button>
+                            <button class="w-100 bg-green" mat-button (click)="onApply()" >{{isSavingOrder? 'please wait...' : 'Apply'}}</button>
                         </div>
 
                     </div>

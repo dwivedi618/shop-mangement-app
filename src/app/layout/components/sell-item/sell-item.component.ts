@@ -73,7 +73,8 @@ export class SellItemComponent implements OnInit,OnChanges {
 
   openAddUpdateProduct(selectedItem){
     selectedItem.action = 'update'
-    this.dialogService.addUpdateProduct(selectedItem).subscribe(result=>{
+    selectedItem.cartItem = selectedItem.selledProducts
+    this.dialogService.openBillPreview(selectedItem).subscribe(result=>{
       this.onDialogClose.emit(result)
     })
   }
