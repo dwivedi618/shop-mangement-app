@@ -148,7 +148,7 @@ export class DialogService {
 
   openChangePassword(credential) {
     let afterCloseResult = new Subject;
-    const data = {};
+
     const bdialogRef = this.dialog.open(ChangePasswordComponent, {
       width: '30rem',
       maxWidth: '100vw',

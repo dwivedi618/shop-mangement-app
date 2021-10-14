@@ -34,7 +34,7 @@ export class AddUpdateProductComponent implements OnInit {
     private fb: FormBuilder,
     private ipcService : IPCService,
     private dialogRef : MatDialogRef<AddUpdateProductComponent>,
-    @Inject(MAT_DIALOG_DATA) data : productDetails
+    @Inject(MAT_DIALOG_DATA) data : Product
     ) {
       this.localData = data || null;
       this.action = this.localData?.action || 'add';

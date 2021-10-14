@@ -8,16 +8,18 @@ import { DialogService } from 'src/app/services/dialog-service';
 })
 export class AccountSettingsComponent implements OnInit {
 
+  psmUser = <any>{}
   constructor(
     private dialogService : DialogService
   ) { }
 
   ngOnInit(): void {
-    
+    this.psmUser = JSON.parse(sessionStorage.getItem('psmUser'))
+    console.log("psmUser",this.psmUser)
   }
 
   onClickChangePassword(){
-    this.dialogService.openChangePassword({}).subscribe()
+    this.dialogService.openChangePassword(this.psmUser).subscribe()
   }
 
   onLock(){
