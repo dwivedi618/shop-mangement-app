@@ -12,7 +12,7 @@ export class Inventory {
         @JoinColumn()
         item: Product;       //foriegn key references to product
 
-        @Column({ nullable: true })
+        @Column({ default: 0 })
         itemInStock: number;
 
         @Column({ type: "float", nullable: true})
@@ -32,9 +32,6 @@ export class Inventory {
 
         @ManyToOne(type => InventoryHistory, inventoryHistory => inventoryHistory.inventory)
         history: InventoryHistory
-
-        @Column({ nullable: true })
-        quantity: number;
 
         @Column({ nullable: true })
         isAddingStock: boolean;
