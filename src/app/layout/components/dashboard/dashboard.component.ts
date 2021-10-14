@@ -32,14 +32,14 @@ console.log(this.daytoday)
     let year = today.getFullYear();
 
     // adding leading zeros to them
-    h = h<10? 0+h: h;
-    m = m<10? 0+m: m;
-    s = s<10? 0+s: s;
+    let hh = h<10? ('0' + h): h;
+    let mm = m<10? ('0' + m): m;
+    let ss = s<10? ('0' + s): s;
 
     // writing it down in the document
-    document.getElementById('hours').innerHTML = h as unknown as string;
-    document.getElementById('min').innerHTML = m as unknown as string;
-    document.getElementById('sec').innerHTML = s as unknown as string;
+    document.getElementById('hours').innerHTML = hh as unknown as string;
+    document.getElementById('min').innerHTML = mm as unknown as string;
+    document.getElementById('sec').innerHTML = ss as unknown as string;
     document.getElementById('time').innerHTML = day;
   
 }

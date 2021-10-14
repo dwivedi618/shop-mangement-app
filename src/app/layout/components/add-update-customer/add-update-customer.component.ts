@@ -44,7 +44,7 @@ export class AddUpdateCustomerComponent implements OnInit {
     this.customerForm.patchValue({name : this.localData?.name});
     this.customerForm.patchValue({phone : this.localData?.phone});
     this.customerForm.patchValue({address : this.localData?.address});
-    this.customerForm.patchValue({phone : this.localData?.photo});
+    this.customerForm.patchValue({photo : this.localData?.photo});
 
 
   }
@@ -64,7 +64,7 @@ export class AddUpdateCustomerComponent implements OnInit {
     console.log("customer",data)
     //api call to save customer 
     this.ipcService.database("customer",action ,data).then(data=>{
-      this.customerForm.patchValue({id : data?.id});
+      this.customerForm.patchValue({id : data?.id });
       console.log("after ",action,data);
       console.log("after customer form ",action,this.customerForm.value);
       this.dialogRef.close(data);

@@ -33,6 +33,8 @@
                     </mat-list>
                 </div>
             </div>
+            <button *ngIf="currentCustomer?.name" mat-button (click)="onUpdateCustomer()" class="w-100 "><small>Change</small></button>
+
 
 
             <mat-accordion class="shadow" style="position: relative;width: inherit;">

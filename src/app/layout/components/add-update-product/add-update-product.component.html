@@ -17,7 +17,7 @@
                 <div class="d-flex" style="align-items: flex-start;">
 
                     <div style="margin: 1rem;" class="d-flex flex-column">
-                        <app-photo-upload (onImageChange)="onImageChange($event)"></app-photo-upload>
+                        <app-photo-upload [(image)]="productForm.value.file"  (onImageChange)="onImageChange($event)"></app-photo-upload>
                     </div>
                     <form [formGroup]="productForm" class="w-100 d-flex" style="align-items: flex-start;">
                         <mat-list dense class="w-100 ">

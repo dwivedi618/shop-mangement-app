@@ -19,12 +19,12 @@ export class LayoutComponent implements OnInit {
     { path : 'product',icon :'dry_cleaning', name : 'Product' },
     { path : 'customer',icon :'groups', name : 'Customer' },
     // { path : 'purchase',icon :'money', name : 'Purchase' },
-    { path : 'sale',icon :'sale', name : 'sale' },
+    { path : 'sale',icon :'sell', name : 'sale' },
     { path : 'settings',icon :'settings', name : 'Settings' },
   ]  
   settingLinks = [
-    // { path : 'settings/generalsettings',icon :'settings_applications', name : 'General' },
-    // { path : 'settings/appearancesettings',icon :'grid_view', name : 'Appearance' },
+    { path : 'settings/generalsettings',icon :'settings_applications', name : 'General' },
+    { path : 'settings/appearancesettings',icon :'grid_view', name : 'Appearance' },
     // { path : 'settings/systemfilter',icon :'settings_input_composite', name : 'System Filter' },
     { path : 'settings/accountsettings',icon :'admin_panel_settings', name : 'Account' },
   ]  

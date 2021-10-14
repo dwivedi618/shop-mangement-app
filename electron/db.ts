@@ -10,25 +10,25 @@ import { compress } from './utility';
 // const connection = getConnection();
 
 export async function customer(connection, action: string, data?: any) {
-    const repository = connection.getRepository( Customer );
-    const customer = new Customer(); 
+    const repository = connection.getRepository(Customer);
+    const customer = new Customer();
 
-    switch( action ) {
+    switch (action) {
         case 'create':
             data.photo = data.photo && await compress(data.photo, 500, 500);
-            return await repository.save( data );
+            return await repository.save(data);
 
         case 'update':
             const id = data.id;
             delete data.id;
             data.photo = data.photo && await compress(data.photo, 500, 500);
-            return await repository.update( id, data );
+            return await repository.update(id, data);
 
         case 'fetch':
-            return await repository.find( data );
+            return await repository.find(data);
 
         case 'delete':
-            return await repository.remove( data );
+            return await repository.remove(data);
 
         default:
             console.log('This is the default option')
@@ -36,31 +36,37 @@ export async function customer(connection, action: string, data?: any) {
 }
 
 export async function inventory(connection, action: string, data?: any) {
-    const repository = connection.getRepository( Inventory );
-    
+    const repository = connection.getRepository(Inventory);
 
-    switch( action ) {
+
+    switch (action) {
         case 'create':
-            return await repository.save( data );
-            
+            return await repository.save(data);
+
         case 'update':
             const id = data.id;
             const inventory = await repository.findOne(id)
             delete data.id;
-            if (data.isAddingStock == 'true') inventory.itemInStock += data.quantity;
-            if (data.isAddingStock == 'false') inventory.itemInStock -= data.quantity;
-            inventory.totalStockPrice = inventory.itemInStock * data.pricePerItem;
+            if (data.isAddingStock == 'true') {
+                inventory.itemInStock += (+data.quantity);
+                inventory.totalStockPrice += (+data.quantity) * (+data.pricePerItem);
+            }
+            if (data.isAddingStock == 'false') {
+                inventory.itemInStock -= (+data.quantity);
+                inventory.totalStockPrice -= (+data.quantity) * (+data.pricePerItem);
+
+            }
 
 
-            Object.keys(data).forEach(key => inventory[key] = data[key]);
-            console.log('data debuggggg',data,"deubgg inventory",inventory)
-            return await repository.update( id, inventory );
+            // Object.keys(data).forEach(key => inventory[key] = data[key]);
+            console.log('data debuggggg', data, "deubgg inventory", inventory)
+            return await repository.update(id, inventory);
 
         case 'fetch':
-            return await repository.find( { relations: ["item"] } );
+            return await repository.find({ relations: ["item"] });
 
         case 'delete':
-            return await repository.remove( data );
+            return await repository.remove(data);
 
         default:
             console.log('This is the default option')
@@ -69,14 +75,14 @@ export async function inventory(connection, action: string, data?: any) {
 }
 
 
-export async function product( connection, action: string, data?: any ) {
+export async function product(connection, action: string, data?: any) {
 
-    const repository = connection.getRepository( Product );
+    const repository = connection.getRepository(Product);
 
-    switch( action ) {
+    switch (action) {
         case 'create':
             const product = new Product();
-            const inventory = new Inventory(); 
+            const inventory = new Inventory();
             product.name = data.name;
             product.description = data.description;
             product.brand = data.brand;
@@ -94,19 +100,19 @@ export async function product( connection, action: string, data?: any ) {
             product.inventory = inventory;
             product.file = data.file && await compress(data.file, 500, 500);
 
-            return await repository.save( product );
-            
+            return await repository.save(product);
+
         case 'update':
             const id = data.id;
             delete data.id;
             data.file = data.file && await compress(data.file, 500, 500);
-            return await repository.update( id, data );
+            return await repository.update(id, data);
 
         case 'fetch':
-            return await repository.find( data);
+            return await repository.find(data);
 
         case 'delete':
-            return await repository.remove( data );
+            return await repository.remove(data);
 
         default:
             console.log('This is the default option')
@@ -117,15 +123,15 @@ export async function product( connection, action: string, data?: any ) {
 
 export async function sell(connection, action: string, data?: any) {
 
-    const repository = connection.getRepository( Sell );
-    
-    switch( action ) {
+    const repository = connection.getRepository(Sell);
+
+    switch (action) {
         case 'create':
             const sell = new Sell();
-            const selledProducts: SelledProduct [] = [];
-            
+            const selledProducts: SelledProduct[] = [];
+
             //Setting keys of sell object.
-            sell.currentCustomer = await connection.getRepository(Customer).findOne( data.customer.id);
+            sell.currentCustomer = await connection.getRepository(Customer).findOne(data.customer.id);
             sell.receiptNumber = data.receiptNumber;
             sell.discountInPercent = data.discountInPercent;
             sell.discountInRuppee = data.discountInRuppee;
@@ -133,10 +139,10 @@ export async function sell(connection, action: string, data?: any) {
             sell.finalPayableAmount = data.finalPayableAmount;
             sell.receivedAmount = data.receivedAmount;
             sell.paymentMode = data.paymentMode;
-            
+
             const items = data.cartItem;
             //Creating selled products and linking with sell object.
-            for(let i = 0; i < items.length; i++) {
+            for (let i = 0; i < items.length; i++) {
                 const selledproduct = new SelledProduct();
                 selledproduct.sell = sell;   //Linking with sell object
 
@@ -147,7 +153,7 @@ export async function sell(connection, action: string, data?: any) {
                 selledproduct.productCode = items[i].item.productCode;
                 selledproduct.description = items[i].item.description;
 
-                selledproduct.item = await connection.getRepository(Product).find({ where: { id: items[i].id } } );
+                selledproduct.item = await connection.getRepository(Product).find({ where: { id: items[i].id } });
                 selledproduct.discountInPercent = items[i].item.discountInPercent;
                 selledproduct.discountInRuppee = items[i].item.discountInRuppee;
                 selledproduct.length = items[i].item.length;
@@ -161,19 +167,19 @@ export async function sell(connection, action: string, data?: any) {
             }
 
             sell.selledProducts = selledProducts;
-            console.log(sell,'seee-------------', selledProducts, '--------', data);
-            return await repository.save( sell );
-            
+            console.log(sell, 'seee-------------', selledProducts, '--------', data);
+            return await repository.save(sell);
+
         case 'update':
             const id = data.id;
             delete data.id;
-            return await repository.update( id, data );
+            return await repository.update(id, data);
 
         case 'fetch':
             return await repository.find({ relations: ["selledProducts"] });
 
         case 'delete':
-            return await repository.remove( data );
+            return await repository.remove(data);
 
         default:
             console.log('This is the default option')
@@ -183,23 +189,23 @@ export async function sell(connection, action: string, data?: any) {
 
 export async function user(connection, action: string, data?: any) {
 
-    const repository = connection.getRepository( User );
-    const user = new User(); 
+    const repository = connection.getRepository(User);
+    const user = new User();
 
-    switch( action ) {
+    switch (action) {
         case 'create':
-            return await repository.save( data );
-            
+            return await repository.save(data);
+
         case 'update':
             const id = data.id;
             delete data.id;
-            return await repository.update( id, data );
+            return await repository.update(id, data);
 
         case 'fetch':
-            return await repository.find( data );
+            return await repository.find(data);
 
         case 'delete':
-            return await repository.remove( data );
+            return await repository.remove(data);
 
         default:
             console.log('This is the default option')
@@ -209,23 +215,23 @@ export async function user(connection, action: string, data?: any) {
 
 export async function settings(connection, action: string, data?: any) {
 
-    const repository = connection.getRepository( Settings );
-    const settings = new Settings(); 
+    const repository = connection.getRepository(Settings);
+    const settings = new Settings();
 
-    switch( action ) {
+    switch (action) {
         case 'create':
-            return await repository.save( data );
-            
+            return await repository.save(data);
+
         case 'update':
             const id = data.id;
             delete data.id;
-            return await repository.update( id, data );
+            return await repository.update(id, data);
 
         case 'fetch':
-            return await repository.find( data );
+            return await repository.find(data);
 
         case 'delete':
-            return await repository.remove( data );
+            return await repository.remove(data);
 
         default:
             console.log('This is the default option')

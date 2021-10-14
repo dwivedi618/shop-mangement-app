@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { rejects } from 'assert';
 import { IPCService } from 'src/app/services/ipc.service';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -9,15 +9,19 @@ import { UtilityService } from 'src/app/services/utility.service';
   templateUrl: './photo-upload.component.html',
   styleUrls: ['./photo-upload.component.scss']
 })
-export class PhotoUploadComponent implements OnInit {
+export class PhotoUploadComponent implements OnInit ,OnChanges{
   imagePreview: string;
-  @Output() onImageChange = new EventEmitter<any>()
+  @Input('image')  image
+  @Output() onImageChange = new EventEmitter<any>();
 
   constructor( 
     private ipcService: IPCService,
     private utliltService : UtilityService
    ) { }
 
+  ngOnChanges(){
+    this.imagePreview = this.image 
+   }
   ngOnInit(): void {
   }
 

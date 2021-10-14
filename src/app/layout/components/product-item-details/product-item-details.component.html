@@ -5,7 +5,6 @@
     <div class="spacer"></div>
 
     <button mat-raised-button class="bg-green" (click)="onEdit()">
-        <!-- <mat-icon class="mat-icon-sm pt-1">inventory</mat-icon> -->
         <small>Edit</small>
     </button>
 </mat-toolbar>
@@ -18,7 +17,7 @@
                     <div style="min-height: 50vh;">
                         <div class="d-flex" style="align-items: flex-start;">
                             <figure style="margin:1rem;">
-                                <img src="assets/images/cool-background.png" alt=""
+                                <img src="{{localData?.file || 'assets/images/cool-background.png'}}" alt=""
                                     class="thumbnail-lg">
                             </figure>
                             <mat-list dense class="w-100">

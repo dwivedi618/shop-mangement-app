@@ -40,12 +40,11 @@ const routes: Routes = [
         path: 'settings', component: SettingsLayoutComponent, data: {
           breadcrumb: 'Settings', icon: 'settings',},
           children: [
-            // { path: '', component: GeneralSettingsComponent, data: { breadcrumb: 'General Settings', icon: 'settings', } },         
+            { path: '', component: GeneralSettingsComponent, data: { breadcrumb: 'General Settings', icon: 'settings', } },         
             { path: 'generalsettings', component: GeneralSettingsComponent, data: { breadcrumb: 'General Settings', icon: 'settings', } },
             { path: 'appearancesettings', component: AppearanceSettingsComponent, data: { breadcrumb: 'Appearance', icon: 'settings', } },
-            
             { path: 'accountsettings', component: AccountSettingsComponent, data: { breadcrumb: 'Accounts', icon: 'admin_panel_settings', } },
-            { path: '', component: AccountSettingsComponent, data: { breadcrumb: 'Accounts', icon: 'admin_panel_settings', } },
+            // { path: '', component: AccountSettingsComponent, data: { breadcrumb: 'Accounts', icon: 'admin_panel_settings', } },
 
 
           ]

@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { IPCService } from 'src/app/services/ipc.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -34,12 +34,12 @@ export class InventoryItemDetailsComponent implements OnInit {
     // code : ''
     this.manageStockForm = this.fb.group({
       id: null,
-      quantity: [''],
+      quantity: ['',Validators.required],
       item: [],
-      pricePerItem: [''],
+      pricePerItem: ['',Validators.required],
       lastUpdate: [''],
       description: [''],
-      isAddingStock: []
+      isAddingStock: ['',Validators.required]
     })
 
     this.patchDataInForm();
@@ -56,6 +56,10 @@ export class InventoryItemDetailsComponent implements OnInit {
   }
 
   onDone(){
+    if(this.manageStockForm.invalid){
+      return;
+    }
+    
     let data  =  this.manageStockForm.value;
     let action  = this.action == 'add' ? 'create' : 'update'
     console.log("Mange Stock Form",this.manageStockForm.value)

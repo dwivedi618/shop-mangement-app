@@ -5,7 +5,7 @@
           <div class="spacer"></div>
           <span class="strong px-2 my-1" >{{item?.mrp | currency : 'INR'}}</span>
         </div>
-        <img class="thumbnail-lg" src="assets/images/pexels-markus-winkler-3812433.jpg" alt="">
+        <img class="thumbnail-lg" src="{{item?.file || 'assets/images/cool-background.png'}}" alt="">
         <div class="card-item-details w-100">
           <mat-list dense class="w-100">
             <mat-list-item class="text-wrap-sm">

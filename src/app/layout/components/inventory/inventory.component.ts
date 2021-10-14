@@ -24,31 +24,7 @@ export class InventoryComponent implements OnInit {
     { path: 'sale', icon: 'sale', name: 'Shoots' },
 
   ];
-  items = [
-    {
-      id: 1,
-      name: 'T-shirt',
-      brand: 'Peter England',
-      itemInStock: 26,
-      pricePerItem: 400,
-      totalStockPrice: 10400,
-      lastUpdate: new Date(),
-      description: '',
-      code: ''
-    },
-    {
-      id: 1,
-      name: 'Flimingo Pink Saree',
-      brand: 'Peter England',
-      quantity: 26,
-      pricePerItem: 400,
-      stockPrice: 10400,
-      lastUpdate: new Date(),
-      description: '',
-      code: ''
-    },
-  ];
-
+  items = []
   constructor(private dialog: MatDialog, private router: Router, private ipcService: IPCService) { }
   ngOnInit(): void {
     this.fetchIventory()

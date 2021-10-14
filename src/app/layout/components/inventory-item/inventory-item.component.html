@@ -4,9 +4,9 @@
       <div class="item-price d-flex">
         <div class="spacer"></div>
         <small class="px-2">In Stock</small>
-        <span class="strong px-2 my-1" >{{item?.quantity || 'N/A'}}</span>
+        <span class="strong px-2 my-1" >{{item?.itemInStock || 'N/A'}}</span>
       </div>
-      <img class="thumbnail-lg" src="assets/images/pexels-markus-winkler-3812433.jpg" alt="">
+      <img class="thumbnail-lg" src="{{item?.item?.file || 'assets/images/cool-background.png'}}" alt="">
       <div class="card-item-details w-100">
         <mat-list dense class="w-100">
           <mat-list-item class="text-wrap-sm">
@@ -37,7 +37,7 @@
       <div style="width: 2rem;" class="layout">
         <span class="strong">{{i+1}}</span>
       </div>
-      <img class="thumbnail-sm" src="assets/images/cool-background.png" alt="">
+      <img class="thumbnail-sm" src="{{item?.item?.file || 'assets/images/cool-background.png'}}" alt="">
       <div class="list-view-details">
         <mat-list dense>
           <mat-list-item class=" text-wrap-lg">
@@ -54,7 +54,7 @@
         <mat-list dense>
           <mat-list-item>
             <span matLine style="color:var(--light)">In Stock</span>
-            <h3 matLine style="font-weight: 600;"> {{item?.quantity || 'unknown' }}</h3>
+            <h3 matLine style="font-weight: 600;"> {{item?.itemInStock || 'unknown' }}</h3>
           </mat-list-item>
         </mat-list>
       </div>
@@ -62,7 +62,7 @@
         <mat-list dense>
           <mat-list-item>
             <span matLine style="color:var(--light)">Stock Price</span>
-            <h3 matLine style="font-weight: 600;"> {{(item?.stockPrice | currency : 'INR') || 'unknown'}}</h3>
+            <h3 matLine style="font-weight: 600;"> {{(item?.totalStockPrice | currency : 'INR') || 'unknown'}}</h3>
           </mat-list-item>
         </mat-list>
       </div>

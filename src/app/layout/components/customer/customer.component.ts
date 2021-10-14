@@ -31,9 +31,6 @@ export class CustomerComponent implements OnInit ,OnChanges{
   @Input() action;
   @Input() view: Boolean;
   @Output() shareCart  = new EventEmitter<any>();
-
-
-
   items = [];
   isListView: Boolean;
 

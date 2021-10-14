@@ -29,41 +29,7 @@ export class CustomerDetailsComponent implements OnInit {
   customerForm : FormGroup
   localData: any;
 
-  customerPurchaseHistory = [
-    {
-      id : 1,
-      name: 'Saree',
-      brand: 'Peter England',
-      salePrice: 199,
-      discountInPercentage : 3,
-      discountInRuppee : 5.97,
-      offerPrice : 193.03,
-      grade : 'A grade',
-      description: 'Wine Purple Woven Kanjivaram Saree - Special Wedding Edition',
-      code : '',
-      make : '',
-      size : '',
-      debt:0,
-      date : new Date()
-    },
-    {
-      id : 2,
-      name: 'Saree Banrasi',
-      brand: 'Peter England',
-      salePrice: 199,
-      discountInPercentage : 3,
-      discountInRuppee : 5.97,
-      offerPrice : 193.03,
-      grade : 'A grade',
-      description: 'Wine Purple Woven Kanjivaram Saree - Special Wedding Edition',
-      code : '',
-      make : '',
-      size : '',
-      debt:100,
-      date: new Date()
-    },
-
-  ];
+  customerPurchaseHistory = []
   constructor(
     private fb: FormBuilder,
     private ipcService: IPCService,
@@ -76,17 +42,35 @@ export class CustomerDetailsComponent implements OnInit {
 
      ngOnInit(): void {
       this.customerForm = this.fb.group({
+        id : [],
         name : [''],
         phone : [''],
         address : [''],
         photo : ['']
-  
       })
+
+      this.patchCustomerForm();
+    }
+
+    patchCustomerForm(){
+      this.customerForm.patchValue({id : this.localData?.id});
+      this.customerForm.patchValue({name : this.localData?.name});
+      this.customerForm.patchValue({phone : this.localData?.phone});
+      this.customerForm.patchValue({address : this.localData?.address});
+      this.customerForm.patchValue({photo : this.localData?.photo});
+    }
+  
+    onImageChange(image : string){
+      console.log("image from On Image change",image)
+      this.customerForm.patchValue({photo : image});
     }
 
   onDone(){
     console.log("Mange Stock Form",this.customerForm.value)
-    this.ipcService.database('customer', 'create', this.customerForm.value);
+    this.ipcService.database('customer', 'update', this.customerForm.value).then(data=>{
+      console.log("after update customer",data);
+      this.dialogRef.close(data);
+    });
   }
 }
 

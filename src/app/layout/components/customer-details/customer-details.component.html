@@ -2,6 +2,7 @@
     <button mat-button [mat-dialog-close]="false" class="bg-dark"><span>Cancel</span></button>
     <div class="spacer"></div>
     <small>Customer Details</small>
+    <mat-icon>sale</mat-icon>
     <div class="spacer"></div>
 
     <button mat-raised-button class="bg-green" (click)="onDone()">
@@ -18,7 +19,7 @@
                     <div style="min-height: 50vh;">
                         <div class="d-flex" style="align-items: flex-start;">
                             <figure style="margin:1rem;">
-                                <img src=".../../../../../../assets/images/cool-background.png" alt=""
+                                <img src="{{localData.photo || 'assets/images/cool-background.png'}}" alt=""
                                     class="thumbnail-lg">
                             </figure>
                             <mat-list dense class="w-100">
@@ -54,7 +55,7 @@
                         <div class="d-flex" style="align-items: flex-start;">
 
                             <div style="margin: 1rem;">
-                                <app-photo-upload></app-photo-upload>
+                                <app-photo-upload [(image)]="customerForm.value.photo" (onImageChange)="onImageChange($event)"></app-photo-upload>
                             </div>
                             <form [formGroup]="customerForm" class="w-100">
                                 <mat-list dense class="w-100 ">
