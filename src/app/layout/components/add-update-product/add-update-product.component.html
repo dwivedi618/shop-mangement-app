@@ -22,7 +22,7 @@
                     <form [formGroup]="productForm" class="w-100 d-flex" style="align-items: flex-start;">
                         <mat-list dense class="w-100 ">
                             <mat-list-item>
-                                <span class="strong text-light">Product Name</span>
+                                <span class="strong text-light">Product Name*</span>
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline" class="">
                                     <mat-label>Name</mat-label>
@@ -30,7 +30,7 @@
                                 </mat-form-field>
                             </mat-list-item>
                             <mat-list-item>
-                                <span class="strong text-light">Grade</span>
+                                <span class="strong text-light">Grade*</span>
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline" class="">
                                     <mat-label>Grade</mat-label>
@@ -38,7 +38,7 @@
                                 </mat-form-field>
                             </mat-list-item>
                             <mat-list-item>
-                                <span class="strong text-light">Make</span>
+                                <span class="strong text-light">Make*</span>
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline" class="">
                                     <mat-label>Make</mat-label>
@@ -50,12 +50,12 @@
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline" class="">
                                     <mat-label>Length</mat-label>
-                                    <input matInput placeholder="length" formControlName="length">
+                                    <input matInput type="number" placeholder="length" formControlName="length">
                                 </mat-form-field>
                             </mat-list-item>
                             
                             <mat-list-item>
-                                <span class="strong text-light">Price</span>
+                                <span class="strong text-light">Price*</span>
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline" class="">
                                     <mat-label>Price ₹</mat-label>
@@ -63,7 +63,7 @@
                                 </mat-form-field>
                             </mat-list-item>
                             <mat-list-item>
-                                <span class="strong text-light">Unit</span>
+                                <span class="strong text-light">Unit*</span>
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline" class="">
                                     <mat-select formControlName="unit">
@@ -82,7 +82,7 @@
 
                                 <mat-list dense class="w-100">
                                     <mat-list-item>
-                                        <span class="strong text-light">Sell By (piece/meter)</span>
+                                        <span class="strong text-light">Sell By (piece/meter)*</span>
                                         <div class="spacer"></div>
                                         <mat-form-field appearance="outline">
                                             <mat-select formControlName="isSellByMeter">
@@ -98,7 +98,7 @@
                                         <div class="spacer"></div>
                                         <mat-form-field appearance="outline" class="">
                                             <mat-label>%</mat-label>
-                                            <input matInput placeholder="%" formControlName="discountInPercent" (keyup)="onDiscountChanged(productForm.value.price,$event.target.value,'percent')" >
+                                            <input matInput type="number" placeholder="%" formControlName="discountInPercent" (keyup)="onDiscountChanged(productForm.value.price,$event.target.value,'percent')" >
                                         </mat-form-field>
                                     </mat-list-item>
                                     <mat-list-item>
@@ -106,7 +106,7 @@
                                         <div class="spacer"></div>
                                         <mat-form-field appearance="outline" class="">
                                             <mat-label>Ruppee</mat-label>
-                                            <input matInput placeholder="INR" formControlName="discountInRuppee" (keyup)="onDiscountChanged(productForm.value.price,$event.target.value,'ruppee')">
+                                            <input matInput type="number" placeholder="INR" formControlName="discountInRuppee" (keyup)="onDiscountChanged(productForm.value.price,$event.target.value,'ruppee')">
                                         </mat-form-field>
                                     </mat-list-item>
                                    

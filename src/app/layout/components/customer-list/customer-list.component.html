@@ -88,7 +88,7 @@
                 </mat-list>
             </mat-menu>
         </mat-toolbar>
-        <app-customer [(data)]="items" [(action)]="action"  [(view)]="isListView" (shareCart)="onCartData($event)" ></app-customer>
+        <app-customer [(data)]="items" [(action)]="action"  [(view)]="isListView" (shareCart)="onCartData($event)" (onDialogClose)="onDialogClose($event)"></app-customer>
         <app-data-missing-instruction *ngIf="!items?.length" [(instructions)]="CUSTOMER_MISSING"></app-data-missing-instruction>
 
         <mat-toolbar *ngIf="cart?.length"

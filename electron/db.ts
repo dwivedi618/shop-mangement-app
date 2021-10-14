@@ -178,7 +178,7 @@ export async function sell(connection, action: string, data?: any) {
             return await repository.update(id, data);
 
         case 'fetch':
-            return await repository.find({ relations: ["selledProducts"] });
+            return await repository.find({ relations: ["selledProducts", "customer"] });
 
         case 'delete':
             return await repository.remove(data);

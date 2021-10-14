@@ -3,7 +3,7 @@
     <div class="spacer"></div>
     <small>Customer</small>
     <div class="spacer"></div>
-    <button mat-raised-button class="bg-green" (click)="onDone()"><span>Done</span></button>
+    <button mat-raised-button class="bg-green" (click)="onDone()"><span>{{isLoading? 'Please wait...' : 'Done'}}</span></button>
 </mat-toolbar>
 <div mat-dialog-content class="">
     <div class="">
@@ -15,12 +15,13 @@
                
                     <div class="px-5">
                         <mat-form-field appearance="outline" class="w-100">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Contact</mat-label>
+                                <input matInput type="phone" placeholder="Ex:7827458618" formControlName="phone" (blur)="onBlurCustomerPhone()">
+                                <mat-hint>If phone exits customer will be fetched </mat-hint>
+                            </mat-form-field>
                             <mat-label>Name</mat-label>
                             <input matInput placeholder="Ex:Nikhil Ojha" formControlName="name">
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" class="w-100">
-                            <mat-label>Contact</mat-label>
-                            <input matInput placeholder="Ex:7827458618" formControlName="phone" (blur)="onBlurCustomerPhone()">
                         </mat-form-field>
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Address</mat-label>

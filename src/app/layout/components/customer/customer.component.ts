@@ -34,6 +34,7 @@ export class CustomerComponent implements OnInit ,OnChanges{
   @Input() action;
   @Input() view: Boolean;
   @Output() shareCart  = new EventEmitter<any>();
+  @Output() onDialogClose  = new EventEmitter<any>();
   items = [];
   isListView: Boolean;
 
@@ -64,13 +65,18 @@ export class CustomerComponent implements OnInit ,OnChanges{
   openCustomerDetails(selectedCustomer){
     this.dialogService.checkCustomerDetails(selectedCustomer).subscribe(data=>{
       console.log("customer details",data);
-      this.ipcService.database('customer', data);
-      
+      this.onDialogClose.emit(data)
+
+      // this.ipcService.database('customer', data);
     })
   }
 
   public onShareCart(){
     this.shareCart.emit(this.customerSelection)
   }
+
+ 
+
+  
   
 }

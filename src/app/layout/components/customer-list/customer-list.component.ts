@@ -54,17 +54,18 @@ export class CustomerListComponent implements OnInit {
     public ipcService: IPCService
   ) { }
   ngOnInit(): void {
+   
+    this.fetchCustomer();
+    // this.checkItemDetails();
+
+  }
+  private fetchCustomer(){
     this.ipcService.database('customer', 'fetch', "").then(
       data => {
-
-        // alert(data)
         this.items = data
         console.log("data ng On changes", data)
       }
     )
-    // this.checkCustomer();
-    // this.checkItemDetails();
-
   }
   checkCustomer() {
     const data = {};
@@ -83,17 +84,6 @@ export class CustomerListComponent implements OnInit {
       maxWidth: '100vw',
       maxHeight: '100vh',
       hasBackdrop: false,
-      data: data,
-    });
-  }
-  checkServiceList() {
-    const data = {};
-    const dialogRef = this.dialog.open(ServiceListComponent, {
-
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      hasBackdrop: true,
-      disableClose: true,
       data: data,
     });
   }
@@ -122,5 +112,10 @@ export class CustomerListComponent implements OnInit {
   onViewCart() {
     localStorage.setItem('currentCartDD', JSON.stringify(this.cart))
     this.router.navigate(['../cart']);
+  }
+
+  onDialogClose(data){
+    console.log("after close**********************",data);
+      this.fetchCustomer();
   }
 }

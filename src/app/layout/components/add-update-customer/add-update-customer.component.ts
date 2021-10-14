@@ -13,6 +13,7 @@ export class AddUpdateCustomerComponent implements OnInit {
   customerForm : FormGroup
   imagePreview: string;
   localData: Customer;
+  isLoading = false;
   action: any;
   constructor(
     private fb: FormBuilder,
@@ -28,7 +29,7 @@ export class AddUpdateCustomerComponent implements OnInit {
     this.customerForm = this.fb.group({
       id : null,
       name : ['',[Validators.required]],
-      phone : ['',[Validators.required]],
+      phone : ['',[Validators.required,Validators.maxLength(10)]],
       address : ['',[Validators.required]],
       photo : [this.imagePreview || '']
     })
@@ -73,8 +74,11 @@ export class AddUpdateCustomerComponent implements OnInit {
     })
   }
   onDone(){
+    this.isLoading = true;
     if(this.customerForm.invalid){
       console.log("invalid customer Form");
+      this.isLoading = false;
+
       return
     }
     let action = this.action == 'add' ? 'create' : 'update' ;
@@ -87,6 +91,8 @@ export class AddUpdateCustomerComponent implements OnInit {
       console.log("after customer form ",action,this.customerForm.value);
       if(this.action == 'update') this.dialogRef.close(this.customerForm.value);
       if(this.action == 'add') this.dialogRef.close(this.customerForm.value);
+      this.isLoading = true;
+
       return
 
     })
