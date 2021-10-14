@@ -24,7 +24,7 @@ export class Sell {
     @Column()
     receiptNumber: string;
 
-    @OneToMany(type => SelledProduct, selledProducts => selledProducts.sell, {
+    @OneToMany(type => SelledProduct, selledProduct => selledProduct.sell, {
         cascade: true
     })
     selledProducts: SelledProduct [];
@@ -48,10 +48,10 @@ export class Sell {
     finalPayableAmount: number;
 
     @Column()
-    recievedAmount: number;
+    receivedAmount: number;
 
     @Column()
-    paymentMode: number;
+    paymentMode: string;
 
     @CreateDateColumn()
     date: Date;

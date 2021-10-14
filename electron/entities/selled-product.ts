@@ -16,7 +16,6 @@ export class SelledProduct {
     id: number;
 
     @ManyToOne(type => Sell, sell => sell.selledProducts)
-    @JoinColumn()
     sell: Sell;   //Foriegin key, references to sell
 
     @OneToOne(type => Product)

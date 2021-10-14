@@ -45,8 +45,13 @@ export async function inventory(connection, action: string, data?: any) {
             
         case 'update':
             const id = data.id;
-            const inventory = await repository.findOne({ where: {id : id} })
+            const inventory = await repository.findOne(id)
             delete data.id;
+            if (data.isAddingStock == true) inventory.itemInStock += data.quantity;
+            if (data.isAddingStock == false) inventory.itemInStock -= data.quantity;
+            inventory.totalStockPrice = inventory.itemInStock * data.pricePerItem;
+
+
             Object.keys(data).forEach(key => inventory[key] = data[key]);
             console.log('data debuggggg',data,"deubgg inventory",inventory)
             return await repository.update( id, inventory );
@@ -118,16 +123,15 @@ export async function sell(connection, action: string, data?: any) {
         case 'create':
             const sell = new Sell();
             const selledProducts: SelledProduct [] = [];
-            sell.selledProducts = selledProducts;
             
             //Setting keys of sell object.
-            sell.currentCustomer = data.customer;
+            sell.currentCustomer = await connection.getRepository(Customer).findOne( data.customer.id);
             sell.receiptNumber = data.receiptNumber;
             sell.discountInPercent = data.discountInPercent;
             sell.discountInRuppee = data.discountInRuppee;
             sell.cartAmount = data.cartAmount;
             sell.finalPayableAmount = data.finalPayableAmount;
-            sell.recievedAmount = data.recievedAmount;
+            sell.receivedAmount = data.receivedAmount;
             sell.paymentMode = data.paymentMode;
             
             const items = data.cartItem;
@@ -154,6 +158,9 @@ export async function sell(connection, action: string, data?: any) {
 
                 selledProducts.push(selledproduct);
             }
+
+            sell.selledProducts = selledProducts;
+            console.log(sell,'seee-------------', selledProducts, '--------', data);
             return await repository.save( sell );
             
         case 'update':
