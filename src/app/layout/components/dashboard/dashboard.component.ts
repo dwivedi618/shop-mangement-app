@@ -15,7 +15,9 @@ export class DashboardComponent implements OnInit,OnDestroy {
   constructor() { }
 
   ngOnInit(): void {
-console.log(this.daytoday)
+  console.log(this.daytoday)
+  localStorage.removeItem('currentCartDD')
+  localStorage.removeItem('currentCustomer')
 
   this.clockInterval = setInterval(this.clock,1000);
   }

@@ -12,6 +12,7 @@ import {
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { DialogService } from 'src/app/services/dialog-service';
 import { IPCService } from 'src/app/services/ipc.service';
+import { Constant } from '../../constant/constant';
 
 export interface CardItem {
   id: number;
@@ -26,6 +27,8 @@ export interface CardItem {
   styleUrls: ['./customer.component.scss']
 })
 export class CustomerComponent implements OnInit ,OnChanges{
+
+  
   @ViewChild('decreamentbtn') decreamentbtn;
   @Input() data;
   @Input() action;
@@ -52,11 +55,6 @@ export class CustomerComponent implements OnInit ,OnChanges{
   ngOnInit(): void {
     this.items = this.data;
     this.isListView = this.view;
-   
-
-
-
-
   }
 
   onSelectItem(selectedCustomer) {

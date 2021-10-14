@@ -131,7 +131,8 @@ export async function sell(connection, action: string, data?: any) {
             const selledProducts: SelledProduct[] = [];
 
             //Setting keys of sell object.
-            sell.currentCustomer = await connection.getRepository(Customer).findOne(1);
+            console.log("data.customer.id----------->",data.customer.id)
+            sell.currentCustomer = await connection.getRepository(Customer).findOne(4);
             sell.receiptNumber = data.receiptNumber;
             sell.discountInPercent = data.discountInPercent;
             sell.discountInRuppee = data.discountInRuppee;

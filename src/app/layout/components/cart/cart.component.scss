@@ -88,3 +88,16 @@ details {
   padding: 16px 16px 16px!important;
   background-color: var(--ultra-light)
 }
+
+mat-sidenav-content{
+  -webkit-animation: fadeIn ease-in-out 450ms;
+   animation: fadeIn ease-in-out 450ms;
+}
+.fadeIn{
+  -webkit-animation: fadeIn ease-in-out 450ms;
+        animation: fadeIn ease-in-out 450ms;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

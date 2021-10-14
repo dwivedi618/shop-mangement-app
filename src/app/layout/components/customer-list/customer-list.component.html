@@ -89,7 +89,7 @@
             </mat-menu>
         </mat-toolbar>
         <app-customer [(data)]="items" [(action)]="action"  [(view)]="isListView" (shareCart)="onCartData($event)" ></app-customer>
-        <app-data-missing-instruction *ngIf="!items?.length" [(instructions)]="newOrderInstruction"></app-data-missing-instruction>
+        <app-data-missing-instruction *ngIf="!items?.length" [(instructions)]="CUSTOMER_MISSING"></app-data-missing-instruction>
 
         <mat-toolbar *ngIf="cart?.length"
         class="mat-elevation-z16 " 

@@ -33,7 +33,8 @@ export class DialogService {
       width: '30rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
-      hasBackdrop: false,
+      hasBackdrop: true,
+      disableClose: true,
       data: data,
     });
     cdialogRef.afterClosed().subscribe(result => {
@@ -49,7 +50,7 @@ export class DialogService {
       width: '40rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
-      hasBackdrop: false,
+      hasBackdrop: true,
       data: selectedCustomer,
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -65,7 +66,7 @@ export class DialogService {
       width: '40rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
-      hasBackdrop: false,
+      hasBackdrop: true,
       data: data,
     });
   }
@@ -76,7 +77,7 @@ export class DialogService {
       width: '40rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
-      hasBackdrop: false,
+      hasBackdrop: true,
       data: data,
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -92,7 +93,7 @@ export class DialogService {
       width: '40rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
-      hasBackdrop: false,
+      hasBackdrop: true,
       data: selectedItem,
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -108,7 +109,8 @@ export class DialogService {
       width: '70rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
-      hasBackdrop: false,
+      hasBackdrop: true,
+      disableClose: true,
       data: selectedItem,
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -148,12 +150,12 @@ export class DialogService {
 
   openChangePassword(credential) {
     let afterCloseResult = new Subject;
-
     const bdialogRef = this.dialog.open(ChangePasswordComponent, {
       width: '30rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
       hasBackdrop: true,
+      
       data: credential,
     });
     bdialogRef.afterClosed().subscribe(result => {
