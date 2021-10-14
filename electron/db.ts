@@ -155,6 +155,7 @@ export async function sell(connection, action: string, data?: any) {
                 selledproduct.salePrice = items[i].salePrice;
                 selledproduct.size = items[i].size;
                 selledproduct.unit = items[i].unit;
+                selledproduct.quantity = items[i].quantity;
 
                 selledProducts.push(selledproduct);
             }

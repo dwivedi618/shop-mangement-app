@@ -64,4 +64,7 @@ export class SelledProduct {
     @Column({ nullable: true })
     size: string;
 
+    @Column({ type: "float" })
+    quantity: number;
+
 }
