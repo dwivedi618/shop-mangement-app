@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { rejects } from 'assert';
+import { NgxImageCompressService } from 'ngx-image-compress';
 import { IPCService } from 'src/app/services/ipc.service';
 import { UtilityService } from 'src/app/services/utility.service';
 
@@ -16,7 +17,8 @@ export class PhotoUploadComponent implements OnInit ,OnChanges{
 
   constructor( 
     private ipcService: IPCService,
-    private utliltService : UtilityService
+    private utliltService : UtilityService,
+    private imageCompress: NgxImageCompressService
    ) { }
 
   ngOnChanges(){
@@ -67,6 +69,28 @@ export class PhotoUploadComponent implements OnInit ,OnChanges{
         
       };
     })
+  }
+
+  imgResultBeforeCompress:string;
+  imgResultAfterCompress:string;
+  compressFile() {
+  
+    
+    this.imageCompress.uploadFile().then(({image, orientation}) => {
+    
+      this.imgResultBeforeCompress = image;
+      console.warn('Size in bytes was:kb', this.imageCompress.byteCount(image)/1024);
+      
+      this.imageCompress.compressFile(image, orientation, 50, 50).then(
+        result => {
+          this.imgResultAfterCompress = result;
+          this.onImageChange.emit(result);
+          console.warn('Size in bytes is now:kb', this.imageCompress.byteCount(result)/1024);
+        }
+      );
+      
+    });
+    
   }
 
 }

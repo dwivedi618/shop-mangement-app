@@ -54,6 +54,7 @@ import { UtilityService } from './services/utility.service';
 import { SellHistoryComponent } from './layout/components/sell-history/sell-history.component';
 import { SellListComponent } from './layout/components/sell-list/sell-list.component';
 import { SellItemComponent } from './layout/components/sell-item/sell-item.component';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @NgModule({
   declarations: [
@@ -109,9 +110,10 @@ import { SellItemComponent } from './layout/components/sell-item/sell-item.compo
     MaterialModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    // NgxImageCompressService
   ],
-  providers: [IPCService, AlertService,UtilityService,
+  providers: [IPCService, AlertService,UtilityService,NgxImageCompressService,
     {
       provide: MatSnackBarRef,
       useValue: {}
