@@ -32,6 +32,21 @@ export class AddUpdateCustomerComponent implements OnInit {
       address : ['',[Validators.required]],
       photo : [this.imagePreview || '']
     })
+
+    if(this.action == 'update'){
+      this.patchCustomerForm();
+    }
+
+  }
+
+  patchCustomerForm(){
+    this.customerForm.patchValue({id : this.localData?.id});
+    this.customerForm.patchValue({name : this.localData?.name});
+    this.customerForm.patchValue({phone : this.localData?.phone});
+    this.customerForm.patchValue({address : this.localData?.address});
+    this.customerForm.patchValue({phone : this.localData?.photo});
+
+
   }
 
   onImageChange(image : string){
@@ -49,8 +64,8 @@ export class AddUpdateCustomerComponent implements OnInit {
     console.log("customer",data)
     //api call to save customer 
     this.ipcService.database("customer",action ,data).then(data=>{
+      this.customerForm.patchValue({id : data?.id});
       console.log("after ",action,data);
-      
     })
 
     //return customer data to dialog

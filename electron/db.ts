@@ -5,6 +5,7 @@ import { Sell } from './entities/sell'
 import { User } from './entities/user';
 import { Settings } from './entities/settings';
 import { SelledProduct } from './entities/selled-product';
+import { compress } from './utility';
 
 // const connection = getConnection();
 
@@ -14,11 +15,13 @@ export async function customer(connection, action: string, data?: any) {
 
     switch( action ) {
         case 'create':
+            data.photo = data.photo && await compress(data.photo, 500, 500);
             return await repository.save( data );
 
         case 'update':
             const id = data.id;
             delete data.id;
+            data.photo = data.photo && await compress(data.photo, 500, 500);
             return await repository.update( id, data );
 
         case 'fetch':
@@ -84,12 +87,14 @@ export async function product( connection, action: string, data?: any ) {
             product.salePrice = data.salePrice;
             product.unit = data.unit;
             product.inventory = inventory;
+            product.file = data.file && await compress(data.file, 500, 500);
 
             return await repository.save( product );
             
         case 'update':
             const id = data.id;
             delete data.id;
+            data.file = data.file && await compress(data.file, 500, 500);
             return await repository.update( id, data );
 
         case 'fetch':
@@ -116,7 +121,7 @@ export async function sell(connection, action: string, data?: any) {
             sell.selledProducts = selledProducts;
             
             //Setting keys of sell object.
-            sell.currentCustomer = data.currentCustomer;
+            sell.currentCustomer = data.customer;
             sell.receiptNumber = data.receiptNumber;
             sell.discountInPercent = data.discountInPercent;
             sell.discountInRuppee = data.discountInRuppee;
@@ -125,7 +130,7 @@ export async function sell(connection, action: string, data?: any) {
             sell.recievedAmount = data.recievedAmount;
             sell.paymentMode = data.paymentMode;
             
-            const items = data.items;
+            const items = data.cartItem;
             //Creating selled products and linking with sell object.
             for(let i = 0; i < items.length; i++) {
                 const selledproduct = new SelledProduct();

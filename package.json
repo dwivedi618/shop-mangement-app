@@ -36,6 +36,7 @@
     "mysql2": "^2.3.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.0",
+    "sharp": "^0.29.1",
     "tslib": "^2.0.0",
     "typeorm": "^0.2.37",
     "zone.js": "~0.11.3"
