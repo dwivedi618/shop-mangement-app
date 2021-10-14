@@ -1,7 +1,7 @@
 // import imagemin from 'imagemin';
 // import imageminJpegtran from 'imagemin-jpegtran';
 // import imageminPngquant from 'imagemin-pngquant';
-import sharp from 'sharp';
+const sharp = require('sharp');
 
 // export class UtilityService {
 
@@ -17,8 +17,18 @@ import sharp from 'sharp';
     //     });
     // }
 
-    export async function compress(data: any, heigth: number, width: number){
+    export async function compress(data: string, heigth: number, width: number){
         return data;
-        return await sharp.resize(heigth, width).toBuffer();
+        let buffer = Buffer.from(data, 'base64');
+        console.log('BBBBBBEEEEEEEEEEEEFFFFFFFFFORRRRRRRRREEEEE', buffer)
+        try {
+            let compressed = await sharp(buffer).resize(heigth, width).toBuffer();
+            console.log('AAAAAAAAAAAAFFFFFFFFFFFFFFFFFFFFFFFFF', compressed.toString('base64'))
+            return compressed;
+        } catch (err) {
+            console.log('this is error from compress function:', err);
+            return data;
+        }
+
     }
 // }
