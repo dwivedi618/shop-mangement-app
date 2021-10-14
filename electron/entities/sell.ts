@@ -19,7 +19,7 @@ export class Sell {
 
     @ManyToOne(type => Customer, )
     @JoinColumn()
-    currentCustomer : Customer;   //Foriegin key references to customer
+    customer : Customer;   //Foriegin key references to customer
 
     @Column()
     receiptNumber: string;
