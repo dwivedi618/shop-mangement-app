@@ -47,8 +47,8 @@ export async function inventory(connection, action: string, data?: any) {
             const id = data.id;
             const inventory = await repository.findOne(id)
             delete data.id;
-            if (data.isAddingStock == true) inventory.itemInStock += data.quantity;
-            if (data.isAddingStock == false) inventory.itemInStock -= data.quantity;
+            if (data.isAddingStock == 'true') inventory.itemInStock += data.quantity;
+            if (data.isAddingStock == 'false') inventory.itemInStock -= data.quantity;
             inventory.totalStockPrice = inventory.itemInStock * data.pricePerItem;
 
 
@@ -140,21 +140,22 @@ export async function sell(connection, action: string, data?: any) {
                 const selledproduct = new SelledProduct();
                 selledproduct.sell = sell;   //Linking with sell object
 
-                selledproduct.brand = items[i].brand;
-                selledproduct.grade = items[i].grade;
-                selledproduct.make = items[i].make;
-                selledproduct.isSellByMeter = items[i].isSellByMeter;
-                selledproduct.productCode = items[i].productCode;
-                selledproduct.description = items[i].description;
+                selledproduct.brand = items[i].item.brand;
+                selledproduct.grade = items[i].item.grade;
+                selledproduct.make = items[i].item.make;
+                selledproduct.isSellByMeter = items[i].item.isSellByMeter;
+                selledproduct.productCode = items[i].item.productCode;
+                selledproduct.description = items[i].item.description;
 
                 selledproduct.item = await connection.getRepository(Product).find({ where: { id: items[i].id } } );
-                selledproduct.discountInPercent = items[i].discountInPercent;
-                selledproduct.discountInRuppee = items[i].discountInRuppee;
-                selledproduct.length = items[i].length;
-                selledproduct.price = items[i].price;
-                selledproduct.salePrice = items[i].salePrice;
-                selledproduct.size = items[i].size;
-                selledproduct.unit = items[i].unit;
+                selledproduct.discountInPercent = items[i].item.discountInPercent;
+                selledproduct.discountInRuppee = items[i].item.discountInRuppee;
+                selledproduct.length = items[i].item.length;
+                selledproduct.price = items[i].item.price;
+                selledproduct.salePrice = items[i].item.salePrice;
+                selledproduct.size = items[i].item.size;
+                selledproduct.unit = items[i].item.unit;
+                selledproduct.quantity = items[i].quantity;
 
                 selledProducts.push(selledproduct);
             }
