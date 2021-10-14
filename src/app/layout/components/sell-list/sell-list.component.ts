@@ -9,12 +9,12 @@ import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
 
 @Component({
-  selector: 'app-inventory',
-  templateUrl: './inventory.component.html',
-  styleUrls: ['./inventory.component.scss']
+  selector: 'app-sell-list',
+  templateUrl: './sell-list.component.html',
+  styleUrls: ['./sell-list.component.scss']
 })
-export class InventoryComponent implements OnInit {
-  INVENTORY_MISSING = Constant.INVENTORY_MISSING
+export class SellListComponent implements OnInit {
+  SELL_MISSING = Constant.SALE_MISSING
   filterOption: any
   value: any;
   isListView = false;
@@ -29,13 +29,13 @@ export class InventoryComponent implements OnInit {
   items = []
   constructor(private dialog: MatDialog, private router: Router, private ipcService: IPCService) { }
   ngOnInit(): void {
-    this.fetchIventory()
+    this.fetchSellList()
   }
 
-  fetchIventory() {
-    this.ipcService.database('inventory', 'fetch', '').then(data => {
+  fetchSellList() {
+    this.ipcService.database('sell', 'fetch', '').then(data => {
       this.items = data
-      console.log("fetch inventory", data);
+      console.log("fetch sell", data);
 
     })
   }
@@ -48,8 +48,9 @@ export class InventoryComponent implements OnInit {
   }
 
   onDialogClose(data) {
-    this.fetchIventory();
+    this.fetchSellList();
   }
 
 
 }
+

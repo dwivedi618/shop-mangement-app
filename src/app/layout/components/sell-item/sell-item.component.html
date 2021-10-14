@@ -1,0 +1,81 @@
+<section *ngIf="isListView" class="items-container grid-view">
+    <div *ngFor="let item of items" >
+      <article class="item shadow"   (click)="openProductItemDetails(item)">
+        <div class="item-price d-flex">
+          <div class="spacer"></div>
+          <span class="strong px-2 my-1" >{{item?.mrp | currency : 'INR'}}</span>
+        </div>
+        <img class="thumbnail-lg" src="{{item?.file || 'assets/images/cool-background.png'}}" alt="">
+        <div class="card-item-details w-100">
+          <mat-list dense class="w-100">
+            <mat-list-item class="text-wrap-sm">
+              <h3 matLine> {{item?.name}} </h3>
+              <p matLine class="">
+                <small> {{item?.code}} </small>
+                <small class="">{{item?.description}} </small>
+              </p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <mat-toolbar style="padding: 0 5px;"   (click)="$event.stopPropagation();">
+          <div class="spacer"></div>
+            <button mat-button class="bg-ultra-light w-100"  (click)="onSelectItem(item)">
+              <small>Manage</small>
+              <mat-icon class="mat-icon-sm pt-1">dry_cleaning</mat-icon>
+            </button>
+           
+          <div class="spacer"></div>
+        </mat-toolbar>
+      </article>
+    </div>
+  </section>
+  
+  <section *ngIf="!isListView" class="items-container-table-view">
+    <div *ngFor="let item of items;let i=index;">
+      <article class="item-list-view shadow bg-white"   (click)="openProductItemDetails(item)">
+        <div style="width: 2rem;" class="layout">
+          <span class="strong">{{i+1}}</span>
+        </div>
+        <img class="thumbnail-sm" src="{{item?.file || 'assets/images/cool-background.png'}}" alt="">
+        <div class="list-view-details">
+          <mat-list dense>
+            <mat-list-item class="text-wrap-sm">
+              <h3 matLine> {{item?.name}} </h3>
+              <p matLine class="" style="color: var(--light);">
+                <span> {{item?.code}} </span>
+                <span class="">{{item?.description}} </span>
+              </p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div class="spacer"></div>
+        <div class="price-column">
+          <mat-list dense>
+            <mat-list-item>
+              <span matLine style="color:var(--light)">Discount</span>
+              <h3 matLine style="font-weight: 600;"> {{item?.discountInPercent || '0'}}%</h3>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div class="price-column">
+          <mat-list dense>
+            <mat-list-item>
+              <span matLine style="color:var(--light)">Sell Price</span>
+              <h3 matLine style="font-weight: 600;"> 
+                <del class="text-light">{{item?.price | currency : 'INR'}}</del> 
+                <span matLine class="">{{(item?.price - (item?.price*item?.discountInPercent)/100) | currency : 'INR'}}</span>
+              </h3>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div class="table-column" (click)="$event.stopPropagation();">
+  
+          <button mat-button class="bg-ultra-light"  (click)="onSelectItem(item);">
+            <small>Manage</small>
+            <mat-icon class="mat-icon-sm pt-1">dry_cleaning</mat-icon>
+          </button>
+         
+        </div>
+      </article>
+    </div>
+  </section>

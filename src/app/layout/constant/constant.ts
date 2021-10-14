@@ -10,5 +10,20 @@ export class Constant{
         text2 : '',
         action : '../customer'
     }
+    static PRODUCT_MISSING = {
+        text1 : 'Product not available!',
+        text2 : '',
+        action : '../product'
+    }
+    static INVENTORY_MISSING = {
+        text1 : 'Inventory not available!',
+        text2 : '',
+        action : '../inventory'
+    }
+    static SALE_MISSING = {
+        text1 : 'Sale not available!',
+        text2 : '',
+        action : '../sale'
+    }
 
 }

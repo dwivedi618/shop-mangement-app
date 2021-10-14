@@ -16,7 +16,6 @@ import { SearchComponent } from './layout/components/search/search.component';
 import { ItemDetailsComponent } from './layout/components/item-details/item-details.component';
 import { ItemComponent } from './layout/components/item/item.component';
 import { ItemTableViewComponent } from './layout/components/item-table-view/item-table-view.component';
-import { SaleListComponent } from './layout/components/sale-list/sale-list.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -52,6 +51,9 @@ import { AccountSettingsComponent } from './layout/components/account-settings/a
 import { ChangePasswordComponent } from './layout/components/change-password/change-password.component';
 import { DataMissingInstructionComponent } from './layout/components/data-missing-instruction/data-missing-instruction.component';
 import { UtilityService } from './services/utility.service';
+import { SellHistoryComponent } from './layout/components/sell-history/sell-history.component';
+import { SellListComponent } from './layout/components/sell-list/sell-list.component';
+import { SellItemComponent } from './layout/components/sell-item/sell-item.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,6 @@ import { UtilityService } from './services/utility.service';
     ItemDetailsComponent,
     ItemComponent,
     ItemTableViewComponent,
-    SaleListComponent,
     NewOrderCategoryComponent,
     ServiceListComponent,
     CartComponent,
@@ -94,6 +95,9 @@ import { UtilityService } from './services/utility.service';
     AccountSettingsComponent,
     ChangePasswordComponent,
     DataMissingInstructionComponent,
+    SellHistoryComponent,
+    SellListComponent,
+    SellItemComponent,
 
   ],
   imports: [

@@ -83,10 +83,10 @@ export class AddUpdateCustomerComponent implements OnInit {
     //api call to save customer 
     this.ipcService.database("customer",action ,data).then(data=>{
       console.log("after ipcservice customer",action,data);
-      this.customerForm.patchValue({id : data?.id });
+      if(data && data?.id) this.customerForm.patchValue({id : data?.id });
       console.log("after customer form ",action,this.customerForm.value);
       if(this.action == 'update') this.dialogRef.close(this.customerForm.value);
-      if(this.action == 'add') this.dialogRef.close(data);
+      if(this.action == 'add') this.dialogRef.close(this.customerForm.value);
       return
 
     })

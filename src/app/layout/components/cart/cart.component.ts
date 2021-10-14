@@ -5,12 +5,8 @@ import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-cu
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { ServiceListComponent } from '../service-list/service-list.component';
 import { DialogService } from 'src/app/services/dialog-service';
-export interface Customers {
-  photo: any;
-  name: string;
-  phone: any;
-  address: string;
-}
+import { Customer } from '../../models/customer';
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -21,7 +17,7 @@ export class CartComponent implements OnInit {
   value: any;
   isListView = false;
   cart = [];
-  currentCustomer = <Customers>{};
+  currentCustomer = <Customer>{};
   discountInRuppee: number;
   discountInPercent: number;
   cartAmount: number;
@@ -42,7 +38,7 @@ export class CartComponent implements OnInit {
     let data = <any>{action : 'add'};
     this.dialogService.checkCustomer(data).subscribe(data => {
       console.log("received cart customer", data);
-      localStorage.setItem('currentCustomer', JSON.stringify(data))
+      // localStorage.setItem('currentCustomer', JSON.stringify(data))
       this.currentCustomer = data
     })
   }
@@ -52,7 +48,7 @@ export class CartComponent implements OnInit {
       data.action = 'update'
       this.dialogService.checkCustomer(data).subscribe(data => {
         console.log("received from update cart customer", data);
-        localStorage.setItem('currentCustomer', JSON.stringify(data))
+        // localStorage.setItem('currentCustomer', JSON.stringify(data))
         this.currentCustomer = data
       })
     }
@@ -124,7 +120,7 @@ export class CartComponent implements OnInit {
   }
 
   onCartNext() {
-    if (this.currentCustomer?.name && this.currentCustomer.phone) {
+    if (this.currentCustomer?.id) {
       //if customer added for this order goto final billings else
       this.onTakePayment();
     } else {
