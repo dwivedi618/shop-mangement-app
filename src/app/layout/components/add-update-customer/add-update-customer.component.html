@@ -20,7 +20,7 @@
                         </mat-form-field>
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Contact</mat-label>
-                            <input matInput placeholder="Ex:7827458618" formControlName="phone">
+                            <input matInput placeholder="Ex:7827458618" formControlName="phone" (blur)="onBlurCustomerPhone()">
                         </mat-form-field>
                         <mat-form-field appearance="outline" class="w-100">
                             <mat-label>Address</mat-label>

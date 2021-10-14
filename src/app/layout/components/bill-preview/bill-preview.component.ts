@@ -33,6 +33,8 @@ export class BillPreviewComponent implements OnInit {
   action: any;
   receivedAmount : number = 0;
   paymentMode : string;
+  dateNow = Date.now()
+  receiptNumber = `RCN${this.dateNow}`
 
   
 

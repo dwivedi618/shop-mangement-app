@@ -5,6 +5,10 @@ export class Constant{
     static PRODUCT_MISSING_INS1 = `Prodcut not available!`
     static PRODUCT_MISSING_INS2 = `Try refreshing or add product`
 
-
+    static CUSTOMER_MISSING = {
+        text1 : Constant.PRODUCT_MISSING_INS1,
+        text2 : Constant.PRODUCT_MISSING_INS2,
+        action : '../customer'
+    }
 
 }

@@ -45,14 +45,32 @@ export class AddUpdateCustomerComponent implements OnInit {
     this.customerForm.patchValue({phone : this.localData?.phone});
     this.customerForm.patchValue({address : this.localData?.address});
     this.customerForm.patchValue({photo : this.localData?.photo});
-
-
   }
 
   onImageChange(image : string){
     console.log("image from On Image change",image)
     this.imagePreview = image;
     this.customerForm.patchValue({photo : image});
+  }
+
+  onBlurCustomerPhone(){
+    if(this.action == 'update') return;
+    let phone = this.customerForm.value.phone; 
+    this.ipcService.database('customer','fetch','').then(customers =>{
+      let customer : Customer = customers.filter(customer => {
+        return customer.phone == phone
+      })[0];
+      console.log("customer already exists ",customer)
+    
+    if(!customer?.phone) {return} ;//return if phone does not match any customer
+
+    this.customerForm.patchValue({id : customer?.id});
+    this.customerForm.patchValue({name : customer?.name});
+    this.customerForm.patchValue({phone : customer?.phone});
+    this.customerForm.patchValue({address : customer?.address});
+    this.customerForm.patchValue({photo : customer?.photo});
+    this.action = 'update';
+    })
   }
   onDone(){
     if(this.customerForm.invalid){
@@ -67,7 +85,8 @@ export class AddUpdateCustomerComponent implements OnInit {
       this.customerForm.patchValue({id : data?.id });
       console.log("after ",action,data);
       console.log("after customer form ",action,this.customerForm.value);
-      this.dialogRef.close(data);
+      if(this.action == 'update') this.dialogRef.close(this.customerForm.value);
+      if(this.action == 'add') this.dialogRef.close(data);
       return
 
     })

@@ -5,7 +5,7 @@
         <div class="spacer"></div>
         <span class="strong px-2 my-1">{{((item?.price - (item?.price*item?.discountInPercent)/100) || item?.priceAfterDiscount) | currency : 'INR'}}</span>
       </div>
-      <img class="thumbnail-lg" src="assets/images/pexels-markus-winkler-3812433.jpg" alt="">
+      <img class="thumbnail-lg" src="{{(item?.file || item?.item?.file) || 'assets/images/pexels-markus-winkler-3812433.jpg'}}" alt="">
       <div class="card-item-details w-100">
         <mat-list dense class="w-100">
           <mat-list-item class="text-wrap-sm">
@@ -48,14 +48,14 @@
       <div style="width: 2rem;" class="layout">
         <span class="strong">{{i+1}}</span>
       </div>
-      <img class="thumbnail-sm" src="assets/images/cool-background.png" alt="">
+      <img class="thumbnail-sm" src="{{(item?.file || item?.item?.file) || 'assets/images/pexels-markus-winkler-3812433.jpg'}}" alt="">
       <div class="list-view-details">
         <mat-list dense>
           <mat-list-item class=" text-wrap-sm">
             <h3 matLine> {{item?.name || item?.item?.name}} </h3>
             <p matLine class="" style="color: var(--light);">
               <span> {{item?.code}} </span>
-              <span class=""> -- {{item?.description || item?.item?.description}} </span>
+              <span class="">{{item?.description || item?.item?.description}} </span>
             </p>
           </mat-list-item>
         </mat-list>
@@ -66,7 +66,7 @@
         <mat-list dense>
           <mat-list-item>
             <span matLine style="color:var(--light)">Discount</span>
-            <h3 matLine style="font-weight: 600;"> {{(item?.discountInPercent/100 || item?.item?.discountInPercent/100)|  percent}} | {{((item?.price*item.discountInPercent)/100) || ((item?.item?.price*item?.item?.discountInPercent)/100) | currency : 'INR'}}</h3>
+            <h3 matLine style="font-weight: 600;"> {{(item?.discountInPercent || item?.item?.discountInPercent)}}% | {{((item?.price*item.discountInPercent)/100) || ((item?.item?.price*item?.item?.discountInPercent)/100) | currency : 'INR'}}</h3>
           </mat-list-item>
         </mat-list>
       </div>
@@ -76,7 +76,7 @@
             <span matLine style="color:var(--light)">Price/{{item?.unit || item?.item?.unit}}</span>
             <h3 matLine style="font-weight: 600;"> 
               <del class="text-light text-thin">{{item.price | currency : 'INR'}}</del> 
-              <span matLine class="">{{((item?.price - (item?.price*item?.discountInPercent)/100) || item?.priceAfterDiscount) | currency : 'INR'}}</span>
+              <span matLine class="">{{((item?.price - (item?.price*item?.discountInPercent)) || item?.priceAfterDiscount) | currency : 'INR'}}</span>
             </h3>
           </mat-list-item>
         </mat-list>

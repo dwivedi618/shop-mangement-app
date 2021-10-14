@@ -34,23 +34,7 @@ export class ProductComponent implements OnInit {
 
   ];
   items = [
-    {
-      id: 1,
-      name: 'Saree',
-      brand: 'Peter England',
-      salePrice: 199,
-      discountInPercent: 3,
-      discountInRuppee: 5.97,
-      price: 193.03,
-      unit: 'piece',
-      issaleByMeter: 'true',
-      grade: 'A grade',
-      description: 'Wine Purple Woven Kanjivaram Saree - Special Wedding Edition',
-      code: '',
-      make: 'Make for this item',
-      length: '',
-      size: '',
-    },
+   
 
   ];
   cart = [];
