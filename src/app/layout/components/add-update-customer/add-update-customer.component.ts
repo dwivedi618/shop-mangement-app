@@ -35,6 +35,7 @@ export class AddUpdateCustomerComponent implements OnInit {
   }
 
   onImageChange(image : string){
+    console.log("image from On Image change",image)
     this.imagePreview = image;
     this.customerForm.patchValue({photo : image});
   }
@@ -45,6 +46,7 @@ export class AddUpdateCustomerComponent implements OnInit {
     }
     let action = this.action == 'add' ? 'create' : 'update' ;
     let data : Customer = this.customerForm.value;
+    console.log("customer",data)
     //api call to save customer 
     this.ipcService.database("customer",action ,data).then(data=>{
       console.log("after ",action,data);

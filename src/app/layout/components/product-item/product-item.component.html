@@ -3,16 +3,16 @@
       <article class="item shadow"   (click)="openProductItemDetails(item)">
         <div class="item-price d-flex">
           <div class="spacer"></div>
-          <span class="strong px-2 my-1" >{{item.mrp | currency : 'INR'}}</span>
+          <span class="strong px-2 my-1" >{{item?.mrp | currency : 'INR'}}</span>
         </div>
         <img class="thumbnail-lg" src="assets/images/pexels-markus-winkler-3812433.jpg" alt="">
         <div class="card-item-details w-100">
           <mat-list dense class="w-100">
             <mat-list-item class="text-wrap-sm">
-              <h3 matLine> {{item.name}} </h3>
+              <h3 matLine> {{item?.name}} </h3>
               <p matLine class="">
-                <small> {{item.code}} </small>
-                <small class=""> -- {{item.description}} </small>
+                <small> {{item?.code}} </small>
+                <small class="">{{item?.description}} </small>
               </p>
             </mat-list-item>
           </mat-list>
@@ -36,14 +36,14 @@
         <div style="width: 2rem;" class="layout">
           <span class="strong">{{i+1}}</span>
         </div>
-        <img class="thumbnail-sm" src="assets/images/cool-background.png" alt="">
+        <img class="thumbnail-sm" src="{{item?.file || 'assets/images/cool-background.png'}}" alt="">
         <div class="list-view-details">
           <mat-list dense>
             <mat-list-item class="text-wrap-sm">
-              <h3 matLine> {{item.name}} </h3>
+              <h3 matLine> {{item?.name}} </h3>
               <p matLine class="" style="color: var(--light);">
-                <span> {{item.code}} </span>
-                <span class="">{{item.description}} </span>
+                <span> {{item?.code}} </span>
+                <span class="">{{item?.description}} </span>
               </p>
             </mat-list-item>
           </mat-list>
@@ -53,7 +53,7 @@
           <mat-list dense>
             <mat-list-item>
               <span matLine style="color:var(--light)">Discount</span>
-              <h3 matLine style="font-weight: 600;"> {{item.discountInPercent/100 |  percent}}</h3>
+              <h3 matLine style="font-weight: 600;"> {{item?.discountInPercent || '0'}}%</h3>
             </mat-list-item>
           </mat-list>
         </div>
@@ -62,8 +62,8 @@
             <mat-list-item>
               <span matLine style="color:var(--light)">Sell Price</span>
               <h3 matLine style="font-weight: 600;"> 
-                <del class="text-light">{{item.price | currency : 'INR'}}</del> 
-                <span matLine class="">{{(item.price - (item.price*item.discountInPercent)/100) | currency : 'INR'}}</span>
+                <del class="text-light">{{item?.price | currency : 'INR'}}</del> 
+                <span matLine class="">{{(item?.price - (item?.price*item?.discountInPercent)/100) | currency : 'INR'}}</span>
               </h3>
             </mat-list-item>
           </mat-list>

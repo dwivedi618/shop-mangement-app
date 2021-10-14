@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { rejects } from 'assert';
 import { IPCService } from 'src/app/services/ipc.service';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -11,7 +11,7 @@ import { UtilityService } from 'src/app/services/utility.service';
 })
 export class PhotoUploadComponent implements OnInit {
   imagePreview: string;
-  onImageChange = new EventEmitter
+  @Output() onImageChange = new EventEmitter<any>()
 
   constructor( 
     private ipcService: IPCService,

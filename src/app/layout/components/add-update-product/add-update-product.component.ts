@@ -106,7 +106,7 @@ export class AddUpdateProductComponent implements OnInit {
   onDone(){
     let data  =  this.productForm.value;
     let action  = this.action == 'add' ? 'create' : 'update'
-    console.log("Mange Stock Form",this.productForm.value)
+    console.log("before save product",this.productForm.value)
     this.ipcService.database('product',action,data).then(
       data=>{
         console.log(`after ${action}  product`,data);
@@ -116,7 +116,8 @@ export class AddUpdateProductComponent implements OnInit {
   }
 
   onImageChange(image){
-    this.productForm.patchValue({ file : image})
+    this.productForm.patchValue({ file : image});
+    console.log("On image change in product ",image)
   }
 
   

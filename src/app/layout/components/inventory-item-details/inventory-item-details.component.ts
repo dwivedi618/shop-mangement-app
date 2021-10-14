@@ -49,8 +49,9 @@ export class InventoryItemDetailsComponent implements OnInit {
     this.manageStockForm.patchValue({id : this.localData?.id})
     this.manageStockForm.patchValue({quantity : this.localData?.quantity})
     this.manageStockForm.patchValue({pricePerItem : this.localData?.pricePerItem})
-    this.manageStockForm.patchValue({notes : this.localData?.description})
-    this.manageStockForm.patchValue({id : this.localData?.id})
+    this.manageStockForm.patchValue({description : this.localData?.description})
+    this.manageStockForm.patchValue({lastUpdate : this.localData?.lastUpdate})
+    this.manageStockForm.patchValue({isAddingStock : this.localData?.isAddingStock})
 
   }
 
