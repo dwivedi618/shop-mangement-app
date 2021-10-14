@@ -29,13 +29,19 @@ export class Sell {
     })
     selledProducts: SelledProduct [];
 
-    @Column()
+    @Column({
+        nullable : true
+    })
     discountInPercent: number;
 
-    @Column()
+    @Column({
+        nullable : true
+    })
     discountInRuppee: number;
 
-    @Column()
+    @Column({
+        nullable : true
+    })
     cartAmount: number;
 
     @Column()

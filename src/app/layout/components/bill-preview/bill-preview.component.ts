@@ -33,6 +33,7 @@ export class BillPreviewComponent implements OnInit {
   action: any;
   receivedAmount : number = 0;
   paymentMode : string;
+
   
 
   dueAmount : number;
@@ -69,8 +70,11 @@ export class BillPreviewComponent implements OnInit {
     this.alertService.alertActionDialog(Constant.ORDER_SUBMIT_WARNING_MSG,'Yes , Save').subscribe(data=>{
       console.log("confirmation",data);
       let sell = this.localData;
+      let dateNow = Date.now()
       sell.receivedAmount = this.receivedAmount || null;
       sell.paymentMode = this.paymentMode || null;
+      sell.receiptNumber = `RCN${dateNow}`;
+
       console.log("before save sell",sell)
       this.ipcService.database('sell','create',this.localData).then(data=>{
       console.log("order saved",data);

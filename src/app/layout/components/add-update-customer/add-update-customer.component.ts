@@ -66,6 +66,10 @@ export class AddUpdateCustomerComponent implements OnInit {
     this.ipcService.database("customer",action ,data).then(data=>{
       this.customerForm.patchValue({id : data?.id});
       console.log("after ",action,data);
+      console.log("after customer form ",action,this.customerForm.value);
+      this.dialogRef.close(data);
+      return
+
     })
 
     //return customer data to dialog

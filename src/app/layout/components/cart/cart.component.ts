@@ -41,7 +41,7 @@ export class CartComponent implements OnInit {
   checkCustomer() {
     let data = <any>{action : 'add'};
     this.dialogService.checkCustomer(data).subscribe(data => {
-      console.log("received data", data);
+      console.log("received cart customer", data);
       localStorage.setItem('currentCustomer', JSON.stringify(data))
       this.currentCustomer = data
     })
@@ -51,7 +51,7 @@ export class CartComponent implements OnInit {
       let data = <any>this.currentCustomer
       data.action = 'update'
       this.dialogService.checkCustomer(data).subscribe(data => {
-        console.log("received data", data);
+        console.log("received from update cart customer", data);
         localStorage.setItem('currentCustomer', JSON.stringify(data))
         this.currentCustomer = data
       })
