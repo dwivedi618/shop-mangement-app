@@ -1,4 +1,4 @@
-.login-section{
+.dashboard-section{
     width: 100%;
     height: calc(100vh - 3rem);
 }
@@ -16,7 +16,6 @@
     z-index: 101;
     background: url(../../../../assets/images/wallpaper/pexels-eberhard-grossgasteiger-1612351.jpg) top center no-repeat; background-size: cover;
     // background: url(../../../../assets/images/wallpaper/pexels-andré-cook-131723.jpg) top center no-repeat; background-size: cover;
-
 }
 .inner_banner::before{
     content: ""; 

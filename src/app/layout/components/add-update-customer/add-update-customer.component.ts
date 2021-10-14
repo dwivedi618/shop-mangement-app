@@ -57,8 +57,8 @@ export class AddUpdateCustomerComponent implements OnInit {
     if(this.action == 'update') return;
     let phone = this.customerForm.value.phone; 
     this.ipcService.database('customer','fetch','').then(customers =>{
-      let customer : Customer = customers.filter(customer => {
-        return customer.phone == phone
+      let customer : Customer = customers.filter(c => {
+        return c.phone == phone
       })[0];
       console.log("customer already exists ",customer)
     
@@ -82,8 +82,8 @@ export class AddUpdateCustomerComponent implements OnInit {
     console.log("customer",data)
     //api call to save customer 
     this.ipcService.database("customer",action ,data).then(data=>{
+      console.log("after ipcservice customer",action,data);
       this.customerForm.patchValue({id : data?.id });
-      console.log("after ",action,data);
       console.log("after customer form ",action,this.customerForm.value);
       if(this.action == 'update') this.dialogRef.close(this.customerForm.value);
       if(this.action == 'add') this.dialogRef.close(data);

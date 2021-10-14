@@ -408,4 +408,23 @@ button.btn-box{
     font-weight: 600;
 }
 
-
+.items-container,.item-list-view ,.item{
+    -webkit-animation: fadeIn ease-in-out 450ms;
+     animation: fadeIn ease-in-out 450ms;
+  }
+  .fadeIn{
+    -webkit-animation: fadeIn ease-in-out 450ms;
+          animation: fadeIn ease-in-out 450ms;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+.instruction-section{
+    -webkit-animation: fadeIn ease-in-out 1000ms;
+     animation: fadeIn ease-in-out 1000ms;
+}
+.dashboard-section{
+    -webkit-animation: fadeIn ease-in-out 1000ms;
+     animation: fadeIn ease-in-out 1000ms;
+}

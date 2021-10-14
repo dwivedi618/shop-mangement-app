@@ -17,7 +17,7 @@ export class DataMissingInstructionComponent implements OnInit,OnChanges {
 
   ngOnChanges(){
     this.instruction = this.instructions
-
+    console.log("instruction ",this.instruction )
   }
   ngOnInit(): void {
 

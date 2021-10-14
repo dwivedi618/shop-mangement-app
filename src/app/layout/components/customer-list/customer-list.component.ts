@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { IPCService } from 'src/app/services/ipc.service';
+import { Constant } from '../../constant/constant';
 
 import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-customer.component';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
@@ -18,6 +19,7 @@ export interface Actions {
   styleUrls: ['./customer-list.component.scss']
 })
 export class CustomerListComponent implements OnInit {
+  CUSTOMER_MISSING = Constant.CUSTOMER_MISSING
   filterOption: any
   value: any;
   isListView = false;
