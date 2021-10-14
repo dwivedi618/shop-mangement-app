@@ -132,7 +132,7 @@ export async function sell(connection, action: string, data?: any) {
 
             //Setting keys of sell object.
             console.log("data.customer.id----------->",data.customer.id)
-            sell.currentCustomer = await connection.getRepository(Customer).findOne(4);
+            sell.currentCustomer = await connection.getRepository(Customer).findOne(data.customer.id);
             sell.receiptNumber = data.receiptNumber;
             sell.discountInPercent = data.discountInPercent;
             sell.discountInRuppee = data.discountInRuppee;
@@ -147,6 +147,7 @@ export async function sell(connection, action: string, data?: any) {
                 const selledproduct = new SelledProduct();
                 // selledproduct.sell = sell;   //Linking with sell object
 
+                selledproduct.name = items[i].item.name;
                 selledproduct.brand = items[i].item.brand;
                 selledproduct.grade = items[i].item.grade;
                 selledproduct.make = items[i].item.make;
@@ -173,7 +174,7 @@ export async function sell(connection, action: string, data?: any) {
 
         case 'update':
             const id = data.id;
-            delete data.id;
+            // delete data.id;
             return await repository.update(id, data);
 
         case 'fetch':

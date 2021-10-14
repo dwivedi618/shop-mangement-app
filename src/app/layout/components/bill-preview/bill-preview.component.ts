@@ -69,7 +69,8 @@ export class BillPreviewComponent implements OnInit {
 
   onApply(){
     this.isSavingOrder = true;
-    this.alertService.alertActionDialog(Constant.ORDER_SUBMIT_WARNING_MSG,'Yes , Save').subscribe(data=>{
+    this.alertService.alertActionDialog(Constant.ORDER_SUBMIT_WARNING_MSG,'Yes , Save')
+    .subscribe( data => {
       console.log("confirmation",data);
       let sell = this.localData;
       let dateNow = Date.now()
@@ -78,8 +79,9 @@ export class BillPreviewComponent implements OnInit {
       sell.receiptNumber = `RCN${dateNow}`;
 
       console.log("before save sell",sell)
-      this.ipcService.database('sell','create',this.localData).then(data=>{
-      console.log("order saved",data);
+      this.ipcService.database('sell', 'create', this.localData)
+      .then(data=>{
+        console.log("order saved",data);
         this.isSavingOrder = false;
       })
       .catch(err=>{ this.isSavingOrder = false;})
