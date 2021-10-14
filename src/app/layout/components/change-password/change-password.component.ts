@@ -53,7 +53,8 @@ export class ChangePasswordComponent implements OnInit {
         data.password = this.newPassword;
         console.log("before change password",data)
         this.ipcService.database('user','update',data).then(data=>{
-          console.log("after change password",data)
+          console.log("after change password",data);
+          this.dialogRef.close(this.currentUser)
         })
       }else {
         this.msg = 'New Password should match with Confirm Password'

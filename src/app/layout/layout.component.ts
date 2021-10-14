@@ -23,9 +23,9 @@ export class LayoutComponent implements OnInit {
     { path : 'settings',icon :'settings', name : 'Settings' },
   ]  
   settingLinks = [
-    { path : 'settings/generalsettings',icon :'settings_applications', name : 'General' },
-    { path : 'settings/appearancesettings',icon :'grid_view', name : 'Appearance' },
-    { path : 'settings/systemfilter',icon :'settings_input_composite', name : 'System Filter' },
+    // { path : 'settings/generalsettings',icon :'settings_applications', name : 'General' },
+    // { path : 'settings/appearancesettings',icon :'grid_view', name : 'Appearance' },
+    // { path : 'settings/systemfilter',icon :'settings_input_composite', name : 'System Filter' },
     { path : 'settings/accountsettings',icon :'admin_panel_settings', name : 'Account' },
   ]  
   currentPath: string;
