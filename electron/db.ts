@@ -131,7 +131,7 @@ export async function sell(connection, action: string, data?: any) {
             const selledProducts: SelledProduct[] = [];
 
             //Setting keys of sell object.
-            sell.currentCustomer = await connection.getRepository(Customer).findOne(data.customer.id);
+            sell.currentCustomer = await connection.getRepository(Customer).findOne(1);
             sell.receiptNumber = data.receiptNumber;
             sell.discountInPercent = data.discountInPercent;
             sell.discountInRuppee = data.discountInRuppee;
@@ -144,7 +144,7 @@ export async function sell(connection, action: string, data?: any) {
             //Creating selled products and linking with sell object.
             for (let i = 0; i < items.length; i++) {
                 const selledproduct = new SelledProduct();
-                selledproduct.sell = sell;   //Linking with sell object
+                // selledproduct.sell = sell;   //Linking with sell object
 
                 selledproduct.brand = items[i].item.brand;
                 selledproduct.grade = items[i].item.grade;
@@ -153,7 +153,7 @@ export async function sell(connection, action: string, data?: any) {
                 selledproduct.productCode = items[i].item.productCode;
                 selledproduct.description = items[i].item.description;
 
-                selledproduct.item = await connection.getRepository(Product).find({ where: { id: items[i].id } });
+                selledproduct.item = await connection.getRepository(Product).findOne(items[i].id );
                 selledproduct.discountInPercent = items[i].item.discountInPercent;
                 selledproduct.discountInRuppee = items[i].item.discountInRuppee;
                 selledproduct.length = items[i].item.length;

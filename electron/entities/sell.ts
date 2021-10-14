@@ -2,7 +2,7 @@ import {
     Entity, 
     PrimaryGeneratedColumn, 
     Column, 
-    OneToOne, 
+    ManyToOne, 
     JoinColumn, 
     UpdateDateColumn, 
     CreateDateColumn, 
@@ -17,7 +17,7 @@ export class Sell {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(type => Customer)
+    @ManyToOne(type => Customer, )
     @JoinColumn()
     currentCustomer : Customer;   //Foriegin key references to customer
 
