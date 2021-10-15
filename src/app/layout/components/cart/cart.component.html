@@ -126,6 +126,8 @@
             </mat-menu>
         </mat-toolbar>
         <app-item [data]="cart" [cartItems]="cart" [(view)]="isListView" (shareCart)="onCartData($event)"></app-item>
+        <app-data-missing-instruction *ngIf="!cart?.length" [(instructions)]="CART_MISSING"></app-data-missing-instruction>
+       
         <mat-toolbar class="mat-elevation-z16 " style="position: absolute;bottom: 0;z-index: 15;">
             <span class="px-5">{{cart?.length || '0'}} | <small>Item</small></span>
             <span class="px-5">{{getCartTotal() | currency :'INR'}}</span>

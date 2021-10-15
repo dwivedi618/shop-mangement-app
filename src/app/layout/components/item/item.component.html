@@ -76,7 +76,7 @@
             <span matLine style="color:var(--light)">Price/{{item?.unit || item?.item?.unit}}</span>
             <h3 matLine style="font-weight: 600;"> 
               <del class="text-light text-thin">{{item.price | currency : 'INR'}}</del> 
-              <span matLine class="">{{((item?.price - (item?.price*item?.discountInPercent)) || item?.priceAfterDiscount) | currency : 'INR'}}</span>
+              <span matLine class="">{{((item?.price - (item?.discountInRuppee)) || item?.priceAfterDiscount) | currency : 'INR'}}</span>
             </h3>
           </mat-list-item>
         </mat-list>
