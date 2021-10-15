@@ -23,39 +23,29 @@ export class Sell {
 
     @Column()
     receiptNumber: string;
-
+    
+    @Column({ type: 'float' })
+    discount: number;
+    
+    @Column()
+    receivedAmount: number;
+    
+    @Column()
+    paymentMode: string;
+    
+    @Column()
+    lastPaymentDate: Date;
+    
     @OneToMany(type => SelledProduct, selledProduct => selledProduct.sell, {
         cascade: true
     })
     selledProducts: SelledProduct [];
 
-    @Column({
-        nullable : true
-    })
-    discountInPercent: number;
-
-    @Column({
-        nullable : true
-    })
-    discountInRuppee: number;
-
-    @Column({
-        nullable : true
-    })
-    cartAmount: number;
-
-    @Column()
-    finalPayableAmount: number;
-
-    @Column()
-    receivedAmount: number;
-
-    @Column()
-    paymentMode: string;
-
     @CreateDateColumn()
-    date: Date;
-
+    selledDate: Date;
+    
     @UpdateDateColumn()
-    paymentDate: Date;
+    updatedAt: Date;
+
+    
 }
