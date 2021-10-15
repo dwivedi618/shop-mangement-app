@@ -6,6 +6,8 @@ import { User } from './entities/user';
 import { Settings } from './entities/settings';
 import { SelledProduct } from './entities/selled-product';
 import { compress } from './utility';
+import { In } from 'typeorm';
+import { InventoryHistory } from 'entities/inventoryHistory';
 
 // const connection = getConnection();
 
@@ -127,12 +129,17 @@ export async function sell(connection, action: string, data?: any) {
 
     switch (action) {
         case 'create':
-            const sell = new Sell();
+            const inventoryRepository = connection.getRepository(Inventory);
+            const productRepository = connection.getRepository(Product);
+            const historyRepository = connection.getRepository(InventoryHistory);
+            const customerRepository = connection.getRepository(Customer);
             const selledProducts: SelledProduct[] = [];
-
-            //Setting keys of sell object.
-            console.log("data.customer.id----------->",data.customer.id)
-            sell.customer = await connection.getRepository(Customer).findOne(data.customer.id);
+            const inventories: Inventory[] = [];
+            const histories: InventoryHistory[] = [];
+            
+            //Create a new sell record.
+            const sell = new Sell();
+            sell.customer = customerRepository.findOne(data.customer.id);
             sell.receiptNumber = data.receiptNumber;
             sell.discountInPercent = data.discountInPercent;
             sell.discountInRuppee = data.discountInRuppee;
@@ -140,13 +147,15 @@ export async function sell(connection, action: string, data?: any) {
             sell.finalPayableAmount = data.finalPayableAmount;
             sell.receivedAmount = data.receivedAmount;
             sell.paymentMode = data.paymentMode;
-
+            sell.selledProducts = selledProducts;
+            
             const items = data.cartItem;
             //Creating selled products and linking with sell object.
             for (let i = 0; i < items.length; i++) {
+                const product = await productRepository.findOne(items[i].id )
+                
+                //Create a new selled product for each item
                 const selledproduct = new SelledProduct();
-                // selledproduct.sell = sell;   //Linking with sell object
-
                 selledproduct.name = items[i].item.name;
                 selledproduct.brand = items[i].item.brand;
                 selledproduct.grade = items[i].item.grade;
@@ -154,8 +163,6 @@ export async function sell(connection, action: string, data?: any) {
                 selledproduct.isSellByMeter = items[i].item.isSellByMeter;
                 selledproduct.productCode = items[i].item.productCode;
                 selledproduct.description = items[i].item.description;
-
-                selledproduct.item = await connection.getRepository(Product).findOne(items[i].id );
                 selledproduct.discountInPercent = items[i].item.discountInPercent;
                 selledproduct.discountInRuppee = items[i].item.discountInRuppee;
                 selledproduct.length = items[i].item.length;
@@ -164,13 +171,28 @@ export async function sell(connection, action: string, data?: any) {
                 selledproduct.size = items[i].item.size;
                 selledproduct.unit = items[i].item.unit;
                 selledproduct.quantity = items[i].quantity;
-
+                selledproduct.item = product;   //Linking with product
+                // selledproduct.sell = sell;   //Linking with sell object
                 selledProducts.push(selledproduct);
+                
+                //Mantain the available item in stock
+                const inventory = await inventoryRepository.findOne({ where: { itemId: items[i].id }});
+                inventory.itemInStock -= (+items[i].quantity);                
+                inventories.push(inventory);
+                
+                //Create history for the stock change
+                let history = new InventoryHistory();
+                history.amount = (+items[i].quantity);
+                history.date = new Date();
+                histories.push( history );
+                
+
             }
 
-            sell.selledProducts = selledProducts;
-            console.log(sell, 'seee-------------', selledProducts, '--------', data);
-            return await repository.save(sell);
+            let sellDetail = await repository.save(sell);
+            inventories.forEach(async inventory => await inventoryRepository.save( inventory ));
+            histories.forEach(async history => await historyRepository.save( history ));
+            return sellDetail;
 
         case 'update':
             const id = data.id;
