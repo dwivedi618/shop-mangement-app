@@ -27,5 +27,10 @@ export class Constant{
         text2 : '',
         action : '../sale'
     }
+    static CART_MISSING = {
+        text1 : 'No item in cart',
+        text2 : 'Go to new Order',
+        action : '../neworder'
+    }
 
 }
