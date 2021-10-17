@@ -55,6 +55,8 @@ import { SellHistoryComponent } from './layout/components/sell-history/sell-hist
 import { SellListComponent } from './layout/components/sell-list/sell-list.component';
 import { SellItemComponent } from './layout/components/sell-item/sell-item.component';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { ApplyDiscountComponent } from './layout/components/apply-discount/apply-discount.component';
+import { AddUpdateInventoryComponent } from './layout/components/add-update-inventory/add-update-inventory.component';
 
 @NgModule({
   declarations: [
@@ -99,6 +101,8 @@ import { NgxImageCompressService } from 'ngx-image-compress';
     SellHistoryComponent,
     SellListComponent,
     SellItemComponent,
+    ApplyDiscountComponent,
+    AddUpdateInventoryComponent,
 
   ],
   imports: [

@@ -10,6 +10,7 @@ import { CustomerDetailsComponent } from '../layout/components/customer-details/
 import { AddUpdateProductComponent } from '../layout/components/add-update-product/add-update-product.component';
 import { BillPreviewComponent } from '../layout/components/bill-preview/bill-preview.component';
 import { ChangePasswordComponent } from '../layout/components/change-password/change-password.component';
+import { AddUpdateInventoryComponent } from '../layout/components/add-update-inventory/add-update-inventory.component';
 
 @Injectable({
   providedIn: 'root'
@@ -106,6 +107,24 @@ export class DialogService {
     let afterCloseResult = new Subject;
     const data = {};
     const dialogRef = this.dialog.open(AddUpdateProductComponent, {
+      width: '70rem',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: true,
+      disableClose: true,
+      data: selectedItem,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      afterCloseResult.next(result)
+    })
+
+    return afterCloseResult.asObservable();
+  }
+
+  addUpdateInventory(selectedItem) {
+    let afterCloseResult = new Subject;
+    const data = {};
+    const dialogRef = this.dialog.open(AddUpdateInventoryComponent, {
       width: '70rem',
       maxWidth: '100vw',
       maxHeight: '100vh',

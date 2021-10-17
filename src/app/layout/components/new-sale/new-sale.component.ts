@@ -32,7 +32,23 @@ export class NewSaleComponent implements OnInit {
   
   ];
   items = [
-    
+    {
+      id: 1,
+      name: "Jeans",
+      brand: null,
+      salePrice: null,
+      discountInPercent: 0,
+      discountInRuppee: 0,
+      price: 899,
+      unit: 'meter',
+      isSellByMeter: false,
+      grade: "grade 1",
+      description: "no decription",
+      productCode: null,
+      make: "make 1",
+      length: null,
+      size: null,
+    }
   ];
   cart = [];
   constructor(private dialog: MatDialog,
@@ -44,7 +60,7 @@ export class NewSaleComponent implements OnInit {
     let loadCart = JSON.parse(localStorage.getItem('currentCartDD'))
     this.cart = loadCart;
 
-    this.fetchProduct();
+    // this.fetchProduct();
   
   }
   private fetchProduct(){

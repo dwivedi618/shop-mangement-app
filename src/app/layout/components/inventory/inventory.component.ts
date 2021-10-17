@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DialogService } from 'src/app/services/dialog-service';
 import { IPCService } from 'src/app/services/ipc.service';
 import { Constant } from '../../constant/constant';
 import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-customer.component';
@@ -26,10 +27,15 @@ export class InventoryComponent implements OnInit {
     { path: 'sale', icon: 'sale', name: 'Shoots' },
 
   ];
-  items = []
-  constructor(private dialog: MatDialog, private router: Router, private ipcService: IPCService) { }
+  items = [
+   
+  ]
+  constructor(private dialog: MatDialog,
+     private router: Router, 
+     private dialogService : DialogService,
+     private ipcService: IPCService) { }
   ngOnInit(): void {
-    this.fetchIventory()
+    // this.fetchIventory()
   }
 
   fetchIventory() {
@@ -37,6 +43,13 @@ export class InventoryComponent implements OnInit {
       this.items = data
       console.log("fetch inventory", data);
 
+    })
+  }
+
+  openAddUpdateInventory() {
+    this.dialogService.addUpdateInventory('').subscribe((data) => {
+      console.log("after close",data);
+      this.fetchIventory();
     })
   }
   getSearchText(searchText) {
