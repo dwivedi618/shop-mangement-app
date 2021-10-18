@@ -35,7 +35,7 @@ export class InventoryComponent implements OnInit {
      private dialogService : DialogService,
      private ipcService: IPCService) { }
   ngOnInit(): void {
-    // this.fetchIventory()
+    this.fetchIventory();
   }
 
   fetchIventory() {

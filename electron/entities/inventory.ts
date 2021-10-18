@@ -11,12 +11,17 @@ export class Inventory {
         item: Product;       //foriegn key references to product
 
         @Column({ default: 0 })
-        itemInStock: number;
+        quantity: number;
 
         @Column({ type: "double", default: 0 })
-        totalStockPrice: number;
+        amount: number;
 
+        @Column({ nullable: true })
+        date: Date;
 
         @UpdateDateColumn()
         updatedAt: Date;
+
+        @CreateDateColumn()
+        createdAt: Date;
 }

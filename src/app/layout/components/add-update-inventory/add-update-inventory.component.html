@@ -23,7 +23,8 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Product</mat-label>
                             <mat-select formControlName="item">
-                                <mat-option *ngFor="let product of items">
+                                <mat-option value=''>select product</mat-option>
+                                <mat-option *ngFor="let product of items" value={{product.id}}>
                                     <span>{{product.name || product.grade}}</span>
                                 </mat-option>
                             </mat-select>

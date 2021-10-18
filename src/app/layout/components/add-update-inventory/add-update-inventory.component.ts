@@ -32,12 +32,12 @@ export class AddUpdateInventoryComponent implements OnInit {
   localData: any;
   action: any;
   items  = [
-     { name : 'product'},
-     { name : 'product'},
-     { name : 'product'},
-     { name : 'product'},
-     { name : 'product'},
-     { name : 'product'},
+    //  { name : 'product'},
+    //  { name : 'product'},
+    //  { name : 'product'},
+    //  { name : 'product'},
+    //  { name : 'product'},
+    //  { name : 'product'},
 
   ]
   constructor(
@@ -74,7 +74,7 @@ export class AddUpdateInventoryComponent implements OnInit {
 
   patchInventoryDataInForm(){
     this.inventoryForm.patchValue({id : this.localData?.id})
-    this.inventoryForm.patchValue({item : this.localData?.item})
+    this.inventoryForm.patchValue({item : this.localData?.item?.id})
 
     this.inventoryForm.patchValue({quantity : this.localData?.quantity})
     this.inventoryForm.patchValue({amount : this.localData?.amount})
