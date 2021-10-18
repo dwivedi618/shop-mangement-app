@@ -33,27 +33,34 @@ export async function customer(connection, action: string, data?: any) {
 }
 
 export async function inventory(connection, action: string, data?: any) {
-    const repository = connection.getRepository(Inventory);
-
+    const inventoryRepository = connection.getRepository(Inventory);
+    const productRepository = connection.getRepository(Product);
+    let inventory: Inventory;
 
     switch (action) {
         case 'create':
-            return repository.save(data);
+            inventory = new Inventory();
+            inventory.item = await productRepository.findOne(data.item)
+            inventory.quantity = data.quantity;
+            inventory.amount = data.amount;
+            inventory.date = data.date;
+
+            return inventoryRepository.save(inventory);
 
         case 'update':
-            const id = data.id;
-            const inventory = await repository.findOne(id);
+            inventory = await inventoryRepository.findOne(data.id);
+            inventory.item = await productRepository.findOne(data.item)
             inventory.quantity = data.quantity;
             inventory.amount = data.amount;
             inventory.date = data.date || inventory.date;
 
-            return repository.save(inventory);
+            return inventoryRepository.save(inventory);
 
         case 'fetch':
-            return repository.find({ relations: ["item"] });
+            return inventoryRepository.find({ relations: ["item"] });
 
         case 'delete':
-            return repository.remove(data);
+            return inventoryRepository.remove(data);
 
         
     }
