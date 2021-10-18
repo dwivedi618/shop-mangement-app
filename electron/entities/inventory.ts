@@ -6,8 +6,7 @@ export class Inventory {
         @PrimaryGeneratedColumn()
         id: number;
 
-        @OneToOne(type => Product, product => product.inventory)
-        @JoinColumn()
+        @ManyToOne(type => Product, product => product.inventory)
         item: Product;       //foriegn key references to product
 
         @Column({ default: 0 })
