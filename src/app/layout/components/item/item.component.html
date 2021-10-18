@@ -64,13 +64,13 @@
 
       <div class="price-column" (click)="$event.stopPropagation();">
         <!-- <button mat-button class="bg-ultra-light" ><small style="font-size: 10px;">Apply discount</small></button> -->
-     <app-apply-discount></app-apply-discount>
-        <!-- <mat-list dense>
+     <!-- <app-apply-discount></app-apply-discount> -->
+        <mat-list dense>
           <mat-list-item>
             <span matLine style="color:var(--light)">Discount</span>
             <h3 matLine style="font-weight: 600;"> {{(item?.discountInPercent || item?.item?.discountInPercent)}}% | {{((item?.price*item.discountInPercent)/100) || ((item?.item?.price*item?.item?.discountInPercent)/100) | currency : 'INR'}}</h3>
           </mat-list-item>
-        </mat-list> -->
+        </mat-list>
       </div>
       <div class="price-column" (click)="$event.stopPropagation();">
         <mat-list dense>

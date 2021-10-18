@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import { Inventory } from "./inventory";
 
 @Entity()
@@ -52,9 +52,7 @@ export class Product {
       @Column({ type: "longtext", nullable: true })
       file: string;
 
-      @OneToOne(type => Inventory, inventory => inventory.item, {
-            cascade: true
-      })
+      @OneToMany(type => Inventory, inventory => inventory.item)
       inventory: Inventory;
 
       @CreateDateColumn()

@@ -24,7 +24,7 @@ export class Sell {
     @Column()
     receiptNumber: string;
     
-    @Column({ type: 'float' })
+    @Column({ type: 'float',default : 0 })
     discount: number;
     
     @Column()
