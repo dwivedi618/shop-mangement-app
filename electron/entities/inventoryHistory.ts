@@ -1,75 +1,35 @@
-
-
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from "typeorm";
 import { Inventory } from "./inventory";
-import { Product } from './product';
 
+enum TransactionType {
+    Added = 'added',
+    Removed = 'removed',
+    Sold = 'sold'
+}
 @Entity()
 export class InventoryHistory {
 
     @PrimaryGeneratedColumn()
     id: number;
 
-    @OneToOne(type => Product, product => product.inventory)
-    @JoinColumn()
-    item: Product;       //foriegn key references to product
-
-    @Column({
-        nullable: true
-    })
-    itemInStock: number;
-
-    @Column({
-        nullable: true
-    })
-    pricePerItem: number;
-
-    @Column({
-        default: 0
-    })
-    totalStockPrice: number;
-
-    @Column({
-        nullable: true
-    })
-    lastUpdate: Date;
-
-    @Column({
-        nullable: true
-    })
-    description: string;
-
-    @Column({
-        nullable: true
-    })
-    code: string
-
-    @Column({
-        nullable: true
-    })
-    quantity: number
-
-    @Column({
-        nullable: true
-    })
-    isAddingStock: boolean
-
-    @Column({
-        nullable: true
-    })
-    isSellByMeter: string
-
-    @Column({
-        nullable: true
-    })
-    length: number
-
-    @OneToMany(type => Inventory, inventory => inventory.history)
+    @ManyToOne(type => Inventory)
     inventory: Inventory;
+
+    @Column({ default: 0 })
+    quantity: number
+    
+    @Column({ nullable: true })
+    amount: number;
+
+    @Column()
+    date: Date;
+    
+    @Column({ nullable: true })
+    description: string;
+    
+    @Column({type: 'char'})
+    trxType: TransactionType;
 
     @CreateDateColumn()
     createdAt: Date;
-
-    @UpdateDateColumn()
-    updatedAt: Date;
 }

@@ -11,6 +11,7 @@ import { AddUpdateProductComponent } from '../layout/components/add-update-produ
 import { BillPreviewComponent } from '../layout/components/bill-preview/bill-preview.component';
 import { ChangePasswordComponent } from '../layout/components/change-password/change-password.component';
 import { AddUpdateInventoryComponent } from '../layout/components/add-update-inventory/add-update-inventory.component';
+import { SelectionModelComponent } from '../layout/components/selection-model/selection-model.component';
 
 @Injectable({
   providedIn: 'root'
@@ -125,7 +126,26 @@ export class DialogService {
     let afterCloseResult = new Subject;
     const data = {};
     const dialogRef = this.dialog.open(AddUpdateInventoryComponent, {
+      width: '30rem',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: true,
+      disableClose: true,
+      data: selectedItem,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      afterCloseResult.next(result)
+    })
+
+    return afterCloseResult.asObservable();
+  }
+
+  openSelectionModel(selectedItem) {
+    let afterCloseResult = new Subject;
+    const data = {};
+    const dialogRef = this.dialog.open(SelectionModelComponent, {
       width: '70rem',
+      minHeight : '50vh',
       maxWidth: '100vw',
       maxHeight: '100vh',
       hasBackdrop: true,

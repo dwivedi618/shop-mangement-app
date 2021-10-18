@@ -1,4 +1,6 @@
+<!-- <app-search></app-search> -->
 <section *ngIf="isListView" class="items-container grid-view">
+
     <div *ngFor="let item of items" >
       <article class="item shadow"   (click)="openProductItemDetails(item)">
         <div class="item-price d-flex">

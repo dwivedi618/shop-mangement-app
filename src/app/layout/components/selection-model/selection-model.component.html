@@ -1,0 +1,15 @@
+<mat-toolbar class="bg-dark rounded-lg dialog-toolbar" style="margin: -24px -24px 24px -24px;padding: 0 .4rem;">
+    <button mat-button [mat-dialog-close]="false" class="bg-dark"><span>Cancel</span></button>
+    <div class="spacer"></div>
+    <!-- <small>{{action | titlecase }} Inventory</small> -->
+    <app-search></app-search>
+    <div class="spacer"></div>
+
+    <button mat-raised-button class="bg-green" >
+        <!-- <mat-icon class="mat-icon-sm pt-1">inventory</mat-icon> -->
+        <small>Done</small>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content class="" style="position: relative;">
+     <app-product-item [(data)]="items"></app-product-item>
+</div>

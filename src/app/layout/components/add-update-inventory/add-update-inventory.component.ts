@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { IPCService } from 'src/app/services/ipc.service';
 import { Product } from '../../models/product';
+import { DialogService } from 'src/app/services/dialog-service';
 
 export interface productDetails{
   id : number,
@@ -30,9 +31,20 @@ export class AddUpdateInventoryComponent implements OnInit {
   inventoryForm : FormGroup
   localData: any;
   action: any;
+  items  = [
+     { name : 'product'},
+     { name : 'product'},
+     { name : 'product'},
+     { name : 'product'},
+     { name : 'product'},
+     { name : 'product'},
+
+  ]
   constructor(
     private fb: FormBuilder,
     private ipcService : IPCService,
+    private dialogService : DialogService,
+
     private dialogRef : MatDialogRef<AddUpdateInventoryComponent>,
     @Inject(MAT_DIALOG_DATA) data : Product
     ) {
@@ -42,66 +54,59 @@ export class AddUpdateInventoryComponent implements OnInit {
       console.log("data",data,this.localData)
      }
 
+
   ngOnInit(): void {
     this.inventoryForm = this.fb.group({
       id: null,
+      item : [''],
       quantity: ['',Validators.required],
       amount: ['',Validators.required],
-      pricePerItem: [''],
       date: [''],
       description: [''],
-      isAddingStock: ['',Validators.required]
+     
     })
 
     if(this.action == 'update'){
       this.patchInventoryDataInForm()
     }
+    this.fetchProduct();
   }
 
   patchInventoryDataInForm(){
     this.inventoryForm.patchValue({id : this.localData?.id})
+    this.inventoryForm.patchValue({item : this.localData?.item})
+
     this.inventoryForm.patchValue({quantity : this.localData?.quantity})
     this.inventoryForm.patchValue({amount : this.localData?.amount})
-    this.inventoryForm.patchValue({pricePerItem : this.localData?.pricePerItem})
     this.inventoryForm.patchValue({description : this.localData?.description})
     this.inventoryForm.patchValue({date : this.localData?.date})
-    this.inventoryForm.patchValue({isAddingStock : this.localData?.isAddingStock})
     console.log("Mange Stock Form",this.inventoryForm.value)
 
   }
 
-  onDiscountChanged(price:number,discountValue : number,type : string){
-    let discountInRuppee = 0;
-    let discountInPercent = 0
-    if(type == 'percent'){
-      discountInRuppee = Math.round((price * discountValue/100)*100)/100;
-      discountInPercent = discountValue;
-      
-    }else{
-      discountInRuppee = discountValue
-      discountInPercent = Math.round((discountValue * 100 /price)*100)/100 
-    }
-    this.inventoryForm.patchValue({discountInPercent : discountInPercent})
-    this.inventoryForm.patchValue({discountInRuppee : discountInRuppee})
+  private fetchProduct() {
+    this.ipcService.database('product', 'fetch', '').then((data) => {
+      this.items = data;
+      console.log("ftech product", data);
+    })
   }
+  onSelectProduct(){
+    this.dialogService.openSelectionModel({}).subscribe(data=>{})
+  }
+
 
   onDone(){
     let data  =  this.inventoryForm.value;
     let action  = this.action == 'add' ? 'create' : 'update'
     console.log("before save product",this.inventoryForm.value)
-    this.ipcService.database('product',action,data).then(
+    this.ipcService.database('inventory',action,data).then(
       data=>{
-        console.log(`after ${action}  product`,data);
+        console.log(`after ${action}  inventory`,data);
         this.dialogRef.close(data);
       }
     ).catch(err => { console.log(err) });
   }
 
-  onImageChange(image){
-    this.inventoryForm.patchValue({ file : image});
-    console.log("On image change in product ",image)
-  }
 
-  
 }
 

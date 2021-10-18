@@ -57,6 +57,7 @@ import { SellItemComponent } from './layout/components/sell-item/sell-item.compo
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { ApplyDiscountComponent } from './layout/components/apply-discount/apply-discount.component';
 import { AddUpdateInventoryComponent } from './layout/components/add-update-inventory/add-update-inventory.component';
+import { SelectionModelComponent } from './layout/components/selection-model/selection-model.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { AddUpdateInventoryComponent } from './layout/components/add-update-inve
     SellItemComponent,
     ApplyDiscountComponent,
     AddUpdateInventoryComponent,
+    SelectionModelComponent,
 
   ],
   imports: [
