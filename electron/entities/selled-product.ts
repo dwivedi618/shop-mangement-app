@@ -23,7 +23,7 @@ export class SelledProduct {
     quantity: number;
 
     @Column({ type: "float", nullable: true })
-    salePrice: number;
+    price: number;
 
     @Column({ type: "float", default: 0 })
     fixedDiscount: number;

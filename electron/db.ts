@@ -140,7 +140,7 @@ export async function sell(connection, action: string, data?: any) {
                 selledproduct.sell = sell; 
                 selledproduct.item = product;
                 selledproduct.quantity = items[i].quantity;
-                selledproduct.salePrice = items[i].salePrice;
+                selledproduct.price = items[i].price;
                 selledproduct.fixedDiscount = items[i].fixedDiscount;
                 selledproduct.specialDiscount = items[i].specialDiscount;
 
