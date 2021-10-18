@@ -29,7 +29,7 @@ export class Product {
       unit: string;
 
       @Column({ nullable: true })
-      isSellByMeter: boolean;
+      isSellByMeter: string;
 
       @Column({ nullable: true })
       grade: string;
