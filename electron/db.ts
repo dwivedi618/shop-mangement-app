@@ -155,7 +155,6 @@ export async function sell(connection, action: string, data?: any) {
 
                 selledProducts.push(selledproduct);
             
-                console.log('sellllllllllllllllllllllllllllllllll----------', selledproduct);
             }
 
             
@@ -167,7 +166,7 @@ export async function sell(connection, action: string, data?: any) {
             return repository.update(id, data);
 
         case 'fetch':
-            return repository.find({ relations: ["selledProducts", "customer", "product"] });
+            return repository.find({ relations: ["selledProducts", "customer"] });
 
         case 'delete':
             return repository.remove(data);
