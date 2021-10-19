@@ -16,7 +16,9 @@ export class SelledProduct {
     @ManyToOne(type => Sell, sell => sell.selledProducts)
     sell: Sell;   //Foriegin key, references to sell
 
-    @ManyToOne(type => Product)
+    @ManyToOne(type => Product, {
+        eager: true
+    })
     item: Product;   //Foriegin key, references to product
 
     @Column({ type: "float" })

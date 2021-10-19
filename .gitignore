@@ -13,8 +13,8 @@
 #electron build
 electron/dist
 
-#uploaded file
-/src/assests/uploads
+#local data file
+psm.sql
 
 # dependencies
 /node_modules
