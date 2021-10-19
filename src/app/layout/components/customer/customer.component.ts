@@ -13,6 +13,7 @@ import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { DialogService } from 'src/app/services/dialog-service';
 import { IPCService } from 'src/app/services/ipc.service';
 import { Constant } from '../../constant/constant';
+import { Customer } from '../../models/customer';
 
 export interface CardItem {
   id: number;
@@ -59,14 +60,22 @@ export class CustomerComponent implements OnInit ,OnChanges{
   }
 
   onSelectItem(selectedCustomer) {
-    this.openCustomerDetails(selectedCustomer)
+    this.openAddUpdateCustomer(selectedCustomer)
+  }
+
+  openAddUpdateCustomer(selectedCustomer){
+    let customer = selectedCustomer
+    customer.action = 'update'
+    this.dialogService.checkCustomer(customer).subscribe(data=>{
+      console.log("customer update",data);
+      this.onDialogClose.emit(data)
+    })
   }
 
   openCustomerDetails(selectedCustomer){
     this.dialogService.checkCustomerDetails(selectedCustomer).subscribe(data=>{
       console.log("customer details",data);
       this.onDialogClose.emit(data)
-
       // this.ipcService.database('customer', data);
     })
   }

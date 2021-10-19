@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DialogService } from 'src/app/services/dialog-service';
 import { IPCService } from 'src/app/services/ipc.service';
 import { Constant } from '../../constant/constant';
 
@@ -51,14 +52,13 @@ export class CustomerListComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private router: Router,
+    private dialogService : DialogService,
     public ipcService: IPCService
   ) { }
   ngOnInit(): void {
-   
     this.fetchCustomer();
-    // this.checkItemDetails();
-
   }
+
   private fetchCustomer(){
     this.ipcService.database('customer', 'fetch', "").then(
       data => {
@@ -67,26 +67,16 @@ export class CustomerListComponent implements OnInit {
       }
     )
   }
-  checkCustomer() {
-    const data = {};
-    const dialogRef = this.dialog.open(AddUpdateCustomerComponent, {
-      width: '30rem',
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      hasBackdrop: false,
-      data: data,
-    });
+
+  openAddUpdateCustomer() {
+      this.dialogService.checkCustomer('').subscribe(data1 => {
+        console.log("received from update cart customer", data1);
+        this.fetchCustomer();
+      })
+    
   }
-  checkItemDetails() {
-    const data = {};
-    const dialogRef = this.dialog.open(ItemDetailsComponent, {
-      width: '40rem',
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      hasBackdrop: false,
-      data: data,
-    });
-  }
+
+
 
   getSearchText(searchText) {
     console.log(searchText)
@@ -99,19 +89,6 @@ export class CustomerListComponent implements OnInit {
   onCartData(cartItems) {
     this.cart = cartItems;
     console.log("cart into parent", this.cart)
-  }
-  getCartTotal() {
-    let cartAmount = 0;
-    for (let i = 0; i < this.cart.length; i++) {
-      cartAmount = cartAmount + (this.cart[i].mrp) * this.cart[i].quantity
-      // console.log(this.cart[i]);
-    }
-    return cartAmount
-  }
-
-  onViewCart() {
-    localStorage.setItem('currentCartDD', JSON.stringify(this.cart))
-    this.router.navigate(['../cart']);
   }
 
   onDialogClose(data){

@@ -66,6 +66,9 @@
             <button mat-icon-button class="mx-2 rounded-lg" disabled>
                 <mat-icon class="mat-icon-sm pt-0">search</mat-icon>
             </button>
+            <button mat-icon-button class="mx-2 rounded-lg" (click)="openAddUpdateCustomer()">
+                <mat-icon class="mat-icon-sm pt-0">add_box</mat-icon>
+            </button>
             <button mat-icon-button class="mx-2 rounded-lg" >
                 <mat-icon class="mat-icon-sm pt-0">refresh</mat-icon>
             </button>
@@ -91,33 +94,6 @@
         <app-customer [(data)]="items" [(action)]="action"  [(view)]="isListView" (shareCart)="onCartData($event)" (onDialogClose)="onDialogClose($event)"></app-customer>
         <app-data-missing-instruction *ngIf="!items?.length" [(instructions)]="CUSTOMER_MISSING"></app-data-missing-instruction>
 
-        <mat-toolbar *ngIf="cart?.length"
-        class="mat-elevation-z16 " 
-        style="position: absolute;bottom: 0;z-index: 15;">
-            <span class="px-5">{{cart?.length || '0'}} | <small>Selected</small></span>
-
-            <div class="spacer"></div>
-            <button mat-button class="" >
-                <mat-icon class="mat-icon-sm pt-1">print</mat-icon>
-                <span class="px-3text-uppercase">print</span>
-            </button>
-            <button mat-button class=""  >
-                <mat-icon class="mat-icon-sm pt-1">edit</mat-icon>
-                <span class="px-3text-uppercase">Update</span>
-            </button>
-            <button mat-button class="" >
-                <mat-icon class="mat-icon-sm pt-1">delete_outline</mat-icon>
-                <span class="px-3text-uppercase">Delete</span>
-            </button>
-            <button mat-button class=""  >
-                <mat-icon class="mat-icon-sm pt-1">read_more</mat-icon>
-                <span class="px-3text-uppercase">Detailed view</span>
-            </button>
-            <div class="spacer"></div>
-            <button mat-stroked-button class=""  >
-                <mat-icon class="mat-icon-sm pt-1">clear</mat-icon>
-                <span class="px-3text-uppercase">Clear Selection</span>
-            </button>
-        </mat-toolbar>
+        
     </mat-sidenav-content>
 </mat-sidenav-container>

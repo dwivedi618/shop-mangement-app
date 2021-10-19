@@ -21,7 +21,7 @@ export class Customer {
   @Column({ nullable: true })
   phone: string;
 
-  @Column({ type: 'string' })
+  @Column({ type: "varchar" })
   gender: Gender
 
   @Column({ nullable: true })
