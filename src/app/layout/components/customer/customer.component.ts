@@ -75,8 +75,9 @@ export class CustomerComponent implements OnInit ,OnChanges{
   openCustomerDetails(selectedCustomer){
     this.dialogService.checkCustomerDetails(selectedCustomer).subscribe(data=>{
       console.log("customer details",data);
-      this.onDialogClose.emit(data)
-      // this.ipcService.database('customer', data);
+      if(data== 'update'){
+        this.openAddUpdateCustomer(selectedCustomer);
+      }
     })
   }
 

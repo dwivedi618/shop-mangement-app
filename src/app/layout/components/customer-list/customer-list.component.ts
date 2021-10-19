@@ -73,7 +73,6 @@ export class CustomerListComponent implements OnInit {
         console.log("received from update cart customer", data1);
         this.fetchCustomer();
       })
-    
   }
 
 

@@ -27,19 +27,15 @@
                                     <span class="strong">{{localData?.name | titlecase}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
-                                    <span class="strong text-light">Sell Price</span>
+                                    <span class="strong text-light">Price</span>
                                     <div class="spacer"></div>
                                     <span class="strong">{{localData?.price | currency : 'INR'}}</span>
                                 </mat-list-item>
-                                <mat-list-item>
-                                    <span class="strong text-light">Offer Price</span>
-                                    <div class="spacer"></div>
-                                    <span class="strong">{{localData?.offerPrice | currency : 'INR'}}</span>
-                                </mat-list-item>
+                                
                                 <mat-list-item>
                                     <span class="strong text-light">Discount</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">{{(localData?.discountInPercentage/100 | percent)}} <span>|
+                                    <span class="strong">{{(localData?.discountInPercentage || '0')}}% <span>|
                                             {{localData?.discountInRuppee | currency : 'INR'}}</span></span>
                                 </mat-list-item>
 
@@ -54,9 +50,9 @@
                                     <span class="strong">{{localData?.make || 'unknown'}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
-                                    <span class="strong text-light">Meter</span>
+                                    <span class="strong text-light">Length in meter</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">{{localData?.meter || 'unknown'}}</span>
+                                    <span class="strong">{{localData?.length || 'unknown'}}</span>
                                 </mat-list-item>
 
                                 <mat-list-item>
@@ -71,8 +67,10 @@
                     </div>
                 </mat-tab>
                
-                <mat-tab label="Qr Code">
-                    <div style="min-height: 50vh;"></div>
+                <mat-tab label="Description">
+                    <div style="min-height: 50vh;">
+                        <p>{{localData?.description}}</p>
+                    </div>
                 </mat-tab>
             </mat-tab-group>
         </section>

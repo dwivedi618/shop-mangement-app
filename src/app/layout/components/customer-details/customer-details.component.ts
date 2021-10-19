@@ -72,5 +72,8 @@ export class CustomerDetailsComponent implements OnInit {
       this.dialogRef.close(data);
     });
   }
+  onEdit(){
+    this.dialogRef.close('update');
+  }
 }
 
