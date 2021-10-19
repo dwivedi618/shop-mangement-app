@@ -21,11 +21,16 @@
                                 <img src="{{localData.photo || 'assets/images/cool-background.png'}}" alt=""
                                     class="thumbnail-lg">
                             </figure>
-                            <mat-list dense class="w-100">
+                            <mat-list dense class="w-100 mt-1">
                                 <mat-list-item>
                                     <span class="strong text-light">Name</span>
                                     <div class="spacer"></div>
                                     <span class="strong">{{localData?.name | titlecase}}</span>
+                                </mat-list-item>
+                                <mat-list-item>
+                                    <span class="strong text-light">Gender</span>
+                                    <div class="spacer"></div>
+                                    <span class="strong">{{localData?.gender | titlecase}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
                                     <span class="strong text-light">Phone</span>
@@ -37,14 +42,8 @@
                                     <div class="spacer"></div>
                                     <span class="strong">{{localData?.address || 'unknown'}}</span>
                                 </mat-list-item>
-                                <mat-list-item>
-                                    <span class="strong text-light">Pending Balance</span>
-                                    <div class="spacer"></div>
-                                    <span class="strong">{{localData?.debt | currency:'INR' || 'unknown'}}</span>
-                                </mat-list-item>
+                            
                                 
-
-
                             </mat-list>
                         </div>
                     </div>

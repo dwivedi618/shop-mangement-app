@@ -11,20 +11,22 @@ import { compress } from './utility';
 
 export async function customer(connection, action: string, data?: any) {
     const repository = connection.getRepository(Customer);
-
+    let cust;
     switch (action) {
         case 'create':
             data.photo = data.photo && await compress(data.photo, 500, 500);
-            return repository.save(data);
+            cust = repository.save(data);
+            return cust;
 
         case 'update':
             const customer = repository.findOne(data.id);
-            customer.name = data.name;
-            customer.phone = data.phone;
-            customer.gender = data.gender;
-            customer.address = data.address;
-            customer.photo = data.photo && await compress(data.photo, 500, 500);
-            return repository.save(customer);
+            customer.name = data.name || customer.name;
+            customer.phone = data.phone || customer.phone;
+            customer.gender = data.gender || customer.gender;
+            customer.address = data.address || customer.address;
+            customer.photo = data.photo && await compress(data.photo, 500, 500) || customer.photo;
+            cust = repository.save(customer);
+            return cust;
 
         case 'fetch':
             return repository.find(data);

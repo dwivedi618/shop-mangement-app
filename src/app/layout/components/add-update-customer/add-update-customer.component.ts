@@ -22,7 +22,9 @@ export class AddUpdateCustomerComponent implements OnInit {
     @Inject (MAT_DIALOG_DATA) data : any
     ) { 
       this.localData = data;
-      this.action = data.action;
+      this.action = data?.id ? 'update' : 'add';
+      console.log('localData customer',data,this.action);
+      
   }
 
   ngOnInit(): void {
@@ -31,7 +33,7 @@ export class AddUpdateCustomerComponent implements OnInit {
       name : ['',[Validators.required]],
       phone : ['',[Validators.required,Validators.maxLength(10)]],
       address : ['',[Validators.required]],
-      photo : [this.imagePreview || ''],
+      photo : [],
       gender : ['']
 
     })
@@ -98,13 +100,9 @@ export class AddUpdateCustomerComponent implements OnInit {
       if(this.action == 'update') this.dialogRef.close(this.customerForm.value);
       if(this.action == 'add') this.dialogRef.close(this.customerForm.value);
       this.isLoading = true;
-
       return
 
     })
-
-    //return customer data to dialog
-    this.dialogRef.close(this.customerForm.value)
 
   }
 
