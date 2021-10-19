@@ -39,8 +39,9 @@ export class CartComponent implements OnInit {
     let data = <any>{action : 'add'};
     this.dialogService.checkCustomer(data).subscribe(data1 => {
       console.log("received cart customer", data1);
-      // localStorage.setItem('currentCustomer', JSON.stringify(data))
-      this.currentCustomer = data1
+      if(data && data.id){
+        this.currentCustomer = data1
+      }
     })
   }
 
@@ -50,8 +51,9 @@ export class CartComponent implements OnInit {
       data.action = 'update'
       this.dialogService.checkCustomer(data).subscribe(data1 => {
         console.log("received from update cart customer", data1);
-        // localStorage.setItem('currentCustomer', JSON.stringify(data))
-        this.currentCustomer = data1
+        if(data && data.id){
+          this.currentCustomer = data1
+        }
       })
     }
   }
