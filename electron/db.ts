@@ -18,10 +18,13 @@ export async function customer(connection, action: string, data?: any) {
             return repository.save(data);
 
         case 'update':
-            const id = data.id;
-            delete data.id;
-            data.photo = data.photo && await compress(data.photo, 500, 500);
-            return repository.update(id, data);
+            const customer = repository.findOne(data.id);
+            customer.name = data.name;
+            customer.phone = data.phone;
+            customer.gender = data.gender;
+            customer.address = data.address;
+            customer.photo = data.photo && await compress(data.photo, 500, 500);
+            return repository.save(customer);
 
         case 'fetch':
             return repository.find(data);
