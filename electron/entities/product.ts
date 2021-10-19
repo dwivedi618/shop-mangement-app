@@ -53,7 +53,7 @@ export class Product {
       @Column({ nullable: true })
       size: string;
 
-      @Column({ type: "longtext", nullable: true })
+      @Column({ type: "text", nullable: true })
       image: string;
 
       @OneToMany(type => Inventory, inventory => inventory.item)

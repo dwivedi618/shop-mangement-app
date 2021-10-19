@@ -15,7 +15,7 @@ export class Customer {
   @Column()
   name: string;
 
-  @Column({type: "longtext", nullable: true })
+  @Column({type: "text", nullable: true })
   photo: string;
 
   @Column({ nullable: true })

@@ -16,12 +16,12 @@ async function createWindow() {
     try {
 
         const connection = await createConnection({
-            type: "mysql",
-            host: DbConfig.host,
-            port: 3306,
-            username: DbConfig.user,
-            database: DbConfig.database,
-            password: DbConfig.password,
+            type: "sqlite",
+            // host: DbConfig.host,
+            // port: 3306,
+            // username: DbConfig.user,
+            database: 'psm.sql',
+            // password: DbConfig.password,
             entities: ["electron/dist/entities/*.js"],
             synchronize: true,
             logging: true
