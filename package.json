@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "electron": "ng build --base-href ./ && tsc --p electron && electron electron/dist/main.js",
+    "electron": "ng build --base-href ./ && tsc --p electron && electron --trace-warnings electron/dist/main.js",
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
@@ -38,6 +38,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.0",
     "sharp": "^0.29.1",
+    "sqlite3": "^5.0.2",
     "tslib": "^2.0.0",
     "typeorm": "^0.2.37",
     "zone.js": "~0.11.3"

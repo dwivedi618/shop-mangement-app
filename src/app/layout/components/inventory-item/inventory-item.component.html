@@ -6,7 +6,7 @@
         <small class="px-2">In Stock</small>
         <span class="strong px-2 my-1" >{{item?.quantity || 'N/A'}}</span>
       </div>
-      <img class="thumbnail-lg" src="{{item?.item?.file || 'assets/images/cool-background.png'}}" alt="">
+      <img class="thumbnail-lg" src="{{item?.item?.image || 'assets/images/cool-background.png'}}" alt="">
       <div class="card-item-details w-100">
         <mat-list dense class="w-100">
           <mat-list-item class="text-wrap-sm">
@@ -37,7 +37,7 @@
       <div style="width: 2rem;" class="layout">
         <span class="strong">{{i+1}}</span>
       </div>
-      <img class="thumbnail-sm" src="{{item?.item?.file || 'assets/images/cool-background.png'}}" alt="">
+      <img class="thumbnail-sm" src="{{item?.item?.image || 'assets/images/cool-background.png'}}" alt="">
       <div class="list-view-details">
         <mat-list dense>
           <mat-list-item class=" text-wrap-lg">

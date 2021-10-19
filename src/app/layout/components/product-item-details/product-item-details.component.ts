@@ -8,7 +8,7 @@ export interface productDetails{
   id : number,
   name: string,
   brand: string,
-  salePrice:number,
+  price:number,
   discountInPercentage : number,
   discountInRuppee :number,
   offerPrice :number,
@@ -45,9 +45,9 @@ export class ProductItemDetailsComponent implements OnInit {
       discountInPercent : [''],
       discountInRuppee : [''],
       description : [''],
-      isSellByMeter : [''],
+      sellBy : [''],
       length : [''],
-      file : ['']
+      image : ['']
     })
   }
 

@@ -1,6 +1,11 @@
-import { type } from "os";
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
+
+enum Gender {
+  MALE = 'male',
+  FEMALE = 'female',
+  OTHER = 'other'
+}
 @Entity()
 export class Customer {
 
@@ -15,6 +20,9 @@ export class Customer {
 
   @Column({ nullable: true })
   phone: string;
+
+  @Column({ type: 'string' })
+  gender: Gender
 
   @Column({ nullable: true })
   address: string;

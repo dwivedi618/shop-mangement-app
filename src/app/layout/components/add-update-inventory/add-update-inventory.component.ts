@@ -11,7 +11,7 @@ export interface productDetails{
   id : number,
   name: string,
   brand: string,
-  salePrice:number,
+  price:number,
   discountInPercentage : number,
   discountInRuppee :number,
   offerPrice :number,

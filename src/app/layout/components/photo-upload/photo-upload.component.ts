@@ -43,23 +43,23 @@ export class PhotoUploadComponent implements OnInit ,OnChanges{
     return null;
   }
   async onImagePicked(event: Event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    console.log("selected file",file);
+    const image = (event.target as HTMLInputElement).files[0];
+    console.log("selected image",image);
 
-    // let fileBuffer = Buffer.from(file)
+    // let fileBuffer = Buffer.from(image)
     // this.utliltService.compress(fileBuffer , 150,150)
-    this.getBase64(file).then((data : string)=>{
+    this.getBase64(image).then((data : string)=>{
       console.log("after image ---mini uploadeer",data);
 
       this.onImageChange.emit(data);
     })
   }
   
-  getBase64(file) {
+  getBase64(image) {
     
     return new Promise(resolve=>{
       const reader = new FileReader();
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(image);
       reader.onload = () => {
         console.log(reader.result);
         resolve(this.imagePreview = reader.result as string);

@@ -18,7 +18,7 @@
                     <div style="min-height: 50vh;">
                         <div class="d-flex" style="align-items: flex-start;">
                             <figure style="margin:1rem;">
-                                <img src="{{localData?.item?.file || 'assets/images/cool-background.png'}}" alt=""
+                                <img src="{{localData?.item?.image || 'assets/images/cool-background.png'}}" alt=""
                                     class="thumbnail-lg">
                             </figure>
                             <mat-list dense class="w-100">
@@ -60,7 +60,7 @@
                     <div style="min-height: 50vh;" class="mange-stock-tab">
                         <div class="d-flex" style="align-items: flex-start;">
                             <figure style="margin:1rem;">
-                                <img src="{{localData?.item?.file || 'assets/images/cool-background.png'}}" alt=""
+                                <img src="{{localData?.item?.image || 'assets/images/cool-background.png'}}" alt=""
                                     class="thumbnail-lg">
                             </figure>
                             <form [formGroup]="manageStockForm" class="w-100">
@@ -82,7 +82,7 @@
                                         </mat-form-field>
                                     </mat-list-item>
                                     <mat-list-item>
-                                        <span class="strong text-light">price Per {{localData?.item?.isSellByMeter == 'true' ? 'meter' : 'Item'}}</span>
+                                        <span class="strong text-light">price Per {{localData?.item?.sellBy == 'true' ? 'meter' : 'Item'}}</span>
                                         <div class="spacer"></div>
                                         <mat-form-field appearance="outline" class="">
                                             <mat-label>price Per Item</mat-label>

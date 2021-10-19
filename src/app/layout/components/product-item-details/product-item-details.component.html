@@ -17,7 +17,7 @@
                     <div style="min-height: 50vh;">
                         <div class="d-flex" style="align-items: flex-start;">
                             <figure style="margin:1rem;">
-                                <img src="{{localData?.file || 'assets/images/cool-background.png'}}" alt=""
+                                <img src="{{localData?.image || 'assets/images/cool-background.png'}}" alt=""
                                     class="thumbnail-lg">
                             </figure>
                             <mat-list dense class="w-100">
@@ -29,7 +29,7 @@
                                 <mat-list-item>
                                     <span class="strong text-light">Sell Price</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">{{localData?.salePrice | currency : 'INR'}}</span>
+                                    <span class="strong">{{localData?.price | currency : 'INR'}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
                                     <span class="strong text-light">Offer Price</span>

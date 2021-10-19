@@ -30,8 +30,8 @@ export class IPCService {
         }
     }
 
-    upload(file: string) {
-        ipcRenderer.invoke('upload', file)
+    upload(image: string) {
+        ipcRenderer.invoke('upload', image)
         .then(res => {
             console.log(res);
         })

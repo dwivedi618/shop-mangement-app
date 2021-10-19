@@ -82,21 +82,21 @@ export async function product(connection, action: string, data?: any) {
             product.discountInRuppee = data.discountInRuppee;
             product.grade = data.grade;
             product.make = data.make;
-            product.isSellByMeter = data.isSellByMeter;
+            product.sellBy = data.sellBy;
             product.length = data.length;
             product.price = data.price;
             product.productCode = data.productCode;
             product.size = data.size;
-            product.salePrice = data.salePrice;
+            product.price = data.price;
             product.unit = data.unit;
-            product.file = data.file && await compress(data.file, 500, 500);
+            product.image = data.image && await compress(data.image, 500, 500);
 
             return repository.save(product);
 
         case 'update':
             const id = data.id;
             delete data.id;
-            data.file = data.file && await compress(data.file, 500, 500);
+            data.image = data.image && await compress(data.image, 500, 500);
             return repository.update(id, data);
 
         case 'fetch':

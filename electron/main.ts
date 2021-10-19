@@ -7,7 +7,6 @@ import { AppConfig } from './config/app.conf';
 import { customer, product, inventory, sell, settings, user } from './db';
 
 let win: BrowserWindow;
-console.log(AppConfig.preloadPath);
 /**
  * createWindow create a native window
  * when electron app will reday
@@ -82,7 +81,6 @@ ipcMain.handle('database', async (event, arg) => {
     try {
 
         const connection = getConnection();
-        console.log(arg);
         const [item, action, data] = arg;
         switch (item) {
             case 'customer':
@@ -101,10 +99,9 @@ ipcMain.handle('database', async (event, arg) => {
 
             case 'settings':
                 return await settings(connection, action, data);
-            default:
-                console.log('This is the default option')
-                return 'Invalid item name'
         }
+
+        return { state: 2 }
     } catch (err) {
         console.log('Error in db handle:', err);
         return { state: 1 }

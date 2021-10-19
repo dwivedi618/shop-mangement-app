@@ -17,7 +17,7 @@
                 <div class="d-flex" style="align-items: flex-start;">
 
                     <div style="margin: 1rem;" class="d-flex flex-column">
-                        <app-photo-upload [(image)]="productForm.value.file"  (onImageChange)="onImageChange($event)"></app-photo-upload>
+                        <app-photo-upload [(image)]="productForm.value.image"  (onImageChange)="onImageChange($event)"></app-photo-upload>
                     </div>
                     <form [formGroup]="productForm" class="w-100 d-flex" style="align-items: flex-start;">
                         <mat-list dense class="w-100 ">
@@ -85,7 +85,7 @@
                                         <span class="strong text-light">Sell By (piece/meter)*</span>
                                         <div class="spacer"></div>
                                         <mat-form-field appearance="outline">
-                                            <mat-select formControlName="isSellByMeter">
+                                            <mat-select formControlName="sellBy">
                                                 <mat-option value="">Select Preference</mat-option>
                                                 <mat-option value="false">Sell by Pieces</mat-option>
                                                 <mat-option value="true">Sell by Meter</mat-option>

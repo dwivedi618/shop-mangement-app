@@ -10,7 +10,7 @@ export interface productDetails{
   id : number,
   name: string,
   brand: string,
-  salePrice:number,
+  price:number,
   discountInPercentage : number,
   discountInRuppee :number,
   offerPrice :number,
@@ -47,19 +47,18 @@ export class AddUpdateProductComponent implements OnInit {
       id : null,
       grade : [],
       name : [],
-      salePrice : [],
+      price : [],
       brand: [],
       productCode: [],
       size: [],
       make : [],
-      price : [],
       unit : [],
       discountInPercent : [],
       discountInRuppee : [],
       description : [],
-      isSellByMeter : [],
+      sellBy : [],
       length : [],
-      file : []
+      image : []
     })
 
     if(this.action == 'update'){
@@ -70,7 +69,6 @@ export class AddUpdateProductComponent implements OnInit {
   patchProductDataInForm(){
     this.productForm.patchValue({id : this.localData?.id})
     this.productForm.patchValue({name : this.localData?.name})
-    this.productForm.patchValue({salePrice : this.localData?.salePrice})
     this.productForm.patchValue({brand : this.localData?.brand})
     this.productForm.patchValue({productCode : this.localData?.productCode})
     this.productForm.patchValue({size : this.localData?.size})
@@ -82,8 +80,8 @@ export class AddUpdateProductComponent implements OnInit {
     this.productForm.patchValue({discountInRuppee : this.localData?.discountInRuppee})
     this.productForm.patchValue({length : this.localData?.length})
     this.productForm.patchValue({description : this.localData?.description})
-    this.productForm.patchValue({isSellByMeter : this.localData?.isSellByMeter})
-    this.productForm.patchValue({file : this.localData?.file})
+    this.productForm.patchValue({sellBy : this.localData?.sellBy})
+    this.productForm.patchValue({image : this.localData?.image})
     console.log("Mange Stock Form",this.productForm.value)
 
   }
@@ -116,7 +114,7 @@ export class AddUpdateProductComponent implements OnInit {
   }
 
   onImageChange(image){
-    this.productForm.patchValue({ file : image});
+    this.productForm.patchValue({ image : image});
     console.log("On image change in product ",image)
   }
 
