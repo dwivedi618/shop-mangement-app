@@ -143,7 +143,7 @@ export class CartComponent implements OnInit {
     billingInfo.finalPayableAmount = await this.getFinalPayableAmount();
     this.dialogService.openBillPreview(billingInfo).subscribe(data => {
       console.log("bill Preview Closed", data, this.currentCustomer);
-      if(data == true) { this.router.navigate(['']) }
+      if(data == true) { this.router.navigate(['./dashboard']) }
     })
   }
 }

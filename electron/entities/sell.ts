@@ -26,6 +26,9 @@ export class Sell {
     
     @Column({ type: 'float',default : 0 })
     discount: number;
+
+    @Column({ type: 'float' })
+    finalPayableAmount: number;
     
     @Column()
     receivedAmount: number;

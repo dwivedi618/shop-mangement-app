@@ -133,6 +133,7 @@ export async function sell(connection, action: string, data?: any) {
             sell.customer = await customerRepository.findOne(data.customer.id);
             sell.receiptNumber = data.receiptNumber;
             sell.discount = data.discount;
+            sell.finalPayableAmount = data.finalPayableAmount;
             sell.receivedAmount = data.receivedAmount;
             sell.paymentMode = data.paymentMode;
             sell.lastPaymentDate = new Date();
@@ -166,7 +167,7 @@ export async function sell(connection, action: string, data?: any) {
             return repository.update(id, data);
 
         case 'fetch':
-            return repository.find({ relations: ["selledProducts", "customer"] });
+            return repository.find({ relations: ["selledProducts", "customer", "product"] });
 
         case 'delete':
             return repository.remove(data);
