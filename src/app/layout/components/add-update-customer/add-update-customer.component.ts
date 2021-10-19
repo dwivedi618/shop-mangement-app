@@ -74,6 +74,8 @@ export class AddUpdateCustomerComponent implements OnInit {
     this.customerForm.patchValue({phone : customer?.phone});
     this.customerForm.patchValue({address : customer?.address});
     this.customerForm.patchValue({photo : customer?.photo});
+    this.customerForm.patchValue({gender : customer?.gender});
+
     this.action = 'update';
     })
   }
@@ -100,9 +102,6 @@ export class AddUpdateCustomerComponent implements OnInit {
       return
 
     })
-
-    //return customer data to dialog
-    this.dialogRef.close(this.customerForm.value)
 
   }
 
