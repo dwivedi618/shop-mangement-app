@@ -53,6 +53,8 @@ export class BillPreviewComponent implements OnInit {
       this.localData = data || null;
       this.action = this.localData?.action || 'new';
       this.receiptNumber =  this.localData?.receiptNumber || `RCN${Date.now()}` ;
+      this.paymentMode =  this.localData?.paymentMode || `cash` ;
+
       if(this.localData?.id) { this.action = "update" }
       else { this.action = 'create' }
       console.log("billing info",data,this.localData)
