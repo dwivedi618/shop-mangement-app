@@ -19,13 +19,15 @@ export async function customer(connection, action: string, data?: any) {
             return cust;
 
         case 'update':
-            const customer = repository.findOne(data.id);
+            const customer = await repository.findOne(data.id);
             customer.name = data.name || customer.name;
             customer.phone = data.phone || customer.phone;
             customer.gender = data.gender || customer.gender;
             customer.address = data.address || customer.address;
             customer.photo = data.photo && await compress(data.photo, 500, 500) || customer.photo;
-            cust = repository.save(customer);
+            cust = await repository.save(customer);
+            console.log('cuuuuussssssssttttttt', cust );
+            
             return cust;
 
         case 'fetch':
@@ -121,19 +123,20 @@ export async function sell(connection, action: string, data?: any) {
 
     switch (action) {
         case 'create':
+            console.log('Inside create--------->>>>>>>>>>', data);
             const productRepository = connection.getRepository(Product);
             const customerRepository = connection.getRepository(Customer);
             const selledProducts: SelledProduct[] = [];
             
             //Create a new sell record.
             const sell = new Sell();
-            sell.customer = customerRepository.findOne(data.customer.id);
+            sell.customer = await customerRepository.findOne(data.customer.id);
             sell.receiptNumber = data.receiptNumber;
             sell.discount = data.discount;
             sell.receivedAmount = data.receivedAmount;
             sell.paymentMode = data.paymentMode;
             sell.lastPaymentDate = new Date();
-            sell.selledProducts = selledProducts;
+            // sell.selledProducts = selledProducts;
             
             const items = data.cartItem;
             //Creating selled products and linking with sell object.
@@ -145,14 +148,16 @@ export async function sell(connection, action: string, data?: any) {
                 selledproduct.sell = sell; 
                 selledproduct.item = product;
                 selledproduct.quantity = items[i].quantity;
-                selledproduct.price = items[i].price;
-                selledproduct.fixedDiscount = items[i].fixedDiscount;
+                selledproduct.price = product.price;
+                selledproduct.fixedDiscount = product.discountInPercent;
                 selledproduct.specialDiscount = items[i].specialDiscount;
 
                 selledProducts.push(selledproduct);
             
+                console.log('sellllllllllllllllllllllllllllllllll----------', selledproduct);
             }
 
+            
             return repository.save(sell);
 
         case 'update':
