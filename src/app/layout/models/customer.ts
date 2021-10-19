@@ -4,4 +4,5 @@ export class Customer{
     photo : any;
     phone : number;
     address : string;
+    gender : string;
 }

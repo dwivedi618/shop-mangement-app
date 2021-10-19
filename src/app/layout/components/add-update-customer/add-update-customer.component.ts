@@ -31,7 +31,9 @@ export class AddUpdateCustomerComponent implements OnInit {
       name : ['',[Validators.required]],
       phone : ['',[Validators.required,Validators.maxLength(10)]],
       address : ['',[Validators.required]],
-      photo : [this.imagePreview || '']
+      photo : [this.imagePreview || ''],
+      gender : ['']
+
     })
 
     if(this.action == 'update'){
@@ -46,6 +48,8 @@ export class AddUpdateCustomerComponent implements OnInit {
     this.customerForm.patchValue({phone : this.localData?.phone});
     this.customerForm.patchValue({address : this.localData?.address});
     this.customerForm.patchValue({photo : this.localData?.photo});
+    this.customerForm.patchValue({gender : this.localData?.gender});
+
   }
 
   onImageChange(image : string){

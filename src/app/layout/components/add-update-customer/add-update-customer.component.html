@@ -27,9 +27,15 @@
                         <input matInput placeholder="Ex:Nikhil Ojha" formControlName="name">
                     </mat-form-field>
                     <mat-form-field appearance="outline" class="w-100">
-                        <mat-label>Address</mat-label>
-                        <textarea matInput placeholder="Ex:Banjaria 274704" formControlName="address"></textarea>
+                        <mat-label>Gender</mat-label>
+                        <mat-select formControlName="gender">
+                            <mat-option value=''>select gender</mat-option>
+                            <mat-option value='male'>MALE</mat-option>
+                            <mat-option value='female'>FEMALE</mat-option>
+                            <mat-option value='other'>OTHER</mat-option>
+                        </mat-select>                    
                     </mat-form-field>
+                   
                 </div>
 
             </form>
