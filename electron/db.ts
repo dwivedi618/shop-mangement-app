@@ -137,7 +137,7 @@ export async function sell(connection, action: string, data?: any) {
             sell.receivedAmount = data.receivedAmount;
             sell.paymentMode = data.paymentMode;
             sell.lastPaymentDate = new Date();
-            // sell.selledProducts = selledProducts;
+            sell.selledProducts = selledProducts;
             
             const items = data.cartItem;
             //Creating selled products and linking with sell object.
