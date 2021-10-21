@@ -14,7 +14,7 @@
 electron/dist
 
 #local data file
-psm.sql
+/psm.sql
 
 # dependencies
 /node_modules
