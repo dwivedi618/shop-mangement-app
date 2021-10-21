@@ -58,6 +58,8 @@ export class SellItemComponent implements OnInit,OnChanges {
 
   onSelectItem(selectedItem) {
     this.openAddUpdateProduct(selectedItem);
+    // this.openTakePayment(selectedItem);
+
   }
 
   openProductItemDetails(selectedItem){
@@ -75,6 +77,13 @@ export class SellItemComponent implements OnInit,OnChanges {
     selectedItem.action = 'update'
     selectedItem.cartItem = selectedItem.selledProducts
     this.dialogService.openBillPreview(selectedItem).subscribe(result=>{
+      this.onDialogClose.emit(result)
+    })
+  }
+  openTakePayment(selectedItem){
+    selectedItem.action = 'update'
+    selectedItem.cartItem = selectedItem.selledProducts
+    this.dialogService.openTakePayment(selectedItem).subscribe(result=>{
       this.onDialogClose.emit(result)
     })
   }

@@ -1,0 +1,148 @@
+<mat-toolbar class="bg-dark dialog-toolbar"
+    style="margin: -24px -24px 24px -24px;padding: 0 .4rem;border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;">
+    <button mat-button [mat-dialog-close]="false" class="bg-dark"><span>Cancel</span></button>
+    <div class="spacer"></div>
+    <small>Take payment</small>
+    <div class="spacer"></div>
+
+    <button mat-raised-button class="bg-green" (click)="onDone()">
+        <!-- <mat-icon class="mat-icon-sm pt-1">print</mat-icon> -->
+        <small>{{isLoading? 'please wait...' : 'Done'}}</small>
+    </button>
+</mat-toolbar>
+<table class="w-100 mb-1 wdialog-100 bg-ultra-light" style="margin: -24px -24px 24px -24px;padding: 0 .4rem;">
+
+    <tr>
+
+        <td align="left">
+    <tr>
+        <td align="left">
+    <tr>
+        <td><span class="text-light">Bill To</span></td>
+    </tr>
+    <tr>
+        <td><span class="text-light">Receipt No.</span></td>
+    </tr>
+    <tr>
+        <td> <span class="text-light">Date</span></td>
+    </tr>
+    <tr>
+        <td><span class="text-light"></span></td>
+    </tr>
+
+    </td>
+    <td align="left">
+        <tr>
+            <td> <span class="strong">{{localData?.customer?.name | titlecase}}</span></td>
+        </tr>
+        <tr>
+            <td><span class="strong text-uppercase">{{receiptNumber}}</span></td>
+        </tr>
+        <tr>
+            <td> <span class="strong">{{orderDate | date : 'short'}}</span></td>
+        </tr>
+        <tr>
+            <td><span class="text-light"></span></td>
+        </tr>
+
+
+    </td>
+    </tr>
+    </td>
+    <td align="right">
+        <tr>
+            <td align="left">
+        <tr *ngIf="localData?.discountInRuppee">
+            <td> <span class="text-light">Discount</span></td>
+        </tr>
+        <tr>
+            <td><span class="strong">Total </span></td>
+        </tr>
+        <tr>
+            <td><span class="text-light">Received ({{(paymentMode | uppercase) || 'N/A'}})</span></td>
+        </tr>
+        <tr>
+            <td><small class="text-light">Amount Due(INR)</small></td>
+        </tr>
+    </td>
+    <td align="right">
+
+        <tr *ngIf="localData?.discountInRuppee">
+            <td> <span class="text-light">- {{(localData?.discountInRuppee | currency:'INR')||
+                    0}}</span></td>
+        </tr>
+        <tr>
+            <td><span class="strong text-uppercase">{{localData?.finalPayableAmount |
+                    currency:'INR'}}</span></td>
+        </tr>
+        <tr>
+            <td><span class="text-light">{{(receivedAmount | currency:'INR') || 0}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td><small class="strong">{{(localData?.finalPayableAmount - receivedAmount | currency:'INR') ||
+                    'N/A'}}</small></td>
+        </tr>
+    </td>
+    </tr>
+    </td>
+    </tr>
+
+</table>
+<div mat-dialog-content class="">
+    <div class="">
+
+        <section class="container" style="min-height: 30vh;position: relative;">
+            <div style="min-height: 50vh;" class="mange-stock-tab">
+                <div class="w-100 d-flex bill-container" style="align-items: flex-start;">
+
+                    <div class="w-100 payment-container rounded-lg d-flex flex-column align-items-start  mt-2 "
+                        style="position: relative;min-height: 15vh;">
+                        <!-- //take payment ui -->
+                        <table class="w-100 " style="margin-top: 2rem;font-size: 12px;">
+                            <tr align="center">
+                                <td>Received Amount</td>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Received Amount</mat-label>
+                                        <input matInput type="number" [(ngModel)]="receivedAmount" placeholder="amount">
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                            <tr align="center">
+                                <td>Payment Method</td>
+                                <td>
+                                    <mat-form-field appearance="outline">
+                                        <mat-select [(ngModel)]="paymentMode">
+                                            <mat-option value=''>Select Payment Method</mat-option>
+                                            <mat-option value='cash'>Cash</mat-option>
+                                            <mat-option value='upi'>UPI</mat-option>
+                                            <mat-option value='Net-banking'>Net Banking</mat-option>
+                                            <mat-option value='other'>Other</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                a
+                            </tr>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<div mat-dialog-action class="d-flex" style="margin: 24px -24px -24px -24px;">
+    <button mat-button [mat-dialog-close]="false" class="w-50 bg-ultra-light right-radius">
+        <small>View Bill</small>
+    </button>
+    <button mat-raised-button [mat-dialog-close]="true" class="w-50 bg-green left-radius" cdkFocusInitial>
+        <small>{{isSavingOrder? 'please wait...' : 'Apply'}}</small>
+    </button>
+</div>

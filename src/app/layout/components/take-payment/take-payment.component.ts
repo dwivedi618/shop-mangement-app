@@ -22,11 +22,11 @@ export interface ProductDetails{
 }
 
 @Component({
-  selector: 'app-bill-preview',
-  templateUrl: './bill-preview.component.html',
-  styleUrls: ['./bill-preview.component.scss']
+  selector: 'app-take-payment',
+  templateUrl: './take-payment.component.html',
+  styleUrls: ['./take-payment.component.scss']
 })
-export class BillPreviewComponent implements OnInit {
+export class TakePaymentComponent implements OnInit {
   productForm : FormGroup
   orderDate = new Date()
   localData: any;
@@ -42,13 +42,12 @@ export class BillPreviewComponent implements OnInit {
   isLoading: boolean;
   isSavingOrder : boolean;
   msg: boolean;
-  finalPayableAmount: any;
 
   constructor(
     private fb: FormBuilder,
     private ipcService : IPCService,
     private alertService : AlertService,
-    private dialogRef : MatDialogRef<BillPreviewComponent>,
+    private dialogRef : MatDialogRef<TakePaymentComponent>,
     @Inject(MAT_DIALOG_DATA) data : ProductDetails
     ) {
       this.localData = data || null;
@@ -56,7 +55,7 @@ export class BillPreviewComponent implements OnInit {
       this.receiptNumber =  this.localData?.receiptNumber || `RCN${Date.now()}` ;
       this.paymentMode =  this.localData?.paymentMode || `cash` ;
       this.dueAmount =  this.localData?.finalPayableAmount - this.localData?.receivedAmount ;
-      this.finalPayableAmount = this.localData?.finalPayableAmount
+
 
       if(this.localData?.id) { this.action = "update" }
       else { this.action = 'create' }
@@ -67,16 +66,11 @@ export class BillPreviewComponent implements OnInit {
     this.receivedAmount = this.localData?.finalPayableAmount - (this.localData?.discountInRuppee || 0)
   }
 
-  
-
-
-
   onDone(){
-   
-    this.exportAsPDF()
+   this.submitPayment();
   }
 
-  onApply(){
+  submitPayment(){
     if(this.action == 'update') {
       this.alertService.alertActionDialog('Notification','Update not available','Okay').subscribe(data=>{
         this.dialogRef.close(true);
@@ -88,17 +82,16 @@ export class BillPreviewComponent implements OnInit {
     .subscribe( data => {
       console.log("confirmation",data);
       let sell = this.localData;
-      let dateNow = Date.now()
       sell.receivedAmount = this.receivedAmount || null;
       sell.paymentMode = this.paymentMode || null;
       sell.receiptNumber = this.receiptNumber;
 
       console.log("before save sell",sell)
       this.ipcService.database('sell', this.action, this.localData)
-      .then(data=>{
-        console.log("order saved",data);
-        this.alertService.alertActionDialog('Saved successfully',Constant.ORDER_SAVED_MSG,'Done').subscribe((data : Boolean)=>{
-          if(data) { this.dialogRef.close(true)}
+      .then(ipcData=>{
+        console.log("order saved",ipcData);
+        this.alertService.alertActionDialog('Saved successfully',Constant.ORDER_SAVED_MSG,'Done').subscribe((altData : Boolean)=>{
+          if(altData) { this.dialogRef.close(true)}
         })
         this.isSavingOrder = false;
       })
@@ -106,55 +99,10 @@ export class BillPreviewComponent implements OnInit {
     })
   }
 
-  exportAsPDF() {
-    this.isLoading = true
-		console.log("name->", )
 
-	
-		const options = {
-			background: 'white',
-			scale: 3
-		};
 
-		html2canvas(document.querySelector("#receipt"), options).then((canvas) => {
-
-			var img = canvas.toDataURL("image/PNG");
-			console.log("img from export Fuction", img);
-			var doc = new jsPDF("p", "mm", "a4", true);
-			var imgWidth = 210;
-			var pageHeight = 295;
-			var imgHeight = canvas.height * imgWidth / canvas.width;
-			var heightLeft = imgHeight;
-			const imgData = canvas.toDataURL('image/png')
-			var position = 0;
-
-			doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight + 15);
-			heightLeft -= pageHeight;
-
-			while (heightLeft >= 0) {
-				position = heightLeft - imgHeight;
-				doc.addPage();
-				doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight + 15);
-				heightLeft -= pageHeight;
-			}
-			return doc;
-		}).then((doc) => {
-			const fileName = "invoice"
-			doc.save(fileName + new Date().getDate() + '.pdf');
-      this.isLoading = false
-
-		});
-
-	}
-  onShare(){
-    let filePath = "/home/shivendra/Downloads/invoice22.pdf";
-    let phone = "+917827458618"
-    let a = document.createElement('a');
-    a.href = `https://web.whatsapp.com/send?phone=${phone}&attachment=${filePath}`
-    a.click();
-    console.log("a",a);
-  }
 }
 
 
  
+

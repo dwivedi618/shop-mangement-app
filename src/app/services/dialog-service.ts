@@ -12,6 +12,7 @@ import { BillPreviewComponent } from '../layout/components/bill-preview/bill-pre
 import { ChangePasswordComponent } from '../layout/components/change-password/change-password.component';
 import { AddUpdateInventoryComponent } from '../layout/components/add-update-inventory/add-update-inventory.component';
 import { SelectionModelComponent } from '../layout/components/selection-model/selection-model.component';
+import { TakePaymentComponent } from '../layout/components/take-payment/take-payment.component';
 
 @Injectable({
   providedIn: 'root'
@@ -175,7 +176,23 @@ export class DialogService {
     let afterCloseResult = new Subject;
     const data = {};
     const bdialogRef = this.dialog.open(BillPreviewComponent, {
-      width: '70rem',
+      width: '40rem',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: true,
+      data: billingInfo,
+    });
+    bdialogRef.afterClosed().subscribe(result => {
+      afterCloseResult.next(result)
+    })
+    return afterCloseResult.asObservable();
+  }
+
+  openTakePayment(billingInfo) {
+    let afterCloseResult = new Subject;
+    const data = {};
+    const bdialogRef = this.dialog.open(TakePaymentComponent, {
+      width: '40rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
       hasBackdrop: true,

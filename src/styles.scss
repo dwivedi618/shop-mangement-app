@@ -147,6 +147,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     mat-toolbar.dialog-toolbar{
         min-width: calc(100% + 48px);
     }
+    .wdialog-100{
+        min-width: calc(100% + 48px);
+    }
     .mat-icon-sm{
         font-size: 1rem;
     }
@@ -427,4 +430,14 @@ button.btn-box{
 .dashboard-section{
     -webkit-animation: fadeIn ease-in-out 1000ms;
      animation: fadeIn ease-in-out 1000ms;
+}
+button.right-radius{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+button.left-radius{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
 }

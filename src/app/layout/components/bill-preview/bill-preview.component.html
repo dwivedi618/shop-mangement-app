@@ -3,10 +3,13 @@
     <div class="spacer"></div>
     <small>Billing Preview</small>
     <div class="spacer"></div>
-   
-    <button mat-raised-button class="bg-green" (click)="onDone()">
+
+    <button *ngIf="receivedAmount == finalPayableAmount" mat-raised-button class="bg-green" (click)="onDone()">
         <mat-icon class="mat-icon-sm pt-1">print</mat-icon>
-    <small>{{isLoading? 'please wait...' : 'Print'}}</small>
+        <small>{{isLoading? 'please wait...' : 'Print'}}</small>
+    </button>
+    <button *ngIf="receivedAmount != finalPayableAmount" mat-raised-button class="bg-green" (click)="onDone()">
+        <small>Take payment</small>
     </button>
 </mat-toolbar>
 <div mat-dialog-content class="">
@@ -14,9 +17,9 @@
 
         <section class="container" style="min-height: 65vh;position: relative;">
             <div style="min-height: 50vh;" class="mange-stock-tab">
-                <div class="w-100 d-flex bill-container" style="align-items: flex-start;" >
+                <div class="w-100 d-flex bill-container" style="align-items: flex-start;">
                     <div id="receipt" style="margin: 1rem;border: 1px solid #ccc;padding: 1rem;"
-                        class="w-50 d-flex flex-column rounded-lg">
+                        class="w-100 d-flex flex-column rounded-lg">
                         <table class="w-100 ">
                             <tr class="border_bottom">
                                 <td></td>
@@ -70,7 +73,8 @@
                                     <td><span class="text-light"></span></td>
                                 </tr>
                                 <tr>
-                                    <td><small class="strong">{{(localData?.finalPayableAmount - receivedAmount | currency:'INR') || 'N/A'}}</small></td>
+                                    <td><small class="strong">{{(localData?.finalPayableAmount - receivedAmount |
+                                            currency:'INR') || 'N/A'}}</small></td>
                                 </tr>
                             </td>
                             </tr>
@@ -78,15 +82,15 @@
                             </tr>
                         </table>
                         <table class="w-100 py-2 rounded-lg"
-                            style="border-top: 1px solid rgba(204, 204, 204, 0.541);border-bottom: 1px solid rgba(204, 204, 204, 0.541);font-size: 12px;">
-                            <thead>
+                            style="border-top: 1px solid rgba(180, 170, 170, 0.541);border-bottom: 1px solid rgba(204, 204, 204, 0.541);font-size: 12px;">
+                            <thead style="border-top:5px solid red; background:var(--ultra-light);height: 2rem;">
                                 <tr>
-                                    <th align="left">Items</th>
+                                    <th align="center">Items</th>
                                     <th>Quantity</th>
 
-                                    <th align="right">Price</th>
+                                    <th align="center">Price</th>
                                     <th>Discount INR</th>
-                                    <th align="right">Amount</th>
+                                    <th align="center">Amount</th>
 
                                 </tr>
                             </thead>
@@ -94,9 +98,18 @@
                                 <tr align="center" *ngFor="let item of localData?.cartItem">
                                     <td align="left">{{item?.item?.grade || item?.item?.make || item.name }}</td>
                                     <td>{{item?.quantity }}</td>
-                                    <td align="right">{{(item?.item?.price || item?.price) | currency:'INR'}}</td>
+                                    <td align="left">
+                                        <span style="margin-left: 20%;"> 
+                                            {{(item?.item?.price || item?.price) | currency:'INR'}}
+                                        </span>
+                                    </td>
                                     <td>- {{item?.discountInRuppee | currency:'INR'}}</td>
-                                    <td align="right">{{ (item?.quantity * (item?.price - item?.discountInRuppee)) | currency:'INR'}}
+                                    <td align="left">
+                                        <span style="margin-left: 20%;"> 
+                                            {{ (item?.quantity * (item?.price - (item?.discountInRuppee || 0))) |
+                                                currency:'INR'}}
+                                        </span>
+                                        
                                     </td>
                                 </tr>
                             </tbody>
@@ -104,86 +117,48 @@
                         <table class="w-100">
                             <tr align="right">
                                 <td align="right">
-                                    <tr>
-                                    <td align="right">
-                                    <tr *ngIf="localData?.discountInRuppee">
-                                        <td> <span class="text-light">Discount</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="strong">Total </span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="text-light">Received ({{(paymentMode | uppercase)  || 'N/A'}})</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><small class="text-light">Amount Due(INR)</small></td>
-                                    </tr>
-                                    </td>
-                                    <td align="right">
-
-                                        <tr *ngIf="localData?.discountInRuppee">
-                                            <td> <span class="text-light">- {{(localData?.discountInRuppee | currency:'INR')||
-                                                    0}}</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="strong text-uppercase">{{localData?.finalPayableAmount |
-                                                    currency:'INR'}}</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="text-light">{{(receivedAmount | currency:'INR') || 0}}</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><small class="strong">{{(localData?.finalPayableAmount - receivedAmount | currency:'INR') || 'N/A'}}</small></td>
-                                        </tr>
-                                    </td>
-                                    </tr>
-                                </td>
+                            <tr>
+                                <td align="right">
+                            <tr *ngIf="localData?.discountInRuppee">
+                                <td> <span class="text-light">Discount</span></td>
                             </tr>
-                        </table>
-
-                    </div>
-                    <div class="w-50 payment-container rounded-lg d-flex flex-column align-items-start  mt-2 " style="position: relative;min-height: 60vh;">
-                        <div class="w-100 bg-ultra-light" style="position: relative;top: 0rem;padding: 1rem 0rem;">
-                            <h3 class="text-center  p-0 m-0">Take Payment</h3>
-                        </div>
-                        
-                        <table class="w-100 mt-2" style="margin-top: 2rem;">
-                            <tr align="center">
-                                <td>Received Amount</td>
-                                <td>
-                                    <mat-form-field appearance="outline">
-                                        <mat-label>Received Amount</mat-label>
-                                        <input matInput type="number" [(ngModel)]="receivedAmount" placeholder="amount">
-                                    </mat-form-field>
-                                </td>
+                            <tr>
+                                <td><span class="strong">Total </span></td>
                             </tr>
-                            <tr align="center">
-                                <td>Payment Method</td>
-                                <td>
-                                    <mat-form-field appearance="outline">
-                                        <mat-select [(ngModel)]="paymentMode">
-                                            <mat-option value=''>Select Payment Method</mat-option>
-                                            <mat-option value='cash'>Cash</mat-option>
-                                            <mat-option value='upi'>UPI</mat-option>
-                                            <mat-option value='Net-banking'>Net Banking</mat-option>
-                                            <mat-option value='other'>Other</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                    
+                            <tr>
+                                <td><span class="text-light">Received ({{(paymentMode | uppercase) || 'N/A'}})</span>
                                 </td>
                             </tr>
                             <tr>
-                                
+                                <td><small class="text-light">Amount Due(INR)</small></td>
                             </tr>
+                            </td>
+                            <td align="right">
 
+                                <tr *ngIf="localData?.discountInRuppee">
+                                    <td> <span class="text-light">- {{(localData?.discountInRuppee | currency:'INR')||
+                                            0}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="strong text-uppercase">{{localData?.finalPayableAmount |
+                                            currency:'INR'}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="text-light">{{(receivedAmount | currency:'INR') || 0}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><small class="strong">{{(localData?.finalPayableAmount - receivedAmount |
+                                            currency:'INR') || 'N/A'}}</small></td>
+                                </tr>
+                            </td>
+                            </tr>
+                            </td>
+                            </tr>
                         </table>
-                        
-                        <div  style="position: absolute;bottom: 0rem;width: 100%;">
-                            <button class="w-100 bg-green" mat-button (click)="onApply()" >{{isSavingOrder? 'please wait...' : 'Apply'}}</button>
-                        </div>
 
                     </div>
+
                 </div>
             </div>
         </section>

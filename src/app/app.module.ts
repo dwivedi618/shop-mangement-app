@@ -59,6 +59,7 @@ import { ApplyDiscountComponent } from './layout/components/apply-discount/apply
 import { AddUpdateInventoryComponent } from './layout/components/add-update-inventory/add-update-inventory.component';
 import { SelectionModelComponent } from './layout/components/selection-model/selection-model.component';
 import { LoadingScreenComponent } from './layout/components/loading-screen/loading-screen.component';
+import { TakePaymentComponent } from './layout/components/take-payment/take-payment.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { LoadingScreenComponent } from './layout/components/loading-screen/loadi
     AddUpdateInventoryComponent,
     SelectionModelComponent,
     LoadingScreenComponent,
+    TakePaymentComponent,
 
   ],
   imports: [
