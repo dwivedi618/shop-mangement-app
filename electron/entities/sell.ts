@@ -40,7 +40,8 @@ export class Sell {
     lastPaymentDate: Date;
     
     @OneToMany(type => SelledProduct, selledProduct => selledProduct.sell, {
-        cascade: true
+        cascade: true,
+        eager: true
     })
     selledProducts: SelledProduct [];
 

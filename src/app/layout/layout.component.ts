@@ -2,6 +2,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { ServiceListComponent } from './components/service-list/service-list.component';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-layout',
@@ -33,6 +34,7 @@ export class LayoutComponent implements OnInit {
   constructor(
     private dialog:MatDialog,
     private activatedRoute:ActivatedRoute,
+    private alert : AlertService,
     private router : Router,
     ) { 
       let links = this.primaryLinks
@@ -71,6 +73,9 @@ export class LayoutComponent implements OnInit {
       disableClose : true,
       data: data,
     });
+  }
+  testLoader(){
+    this.alert.startLoader('','','').subscribe()
   }
 
 }

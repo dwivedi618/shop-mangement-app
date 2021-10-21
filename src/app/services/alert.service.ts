@@ -7,6 +7,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { AlertWithActionComponent } from '../layout/components/alert-with-action/alert-with-action.component';
 import { AlertComponent } from '../layout/components/alert/alert.component';
 import { MatDialog } from '@angular/material/dialog';
+import { LoadingScreenComponent } from '../layout/components/loading-screen/loading-screen.component';
 
 @Injectable({
   providedIn: 'root'
@@ -99,7 +100,22 @@ alertActionDialog(alertTitle , message ,action): Observable<any> {
   return afterCloseResult.asObservable();
 }
 
-
+startLoader(alertTitle , message ,action): Observable<any> {
+  let afterCloseResult = new Subject;
+  const dialogRef = this.dialog.open(LoadingScreenComponent, {
+    
+    disableClose : true,
+    hasBackdrop: true,
+    
+    data: {alertTitle, message , action },
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    afterCloseResult.next(result)
+  })
+  return afterCloseResult.asObservable();
+}
 
   
 }
+
+
