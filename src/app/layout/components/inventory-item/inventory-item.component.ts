@@ -28,19 +28,19 @@ export interface CardItem {
   templateUrl: './inventory-item.component.html',
   styleUrls: ['./inventory-item.component.scss']
 })
-export class InventoryItemComponent implements OnInit ,OnChanges{
+export class InventoryItemComponent implements OnInit, OnChanges {
   @ViewChild('decreamentbtn') decreamentbtn;
   @Input() data;
   @Input() cartItems;
   @Input() view: Boolean;
-  @Output() onDialogClose  = new EventEmitter<any>();
+  @Output() onDialogClose = new EventEmitter<any>();
 
 
 
   items = [];
   isListView: Boolean;
 
-  constructor(private dialog : MatDialog,private dialogService : DialogService,private ipcService : IPCService) {}
+  constructor(private dialog: MatDialog, private dialogService: DialogService, private ipcService: IPCService) { }
   ngOnChanges() {
     this.isListView = this.view;
     this.items = this.data;
@@ -55,22 +55,27 @@ export class InventoryItemComponent implements OnInit ,OnChanges{
   }
 
   onSelectItem(selectedItem) {
-    this.dialogService.checkInventoryItemDetails(selectedItem).subscribe(data=>{
-      console.log("Inventory Item details",data);
-      this.onDialogClose.emit(data)
-    })
+    this.openAddUpdateInventory(selectedItem);
   }
 
 
-  checkItemDetails() {
-    const data = {};
-    const dialogRef = this.dialog.open(InventoryItemDetailsComponent, {
-      width: '40rem',
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      hasBackdrop: false,
-      data: data,
-    });
+
+
+  openAddUpdateInventory(selectedItem) {
+    this.dialogService.addUpdateInventory(selectedItem).subscribe((data) => {
+      console.log("after close", data);
+      this.onDialogClose.emit(data)
+    })
+  }
+  openInventoryItemDetails(selectedItem) {
+    this.dialogService.checkInventoryItemDetails(selectedItem).subscribe(data => {
+      console.log("product item details ", data)
+      data == 'update' ? this.openAddUpdateInventory(selectedItem) : doNothing()
+    })
+
+    function doNothing() {
+      return
+    }
   }
 }
 

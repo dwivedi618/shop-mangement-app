@@ -56,9 +56,11 @@ export class InventoryItemDetailsComponent implements OnInit {
     let action  = this.action == 'add' ? 'create' : 'update'
     console.log("Mange Stock Form",this.manageStockForm.value)
     this.ipcService.database('inventory','update',data).then(
-      data=>{
-        console.log(`after ${action}  inventory`,data);
-        this.dialogRef.close(data);
+      res=>{
+        if(res.status){
+          console.log(`after ${action}  inventory`,res.data);
+          this.dialogRef.close(res.data);
+        }
       }
     ).catch(err => { console.log(err) });
   }

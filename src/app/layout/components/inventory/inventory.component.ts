@@ -39,10 +39,11 @@ export class InventoryComponent implements OnInit {
   }
 
   fetchIventory() {
-    this.ipcService.database('inventory', 'fetch', '').then(data => {
-      this.items = data
-      console.log("fetch inventory", data);
-
+    this.ipcService.database('inventory', 'fetch', '').then(res => {
+      if(res.status){
+        this.items = res.data
+        console.log("fetch inventory", res);
+      }
     })
   }
 

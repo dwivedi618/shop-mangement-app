@@ -97,11 +97,13 @@ export class BillPreviewComponent implements OnInit {
 
       console.log("before save sell",sell)
       this.ipcService.database('sell', this.action, this.localData)
-      .then(data=>{
-        console.log("order saved",data);
-        this.alertService.alertActionDialog('Saved successfully',Constant.ORDER_SAVED_MSG,'Done').subscribe((data : Boolean)=>{
-          if(data) { this.dialogRef.close(true)}
-        })
+      .then(res=>{
+        if(res.status){
+          console.log("order saved",res);
+          this.alertService.alertActionDialog('Saved successfully',Constant.ORDER_SAVED_MSG,'Done').subscribe((data : Boolean)=>{
+            if(data) { this.dialogRef.close(true)}
+          })
+        }
         this.isSavingOrder = false;
       })
       .catch(err=>{ this.isSavingOrder = false;})

@@ -106,9 +106,11 @@ export class AddUpdateProductComponent implements OnInit {
     let action  = this.action == 'add' ? 'create' : 'update'
     console.log("before save product",this.productForm.value)
     this.ipcService.database('product',action,data).then(
-      data=>{
-        console.log(`after ${action}  product`,data);
-        this.dialogRef.close(data);
+      res=>{
+        if(res.status){
+          console.log(`after ${action}  product`,res);
+          this.dialogRef.close(res.data);
+        }
       }
     ).catch(err => { console.log(err) });
   }

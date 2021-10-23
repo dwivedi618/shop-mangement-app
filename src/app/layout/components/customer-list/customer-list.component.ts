@@ -61,9 +61,11 @@ export class CustomerListComponent implements OnInit {
 
   private fetchCustomer(){
     this.ipcService.database('customer', 'fetch', "").then(
-      data => {
-        this.items = data
-        console.log("data ng On changes", data)
+      res => {
+        if(res.status){
+          this.items = res.data
+          console.log("data ng On changes", res)
+        }
       }
     )
   }

@@ -91,11 +91,13 @@ export class TakePaymentComponent implements OnInit {
 
       console.log("before save sell",sell)
       this.ipcService.database('sell', this.action, sell)
-      .then(ipcData=>{
-        console.log("order saved",ipcData);
-        this.alertService.alertActionDialog('Saved successfully',Constant.ORDER_SAVED_MSG,'Done').subscribe((altData : Boolean)=>{
-          if(altData) { this.dialogRef.close(true)}
-        })
+      .then(res=>{
+        if(res.status){
+          console.log("order saved",res);
+          this.alertService.alertActionDialog('Saved successfully',Constant.ORDER_SAVED_MSG,'Done').subscribe((altData : Boolean)=>{
+            if(altData) { this.dialogRef.close(true)}
+          })
+        }
         this.isSavingOrder = false;
       })
       .catch(err=>{ this.isSavingOrder = false;})

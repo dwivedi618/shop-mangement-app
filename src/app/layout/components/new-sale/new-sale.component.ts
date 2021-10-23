@@ -63,9 +63,11 @@ export class NewSaleComponent implements OnInit {
   
   }
   private fetchProduct(){
-    this.ipcService.database('product','fetch','').then((data)=>{
-      this.items = data;
-      console.log("ftech product",this.items);
+    this.ipcService.database('product','fetch','').then((res)=>{
+      if(res.status){
+        this.items = res.data
+        console.log("fetch inventory", res);
+      }
     })
   }
   checkCustomer() {

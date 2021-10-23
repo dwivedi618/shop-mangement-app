@@ -26,7 +26,7 @@
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline" class="">
                                     <mat-label>Name</mat-label>
-                                    <input matInput placeholder="name" formControlName="name">
+                                    <input matInput placeholder="name" formControlName="name" >
                                 </mat-form-field>
                             </mat-list-item>
                             <mat-list-item>
@@ -34,7 +34,7 @@
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline" class="">
                                     <mat-label>Grade</mat-label>
-                                    <input matInput placeholder="Grade" formControlName="grade">
+                                    <input matInput placeholder="Grade" formControlName="grade" >
                                 </mat-form-field>
                             </mat-list-item>
                             <mat-list-item>
@@ -42,7 +42,7 @@
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline" class="">
                                     <mat-label>Make</mat-label>
-                                    <input matInput placeholder="Make" formControlName="make">
+                                    <input matInput placeholder="Make" formControlName="make" >
                                 </mat-form-field>
                             </mat-list-item>
                             <mat-list-item>
@@ -50,7 +50,7 @@
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline" class="">
                                     <mat-label>Length</mat-label>
-                                    <input matInput type="number" placeholder="length" formControlName="length">
+                                    <input matInput type="number" placeholder="length" formControlName="length" >
                                 </mat-form-field>
                             </mat-list-item>
                             
@@ -59,14 +59,14 @@
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline" class="">
                                     <mat-label>Price ₹</mat-label>
-                                    <input matInput type="number" placeholder="Price" formControlName="price">
+                                    <input matInput type="number" placeholder="Price" formControlName="price" >
                                 </mat-form-field>
                             </mat-list-item>
                             <mat-list-item>
                                 <span class="strong text-light">Unit*</span>
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline" class="">
-                                    <mat-select formControlName="unit">
+                                    <mat-select formControlName="unit" >
                                         <mat-option value="">Select</mat-option>
                                         <mat-option value="piece">Piece</mat-option>
                                         <mat-option value="meter">Meter</mat-option>
@@ -84,7 +84,7 @@
                                     <mat-list-item>
                                         <span class="strong text-light">Sell By (piece/meter)*</span>
                                         <div class="spacer"></div>
-                                        <mat-form-field appearance="outline">
+                                        <mat-form-field appearance="outline" >
                                             <mat-select formControlName="sellBy">
                                                 <mat-option value="">Select Preference</mat-option>
                                                 <mat-option value="false">Sell by Pieces</mat-option>
@@ -106,7 +106,7 @@
                                         <div class="spacer"></div>
                                         <mat-form-field appearance="outline" class="">
                                             <mat-label>Ruppee</mat-label>
-                                            <input matInput type="number" placeholder="INR" formControlName="discountInRuppee" (keyup)="onDiscountChanged(productForm.value.price,$event.target.value,'ruppee')">
+                                            <input matInput type="number" placeholder="INR" formControlName="discountInRuppee" (keyup)="onDiscountChanged(productForm.value.price,$event.target.value,'ruppee')" >
                                         </mat-form-field>
                                     </mat-list-item>
                                    
@@ -115,11 +115,9 @@
                                     <span class="strong text-light">Description</span>
                                     <mat-form-field appearance="outline" class="w-100 mt-2">
                                         <!-- <mat-label>Description</mat-label> -->
-                                        <textarea matInput placeholder="Description" rows="6" formControlName="description"></textarea>
+                                        <textarea matInput placeholder="Description" rows="6" formControlName="description" ></textarea>
                                     </mat-form-field>
                                 </div>
-                                
-                            
                         </div>
                     </form>
                 </div>

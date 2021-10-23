@@ -17,7 +17,7 @@
 
 
                 <mat-list dense class="w-100 ">
-                    <mat-list-item>
+                    <mat-list-item *ngIf="action !='update'">
                         <span class="strong text-light">Product</span>
                         <div class="spacer"></div>
                         <mat-form-field appearance="outline">

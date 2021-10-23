@@ -56,29 +56,32 @@ export class LoginComponent implements OnInit {
 
 
 
-    this.ipcService.database('user','fetch','').then(users => {
+    this.ipcService.database('user','fetch','').then(res => {
       this.isLogging = false;
-      console.log("login result", users,this.password)
-      users.forEach(user => {
-        if(user.password == this.password){
-          sessionStorage.setItem('psmUser',JSON.stringify(user));
-          console.log("login success",user);
-
-          this.router.navigate(['']);
-          return
-        }else{
-          console.log("login failed",user);
-          this.isLogging = false;
-          this.MSG = Constant.INVALID_PASSWORD_MSG;
-          this.password = ''
-    
-          setTimeout(()=>{
-            this.MSG = '';
-    
-          },4000)
-
-        }
-      });
+      if(res.status){
+        let users = res.data;
+        console.log("login result", users,this.password)
+        users.forEach(user => {
+          if(user.password == this.password){
+            sessionStorage.setItem('psmUser',JSON.stringify(user));
+            console.log("login success",user);
+  
+            this.router.navigate(['']);
+            return
+          }else{
+            console.log("login failed",user);
+            this.isLogging = false;
+            this.MSG = Constant.INVALID_PASSWORD_MSG;
+            this.password = ''
+      
+            setTimeout(()=>{
+              this.MSG = '';
+      
+            },4000)
+  
+          }
+        });
+      }
     }).catch(error=>{throw new Error})
   }
 

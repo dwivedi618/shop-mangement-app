@@ -146,6 +146,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     }
     mat-toolbar.dialog-toolbar{
         min-width: calc(100% + 48px);
+        border-bottom-left-radius: 0!important;
+        border-bottom-left-radius: 0!important;
+
     }
     .wdialog-100{
         min-width: calc(100% + 48px);

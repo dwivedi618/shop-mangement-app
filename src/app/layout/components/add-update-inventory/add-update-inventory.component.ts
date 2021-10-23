@@ -49,7 +49,8 @@ export class AddUpdateInventoryComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data : Product
     ) {
       this.localData = data || null;
-      this.action = this.localData?.action || 'add';
+      this.action = this.localData?.id ? 'update' : 'add';
+
       
       console.log("data",data,this.localData)
      }
@@ -85,9 +86,11 @@ export class AddUpdateInventoryComponent implements OnInit {
   }
 
   private fetchProduct() {
-    this.ipcService.database('product', 'fetch', '').then((data) => {
-      this.items = data;
-      console.log("ftech product", data);
+    this.ipcService.database('product', 'fetch', '').then((res) => {
+      if(res.status){
+        this.items = res.data;
+        console.log("ftech product", res);
+      }
     })
   }
   onSelectProduct(){
@@ -100,9 +103,11 @@ export class AddUpdateInventoryComponent implements OnInit {
     let action  = this.action == 'add' ? 'create' : 'update'
     console.log("before save product",this.inventoryForm.value)
     this.ipcService.database('inventory',action,data).then(
-      data=>{
-        console.log(`after ${action}  inventory`,data);
-        this.dialogRef.close(data);
+      res=>{
+        if(res.status){
+          console.log(`after ${action}  inventory`,res);
+          this.dialogRef.close(res.data);
+        }
       }
     ).catch(err => { console.log(err) });
   }

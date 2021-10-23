@@ -63,11 +63,15 @@ export class AddUpdateCustomerComponent implements OnInit {
   onBlurCustomerPhone(){
     if(this.action == 'update') return;
     let phone = this.customerForm.value.phone; 
-    this.ipcService.database('customer','fetch','').then(customers =>{
-      let customer : Customer = customers.filter(c => {
-        return c.phone == phone
-      })[0];
-      console.log("customer already exists ",customer)
+    let customer : Customer;
+    this.ipcService.database('customer','fetch','').then(res =>{
+      if(res.status){
+        console.log("fetch customer", res);
+        let customers = res.data
+        customer = customers.filter(c => {
+          return c.phone == phone
+        })[0];
+      }
     
     if(!customer?.phone) {return} ;//return if phone does not match any customer
 
@@ -93,15 +97,17 @@ export class AddUpdateCustomerComponent implements OnInit {
     let data : Customer = this.customerForm.value;
     console.log("customer",data)
     //api call to save customer 
-    this.ipcService.database("customer",action ,data).then(data=>{
-      console.log("after ipcservice customer",action,data);
-      if(data && data?.id) this.customerForm.patchValue({id : data?.id });
-      console.log("after customer form ",action,this.customerForm.value);
-      if(this.action == 'update') this.dialogRef.close(this.customerForm.value);
-      if(this.action == 'add') this.dialogRef.close(this.customerForm.value);
-      this.isLoading = true;
-      return
-
+    this.ipcService.database("customer",action ,data).then(res=>{
+      if(res.status){
+        let customer = res.data;
+        console.log("after ipcservice customer",action,data);
+        if(data && data?.id) this.customerForm.patchValue({id : customer?.id });
+        console.log("after customer form ",action,this.customerForm.value);
+        if(this.action == 'update') this.dialogRef.close(this.customerForm.value);
+        if(this.action == 'add') this.dialogRef.close(this.customerForm.value);
+        this.isLoading = true;
+        return
+      }
     })
 
   }

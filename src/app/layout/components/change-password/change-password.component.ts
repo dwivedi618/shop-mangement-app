@@ -33,9 +33,12 @@ export class ChangePasswordComponent implements OnInit {
 
   private getSystemUser(){
     let currentUserId = this.localData?.id
-    this.ipcService.database('user','fetch','').then(users=>{
-      this.currentUser = users.filter(user => user.id == currentUserId)[0]
-      console.log("user found",this.currentUser)
+    this.ipcService.database('user','fetch','').then(res=>{
+      if(res.status){
+        let users = res.data
+        this.currentUser = users.filter(user => user.id == currentUserId)[0]
+        console.log("user found",this.currentUser)
+      }
     })
 
   }
@@ -52,9 +55,11 @@ export class ChangePasswordComponent implements OnInit {
         let data = user;
         data.password = this.newPassword;
         console.log("before change password",data)
-        this.ipcService.database('user','update',data).then(data=>{
-          console.log("after change password",data);
-          this.dialogRef.close(this.currentUser)
+        this.ipcService.database('user','update',data).then(res=>{
+          if(res.status){
+            console.log("after change password",res);
+            this.dialogRef.close(this.currentUser)
+          }
         })
       }else {
         this.msg = 'New Password should match with Confirm Password'
