@@ -6,6 +6,7 @@ import { User } from './entities/user';
 import { Settings } from './entities/settings';
 import { SelledProduct } from './entities/selled-product';
 import { compress } from './utility';
+import { Payment } from 'entities/payment';
 
 // const connection = getConnection();
 
@@ -170,6 +171,24 @@ export async function sell(connection, action: string, data?: any) {
 
         case 'delete':
             return repository.remove(data);
+
+    }
+
+}
+
+export async function payment(connection, action: string, data?: any) {
+
+    const paymentRepository = connection.getRepository(Payment);
+    const sellRepository = connection.getRepository(Sell);
+
+    const payment = new Payment();
+
+    switch (action) {
+        case 'create':
+            payment.amount = data.amount;
+            payment.sell = await sellRepository.findOne(data.sellId)
+            payment.discription = data.discription;
+            return paymentRepository.save(payment);
 
     }
 
