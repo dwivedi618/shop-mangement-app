@@ -1,10 +1,13 @@
 import "reflect-metadata";
-import * as path from 'path';
 import { app, BrowserWindow, ipcMain, screen, Menu} from "electron";
 import {createConnection, Connection, getConnection, Db } from "typeorm";
 import { DbConfig }  from './config/db.conf';
 import { AppConfig } from './config/app.conf';
-import { customer, product, inventory, sell, settings, user } from './db';
+import { customer, product, inventory, sell, settings, user, payment } from './db';
+enum Status {
+    FAILURE = 0,
+    SUCCESS = 1
+}
 
 let win: BrowserWindow;
 /**
@@ -79,38 +82,53 @@ app.on('window-all-closed', () => {
  */
 ipcMain.handle('database', async (event, arg) => {
     try {
-
+        const response = {
+            status: Status.SUCCESS,
+            data: null
+        }
         const connection = getConnection();
         const [item, action, data] = arg;
         switch (item) {
             case 'customer':
-                return await customer(connection, action, data);
-
+                response.data = await customer(connection, action, data);
+                break;
             case 'product':
-                return await product(connection, action, data);
+                response.data = await product(connection, action, data);
+                break;
 
             case 'inventory':
-                return await inventory(connection, action, data);
+                response.data = await inventory(connection, action, data);
+                break;
 
             case 'sell':
-                return await sell(connection, action, data);
+                response.data = await sell(connection, action, data);
+                break;
+            
+            case 'payment':
+                response.data = await payment(connection, action, data);
+                break;
+            
+                
             case 'user':
-                return await user(connection, action, data);
+                response.data = await user(connection, action, data);
+                break;
 
             case 'settings':
-                return await settings(connection, action, data);
+                response.data = await settings(connection, action, data);
+                break;
         }
 
-        return { state: 2 }
+        return response;
     } catch (err) {
-        console.log('Error in db handle:', err);
-        return { state: 1 }
+        console.log('Error in db handler:', err);
+        throw new Error(`Request could not be resolved.\n Error: ${err}`)
     }
 });
 
-// ipcMain.handle('insert', async (event, arg) => {
-//     console.log(event, arg);
-// });
+//Creates the backup of database to download
+ipcMain.handle('backup', async (event, arg) => {
+    console.log(event, arg);
+});
 
 // ipcMain.handle('update', async (event, arg) => {
 //     console.log(event, arg);
