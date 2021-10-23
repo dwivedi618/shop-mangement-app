@@ -88,17 +88,7 @@ export class NewSaleComponent implements OnInit {
       data: data,
     });
   }
-  checkServiceList() {
-    const data = {};
-    const dialogRef = this.dialog.open(ServiceListComponent, {
-      
-      maxWidth: '100vw',
-      maxHeight: '100vh',
-      hasBackdrop: true,
-      disableClose : true,
-      data: data,
-    });
-  }
+
 
   getSearchText(searchText){
     console.log(searchText)

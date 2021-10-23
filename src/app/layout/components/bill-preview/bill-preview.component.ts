@@ -55,8 +55,10 @@ export class BillPreviewComponent implements OnInit {
       this.action = this.localData?.action || 'new';
       this.receiptNumber =  this.localData?.receiptNumber || `RCN${Date.now()}` ;
       this.paymentMode =  this.localData?.paymentMode || `cash` ;
-      this.dueAmount =  this.localData?.finalPayableAmount - this.localData?.receivedAmount ;
+      this.dueAmount =  this.localData?.finalPayableAmount - (this.localData?.receivedAmount || 0)- (this.localData?.discount || 0) ;
       this.finalPayableAmount = this.localData?.finalPayableAmount
+      this.receivedAmount = this.localData?.receivedAmount || ''
+
 
       if(this.localData?.id) { this.action = "update" }
       else { this.action = 'create' }
@@ -64,7 +66,7 @@ export class BillPreviewComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.receivedAmount = this.localData?.finalPayableAmount - (this.localData?.discountInRuppee || 0)
+    // this.receivedAmount = this.localData?.finalPayableAmount - (this.localData?.discountInRuppee || 0)
   }
 
   

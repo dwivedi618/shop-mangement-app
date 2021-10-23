@@ -26,14 +26,12 @@
     <tr>
         <td> <span class="text-light">Date</span></td>
     </tr>
-    <tr>
-        <td><span class="text-light"></span></td>
-    </tr>
+
 
     </td>
     <td align="left">
         <tr>
-            <td> <span class="strong">{{localData?.customer?.name | titlecase}}</span></td>
+            <td> <span class="strong">{{(localData?.customer?.name | titlecase)|| 'N/A'}}</span></td>
         </tr>
         <tr>
             <td><span class="strong text-uppercase">{{receiptNumber}}</span></td>
@@ -41,9 +39,7 @@
         <tr>
             <td> <span class="strong">{{orderDate | date : 'short'}}</span></td>
         </tr>
-        <tr>
-            <td><span class="text-light"></span></td>
-        </tr>
+
 
 
     </td>
@@ -58,11 +54,11 @@
         <tr>
             <td><span class="strong">Total </span></td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td><span class="text-light">Received ({{(paymentMode | uppercase) || 'N/A'}})</span></td>
-        </tr>
+        </tr> -->
         <tr>
-            <td><small class="text-light">Amount Due(INR)</small></td>
+            <td><span class="strong">Amount Due</span></td>
         </tr>
     </td>
     <td align="right">
@@ -75,13 +71,13 @@
             <td><span class="strong text-uppercase">{{localData?.finalPayableAmount |
                     currency:'INR'}}</span></td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td><span class="text-light">{{(receivedAmount | currency:'INR') || 0}}</span>
             </td>
-        </tr>
+        </tr> -->
         <tr>
-            <td><small class="strong">{{(localData?.finalPayableAmount - receivedAmount | currency:'INR') ||
-                    'N/A'}}</small></td>
+            <td><span class="strong">{{(dueAmount | currency:'INR') ||
+                    'N/A'}}</span></td>
         </tr>
     </td>
     </tr>
@@ -97,38 +93,27 @@
                 <div class="w-100 d-flex bill-container" style="align-items: flex-start;">
 
                     <div class="w-100 payment-container rounded-lg d-flex flex-column align-items-start  mt-2 "
-                        style="position: relative;min-height: 15vh;">
+                        style="position: relative;min-height: 15vh;font-size: 12px;">
                         <!-- //take payment ui -->
-                        <table class="w-100 " style="margin-top: 2rem;font-size: 12px;">
-                            <tr align="center">
-                                <td>Received Amount</td>
-                                <td>
-                                    <mat-form-field appearance="outline">
-                                        <mat-label>Received Amount</mat-label>
-                                        <input matInput type="number" [(ngModel)]="receivedAmount" placeholder="amount">
-                                    </mat-form-field>
-                                </td>
-                            </tr>
-                            <tr align="center">
-                                <td>Payment Method</td>
-                                <td>
-                                    <mat-form-field appearance="outline">
-                                        <mat-select [(ngModel)]="paymentMode">
-                                            <mat-option value=''>Select Payment Method</mat-option>
-                                            <mat-option value='cash'>Cash</mat-option>
-                                            <mat-option value='upi'>UPI</mat-option>
-                                            <mat-option value='Net-banking'>Net Banking</mat-option>
-                                            <mat-option value='other'>Other</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                a
-                            </tr>
-
-                        </table>
+                        <div>
+                            <h4>Receive Amount</h4>
+                            <mat-form-field appearance="outline">
+                                <!-- <mat-label>Received Amount</mat-label> -->
+                                <input matInput type="number" [(ngModel)]="receivedAmount" placeholder="amount">
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <h4>Payment Method</h4>
+                            <mat-form-field appearance="outline">
+                                <mat-select [(ngModel)]="paymentMode">
+                                    <mat-option value=''>Select Payment Method</mat-option>
+                                    <mat-option value='cash'>Cash</mat-option>
+                                    <mat-option value='upi'>UPI</mat-option>
+                                    <mat-option value='Net-banking'>Net Banking</mat-option>
+                                    <mat-option value='other'>Other</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
 
                     </div>
                 </div>
@@ -139,10 +124,10 @@
 </div>
 
 <div mat-dialog-action class="d-flex" style="margin: 24px -24px -24px -24px;">
-    <button mat-button [mat-dialog-close]="false" class="w-50 bg-ultra-light right-radius">
+    <button (click)="onBillView()"mat-button  class="w-50 bg-ultra-light right-radius">
         <small>View Bill</small>
     </button>
-    <button mat-raised-button [mat-dialog-close]="true" class="w-50 bg-green left-radius" cdkFocusInitial>
+    <button (click)="submitPayment()" mat-raised-button  class="w-50 bg-green left-radius" cdkFocusInitial>
         <small>{{isSavingOrder? 'please wait...' : 'Apply'}}</small>
     </button>
 </div>
