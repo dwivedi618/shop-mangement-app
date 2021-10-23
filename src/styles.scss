@@ -254,6 +254,15 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     transition: all 0.2s linear
   }
 
+  .thumbnail-background{
+    height: 15rem;
+    width: 100%;
+    border-radius: 0.2rem;
+    flex-shrink: 0;
+    object-fit: cover;
+    transition: all 0.2s linear
+  }
+
   .thumbnail-sm{
     height: 4rem;
     width: 4rem;

@@ -129,9 +129,9 @@ export class CartComponent implements OnInit {
       this.onTakePayment();
     } else {
       //add customer for current order
-      this.onTakePayment();
+      // this.onTakePayment();
 
-      // this.checkCustomer()
+      this.checkCustomer()
     }
   }
 

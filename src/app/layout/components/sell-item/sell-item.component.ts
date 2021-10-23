@@ -63,14 +63,14 @@ export class SellItemComponent implements OnInit,OnChanges {
   }
 
   openProductItemDetails(selectedItem){
-    this.dialogService.checkProductItemDetails(selectedItem).subscribe(data=>{
-      console.log("product item details ",data)
-      data == 'update' ? this.openAddUpdateProduct(selectedItem) : doNothing()
-    })
+    // this.dialogService.checkProductItemDetails(selectedItem).subscribe(data=>{
+    //   console.log("product item details ",data)
+    //   data == 'update' ? this.openAddUpdateProduct(selectedItem) : doNothing()
+    // })
 
-    function doNothing(){
-      return
-    }
+    // function doNothing(){
+    //   return
+    // }
   }
 
   openAddUpdateProduct(selectedItem){

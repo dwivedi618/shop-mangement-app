@@ -4,11 +4,14 @@
         <div class="column-nav-layout" >
         <mat-nav-list dense style="padding-top:0">
 
-            <button mat-button (click)="testLoader()">test loader</button>
+            <!-- <button mat-button (click)="testLoader()">test loader</button> -->
 
             <a mat-list-item *ngFor="let link of primaryLinks" routerLink="{{link.path}}" class="layout" 
             routerLinkActive="bg-mygradient-secondary" #rla="routerLinkActive" >
-                <mat-icon matListIcon [class.activeLink]="rla.isActive">{{link.icon}}</mat-icon>
+            <div matListIcon >
+                <mat-icon  [class.activeLink]="rla.isActive">{{link.icon}}</mat-icon>
+
+            </div>
                 <p matLine [class.activeLink]="rla.isActive"> {{link.name | uppercase}}</p>
             </a>
         </mat-nav-list>
