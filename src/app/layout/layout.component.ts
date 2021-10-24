@@ -14,13 +14,13 @@ export class LayoutComponent implements OnInit {
    * primary links
    */
   primaryLinks = [
-    { path : 'neworder',icon :'add', name : 'New Order' },
+    { path : 'neworder',icon :'add', name : 'New Sell' },
     // { path : 'dashboard',icon :'grid_view', name : 'Dashboard' },
     { path : 'inventory',icon :'inventory', name : 'Inventory' },
     { path : 'product',icon :'dry_cleaning', name : 'Product' },
     { path : 'customer',icon :'groups', name : 'Customer' },
     // { path : 'purchase',icon :'money', name : 'Purchase' },
-    { path : 'sale',icon :'sell', name : 'sale' },
+    { path : 'sale',icon :'sell', name : 'Sell History' },
     { path : 'settings',icon :'settings', name : 'Settings' },
   ]  
   settingLinks = [

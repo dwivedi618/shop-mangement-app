@@ -59,7 +59,7 @@ export class TakePaymentComponent implements OnInit {
       this.action = this.localData?.action || 'new';
       this.receiptNumber =  this.localData?.receiptNumber || `RCN${Date.now()}` ;
       this.paymentMode =  this.localData?.paymentMode || `cash` ;
-      this.dueAmount =  this.localData?.finalPayableAmount - this.localData?.receivedAmount ;
+      this.dueAmount =  this.localData?.finalPayableAmount - (this.localData?.receivedAmount || 0) -  (this.localData?.discount || 0);
       this.amount = this.dueAmount
 
 
@@ -89,6 +89,7 @@ export class TakePaymentComponent implements OnInit {
       sell.receivedAmount = this.amount || 0;
       sell.paymentMode = this.paymentMode || 'cash';
       sell.receiptNumber = this.receiptNumber;
+      sell.description = this.description;
       
 
       console.log("before save sell",sell)
@@ -108,7 +109,7 @@ export class TakePaymentComponent implements OnInit {
 
   onPaymentUpdate(){
     this.isSavingOrder = true;
-    this.alertService.alertActionDialog('Are you sure?',Constant.ORDER_SUBMIT_WARNING_MSG,'Yes , Save')
+    this.alertService.alertActionDialog('Are you sure?',Constant.PAYMENT_SUBMIT_WARNING_MSG,'Yes , Save')
     .subscribe( data => {
       console.log("payment  -----",data);
       let payment = <any>{}
@@ -124,7 +125,7 @@ export class TakePaymentComponent implements OnInit {
       .then(res=>{
         if(res.status){
           console.log("payment Saved",res);
-          this.alertService.alertActionDialog('Saved successfully',Constant.ORDER_SAVED_MSG,'Done').subscribe((altData : Boolean)=>{
+          this.alertService.alertActionDialog('Saved successfully',Constant.PAYMENT_SAVED_MSG,'Done').subscribe((altData : Boolean)=>{
             if(altData) { this.dialogRef.close(true)}
           })
         }
@@ -139,6 +140,8 @@ export class TakePaymentComponent implements OnInit {
     sell.receivedAmount = this.receivedAmount || null;
     sell.paymentMode = this.paymentMode || null;
     sell.receiptNumber = this.receiptNumber;
+    sell.description = this.description;
+
     this.dialogService.openBillPreview(sell).subscribe(data => {
       console.log("bill Preview Closed", data);
       // if(data == true) { this.router.navigate(['./dashboard']) }

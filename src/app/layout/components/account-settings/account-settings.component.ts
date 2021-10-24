@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DialogService } from 'src/app/services/dialog-service';
 
 @Component({
@@ -10,6 +11,7 @@ export class AccountSettingsComponent implements OnInit {
 
   psmUser = <any>{}
   constructor(
+    private router : Router,
     private dialogService : DialogService
   ) { }
 
@@ -24,6 +26,7 @@ export class AccountSettingsComponent implements OnInit {
 
   onLock(){
     sessionStorage.removeItem('psmUser');
+    this.router.navigate([''])
   }
 
 }

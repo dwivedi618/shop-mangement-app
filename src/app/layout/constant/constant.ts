@@ -1,9 +1,10 @@
 import { SearchType } from './../models/filter';
 export class Constant {
   static RESET_ORDER_WARNING_MSG = `This will remove all you current selected item.`;
-  static ORDER_SUBMIT_WARNING_MSG = `To save this order`;
-  static ORDER_SAVED_MSG = `Order Saved Successfully . Payment Recorded you can print your receipt any time from 'Sale'`;
-
+  static ORDER_SUBMIT_WARNING_MSG = `To save this Order`;
+  static PAYMENT_SUBMIT_WARNING_MSG = `To save this Payment`;
+  static ORDER_SAVED_MSG = `Order Saved Successfully . You can print your receipt any time from 'SELL HISTORY'`;
+  static PAYMENT_SAVED_MSG = `Payment Saved Successfully . You can print your receipt any time from 'SELL HISTORY'`;
   static INVALID_PASSWORD_MSG = `Incorrect password`;
   static PRODUCT_MISSING_INS1 = `Prodcut not available!`;
   static PRODUCT_MISSING_INS2 = `Try refreshing or add product`;
@@ -13,6 +14,7 @@ export class Constant {
     text2: '',
     action: '../customer',
   };
+  
   static PRODUCT_MISSING = {
     text1: 'Product not available!',
     text2: '',

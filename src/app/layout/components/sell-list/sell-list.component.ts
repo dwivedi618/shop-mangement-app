@@ -313,6 +313,10 @@ export class SellListComponent implements OnInit {
     this.fetchSellList();
   }
 
+  onApplyFilter(data){
+    console.log("Filter Applied",data)
+    this.items = data
+  }
 
 }
 

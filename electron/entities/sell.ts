@@ -47,7 +47,8 @@ export class Sell {
     selledProducts: SelledProduct [];
 
     @OneToMany(type => Payment, payment => payment.sell, {
-        eager: true
+        eager: true,
+        cascade :true
     })
     payments: Payment [];
 

@@ -65,5 +65,9 @@ export class InventoryComponent implements OnInit {
     this.fetchIventory();
   }
 
+  onApplyFilter(data){
+    console.log("Filter Applied",data)
+    this.items = data
+  }
 
 }

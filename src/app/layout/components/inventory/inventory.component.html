@@ -1,70 +1,7 @@
 <mat-sidenav-container class="sidenav-newsale-container">
     <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="true" position="end">
-        <mat-toolbar class="shadow" style="position: absolute;top: 0;z-index: 5;background: white;">
-            <div class="spacer"></div>
-            <small>Filter</small>
-            <div class="spacer"></div>
-        </mat-toolbar>
-        <mat-accordion style="margin-top: 3rem;" class="shadow">
-            <mat-expansion-panel class="shadow mat-elevation-z0">
-                <mat-expansion-panel-header>
-                    <small class="strong">Category</small>
-                    <div class="spacer"></div>
-                </mat-expansion-panel-header>
+        <app-filter [(data)]="items" (onFilter)="onApplyFilter($event)"></app-filter>
 
-                <mat-selection-list dense >
-                    <mat-list-option *ngFor="let category of garmentsCategory">
-                        <small class="strong text-light">{{category.name }}</small>
-                    </mat-list-option>
-                </mat-selection-list>
-            </mat-expansion-panel>
-            <mat-expansion-panel class="shadow mat-elevation-z0">
-                <mat-expansion-panel-header>
-                    <small class="strong">Price</small>
-                    <div class="spacer"></div>
-                </mat-expansion-panel-header>
-
-                <mat-selection-list dense >
-                    <mat-list-option *ngFor="let category of garmentsCategory">
-                        <small class="strong text-light">{{category.name }}</small>
-                    </mat-list-option>
-                </mat-selection-list>
-            </mat-expansion-panel>
-            <mat-expansion-panel class="shadow mat-elevation-z0">
-                <mat-expansion-panel-header>
-                    <small class="strong">Color</small>
-                    <div class="spacer"></div>
-                </mat-expansion-panel-header>
-
-                <mat-selection-list dense >
-                    <mat-list-option *ngFor="let category of garmentsCategory">
-                        <small class="strong text-light">{{category.name }}</small>
-                    </mat-list-option>
-                </mat-selection-list>
-            </mat-expansion-panel>
-            <mat-expansion-panel class="shadow mat-elevation-z0">
-                <mat-expansion-panel-header>
-                    <small class="strong">Size</small>
-                    <div class="spacer"></div>
-                </mat-expansion-panel-header>
-
-                <mat-selection-list dense >
-                    <mat-list-option *ngFor="let category of garmentsCategory">
-                        <small class="strong text-light">{{category.name }}</small>
-                    </mat-list-option>
-                </mat-selection-list>
-            </mat-expansion-panel>
-        </mat-accordion>
-        
-        
-        <mat-toolbar style="position: absolute;bottom: 0;z-index: 5;background: white">
-            <button mat-stroked-button class="w-100 mr-1">
-                <span class="fancy-text text-uppercase">Reset</span>
-            </button>
-            <button mat-raised-button class="bg-green w-100">
-                <span class="fancy-text text-uppercase">Apply</span>
-            </button>
-        </mat-toolbar>
     </mat-sidenav>
 
     <mat-sidenav-content style="position: relative;">

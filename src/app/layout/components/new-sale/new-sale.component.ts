@@ -129,4 +129,8 @@ export class NewSaleComponent implements OnInit {
       }
     })
   }
+  onApplyFilter(data){
+    console.log("Filter Applied",data)
+    this.items = data
+  }
 }

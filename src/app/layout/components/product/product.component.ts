@@ -95,4 +95,8 @@ export class ProductComponent implements OnInit {
       this.fetchProduct();
   }
 
+  onApplyFilter(data){
+    console.log("Filter Applied",data)
+    this.items = data
+  }
 }
