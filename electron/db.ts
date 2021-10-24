@@ -189,7 +189,9 @@ export async function payment(connection, action: string, data?: any) {
             sell.receivedAmount += (+data.amount);
             payment.sell = sell;
             payment.amount = data.amount;
-            payment.discription = data.discription;
+            payment.description = data.description;
+            payment.paymentMode = data.paymentMode;
+
             await paymentRepository.save(payment);
             return sellRepository.save(sell);
 

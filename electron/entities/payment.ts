@@ -7,14 +7,17 @@ export class Payment {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @ManyToOne( type => Sell)
+    @ManyToOne( type => Sell, sell => sell.payments)
     sell: Sell;
 
     @Column({type: 'float'})
     amount: number;
 
-    @Column()
-    discription: string;
+    @Column({nullable: true})
+    paymentMode: string;
+
+    @Column({nullable: true})
+    description: string;
 
     @CreateDateColumn()
     paymentDate: number;

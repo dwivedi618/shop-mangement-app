@@ -43,6 +43,8 @@ export class TakePaymentComponent implements OnInit {
   isLoading: boolean;
   isSavingOrder : boolean;
   msg: boolean;
+  amount: any;
+  description: any;
 
   constructor(
     private fb: FormBuilder,
@@ -58,6 +60,7 @@ export class TakePaymentComponent implements OnInit {
       this.receiptNumber =  this.localData?.receiptNumber || `RCN${Date.now()}` ;
       this.paymentMode =  this.localData?.paymentMode || `cash` ;
       this.dueAmount =  this.localData?.finalPayableAmount - this.localData?.receivedAmount ;
+      this.amount = this.dueAmount
 
 
       if(this.localData?.id) { this.action = "update" }
@@ -75,25 +78,52 @@ export class TakePaymentComponent implements OnInit {
 
   submitPayment(){
     if(this.action == 'update') {
-      this.alertService.alertActionDialog('Notification','Update not available','Okay').subscribe(data=>{
-        this.dialogRef.close(true);
-      })
-      return
+      return this.onPaymentUpdate();
     }
+
     this.isSavingOrder = true;
     this.alertService.alertActionDialog('Are you sure?',Constant.ORDER_SUBMIT_WARNING_MSG,'Yes , Save')
     .subscribe( data => {
       console.log("confirmation",data);
       let sell = this.localData;
-      sell.receivedAmount = this.receivedAmount || null;
-      sell.paymentMode = this.paymentMode || null;
+      sell.receivedAmount = this.amount || 0;
+      sell.paymentMode = this.paymentMode || 'cash';
       sell.receiptNumber = this.receiptNumber;
+      
 
       console.log("before save sell",sell)
       this.ipcService.database('sell', this.action, sell)
       .then(res=>{
         if(res.status){
           console.log("order saved",res);
+          this.alertService.alertActionDialog('Saved successfully',Constant.ORDER_SAVED_MSG,'Done').subscribe((altData : Boolean)=>{
+            if(altData) { this.dialogRef.close(true)}
+          })
+        }
+        this.isSavingOrder = false;
+      })
+      .catch(err=>{ this.isSavingOrder = false;})
+    })
+  }
+
+  onPaymentUpdate(){
+    this.isSavingOrder = true;
+    this.alertService.alertActionDialog('Are you sure?',Constant.ORDER_SUBMIT_WARNING_MSG,'Yes , Save')
+    .subscribe( data => {
+      console.log("payment  -----",data);
+      let payment = <any>{}
+      payment.amount = this.amount
+      payment.sellId = this.localData?.id
+      payment.description = this.description
+      payment.paymentMode = this.paymentMode || 'cash';
+
+
+
+      console.log("before save payment",payment)
+      this.ipcService.database('payment', 'create', payment)
+      .then(res=>{
+        if(res.status){
+          console.log("payment Saved",res);
           this.alertService.alertActionDialog('Saved successfully',Constant.ORDER_SAVED_MSG,'Done').subscribe((altData : Boolean)=>{
             if(altData) { this.dialogRef.close(true)}
           })
