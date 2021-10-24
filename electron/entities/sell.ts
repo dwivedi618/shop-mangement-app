@@ -9,6 +9,7 @@ import {
     OneToMany 
 } from "typeorm";
 import { Customer } from "./customer";
+import { Payment } from "./payment";
 import { SelledProduct } from "./selled-product";
 
 @Entity()
@@ -44,6 +45,11 @@ export class Sell {
         eager: true
     })
     selledProducts: SelledProduct [];
+
+    @OneToMany(type => Payment, payment => payment.sell, {
+        eager: true
+    })
+    payments: Payment [];
 
     @CreateDateColumn()
     selledDate: Date;
