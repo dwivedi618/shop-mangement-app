@@ -33,4 +33,21 @@ export class Constant{
         action : '../neworder'
     }
 
+    // Filter
+    static CUSTOMER_CATEGORY = [
+        { path: 'activity', icon: 'grid_view', name: 'Regular' },
+        { path: 'chats', icon: 'dry_cleaning', name: 'Verified' },
+        { path: 'calls', icon: 'inventory', name: 'New' },
+        { path: 'calls', icon: 'inventory', name: 'Due Payments' },
+    
+      ];
+      static CATEGORY_BY_GENDER = [
+        { path: 'activity', icon: 'grid_view', name: 'Male' },
+        { path: 'chats', icon: 'dry_cleaning', name: 'Female' },
+        { path: 'chats', icon: 'dry_cleaning', name: 'Other' },
+      ];
+      static CATEGORY_BY_ALPHABET = [
+        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+      ];
+
 }

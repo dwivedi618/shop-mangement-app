@@ -24,21 +24,9 @@ export class CustomerListComponent implements OnInit {
   filterOption: any
   value: any;
   isListView = false;
-  cutomerCategory = [
-    { path: 'activity', icon: 'grid_view', name: 'Regular' },
-    { path: 'chats', icon: 'dry_cleaning', name: 'Verified' },
-    { path: 'calls', icon: 'inventory', name: 'New' },
-    { path: 'calls', icon: 'inventory', name: 'Due Payments' },
-
-  ];
-  cutomerCategoryByGender = [
-    { path: 'activity', icon: 'grid_view', name: 'Male' },
-    { path: 'chats', icon: 'dry_cleaning', name: 'Female' },
-    { path: 'chats', icon: 'dry_cleaning', name: 'Other' },
-  ];
-  cutomerCategoryByAlphabet = [
-    "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
-  ];
+  cutomerCategory = Constant.CUSTOMER_CATEGORY
+  cutomerCategoryByGender = Constant.CATEGORY_BY_GENDER
+  cutomerCategoryByAlphabet = Constant.CATEGORY_BY_ALPHABET
 
   customerSelectionAction: Actions[] = [
 
