@@ -1,3 +1,4 @@
+import { Customer } from './../../models/customer';
 
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,9 +7,7 @@ import { DialogService } from 'src/app/services/dialog-service';
 import { IPCService } from 'src/app/services/ipc.service';
 import { Constant } from '../../constant/constant';
 
-import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-customer.component';
-import { ItemDetailsComponent } from '../item-details/item-details.component';
-import { ServiceListComponent } from '../service-list/service-list.component';
+
 
 export interface Actions {
   clearSelection: Function,
@@ -27,16 +26,10 @@ export class CustomerListComponent implements OnInit {
   cutomerCategory = Constant.CUSTOMER_CATEGORY
   cutomerCategoryByGender = Constant.CATEGORY_BY_GENDER
   cutomerCategoryByAlphabet = Constant.CATEGORY_BY_ALPHABET
-
-  customerSelectionAction: Actions[] = [
-
-  ]
-  items = [
-  ];
+  items = [];
   cart = [];
-  action = [
-
-  ]
+  filters = new Set();
+  filtersList: unknown[];
   constructor(
     private dialog: MatDialog,
     private router: Router,
@@ -83,5 +76,18 @@ export class CustomerListComponent implements OnInit {
   onDialogClose(data){
     console.log("after close**********************",data);
       this.fetchCustomer();
+  }
+
+  onFilterSelection(value : any){
+    this.filters.has(value) ? this.filters.delete(value) : this.filters.add(value);
+    this.filtersList = Array.from(this.filters);
+  }
+  removeFilter(value : any){
+    this.filters.has(value) ? this.filters.delete(value) : this.filters
+    this.filtersList = Array.from(this.filters);
+  }
+
+  isFilterSelected(value : any){
+    return this.filters.has(value) ? true : false;
   }
 }

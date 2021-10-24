@@ -13,7 +13,7 @@
                 </mat-expansion-panel-header>
 
                 <mat-selection-list dense >
-                    <mat-list-option *ngFor="let category of cutomerCategory">
+                    <mat-list-option [selected]="isFilterSelected(category.name)" *ngFor="let category of cutomerCategory" (click)="onFilterSelection(category.name)">
                         <small class="strong text-light">{{category.name }}</small>
                     </mat-list-option>
                 </mat-selection-list>
@@ -25,7 +25,7 @@
                 </mat-expansion-panel-header>
 
                 <mat-selection-list dense >
-                    <mat-list-option *ngFor="let category of cutomerCategoryByGender">
+                    <mat-list-option [selected]="isFilterSelected(category.name)" *ngFor="let category of cutomerCategoryByGender" (click)="onFilterSelection(category.name)">
                         <small class="strong text-light">{{category.name }}</small>
                     </mat-list-option>
                 </mat-selection-list>
@@ -37,24 +37,34 @@
                 </mat-expansion-panel-header>
 
                 <mat-card class="mat-elevation-z0" style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: flex-start;">
-                    <button mat-button *ngFor="let category of cutomerCategoryByAlphabet">
-                        <small class="strong text-light">{{category}}</small>
+                    <button mat-icon-button [color]="isFilterSelected(category) ? 'accent' : ''"  *ngFor="let category of cutomerCategoryByAlphabet" (click)="onFilterSelection(category)" style="padding: 2px;">
+                        <small class="strong">{{category}}</small>
                     </button>
                 </mat-card>
             </mat-expansion-panel>
             
           
         </mat-accordion>
+        <div class="px-2 mt-1 bg-ultra-light" *ngIf="filtersList?.length">
+            <small class="strong px-2">Filters</small><br>
+            <div class="mt-1" style="display: flex;align-items: flex-start;justify-content: flex-start;flex-wrap: wrap;flex-direction: row;">
+                <button mat-raised-button color="primary" *ngFor="let filter of filtersList" class="mr-1 mb-1" style="padding: 0 4px 0px 16px">
+                    <small class="mr-1">{{filter}}</small>
+                    <mat-icon class="mat-icon-sm pt-1" (click)="removeFilter(filter)">clear</mat-icon>
+                </button>
+            </div>
+        </div>
         
         
-        <mat-toolbar style="position: absolute;bottom: 0;z-index: 5;background: white">
-            <button mat-stroked-button class="w-100 mr-1">
+        
+        <div *ngIf="filtersList?.length" class="d-flex w-100" style="position: absolute;bottom: 0;z-index: 5;padding: 0;">
+            <button mat-button class="w-100 bg-ultra-light rounded-0">
                 <span class="fancy-text text-uppercase">Reset</span>
             </button>
-            <button mat-raised-button class="bg-green w-100">
+            <button mat-raised-button class="bg-green w-100 rounded-0" >
                 <span class="fancy-text text-uppercase">Apply</span>
             </button>
-        </mat-toolbar>
+        </div>
     </mat-sidenav>
 
     <mat-sidenav-content style="position: relative;">
@@ -91,7 +101,7 @@
                 </mat-list>
             </mat-menu>
         </mat-toolbar>
-        <app-customer [(data)]="items" [(action)]="action"  [(view)]="isListView" (shareCart)="onCartData($event)" (onDialogClose)="onDialogClose($event)"></app-customer>
+        <app-customer [(data)]="items"   [(view)]="isListView" (shareCart)="onCartData($event)" (onDialogClose)="onDialogClose($event)"></app-customer>
         <app-data-missing-instruction *ngIf="!items?.length" [(instructions)]="CUSTOMER_MISSING"></app-data-missing-instruction>
 
         
