@@ -7,10 +7,10 @@
                                 <button mat-button class=" bg-ultra-light" (click)="compressFile()">
                                     <mat-icon class="mat-icon-sm">camera_alt</mat-icon>
                                 </button>
-                                <button mat-button class="" (click)="compressFile()" >
+                                <button mat-button class="" (click)="compressFile()" disabled>
                                     <mat-icon class="mat-icon-sm" >crop</mat-icon>
                                 </button>
-                                <button mat-button class="" (click)="fileUploadReset()" disabled="imagePreview!=='' && imagePreview">
+                                <button mat-button class="" (click)="onRemovePhoto()" >
                                     <mat-icon class="mat-icon-sm">delete_outline</mat-icon>
                                 </button>
                                 <div class="spacer"></div>

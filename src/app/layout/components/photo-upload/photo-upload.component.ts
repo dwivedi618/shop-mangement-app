@@ -93,4 +93,8 @@ export class PhotoUploadComponent implements OnInit ,OnChanges{
     
   }
 
+  onRemovePhoto(){
+    this.onImageChange.emit('');
+  }
+
 }
