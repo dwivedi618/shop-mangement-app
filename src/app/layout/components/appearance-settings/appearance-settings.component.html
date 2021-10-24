@@ -1,42 +1,23 @@
-<section class="w-100 px-5" style="display: flex;flex-direction: column;align-items: flex-start;box-sizing: border-box;">
-    <h4>Appearance</h4>
-    <mat-list dense class="w-100 text-light shadow">
-        <mat-list-item>
-            <div>
-                <span class="strong">Theme</span>
-                <small matLine class="text-light">classic</small>
-            </div>
-            <div class="spacer"></div>
-            <mat-slide-toggle></mat-slide-toggle>
-        </mat-list-item>
-        <mat-list-item>
-            <div>
-                <span class="strong">Front size</span>
-                <small matLine class="text-light">medium</small>
-            </div>
-            <div class="spacer"></div>
-            <mat-form-field appearance="outline">
-                <mat-select >
-                    <mat-option value="" >Select</mat-option>
-                    <mat-option value="12px">Small</mat-option>
-                    <mat-option value="16px" selected>Medium</mat-option>
-                    <mat-option value="18px">Large</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </mat-list-item>
+<section class="w-100 px-5 bg-ultra-light setting-section"
+    style="position:relative;display: flex;flex-direction: column;align-items: center;box-sizing: border-box;">
+    <h3 style="float: left;">Appearance</h3>
+    <div class="d-flex shadow mb-2 py-2 bg-ultra-light"
+        style="position: relative;align-items: flex-start;justify-content: space-around;min-width: 50vw;">
+        <button mat-raised-button class="bg-dark w-100 mr-1">
+            <!-- <mat-icon class="mat-icon-sm pt-1">add</mat-icon> -->
+            <small>LIGHT MODE</small>
+        </button>
+        <button mat-raised-button class="bg-dark  w-100">
+            <!-- <mat-icon class="mat-icon-sm pt-1">lock</mat-icon> -->
+            <small>DARK MODE</small>
+        </button>
 
-        <mat-list-item>
-            <div>
-                <span class="strong">Zoom</span>
-                <small matLine class="text-light">100%</small>
-            </div>
-            <div class="spacer"></div>
-            <mat-form-field appearance="outline">
-                <mat-select >
-                    <mat-option >Select</mat-option>
-                    <mat-option *ngFor="let z of zoomLevel" value="{{z}}">{{z}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </mat-list-item>
-    </mat-list>
+    </div>
+    <h3>Background</h3>
+    <div class="d-flex shadow mb-2"
+        style="position: relative;align-items: flex-start;justify-content: space-around;min-width: 50vw;height: 15rem;">
+            <img class="thumbnail-background"  src="../../../../assets/images/wallpaper/pexels-eberhard-grossgasteiger-1612351.jpg" alt="">
+            <button mat-raised-button style="position: absolute;z-index: 1000;right: 1rem;top: 1rem;">Change</button>
+    </div>
+    
 </section>

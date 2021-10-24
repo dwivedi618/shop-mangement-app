@@ -8,7 +8,7 @@
         <mat-icon class="mat-icon-sm pt-1">print</mat-icon>
         <small>{{isLoading? 'please wait...' : 'Print'}}</small>
     </button>
-    <button *ngIf="receivedAmount != finalPayableAmount" mat-raised-button class="bg-green" (click)="onDone()">
+    <button *ngIf="receivedAmount != finalPayableAmount" mat-raised-button class="bg-green" [mat-dialog-close]="true">
         <small>Take payment</small>
     </button>
 </mat-toolbar>

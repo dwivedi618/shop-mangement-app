@@ -294,10 +294,11 @@ export class SellListComponent implements OnInit {
   }
 
   fetchSellList() {
-    this.ipcService.database('sell', 'fetch', '').then(data => {
-      this.items = data
-      console.log("fetch sell", data);
-
+    this.ipcService.database('sell', 'fetch', '').then(res => {
+      if(res.status){
+        this.items = res.data
+        console.log("fetch inventory", res);
+      }
     })
   }
   getSearchText(searchText) {

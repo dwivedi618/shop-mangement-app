@@ -1,6 +1,6 @@
 <section *ngIf="isListView" class="items-container grid-view">
   <div *ngFor="let item of items">
-    <article class="item shadow"  (click)="checkItemDetails()">
+    <article class="item shadow"  (click)="openInventoryItemDetails(item)">
       <div class="item-price d-flex">
         <div class="spacer"></div>
         <small class="px-2">In Stock</small>
@@ -33,7 +33,7 @@
 
 <section *ngIf="!isListView" class="items-container-table-view">
   <div *ngFor="let item of items;let i=index;">
-    <article class="item-list-view shadow "  (click)="checkItemDetails()">
+    <article class="item-list-view shadow "  (click)="openInventoryItemDetails(item)">
       <div style="width: 2rem;" class="layout">
         <span class="strong">{{i+1}}</span>
       </div>

@@ -15,4 +15,12 @@ export class HeaderComponent implements OnInit {
     this.serviceType = JSON.parse(service) ;
   }
 
+  goBack(){
+    window.history.back()
+  }
+
+  goFarward(){
+    window.history.forward()
+
+  }
 }

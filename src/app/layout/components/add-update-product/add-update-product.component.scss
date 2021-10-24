@@ -5,3 +5,7 @@
   .mange-stock-tab mat-list-item{
       margin-top: 1rem;
   }
+
+  ::ng-deep .mat-form-field-appearance-outline.mat-form-field-disabled .mat-form-field-outline {
+    opacity: 0!important;
+    }

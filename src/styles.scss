@@ -146,6 +146,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     }
     mat-toolbar.dialog-toolbar{
         min-width: calc(100% + 48px);
+        border-bottom-left-radius: 0!important;
+        border-bottom-left-radius: 0!important;
+
     }
     .wdialog-100{
         min-width: calc(100% + 48px);
@@ -245,6 +248,15 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
   .thumbnail-lg{
     height: 12rem;
     width: 12rem;
+    border-radius: 0.2rem;
+    flex-shrink: 0;
+    object-fit: cover;
+    transition: all 0.2s linear
+  }
+
+  .thumbnail-background{
+    height: 15rem;
+    width: 100%;
     border-radius: 0.2rem;
     flex-shrink: 0;
     object-fit: cover;

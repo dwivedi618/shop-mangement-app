@@ -11,6 +11,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
+import { AlertService } from 'src/app/services/alert.service';
 
 export interface CardItem {
   id: number;
@@ -20,7 +21,7 @@ export interface CardItem {
   price: number;
   discountInPercent: any;
   discountInRuppee: any;
-  priceAfterDiscount : number;
+  priceAfterDiscount: number;
 
 }
 @Component({
@@ -33,14 +34,14 @@ export class ItemComponent implements OnInit, OnChanges {
   @Input() data;
   @Input() cartItems;
   @Input() view: Boolean;
-  @Output() shareCart  = new EventEmitter<any>();
+  @Output() shareCart = new EventEmitter<any>();
 
 
 
   items = [];
   isListView: Boolean;
   cart = [];
-  constructor(private dialog : MatDialog) {}
+  constructor(private dialog: MatDialog, private alertService: AlertService) { }
   ngOnChanges() {
     this.isListView = this.view;
     this.items = this.data;
@@ -67,12 +68,16 @@ export class ItemComponent implements OnInit, OnChanges {
     cartItem.priceAfterDiscount = selectedItem?.price - selectedItem?.discountInRuppee;
 
 
+    let addToCart = () => {
+      this.cart.unshift(cartItem);
+      // this.alertService.alertLb('Item added to cart','')
+    }
     if (this.cart.length > 0) {
       this.cart.find((item) => item.id == cartItem.id)
         ? this.cart
-        : this.cart.unshift(cartItem);
+        : addToCart();
     } else {
-      this.cart.unshift(cartItem);
+      addToCart();
     }
     // for(let i=0;i<this.cart.length;i++){
     //   if(this.cart[i]['id'] == selectedItem.id){
@@ -84,24 +89,24 @@ export class ItemComponent implements OnInit, OnChanges {
   }
 
   isAddedToCart(item) {
-    if(this.cart.length){
+    if (this.cart.length) {
       for (let i = 0; i < this.cart.length; i++) {
         if (this.cart[i]['id'] == item.id) {
           return true;
         }
       }
-    }else{
+    } else {
       return false
     }
   }
   adjustCartItemQuantity(adjustType: number, selectedItem: any) {
-    console.log('ADJUST VLUSIE IS ==============',adjustType);
-    
+    console.log('ADJUST VLUSIE IS ==============', adjustType);
+
     if (adjustType === 0) {
       //decrease cart item quantity
       for (let i = 0; i < this.cart.length; i++) {
         if (this.cart[i].id == selectedItem.id) {
-          ( this.cart[i].quantity > 1 ) ? this.cart[i].quantity-- : this.cart.splice(i,1);
+          (this.cart[i].quantity > 1) ? this.cart[i].quantity-- : this.cart.splice(i, 1);
           // console.log('SELCYTY___________',selectedItem,"-----------",i,'---',this.cart.length);
           return;
         }
@@ -116,12 +121,12 @@ export class ItemComponent implements OnInit, OnChanges {
       }
     }
   }
-  onCartItemQuantityChange(newQuantity,itemId){
-    
+  onCartItemQuantityChange(newQuantity, itemId) {
+
     for (let i = 0; i < this.cart.length; i++) {
       if (this.cart[i]['id'] == itemId) {
         //do not change quantity if new Quantity is less than 1
-        ( newQuantity < 1  ) ? (this.cart[i].quantity = 1) :  (this.cart[i].quantity = newQuantity);
+        (newQuantity < 1) ? (this.cart[i].quantity = 1) : (this.cart[i].quantity = newQuantity);
         // console.log("new Quantity-----------",this.cart[i].quantity)
       }
     }
@@ -135,7 +140,7 @@ export class ItemComponent implements OnInit, OnChanges {
     }
   }
 
-  public onShareCart(){
+  public onShareCart() {
     // console.log("emit------------ cart" ,this.cart.length)
     this.shareCart.emit(this.cart)
   }

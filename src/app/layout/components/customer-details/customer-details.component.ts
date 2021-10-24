@@ -67,9 +67,11 @@ export class CustomerDetailsComponent implements OnInit {
 
   onDone(){
     console.log("Mange Stock Form",this.customerForm.value)
-    this.ipcService.database('customer', 'update', this.customerForm.value).then(data=>{
-      console.log("after update customer",data);
-      this.dialogRef.close(data);
+    this.ipcService.database('customer', 'update', this.customerForm.value).then(res=>{
+      if(res.status){
+        console.log("after update customer",res);
+        this.dialogRef.close(res.data);
+      }
     });
   }
   onEdit(){

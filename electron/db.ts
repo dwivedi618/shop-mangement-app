@@ -6,7 +6,7 @@ import { User } from './entities/user';
 import { Settings } from './entities/settings';
 import { SelledProduct } from './entities/selled-product';
 import { compress } from './utility';
-import { Payment } from 'entities/payment';
+import { Payment } from './entities/payment';
 
 // const connection = getConnection();
 

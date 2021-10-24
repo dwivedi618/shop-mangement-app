@@ -6,6 +6,7 @@ import html2canvas from 'html2canvas';
 import { IPCService } from 'src/app/services/ipc.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Constant } from '../../constant/constant';
+import { DialogService } from 'src/app/services/dialog-service';
 export interface ProductDetails{
   id : number,
   name: string,
@@ -46,6 +47,8 @@ export class TakePaymentComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private ipcService : IPCService,
+    private dialogService : DialogService,
+
     private alertService : AlertService,
     private dialogRef : MatDialogRef<TakePaymentComponent>,
     @Inject(MAT_DIALOG_DATA) data : ProductDetails
@@ -63,7 +66,7 @@ export class TakePaymentComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.receivedAmount = this.localData?.finalPayableAmount - (this.localData?.discountInRuppee || 0)
+    // this.receivedAmount = this.localData?.finalPayableAmount - (this.localData?.discount || 0) -  (this.localData?.received || 0)
   }
 
   onDone(){
@@ -87,16 +90,30 @@ export class TakePaymentComponent implements OnInit {
       sell.receiptNumber = this.receiptNumber;
 
       console.log("before save sell",sell)
-      this.ipcService.database('sell', this.action, this.localData)
-      .then(ipcData=>{
-        console.log("order saved",ipcData);
-        this.alertService.alertActionDialog('Saved successfully',Constant.ORDER_SAVED_MSG,'Done').subscribe((altData : Boolean)=>{
-          if(altData) { this.dialogRef.close(true)}
-        })
+      this.ipcService.database('sell', this.action, sell)
+      .then(res=>{
+        if(res.status){
+          console.log("order saved",res);
+          this.alertService.alertActionDialog('Saved successfully',Constant.ORDER_SAVED_MSG,'Done').subscribe((altData : Boolean)=>{
+            if(altData) { this.dialogRef.close(true)}
+          })
+        }
         this.isSavingOrder = false;
       })
       .catch(err=>{ this.isSavingOrder = false;})
     })
+  }
+
+  async onBillView() {
+    let sell = this.localData;
+    sell.receivedAmount = this.receivedAmount || null;
+    sell.paymentMode = this.paymentMode || null;
+    sell.receiptNumber = this.receiptNumber;
+    this.dialogService.openBillPreview(sell).subscribe(data => {
+      console.log("bill Preview Closed", data);
+      // if(data == true) { this.router.navigate(['./dashboard']) }
+    })
+ 
   }
 
 

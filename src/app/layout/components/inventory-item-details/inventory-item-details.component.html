@@ -4,9 +4,8 @@
     <small>Inventory Item Details</small>
     <div class="spacer"></div>
 
-    <button mat-raised-button class="bg-green" (click)="onDone()">
-        <!-- <mat-icon class="mat-icon-sm pt-1">inventory</mat-icon> -->
-        <small>Done</small>
+    <button mat-raised-button class="bg-green" [mat-dialog-close]="true">
+        <small>Edit</small>
     </button>
 </mat-toolbar>
 <div mat-dialog-content class="">
@@ -29,96 +28,34 @@
                                 </mat-list-item>
                              
                                 <mat-list-item>
-                                    <span class="strong text-light">Stock Price</span>
+                                    <span class="strong text-light">Amount</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">{{(localData?.totalStockPrice | currency:'INR') || 'unknown'}}</span>
+                                    <span class="strong">{{(localData?.amount | currency:'INR') || 'unknown'}}</span>
                                 </mat-list-item>
+                                
                                 <mat-list-item>
-                                    <span class="strong text-light">Grade</span>
+                                    <span class="strong text-light">Quantity</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">{{(localData?.item?.grade | titlecase) || 'unknown'}}</span>
-                                </mat-list-item>
-                                <mat-list-item>
-                                    <span class="strong text-light">Make</span>
-                                    <div class="spacer"></div>
-                                    <span class="strong">{{(localData?.item?.make | titlecase) || 'unknown'}}</span>
+                                    <span class="strong">{{(localData?.quantity ) || 'unknown'}}</span>
                                 </mat-list-item>
                                 
                                 
                                 <mat-list-item>
-                                    <span class="strong text-light">pices</span>
+                                    <span class="strong text-light">Date</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">{{(localData?.itemInStock ) || 'unknown'}}</span>
+                                    <span class="strong">{{(localData?.date | date : 'medium' ) || 'unknown'}}</span>
                                 </mat-list-item>
+                                
+                                <div class="px-2 mt-2">
+                                    <p class="text-light">{{localData?.description}}</p>
+                                </div>
                                
 
                             </mat-list>
                         </div>
                     </div>
                 </mat-tab>
-                <mat-tab label="Mange Stock">
-                    <div style="min-height: 50vh;" class="mange-stock-tab">
-                        <div class="d-flex" style="align-items: flex-start;">
-                            <figure style="margin:1rem;">
-                                <img src="{{localData?.item?.image || 'assets/images/cool-background.png'}}" alt=""
-                                    class="thumbnail-lg">
-                            </figure>
-                            <form [formGroup]="manageStockForm" class="w-100">
-                                <mat-list dense class="w-100 ">
-                                    <mat-list-item>
-                                        <span class="strong text-light">Quantity</span>
-                                        <div class="spacer"></div>
-                                        <mat-form-field appearance="outline" class="">
-                                            <mat-label>Quantity</mat-label>
-                                            <input matInput placeholder="Qty." formControlName="quantity">
-                                        </mat-form-field>
-                                    </mat-list-item>
-                                    <mat-list-item>
-                                        <span class="strong text-light">Amount</span>
-                                        <div class="spacer"></div>
-                                        <mat-form-field appearance="outline" class="">
-                                            <mat-label>Amount</mat-label>
-                                            <input matInput placeholder="amount" formControlName="amount">
-                                        </mat-form-field>
-                                    </mat-list-item>
-                                    <mat-list-item>
-                                        <span class="strong text-light">price Per {{localData?.item?.sellBy == 'true' ? 'meter' : 'Item'}}</span>
-                                        <div class="spacer"></div>
-                                        <mat-form-field appearance="outline" class="">
-                                            <mat-label>price Per Item</mat-label>
-                                            <input matInput placeholder="Price" formControlName="pricePerItem">
-                                        </mat-form-field>
-                                    </mat-list-item>
-                                    <mat-list-item>
-                                        <span class="strong text-light">Date</span>
-                                        <div class="spacer"></div>
-                                        <mat-form-field appearance="outline" class="">
-                                            <mat-label>Date</mat-label>
-                                            <input matInput type="date" placeholder="Date" formControlName="date">
-                                        </mat-form-field>
-                                    </mat-list-item>
-                                    <mat-list-item style="margin-top: 2rem;">
-                                        <span class="strong text-light">Description</span>
-                                        <div class="spacer"></div>
-                                        <mat-form-field appearance="outline" class="">
-                                            <mat-label>Description</mat-label>
-                                            <textarea matInput placeholder="description" formControlName="description"></textarea>
-                                        </mat-form-field>
-                                    </mat-list-item>
-                                    <mat-list-item>
-                                        <mat-radio-group aria-label="Select an option" formControlName="isAddingStock">
-                                            <mat-radio-button value="true">Add Stock</mat-radio-button>
-                                            <mat-radio-button value="false">Remove Stock</mat-radio-button>
-                                        </mat-radio-group>
-                                    </mat-list-item>
-                                </mat-list>
-                            </form>
-                        </div>
-                    </div>
-                </mat-tab>
-                <mat-tab label="Stock Transaction">
-                    <div style="min-height: 50vh;"></div>
-                </mat-tab>
+                
             </mat-tab-group>
         </section>
     </div>

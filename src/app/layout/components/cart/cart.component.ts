@@ -129,6 +129,8 @@ export class CartComponent implements OnInit {
       this.onTakePayment();
     } else {
       //add customer for current order
+      // this.onTakePayment();
+
       this.checkCustomer()
     }
   }
@@ -141,7 +143,11 @@ export class CartComponent implements OnInit {
     billingInfo.discountInRuppee = this.discountInRuppee
     billingInfo.discountInPercent = this.discountInPercent
     billingInfo.finalPayableAmount = await this.getFinalPayableAmount();
-    this.dialogService.openBillPreview(billingInfo).subscribe(data => {
+    // this.dialogService.openBillPreview(billingInfo).subscribe(data => {
+    //   console.log("bill Preview Closed", data, this.currentCustomer);
+    //   if(data == true) { this.router.navigate(['./dashboard']) }
+    // })
+    this.dialogService.openTakePayment(billingInfo).subscribe(data => {
       console.log("bill Preview Closed", data, this.currentCustomer);
       if(data == true) { this.router.navigate(['./dashboard']) }
     })
