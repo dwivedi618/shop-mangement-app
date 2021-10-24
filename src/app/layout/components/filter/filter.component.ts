@@ -1,24 +1,21 @@
-import { Customer } from './../../models/customer';
 
-import { Component, OnInit } from '@angular/core';
+import { Customer } from './../../models/customer';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DialogService } from 'src/app/services/dialog-service';
 import { IPCService } from 'src/app/services/ipc.service';
 import { Constant } from '../../constant/constant';
 
-
-
-export interface Actions {
-  clearSelection: Function,
-  deleteSelection: Function,
-}
 @Component({
-  selector: 'app-customer-list',
-  templateUrl: './customer-list.component.html',
-  styleUrls: ['./customer-list.component.scss']
+  selector: 'app-filter',
+  templateUrl: './filter.component.html',
+  styleUrls: ['./filter.component.scss']
 })
-export class CustomerListComponent implements OnInit {
+export class FilterComponent implements OnInit ,OnChanges{
+  @Input() data;
+  @Output() onFilter  = new EventEmitter<any>();
+
   CUSTOMER_MISSING = Constant.CUSTOMER_MISSING
   filterOption: any
   value: any;
@@ -31,32 +28,19 @@ export class CustomerListComponent implements OnInit {
   filters = new Set();
   filtersList: unknown[];
   constructor(
-    private dialog: MatDialog,
-    private router: Router,
     private dialogService : DialogService,
     public ipcService: IPCService
   ) { }
+
+  ngOnChanges(){
+    this.items = this.data;
+  }
   ngOnInit(): void {
-    this.fetchCustomer();
+
   }
 
-  private fetchCustomer(){
-    this.ipcService.database('customer', 'fetch', "").then(
-      res => {
-        if(res.status){
-          this.items = res.data
-          console.log("data ng On changes", res)
-        }
-      }
-    )
-  }
 
-  openAddUpdateCustomer() {
-      this.dialogService.checkCustomer('').subscribe(data1 => {
-        console.log("received from update cart customer", data1);
-        this.fetchCustomer();
-      })
-  }
+
 
 
 
@@ -66,16 +50,6 @@ export class CustomerListComponent implements OnInit {
     function getText() {
       return this.filterOption
     }
-  }
-
-  onCartData(cartItems) {
-    this.cart = cartItems;
-    console.log("cart into parent", this.cart)
-  }
-
-  onDialogClose(data){
-    console.log("after close**********************",data);
-      this.fetchCustomer();
   }
 
   onFilterSelection(value : any){
@@ -91,8 +65,12 @@ export class CustomerListComponent implements OnInit {
     return this.filters.has(value) ? true : false;
   }
 
-  onApplyFilter(data){
-    console.log("Filter Applied",data)
-    this.items = data
+  onApplyFilter(){
+    this.onFilter.emit(this.items);
+  }
+  onResetFilter(){
+    this.filters.clear();
+    this.filtersList = null;
   }
 }
+

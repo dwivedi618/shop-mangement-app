@@ -60,6 +60,7 @@ import { AddUpdateInventoryComponent } from './layout/components/add-update-inve
 import { SelectionModelComponent } from './layout/components/selection-model/selection-model.component';
 import { LoadingScreenComponent } from './layout/components/loading-screen/loading-screen.component';
 import { TakePaymentComponent } from './layout/components/take-payment/take-payment.component';
+import { FilterComponent } from './layout/components/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import { TakePaymentComponent } from './layout/components/take-payment/take-paym
     SelectionModelComponent,
     LoadingScreenComponent,
     TakePaymentComponent,
+    FilterComponent,
 
   ],
   imports: [
