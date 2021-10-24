@@ -16,8 +16,6 @@ export class Settings{
   })
     subType: string;
 
-    @Column({
-        nullable: true
-  })
-    value: string;
+  @Column({ nullable: true })
+  value: string;
 }

@@ -185,10 +185,13 @@ export async function payment(connection, action: string, data?: any) {
 
     switch (action) {
         case 'create':
+            const sell = await sellRepository.findOne(data.sellId)
+            sell.receivedAmount += (+data);
+            payment.sell = sell;
             payment.amount = data.amount;
-            payment.sell = await sellRepository.findOne(data.sellId)
             payment.discription = data.discription;
-            return paymentRepository.save(payment);
+            await paymentRepository.save(payment);
+            return sellRepository.save(sell);
 
     }
 
