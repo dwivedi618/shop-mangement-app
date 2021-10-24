@@ -25,7 +25,7 @@ export async function customer(connection, action: string, data?: any) {
             customer.phone = data.phone || customer.phone;
             customer.gender = data.gender || customer.gender;
             customer.address = data.address || customer.address;
-            customer.photo = data.photo && await compress(data.photo, 500, 500) || customer.photo;
+            if(data.hasOwnProperty('photo')) customer.photo = data.photo;
             cust = await repository.save(customer);
             console.log('cuuuuussssssssttttttt', cust );
             
