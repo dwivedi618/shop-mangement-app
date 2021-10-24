@@ -1,0 +1,52 @@
+<section class="login-section inner_banner layout" >
+    <video *ngIf="videoScreen" autoplay muted loop id="myVideo" style="width: 100vw;" >
+        <source src="assets/video/Circles 1600x1200.mp4" type="video/mp4">
+      </video>
+      <div *ngIf="videoScreen " style="position: absolute;z-index: 10000;font-size: 1.5rem;font-weight: 900;color: lightblue;">
+        <h3  class="fadeIn">Loading...</h3>
+    </div>
+    <div *ngIf="!videoScreen " class="" style="position: absolute;z-index: 10000;">
+        <div class="">
+            <h1 class="text-light text-center mb-2">Account Setup</h1>
+          
+            <form autoComplete="off"  id="form"
+                style="width:20rem;position: relative;">
+                <mat-card class="mat-elevation-z0" style="background: transparent;padding-top: 100px;">
+                   
+
+                    <mat-form-field appearance="outline" class="w-100" *ngIf="step1">
+                        <mat-label>Your name</mat-label>
+                        <input matInput type="text" 
+                            [(ngModel)]="name" [ngModelOptions]="{standalone: true}" autoComplete="off" 
+                            onfocus="this.removeAttribute('readonly');">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100" *ngIf="step2">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="{{isPasswordHidden ? 'password' :'text'}}" placeholder="Password"
+                            [(ngModel)]="password" [ngModelOptions]="{standalone: true}" autoComplete="off" readonly
+                            onfocus="this.removeAttribute('readonly');">
+                        <button mat-button type="button" matSuffix (click)="isPasswordHidden = !isPasswordHidden"
+                            class="">
+                            <small class="pt-0">{{(isPasswordHidden ? 'Show' : 'Hide') | uppercase}}</small>
+                        </button>
+                       
+                    </mat-form-field>
+
+
+                    <button  mat-raised-button type="submit" color="primary" 
+                        (click)="createAccount()" class="w-100">
+                        <small [class.fancy-text] = "!isCreatingAccount">{{ isCreatingAccount ? 'Please Wait...' : 'Next'}}</small>
+                    </button>
+                    <div class="text-center">
+                    <button mat-button (click)="onBack()" class="mt-1" ><span style="color: white;">Back</span></button>
+
+                    </div>
+
+
+                </mat-card>
+            </form>
+        </div>
+    </div>
+  
+</section>

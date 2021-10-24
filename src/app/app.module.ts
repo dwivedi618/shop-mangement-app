@@ -61,6 +61,7 @@ import { SelectionModelComponent } from './layout/components/selection-model/sel
 import { LoadingScreenComponent } from './layout/components/loading-screen/loading-screen.component';
 import { TakePaymentComponent } from './layout/components/take-payment/take-payment.component';
 import { FilterComponent } from './layout/components/filter/filter.component';
+import { AppSetupComponent } from './layout/components/app-setup/app-setup.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { FilterComponent } from './layout/components/filter/filter.component';
     LoadingScreenComponent,
     TakePaymentComponent,
     FilterComponent,
+    AppSetupComponent,
 
   ],
   imports: [

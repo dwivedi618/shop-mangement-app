@@ -16,8 +16,10 @@ import { AppearanceSettingsComponent } from './layout/components/appearance-sett
 import { AuthGuard } from './auth.guard';
 import { AccountSettingsComponent } from './layout/components/account-settings/account-settings.component';
 import { SellListComponent } from './layout/components/sell-list/sell-list.component';
+import { AppSetupComponent } from './layout/components/app-setup/app-setup.component';
 
 const routes: Routes = [
+  { path: '', component: AppSetupComponent },
   { path: 'login', component: LoginComponent },
   { path: '', component: HomeComponent, data: { breadcrumb: 'Home' }  ,canActivate: [AuthGuard]},
   {
