@@ -10,9 +10,10 @@
             <div class="spacer"></div>
         </mat-expansion-panel-header>
 
-        <mat-selection-list dense >
-            <mat-list-option [selected]="isFilterSelected(category.name)" *ngFor="let category of cutomerCategory" (click)="onFilterSelection(category.name)">
-                <small class="strong text-light">{{category.name }}</small>
+        <mat-selection-list dense>
+            <mat-list-option [selected]="isFilterSelected(category)" *ngFor="let category of cutomerCategory"
+                (click)="onFilterSelection(category)">
+                <small class="strong text-light">{{category.keys }}</small>
             </mat-list-option>
         </mat-selection-list>
     </mat-expansion-panel>
@@ -22,9 +23,10 @@
             <div class="spacer"></div>
         </mat-expansion-panel-header>
 
-        <mat-selection-list dense >
-            <mat-list-option [selected]="isFilterSelected(category.name)" *ngFor="let category of cutomerCategoryByGender" (click)="onFilterSelection(category.name)">
-                <small class="strong text-light">{{category.name }}</small>
+        <mat-selection-list dense>
+            <mat-list-option [selected]="isFilterSelected(category)"
+                *ngFor="let category of cutomerCategoryByGender" (click)="onFilterSelection(category)">
+                <small class="strong text-light">{{category.keys }}</small>
             </mat-list-option>
         </mat-selection-list>
     </mat-expansion-panel>
@@ -34,20 +36,25 @@
             <div class="spacer"></div>
         </mat-expansion-panel-header>
 
-        <mat-card class="mat-elevation-z0" style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: flex-start;">
-            <button mat-icon-button [color]="isFilterSelected(category) ? 'accent' : ''"  *ngFor="let category of cutomerCategoryByAlphabet" (click)="onFilterSelection(category)" style="padding: 2px;">
-                <small class="strong">{{category}}</small>
+        <mat-card class="mat-elevation-z0"
+            style="display: flex;flex-direction: row;flex-wrap: wrap;justify-content: flex-start;">
+            <button mat-icon-button [color]="isFilterSelected(category) ? 'accent' : ''"
+                *ngFor="let category of customerCategoryByAlphabet" (click)="onFilterSelection(category)"
+                style="padding: 2px;">
+                <small class="strong">{{category?.keys | uppercase}}</small>
             </button>
         </mat-card>
     </mat-expansion-panel>
-    
-  
+
+
 </mat-accordion>
 <div class="px-2 mt-1 bg-ultra-light" *ngIf="filtersList?.length">
     <small class="strong px-2">Filters</small><br>
-    <div class="mt-1" style="display: flex;align-items: flex-start;justify-content: flex-start;flex-wrap: wrap;flex-direction: row;">
-        <button mat-raised-button color="primary" *ngFor="let filter of filtersList" class="mr-1 mb-1" style="padding: 0 4px 0px 16px">
-            <small class="mr-1">{{filter}}</small>
+    <div class="mt-1"
+        style="display: flex;align-items: flex-start;justify-content: flex-start;flex-wrap: wrap;flex-direction: row;">
+        <button mat-raised-button color="primary" *ngFor="let filter of filtersList" class="mr-1 mb-1"
+            style="padding: 0 4px 0px 16px">
+            <small class="mr-1">{{filter.keys}}</small>
             <mat-icon class="mat-icon-sm pt-1" (click)="removeFilter(filter)">clear</mat-icon>
         </button>
     </div>
@@ -59,7 +66,7 @@
     <button mat-button class="w-100 bg-ultra-light rounded-0" (click)="onResetFilter()">
         <span class="fancy-text text-uppercase">Reset</span>
     </button>
-    <button mat-raised-button class="bg-green w-100 rounded-0" (click)="onApplyFilter()" >
+    <button mat-raised-button class="bg-green w-100 rounded-0" (click)="onApplyFilter()">
         <span class="fancy-text text-uppercase">Apply</span>
     </button>
 </div>
