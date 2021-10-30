@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron": "ng build --base-href ./ && tsc --p electron && electron --trace-warnings electron/dist/main.js",
-    "package": "electron-forge package",
+    "package": "ng build --prod --base-href ./ && tsc --p electron && electron-forge package",
     "make": "electron-forge make"
   },
   "private": true,
