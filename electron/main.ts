@@ -1,15 +1,18 @@
 import "reflect-metadata";
 import { app, BrowserWindow, ipcMain, screen, Menu} from "electron";
-import {createConnection, Connection, getConnection, Db } from "typeorm";
-import { DbConfig }  from './config/db.conf';
+import {createConnection, Connection } from "typeorm";
 import { AppConfig } from './config/app.conf';
-import { customer, product, inventory, sell, settings, user, payment } from './db';
+import { customer, product, inventory, sell, settings, user, payment, Entities } from './db';
+
 enum Status {
     FAILURE = 0,
     SUCCESS = 1
 }
 
+let isDevMode = false;
+
 let win: BrowserWindow;
+let connection: Connection;
 /**
  * createWindow create a native window
  * when electron app will reday
@@ -18,21 +21,19 @@ async function createWindow() {
 
     try {
 
-        const connection = await createConnection({
+        connection = await createConnection({
             type: "sqlite",
             // host: DbConfig.host,
             // port: 3306,
             // username: DbConfig.user,
-            database: 'psm.sql',
+            database: './psm.sql',
             // password: DbConfig.password,
-            entities: ["electron/dist/entities/*.js"],
+            entities: Entities,
             synchronize: true,
-            logging: true
+            logging: isDevMode
         });
     } catch (err) {
-        console.log('Error from db:', err, 'this is config', DbConfig);
         app.quit();
-        process.exit();
     }
 
     //Getting the screen area of the display
@@ -50,7 +51,7 @@ async function createWindow() {
 
     win.loadURL(AppConfig.indexURL);
 
-    // if(process.env.NODE_ENV === 'development') win.webContents.openDevTools();
+    if( isDevMode ) win.webContents.openDevTools();
     // console.log('node ene',process.env.NODE_ENV);
     
     Menu.setApplicationMenu(null);
@@ -88,7 +89,6 @@ ipcMain.handle('database', async (event, arg) => {
             status: Status.SUCCESS,
             data: null
         }
-        const connection = getConnection();
         const [item, action, data] = arg;
         switch (item) {
             case 'customer':

@@ -9,6 +9,16 @@ import { compress } from './utility';
 import { Payment } from './entities/payment';
 
 // const connection = getConnection();
+export let Entities = [
+  Customer,
+  Payment,
+  Product,
+  Inventory,
+  Sell,
+  User,
+  Settings,
+  SelledProduct,
+];
 
 export async function customer(connection, action: string, data?: any) {
   const repository = connection.getRepository(Customer);
