@@ -42,6 +42,7 @@ async function createWindow() {
         width,
         height,
         webPreferences: {
+            nativeWindowOpen: false,
             preload: AppConfig.preloadPath
         },
         icon: AppConfig.iconPath
@@ -49,8 +50,9 @@ async function createWindow() {
 
     win.loadURL(AppConfig.indexURL);
 
-
-    win.webContents.openDevTools();
+    // if(process.env.NODE_ENV === 'development') win.webContents.openDevTools();
+    // console.log('node ene',process.env.NODE_ENV);
+    
     Menu.setApplicationMenu(null);
     win.maximize();
 

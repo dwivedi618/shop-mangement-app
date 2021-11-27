@@ -75,12 +75,6 @@
       },
       "makers": [
         {
-          "name": "@electron-forge/maker-deb",
-          "config": {
-            "name": "Tridev"
-          }
-        },
-        {
           "name": "@electron-forge/maker-squirrel",
           "platforms": [
             "win32"
