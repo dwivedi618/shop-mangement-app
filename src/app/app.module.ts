@@ -61,6 +61,8 @@ import { LoadingScreenComponent } from './layout/components/uicomponents/loading
 import { TakePaymentComponent } from './layout/components/take-payment/take-payment.component';
 import { FilterComponent } from './layout/components/filter/filter.component';
 import { AppSetupComponent } from './layout/components/app-setup/app-setup.component';
+import { BrandComponent } from './layout/components/pconfig/brand/brand.component';
+import { PconfigLayoutComponent } from './layout/components/pconfig/pconfig-layout/pconfig-layout.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +114,8 @@ import { AppSetupComponent } from './layout/components/app-setup/app-setup.compo
     TakePaymentComponent,
     FilterComponent,
     AppSetupComponent,
+    BrandComponent,
+    PconfigLayoutComponent,
 
   ],
   imports: [

@@ -17,6 +17,8 @@ import { AccountSettingsComponent } from './layout/components/settings/account-s
 import { SellListComponent } from './layout/components/sales/sell-list/sell-list.component';
 import { AppSetupComponent } from './layout/components/app-setup/app-setup.component';
 import { NewSaleComponent } from './layout/components/newsell/new-sale/new-sale.component';
+import { BrandComponent } from './layout/components/pconfig/brand/brand.component';
+import { PconfigLayoutComponent } from './layout/components/pconfig/pconfig-layout/pconfig-layout.component';
 
 const routes: Routes = [
   { path: '', component: AppSetupComponent },
@@ -46,11 +48,22 @@ const routes: Routes = [
             { path: 'generalsettings', component: GeneralSettingsComponent, data: { breadcrumb: 'General Settings', icon: 'settings', } },
             { path: 'appearancesettings', component: AppearanceSettingsComponent, data: { breadcrumb: 'Appearance', icon: 'settings', } },
             { path: 'accountsettings', component: AccountSettingsComponent, data: { breadcrumb: 'Accounts', icon: 'admin_panel_settings', } },
+            { path: 'pconfig', component: BrandComponent, data: { breadcrumb: 'Brand', icon: 'workspace_premium', } },
+
             // { path: '', component: AccountSettingsComponent, data: { breadcrumb: 'Accounts', icon: 'admin_panel_settings', } },
-
-
           ]
         },
+        {
+          path: 'pconfig', component: PconfigLayoutComponent, data: {
+            breadcrumb: 'Config', icon: 'build_circle',},
+            children: [
+              { path: 'brand', component: BrandComponent, data: { breadcrumb: 'Brand', icon: 'workspace_premium', } },  
+              { path: 'category', component: BrandComponent, data: { breadcrumb: 'Category', icon: 'category', } },  
+              { path: 'color', component: BrandComponent, data: { breadcrumb: 'Color', icon: 'palette', } },  
+              { path: 'size', component: BrandComponent, data: { breadcrumb: 'Size', icon: 'format_size', } },  
+     
+            ]
+          },
 
     // { path: 'cart',component:CartComponent ,data : {breadcrumb : 'Cart'}},
   ]

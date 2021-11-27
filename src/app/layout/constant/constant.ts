@@ -35,6 +35,11 @@ export class Constant {
     text2: 'Go to new Order',
     action: '../neworder',
   };
+  static BRAND_MISSING = {
+    text1: 'Brand not available!',
+    text2: 'Add Brand',
+    action: '../brand',
+  };
 
   // Filter
   static CUSTOMER_CATEGORY = [

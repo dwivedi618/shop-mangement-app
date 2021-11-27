@@ -127,6 +127,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 .text-light{
     color: var(--light);
 }
+.text-light:hover{
+    color: var(--dark);
+}
 .text-thin{
     font-weight: 200!important;
 }
@@ -158,6 +161,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     }
 .w-100{
     width: 100%!important;
+}
+.w-75{
+    width: 75%!important;
 }
 .w-50{
     width: 50%;
@@ -192,6 +198,12 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 }
 .p-2{
     padding: 12px;
+}
+.pb-0{
+    padding-bottom: 0px!important;
+}
+.p-5{
+    padding: 30px;
 }
 .py-2{
     padding: 12px 0;
@@ -232,6 +244,12 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 }
 .justify-content-start{
     justify-content: start;
+}
+.align-items-center{
+    align-items: center;
+}
+.justify-content-between{
+    justify-content:space-between;
 }
 .fancy-text{
     letter-spacing: 5px;
