@@ -1,22 +1,22 @@
-import { LoginComponent } from './layout/components/login/login.component';
+import { LoginComponent } from './layout/components/auth/login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NewSaleComponent } from './layout/components/new-sale/new-sale.component';
-import { CartComponent } from './layout/components/cart/cart.component';
-import { CustomerListComponent } from './layout/components/customer-list/customer-list.component';
-import { InventoryComponent } from './layout/components/inventory/inventory.component';
+import { CartComponent } from './layout/components/newsell/cart/cart.component';
+import { CustomerListComponent } from './layout/components/customers/customer-list/customer-list.component';
+import { InventoryComponent } from './layout/components/inventories/inventory/inventory.component';
 import { HomeComponent } from './layout/components/home/home.component';
 import { DashboardComponent } from './layout/components/dashboard/dashboard.component';
-import { ProductComponent } from './layout/components/product/product.component';
-import { NewOrderlayoutComponent } from './layout/components/new-orderlayout/new-orderlayout.component';
-import { GeneralSettingsComponent } from './layout/components/general-settings/general-settings.component';
-import { SettingsLayoutComponent } from './layout/components/settings-layout/settings-layout.component';
-import { AppearanceSettingsComponent } from './layout/components/appearance-settings/appearance-settings.component';
+import { ProductComponent } from './layout/components/products/product/product.component';
+import { NewOrderlayoutComponent } from './layout/components/newsell/new-orderlayout/new-orderlayout.component';
+import { GeneralSettingsComponent } from './layout/components/settings/general-settings/general-settings.component';
+import { SettingsLayoutComponent } from './layout/components/settings/settings-layout/settings-layout.component';
+import { AppearanceSettingsComponent } from './layout/components/settings/appearance-settings/appearance-settings.component';
 import { AuthGuard } from './auth.guard';
-import { AccountSettingsComponent } from './layout/components/account-settings/account-settings.component';
-import { SellListComponent } from './layout/components/sell-list/sell-list.component';
+import { AccountSettingsComponent } from './layout/components/settings/account-settings/account-settings.component';
+import { SellListComponent } from './layout/components/sales/sell-list/sell-list.component';
 import { AppSetupComponent } from './layout/components/app-setup/app-setup.component';
+import { NewSaleComponent } from './layout/components/newsell/new-sale/new-sale.component';
 
 const routes: Routes = [
   { path: '', component: AppSetupComponent },
