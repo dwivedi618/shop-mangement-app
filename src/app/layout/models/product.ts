@@ -1,8 +1,11 @@
-export class Product{
+import { Pcategory } from './pcategory';
+import { Psize } from './psize';
+import { Brand } from './brand';
+import { Pcolor } from './pcolor';
+export interface Product{
   
-      id : number;
+      readonly id : number;
       name: string;
-      brand: string;
       price: number;
       discountInPercent : number;
       discountInRuppee : number;
@@ -13,6 +16,10 @@ export class Product{
       productCode : any ;
       make : string;
       length : string;
-      size : string;
       image : any;  
+      color : Pcolor;
+      brand: Brand;
+      size : Psize;
+      category : Pcategory;
+      
 }

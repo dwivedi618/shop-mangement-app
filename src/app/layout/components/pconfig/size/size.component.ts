@@ -1,21 +1,23 @@
+
 import { IPCService } from './../../../../services/ipc.service';
-import { Brand } from './../../../models/brand';
 import { AlertService } from 'src/app/services/alert.service';
 import { Component, OnInit } from '@angular/core';
 import { Constant } from 'src/app/layout/constant/constant';
 import { table } from 'console';
+import { Psize } from 'src/app/layout/models/psize';
 
-interface Brands extends Brand{
+
+interface GarmentSize extends Psize{
   isEditEnable?: boolean
 }
 @Component({
-  selector: 'app-brand',
-  templateUrl: './brand.component.html',
-  styleUrls: ['./brand.component.scss']
+  selector: 'app-size',
+  templateUrl: './size.component.html',
+  styleUrls: ['./size.component.scss']
 })
-export class BrandComponent implements OnInit {
-  BRAND_MISSING = Constant.BRAND_MISSING
-  newBrand : string
+export class SizeComponent implements OnInit {
+  SIZE_MISSING = Constant.SIZE_MISSING
+  newGarmentSize : string
   
   data= [
     { id: 1 , name : 'HRX',isEditEnable : false},
@@ -30,37 +32,37 @@ export class BrandComponent implements OnInit {
 
  
   ]
-  brands : Brands[] = [];
+  garmentSizeList : GarmentSize[] = [];
   isNewAddEnable : Boolean = false;
   isEditEnable : boolean = false;
   constructor(private alertService : AlertService,private ipcService : IPCService) { }
 
   ngOnInit(): void {
-    this.brands = this.data;
-    // this.getBrandList();
+    this.garmentSizeList = this.data;
+    // this.getGarmentSizeList();
   }
 
-  getBrandList(){
+  getGarmentSizeList(){
     this.ipcService.database('brand','fetch','')
     .then(res => {
       if(res.status){
-        this.brands = res.data
+        this.garmentSizeList = res.data
         console.log("data ng On changes", res)
       }
     })
   }
 
-  onNewBrandSave = ()=> {
-    let newBrand:Brand = {  name : this.newBrand };
-    let save = newBrand =>{
-      this.ipcService.database("brand",'create',newBrand)
+  onNewSave = ()=> {
+    let newGarmentSize:Psize = {  id:0,name : this.newGarmentSize };
+    let save = newGarmentSize =>{
+      this.ipcService.database("brand",'create',newGarmentSize)
       .then(res=>{
         if(res.status){
           this.alertService.alert('Item Added Successfully','close');
-          this.getBrandList();
-          this.brands.push(newBrand);
+          this.getGarmentSizeList();
+          this.garmentSizeList.push(newGarmentSize);
           this.isNewAddEnable = false;
-          this.newBrand = '';
+          this.newGarmentSize = '';
         }
       })
     }
@@ -69,17 +71,17 @@ export class BrandComponent implements OnInit {
 
   onFocusBrandName = (id:Number) =>{
     // alert("id")
-    this.brands.forEach(brand => {
+    this.garmentSizeList.forEach(brand => {
       if(brand.id == id){ brand.isEditEnable = true;return}
     })
   }
  
-  onSave = (brand:Brands) =>{
+  onSave = (brand:GarmentSize) =>{
     console.table(brand);
     this.ipcService.database('brand','update',brand)
     .then(res =>{
       if(res.status){
-        this.getBrandList();
+        this.getGarmentSizeList();
         console.log("data ng On changes", res)
       }
     })
@@ -90,10 +92,10 @@ export class BrandComponent implements OnInit {
       .then(res=>{
         if(res.status){
           this.alertService.alert('Item deleted successfully','close');
-          this.getBrandList();
+          this.getGarmentSizeList();
         }
       })
-      this.brands.pop()
+      this.garmentSizeList.pop()
     }
     this.alertService.alertActionDialog('Delete','Are you sure ?','Yes! Delete')
     .subscribe(result=>{
@@ -101,3 +103,5 @@ export class BrandComponent implements OnInit {
     })
   }
 }
+
+

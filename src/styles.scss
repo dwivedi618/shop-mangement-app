@@ -127,6 +127,11 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 .text-light{
     color: var(--light);
 }
+.text-ultra-light{
+    color: var(--light);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
 .text-light:hover{
     color: var(--dark);
 }

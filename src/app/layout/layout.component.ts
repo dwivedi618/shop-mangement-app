@@ -25,10 +25,9 @@ export class LayoutComponent implements OnInit {
   ]  
   settingLinks = [
     { path : 'dashboard',icon :'keyboard_arrow_left', name : 'Exit Setting' },
-    { path : 'settings/pconfig',icon :'build_circle', name : 'Configuration' },
     // { path : 'settings/generalsettings',icon :'settings_applications', name : 'General' },
     { path : 'settings/appearancesettings',icon :'grid_view', name : 'Appearance' },
-    { path : 'settings/systemfilter',icon :'settings_input_composite', name : 'System Filter' },
+    // { path : 'settings/systemfilter',icon :'settings_input_composite', name : 'System Filter' },
     { path : 'settings/accountsettings',icon :'admin_panel_settings', name : 'Account' },
   ]  
 

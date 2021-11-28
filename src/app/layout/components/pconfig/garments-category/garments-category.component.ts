@@ -1,3 +1,5 @@
+import { Pcategory } from './../../../models/pcategory';
+
 import { IPCService } from './../../../../services/ipc.service';
 import { Brand } from './../../../models/brand';
 import { AlertService } from 'src/app/services/alert.service';
@@ -5,17 +7,17 @@ import { Component, OnInit } from '@angular/core';
 import { Constant } from 'src/app/layout/constant/constant';
 import { table } from 'console';
 
-interface Brands extends Brand{
+interface categoryList extends Brand{
   isEditEnable?: boolean
 }
 @Component({
-  selector: 'app-brand',
-  templateUrl: './brand.component.html',
-  styleUrls: ['./brand.component.scss']
+  selector: 'app-garments-category',
+  templateUrl: './garments-category.component.html',
+  styleUrls: ['./garments-category.component.scss']
 })
-export class BrandComponent implements OnInit {
+export class GarmentsCategoryComponent implements OnInit {
   BRAND_MISSING = Constant.BRAND_MISSING
-  newBrand : string
+  newGarmentCategory : string
   
   data= [
     { id: 1 , name : 'HRX',isEditEnable : false},
@@ -30,13 +32,14 @@ export class BrandComponent implements OnInit {
 
  
   ]
-  brands : Brands[] = [];
+  categoryList : categoryList[] = [];
   isNewAddEnable : Boolean = false;
   isEditEnable : boolean = false;
+  newCategory: string;
   constructor(private alertService : AlertService,private ipcService : IPCService) { }
 
   ngOnInit(): void {
-    this.brands = this.data;
+    this.categoryList = this.data;
     // this.getBrandList();
   }
 
@@ -44,23 +47,23 @@ export class BrandComponent implements OnInit {
     this.ipcService.database('brand','fetch','')
     .then(res => {
       if(res.status){
-        this.brands = res.data
+        this.categoryList = res.data
         console.log("data ng On changes", res)
       }
     })
   }
 
-  onNewBrandSave = ()=> {
-    let newBrand:Brand = {  name : this.newBrand };
-    let save = newBrand =>{
-      this.ipcService.database("brand",'create',newBrand)
+  onNewSave = ()=> {
+    let newCategory:Pcategory = { id: 0, name : this.newGarmentCategory };
+    let save = newCategory =>{
+      this.ipcService.database("brand",'create',newCategory)
       .then(res=>{
         if(res.status){
           this.alertService.alert('Item Added Successfully','close');
           this.getBrandList();
-          this.brands.push(newBrand);
+          // this.categoryList.push(newCategory);//test
           this.isNewAddEnable = false;
-          this.newBrand = '';
+          this.newGarmentCategory = '';
         }
       })
     }
@@ -69,12 +72,12 @@ export class BrandComponent implements OnInit {
 
   onFocusBrandName = (id:Number) =>{
     // alert("id")
-    this.brands.forEach(brand => {
+    this.categoryList.forEach(brand => {
       if(brand.id == id){ brand.isEditEnable = true;return}
     })
   }
  
-  onSave = (brand:Brands) =>{
+  onSave = (brand:categoryList) =>{
     console.table(brand);
     this.ipcService.database('brand','update',brand)
     .then(res =>{
@@ -93,7 +96,7 @@ export class BrandComponent implements OnInit {
           this.getBrandList();
         }
       })
-      this.brands.pop()
+      this.categoryList.pop()
     }
     this.alertService.alertActionDialog('Delete','Are you sure ?','Yes! Delete')
     .subscribe(result=>{
@@ -101,3 +104,4 @@ export class BrandComponent implements OnInit {
     })
   }
 }
+

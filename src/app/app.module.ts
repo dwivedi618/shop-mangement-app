@@ -63,6 +63,9 @@ import { FilterComponent } from './layout/components/filter/filter.component';
 import { AppSetupComponent } from './layout/components/app-setup/app-setup.component';
 import { BrandComponent } from './layout/components/pconfig/brand/brand.component';
 import { PconfigLayoutComponent } from './layout/components/pconfig/pconfig-layout/pconfig-layout.component';
+import { GarmentsCategoryComponent } from './layout/components/pconfig/garments-category/garments-category.component';
+import { ColorComponent } from './layout/components/pconfig/color/color.component';
+import { SizeComponent } from './layout/components/pconfig/size/size.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +119,9 @@ import { PconfigLayoutComponent } from './layout/components/pconfig/pconfig-layo
     AppSetupComponent,
     BrandComponent,
     PconfigLayoutComponent,
+    GarmentsCategoryComponent,
+    ColorComponent,
+    SizeComponent,
 
   ],
   imports: [

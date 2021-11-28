@@ -40,6 +40,21 @@ export class Constant {
     text2: 'Add Brand',
     action: '../brand',
   };
+  static COLOR_MISSING = {
+    text1: 'Color not available!',
+    text2: 'Add Color',
+    action: '../pcolor',
+  };
+  static SIZE_MISSING = {
+    text1: 'Garment size list not available!',
+    text2: 'Add Garment size',
+    action: '../pcolor',
+  };
+  static GARMENT_CATEGORY_MISSING = {
+    text1: 'Categories not available!',
+    text2: '',
+    action: '../pcolor',
+  };
 
   // Filter
   static CUSTOMER_CATEGORY = [

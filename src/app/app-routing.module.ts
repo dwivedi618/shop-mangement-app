@@ -19,6 +19,9 @@ import { AppSetupComponent } from './layout/components/app-setup/app-setup.compo
 import { NewSaleComponent } from './layout/components/newsell/new-sale/new-sale.component';
 import { BrandComponent } from './layout/components/pconfig/brand/brand.component';
 import { PconfigLayoutComponent } from './layout/components/pconfig/pconfig-layout/pconfig-layout.component';
+import { GarmentsCategoryComponent } from './layout/components/pconfig/garments-category/garments-category.component';
+import { ColorComponent } from './layout/components/pconfig/color/color.component';
+import { SizeComponent } from './layout/components/pconfig/size/size.component';
 
 const routes: Routes = [
   { path: '', component: AppSetupComponent },
@@ -58,9 +61,9 @@ const routes: Routes = [
             breadcrumb: 'Config', icon: 'build_circle',},
             children: [
               { path: 'brand', component: BrandComponent, data: { breadcrumb: 'Brand', icon: 'workspace_premium', } },  
-              { path: 'category', component: BrandComponent, data: { breadcrumb: 'Category', icon: 'category', } },  
-              { path: 'color', component: BrandComponent, data: { breadcrumb: 'Color', icon: 'palette', } },  
-              { path: 'size', component: BrandComponent, data: { breadcrumb: 'Size', icon: 'format_size', } },  
+              { path: 'category', component: GarmentsCategoryComponent, data: { breadcrumb: 'Category', icon: 'category', } },  
+              { path: 'color', component: ColorComponent, data: { breadcrumb: 'Color', icon: 'palette', } },  
+              { path: 'size', component: SizeComponent, data: { breadcrumb: 'Size', icon: 'format_size', } },  
      
             ]
           },
