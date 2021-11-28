@@ -482,3 +482,19 @@ button.left-radius{
 .rounded-0{
     border-radius: 0!important;
 }
+
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	// width: 3rem;
+    height: .9rem;
+    border-radius: 4px;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border-radius: 4px;
+}
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 4px;
+}

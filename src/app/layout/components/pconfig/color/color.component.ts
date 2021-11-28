@@ -15,19 +15,20 @@ interface Colors extends Pcolor{
   styleUrls: ['./color.component.scss']
 })
 export class ColorComponent implements OnInit {
-  _MISSING = Constant.COLOR_MISSING
-  newColor : string
+  COLOR_MISSING = Constant.COLOR_MISSING
+  newColorCode : string
   
   data= [
-    { id: 1 , name : 'HRX',code :'#orangered',isEditEnable : false},
- 
+    { id: 1 , name : 'Orange Red',code :'#EABABB',isEditEnable : false},
+    { id: 2 , name : 'Red',code :'#fbb000',isEditEnable : false},
+    { id: 3 , name : 'white',code :'#cccccc',isEditEnable : false},
 
- 
   ]
   colors : Colors[] = [];
   isNewAddEnable : Boolean = false;
   isEditEnable : boolean = false;
-  colorCode: string;
+  colorCode: string = 'rgba(210, 105, 30, 0)';//no color or transparent
+  colorName: string;
   constructor(private alertService : AlertService,private ipcService : IPCService) { }
 
   ngOnInit(): void {
@@ -46,23 +47,27 @@ export class ColorComponent implements OnInit {
   }
 
   onNewColorSave = ()=> {
-    let newcolor:Pcolor = { id:1, name : this.newColor,code: this.colorCode };
+    let newcolor:Pcolor = { id:1, name : this.colorName,code: this.colorCode };
     let save = newcolor =>{
       this.ipcService.database("color",'create',newcolor)
       .then(res=>{
         if(res.status){
           this.alertService.alert('Item Added Successfully','close');
           this.getColorList();
-          this.colors.push(newcolor);
+        
           this.isNewAddEnable = false;
-          this.newColor = '';
+          this.colorCode = '';
+          this.colorName = '';
+
         }
       })
     }
   }
 
 
- 
+ /**
+  * @param data 
+  */
   onSave = (data:Colors) =>{
     console.table(data);
     this.ipcService.database('color','update',data)
@@ -74,6 +79,9 @@ export class ColorComponent implements OnInit {
     })
   }
 
+  /**
+   * @param color 
+   */
   onDelete = color =>{ 
     let deletecolor = ()=>{
       this.ipcService.database('color','delete',color)
