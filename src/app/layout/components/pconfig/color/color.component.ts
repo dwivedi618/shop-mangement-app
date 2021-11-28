@@ -1,9 +1,13 @@
+import { DefinedSizes } from './../../../../fakedata/sizes';
 
 import { IPCService } from './../../../../services/ipc.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Component, OnInit } from '@angular/core';
 import { Constant } from 'src/app/layout/constant/constant';
 import { Pcolor } from 'src/app/layout/models/pcolor';
+import { DefinedColors } from 'src/app/fakedata/colors';
+import { DefinedCategory } from 'src/app/fakedata/categories';
+import { DefinedSubCategory } from 'src/app/fakedata/subcategories';
 
 interface Colors extends Pcolor{
   isEditEnable?: boolean
@@ -32,8 +36,26 @@ export class ColorComponent implements OnInit {
   constructor(private alertService : AlertService,private ipcService : IPCService) { }
 
   ngOnInit(): void {
-    this.colors = this.data;
-    // this.getColorList();
+    this.colors = DefinedColors.all;
+    // this.getBrandList();
+    // this.refineData()
+  }
+
+  refineData(){
+    let beforeRefine = DefinedSubCategory.all;
+    // beforeRefine.forEach(element => {
+    //   element['name'] = element['value'];
+    //   // element['code'] = element['meta'];
+
+    //   delete element.value;
+    //   delete element.pLevel;
+    //   delete element.count;
+    //   delete element.meta;
+    //   return
+
+    // });
+    console.table(beforeRefine);
+    console.log(beforeRefine);
   }
 
   getColorList(){

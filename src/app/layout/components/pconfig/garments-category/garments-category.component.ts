@@ -1,3 +1,4 @@
+import { DefinedCategory } from './../../../../fakedata/categories';
 import { Pcategory } from './../../../models/pcategory';
 
 import { IPCService } from './../../../../services/ipc.service';
@@ -39,7 +40,7 @@ export class GarmentsCategoryComponent implements OnInit {
   constructor(private alertService : AlertService,private ipcService : IPCService) { }
 
   ngOnInit(): void {
-    this.categoryList = this.data;
+    this.categoryList = DefinedCategory.all;;
     // this.getBrandList();
   }
 

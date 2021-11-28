@@ -12,6 +12,5 @@ export class Inventory{
         description: string;
         code : string;
         isAddingStock: boolean;
-        length : number;
-        
+        length : number;  
 }

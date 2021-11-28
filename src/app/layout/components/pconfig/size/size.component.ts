@@ -1,3 +1,4 @@
+import { DefinedSizes } from './../../../../fakedata/sizes';
 
 import { IPCService } from './../../../../services/ipc.service';
 import { AlertService } from 'src/app/services/alert.service';
@@ -38,7 +39,7 @@ export class SizeComponent implements OnInit {
   constructor(private alertService : AlertService,private ipcService : IPCService) { }
 
   ngOnInit(): void {
-    this.garmentSizeList = this.data;
+    this.garmentSizeList = DefinedSizes.all;
     // this.getGarmentSizeList();
   }
 

@@ -1,4 +1,4 @@
 export interface Brand{
-    readonly id ?: number;
+    readonly id ?: number|string;
     name: string;
 }

@@ -1,10 +1,11 @@
+
 import { IPCService } from './../../../../services/ipc.service';
 import { Brand } from './../../../models/brand';
 import { AlertService } from 'src/app/services/alert.service';
 import { Component, OnInit } from '@angular/core';
 import { Constant } from 'src/app/layout/constant/constant';
 import { table } from 'console';
-
+import { BrandList } from '../../../../fakedata/brands'
 interface Brands extends Brand{
   isEditEnable?: boolean
 }
@@ -36,10 +37,26 @@ export class BrandComponent implements OnInit {
   constructor(private alertService : AlertService,private ipcService : IPCService) { }
 
   ngOnInit(): void {
-    this.brands = this.data;
+    this.brands = BrandList.allbrands;
     // this.getBrandList();
+    // this.refineData()
   }
 
+  // refineData(){
+  //   let beforeRefine = BrandList.allbrands;
+  //   beforeRefine.forEach(element => {
+  //     element['name'] = element['value'];
+  //     delete element.value;
+  //     delete element.pLevel;
+  //     delete element.count;
+  //     delete element.meta;
+  //     return
+
+  //   });
+  //   console.table(beforeRefine);
+  //   console.log(beforeRefine);
+  // }
+  
   getBrandList(){
     this.ipcService.database('brand','fetch','')
     .then(res => {

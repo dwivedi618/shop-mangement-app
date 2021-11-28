@@ -1,5 +1,5 @@
 export interface Pcolor{
-    id : number;
+    id : number|string;
     name: string;
     code : string;
 }
