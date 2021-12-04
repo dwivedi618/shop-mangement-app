@@ -44,13 +44,38 @@
             <mat-list-item class="text-wrap-sm">
               <h3 matLine> {{item?.name}} </h3>
               <p matLine class="" style="color: var(--light);">
-                <span> {{item?.code}} </span>
+                <span> {{item?.code}} S,M,XL </span>
                 <span class="">{{item?.description}} </span>
               </p>
             </mat-list-item>
           </mat-list>
         </div>
+
         <div class="spacer"></div>
+        <div class="price-column">
+          <mat-list dense>
+            <mat-list-item>
+              <span matLine style="color:var(--light)">Garment Category</span>
+              <h3 matLine style="font-weight: 600;"> Saree</h3>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div class="price-column">
+          <mat-list dense>
+            <mat-list-item>
+              <span matLine style="color:var(--light)">Brand</span>
+              <h3 matLine style="font-weight: 600;"> Kaveri</h3>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div class="price-column">
+          <mat-list dense>
+            <mat-list-item>
+              <span matLine style="color:var(--light)">Size</span>
+              <h3 matLine style="font-weight: 600;"> S,M,XL,XXL</h3>
+            </mat-list-item>
+          </mat-list>
+        </div>
         <div class="price-column">
           <mat-list dense>
             <mat-list-item>

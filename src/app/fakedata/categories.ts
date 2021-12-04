@@ -5,6 +5,10 @@ export class DefinedCategory{
         "name": "Tshirts"
       },
       {
+        "id": "Sharee",
+        "name": "Sharee"
+      },
+      {
         "id": "Tops",
         "name": "Tops"
       },

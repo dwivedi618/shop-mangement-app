@@ -32,22 +32,22 @@ export class NewSaleComponent implements OnInit {
   
   ];
   items = [
-    // {
-    //   id: 1,
-    //   name: "Jeans",
-    //   brand: null,
-    //   price: 897,
-    //   discountInPercent: 0,
-    //   discountInRuppee: 0,
-    //   unit: 'meter',
-    //   sellBy: false,
-    //   grade: "grade 1",
-    //   description: "no decription",
-    //   productCode: null,
-    //   make: "make 1",
-    //   length: null,
-    //   size: null,
-    // }
+    {
+      id: 1,
+      name: "Jeans",
+      brand: null,
+      price: 897,
+      discountInPercent: 0,
+      discountInRuppee: 0,
+      unit: 'meter',
+      sellBy: false,
+      grade: "grade 1",
+      description: "no decription",
+      productCode: null,
+      make: "make 1",
+      length: null,
+      size: null,
+    }
   ];
   cart = [];
   constructor(private dialog: MatDialog,

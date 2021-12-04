@@ -11,19 +11,21 @@
             </div> -->
             
             <span class="spacer"></span>
-            <button mat-icon-button class="mx-2 rounded-lg" disabled>
+            <!-- <button mat-icon-button class="mx-2 rounded-lg" disabled>
                 <mat-icon class="mat-icon-sm pt-0">search</mat-icon>
-            </button>
-            <button mat-icon-button class="mx-2 rounded-lg" >
+            </button> -->
+            <!-- <button mat-icon-button class="mx-2 rounded-lg" >
                 <mat-icon class="mat-icon-sm pt-0">refresh</mat-icon>
-            </button>
-            <button mat-icon-button class="mx-2 rounded-lg" (click)="openAddUpdateProduct()">
-                <mat-icon class="mat-icon-sm pt-0">add_box</mat-icon>
-            </button>
-            <button mat-icon-button class="mx-2 rounded-lg" (click)="isListView = !isListView">
+            </button> -->
+            <button mat-icon-button matTooltip="Change view" class="mx-2 rounded-lg" (click)="isListView = !isListView" >
                 <mat-icon class="mat-icon-sm pt-0">{{isListView ? 'view_list' : 'grid_view'}}</mat-icon>
             </button>
-            <button mat-icon-button class="mx-2 rounded-lg" [matMenuTriggerFor]="moreTools">
+            <button mat-raised-button class="mx-2 mr-1 rounded-lg bg-green" (click)="openAddUpdateProduct()">
+                <mat-icon class="mat-icon-sm pt-1">add_box</mat-icon>
+                <small>Add Product</small>
+            </button>
+            
+            <!-- <button mat-icon-button class="mx-2 rounded-lg" [matMenuTriggerFor]="moreTools">
                 <mat-icon class="mat-icon-sm pt-0">more_vert</mat-icon>
             </button>
             <mat-menu #moreTools="matMenu">
@@ -37,7 +39,7 @@
                         <span>settings</span>
                     </mat-list-item>
                 </mat-list>
-            </mat-menu>
+            </mat-menu> -->
         </mat-toolbar>
         <app-product-item [(data)]="items" [cartItems]="cart" [(view)]="isListView" 
         (shareCart)="onCartData($event)" (onDialogClose)="onDialogClose($event)"

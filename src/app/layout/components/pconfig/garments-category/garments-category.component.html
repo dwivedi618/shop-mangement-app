@@ -25,7 +25,9 @@
     <div class="brand-list-container ">
         <mat-list *ngIf="categoryList?.length" dense class="bg-white rounded-lg shadow py-2">
             <mat-list-item>
-                <h1>Garment Category<small class="text-ultra-light px-2">{{categoryList?.length}}</small></h1>
+                <!-- <h1>Garment Category<small class="text-ultra-light px-2">{{categoryList?.length}}</small></h1> -->
+                <app-search></app-search>
+
             </mat-list-item>
             <mat-list-item *ngFor="let brand of categoryList;let i=index">
                 <div *ngIf="!brand.isEditEnable" class="d-flex align-items-center justify-content-between w-100">

@@ -66,6 +66,10 @@ import { PconfigLayoutComponent } from './layout/components/pconfig/pconfig-layo
 import { GarmentsCategoryComponent } from './layout/components/pconfig/garments-category/garments-category.component';
 import { ColorComponent } from './layout/components/pconfig/color/color.component';
 import { SizeComponent } from './layout/components/pconfig/size/size.component';
+import { FilterPipe } from './customPipes/filter.pipe';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { AddUpdateBrandComponent } from './layout/components/pconfig/add-update-brand/add-update-brand.component';
+
 
 @NgModule({
   declarations: [
@@ -122,6 +126,8 @@ import { SizeComponent } from './layout/components/pconfig/size/size.component';
     GarmentsCategoryComponent,
     ColorComponent,
     SizeComponent,
+    FilterPipe,
+    AddUpdateBrandComponent,
 
   ],
   imports: [
@@ -134,6 +140,7 @@ import { SizeComponent } from './layout/components/pconfig/size/size.component';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    NgxMatSelectSearchModule
     // NgxImageCompressService
   ],
   providers: [IPCService, AlertService,UtilityService,NgxImageCompressService,

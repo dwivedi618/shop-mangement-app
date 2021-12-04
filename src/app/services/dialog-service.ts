@@ -1,6 +1,6 @@
 import { Observable, Subject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { Injectable } from '@angular/core';
+import { Component, ComponentRef, Injectable } from '@angular/core';
 import { AddUpdateCustomerComponent } from '../layout/components/customers/add-update-customer/add-update-customer.component';
 import { ItemDetailsComponent } from '../layout/components/newsell/item-details/item-details.component';
 import { ServiceListComponent } from '../layout/components/service-list/service-list.component';
@@ -209,6 +209,17 @@ export class DialogService {
       data: credential,
     });
     bdialogRef.afterClosed().subscribe((result) => {
+      afterCloseResult.next(result);
+    });
+    return afterCloseResult.asObservable();
+  }
+
+  openMatDialog(componentRef,selectedItem:{},dialogConfig) {
+    let afterCloseResult = new Subject();
+    let config = dialogConfig;
+    config.data = selectedItem;
+    const dialogRef = this.dialog.open(componentRef,config);
+    dialogRef.afterClosed().subscribe((result) => {
       afterCloseResult.next(result);
     });
     return afterCloseResult.asObservable();

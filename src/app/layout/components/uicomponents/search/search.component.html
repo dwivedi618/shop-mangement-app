@@ -1,12 +1,12 @@
-<form  class="d-flex w-100 shadow search-container">
-    <input type="search" placeholder="Search" (keyup)="onTyping()"
-    [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" >
-    <button *ngIf="searchText" mat-icon-button  class="clear-search-btn rounded-lg" #clearSearch (click)="searchText = ''">
-        <mat-icon class="mat-icon-sm pt-1">cancel</mat-icon>
-    </button>
+<form  class="d-flex w-100  search-container bg-ultra-light rounded-lg">
+    <div class="search-input">
+        <input type="search" placeholder="Search" (keyup)="onTyping()" spellcheck="true"
+        [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" >
+        <mat-icon *ngIf="searchText" mat-icon-button   #clearSearch (click)="searchText = '';onTyping()" class="mat-icon-sm pt-1 clear-search-btn text-light">cancel</mat-icon>
+    </div>
     <div >
-        <button mat-icon-button  class="bg-ultra-light rounded-lg">
-            <mat-icon class="mat-icon-sm pt-1">search</mat-icon>
+        <button mat-icon-button  class="bg-ultra-light rounded-lg" (click)=onSearchHandler()>
+            <mat-icon class="mat-icon-sm pt-0">search</mat-icon>
         </button>
     </div>
 </form>

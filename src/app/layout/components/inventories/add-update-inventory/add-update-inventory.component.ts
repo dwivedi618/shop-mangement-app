@@ -1,11 +1,13 @@
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { IPCService } from 'src/app/services/ipc.service';
 import { Product } from '../../../models/product';
 import { DialogService } from 'src/app/services/dialog-service';
+import { map, startWith } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export interface productDetails{
   id : number,
@@ -28,16 +30,30 @@ export interface productDetails{
   styleUrls: ['./add-update-inventory.component.scss']
 })
 export class AddUpdateInventoryComponent implements OnInit {
+  control = new FormControl();
+  streets: string[] = ['Champs-Élysées', 'Lombard Street', 'Abbey Road', 'Fifth Avenue'];
+  filteredStreets: Observable<string[]>;
+
+ 
+
+  private _filter(value: string): string[] {
+    const filterValue = this._normalizeValue(value);
+    return this.streets.filter(street => this._normalizeValue(street).includes(filterValue));
+  }
+
+  private _normalizeValue(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
+  }
   inventoryForm : FormGroup
   localData: any;
   action: any;
   items  = [
-    //  { name : 'product'},
-    //  { name : 'product'},
-    //  { name : 'product'},
-    //  { name : 'product'},
-    //  { name : 'product'},
-    //  { name : 'product'},
+     { name : 'product'},
+     { name : 'product'},
+     { name : 'product'},
+     { name : 'product'},
+     { name : 'product'},
+     { name : 'product'},
 
   ]
   constructor(
@@ -67,6 +83,10 @@ export class AddUpdateInventoryComponent implements OnInit {
      
     })
 
+    this.filteredStreets = this.control.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value as string)),
+    );
     if(this.action == 'update'){
       this.patchInventoryDataInForm()
     }
