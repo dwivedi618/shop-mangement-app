@@ -1,0 +1,26 @@
+mat-list mat-list-item{
+    margin-top: 1rem;
+}
+.setting-section{
+
+    height: calc(100vh - 6rem);
+}
+.inner_banner{    
+    position: relative;
+    z-index: 101;
+    background: url(../../../../../assets/images/wallpaper/pexels-eberhard-grossgasteiger-1612351.jpg) top center no-repeat; background-size: cover;
+    // background: url(../../../../assets/images/wallpaper/pexels-andré-cook-131723.jpg) top center no-repeat; background-size: cover;
+
+}
+.inner_banner::before{
+    content: ""; 
+    // backdrop-filter: blur(10px);
+    background: -webkit-linear-gradient(45deg, #2100466e, #0017b952); 
+    background: linear-gradient(45deg, #2100465e, var(--ultra-light)); 
+    position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;}
+.inner_banner_in{position: relative;     text-align: center;
+    background: rgb(31 20 84 / 61%);
+    height: 200px;
+    padding-top: 60px;
+    box-sizing: border-box;
+    color: #fff;}

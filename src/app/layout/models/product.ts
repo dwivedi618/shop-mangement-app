@@ -1,18 +1,26 @@
-export class Product{
-  
-      id : number;
+import { Pcategory } from './pcategory';
+import { Psize } from './psize';
+import { Brand } from './brand';
+import { Pcolor } from './pcolor';
+export interface Product{
+      readonly id : number;
       name: string;
-      brand: string;
       price: number;
-      discountInPercent : number;
-      discountInRuppee : number;
+      discountPercent : number;
+      discountAmount : number;
       unit : string;
       sellBy : boolean;
-      grade : string;
       description: string;
-      productCode : any ;
-      make : string;
+      productCode : string ;
       length : string;
-      size : string;
-      image : any;  
+      image?: any;  
+      color?: Pcolor;
+      brand?: Brand;
+      sizes?: Psize;
+      category?: Pcategory;
+      gender : string;
+      primaryColour : string; 
+      colorVariantAvailable : Boolean | string;
+      season? : string
+      
 }

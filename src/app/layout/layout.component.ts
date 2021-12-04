@@ -19,8 +19,8 @@ export class LayoutComponent implements OnInit {
     { path : 'inventory',icon :'inventory', name : 'Inventory' },
     { path : 'product',icon :'dry_cleaning', name : 'Product' },
     { path : 'customer',icon :'groups', name : 'Customer' },
-    // { path : 'purchase',icon :'money', name : 'Purchase' },
     { path : 'sale',icon :'sell', name : 'Sell History' },
+    { path : 'pconfig',icon :'build_circle', name : 'Configuration' },
     { path : 'settings',icon :'settings', name : 'Settings' },
   ]  
   settingLinks = [
@@ -30,8 +30,17 @@ export class LayoutComponent implements OnInit {
     // { path : 'settings/systemfilter',icon :'settings_input_composite', name : 'System Filter' },
     { path : 'settings/accountsettings',icon :'admin_panel_settings', name : 'Account' },
   ]  
+
+  pconfigLinks = [
+    { path : 'dashboard',icon :'keyboard_arrow_left', name : 'Exit Config' },
+    { path : 'pconfig/brand',icon :'workspace_premium', name : 'Brand' },
+    { path : 'pconfig/category',icon :'category', name : 'Category' },
+    { path : 'pconfig/color',icon :'palette', name : 'Color' },
+    { path : 'pconfig/size',icon :'format_size', name : 'Size' }
+  ] 
   currentPath: string;
   beforeCurrentPath: string;
+
   constructor(
     private dialog:MatDialog,
     private activatedRoute:ActivatedRoute,
@@ -53,6 +62,9 @@ export class LayoutComponent implements OnInit {
               this.primaryLinks = []
             }else if(this.currentPath === 'settings' || this.beforeCurrentPath === 'settings'){
               this.primaryLinks = this.settingLinks
+            }
+            else if(this.currentPath === 'pconfig' || this.beforeCurrentPath === 'pconfig'){
+              this.primaryLinks = this.pconfigLinks
             }
             else{
               this.primaryLinks = links

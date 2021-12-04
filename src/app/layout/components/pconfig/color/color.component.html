@@ -1,0 +1,87 @@
+<div class="w-100 " style="min-width: 50vw;">
+    <h3></h3>
+    <div *ngIf="!isNewAddEnable" class="py-2  mb-2">
+        <button mat-raised-button class="bg-dark w-100" (click)="isNewAddEnable = true;">
+            <mat-icon class="mat-icon-sm pt-1">add</mat-icon>
+            <small>Add Color</small>
+        </button>
+    </div>
+
+
+    <div *ngIf="isNewAddEnable" class="inline-edit__form d-flex shadow rounded-lg mb-2"
+        style="position: relative;align-items: flex-start;justify-content: space-around;min-width: 50vw;">
+        <div class="p-5 w-100 bg-dark rounded-lg d-flex justify-content-between align-items-center">
+            <mat-form-field appearance="outline" color="accent" class="" style="font-size: 12px;">
+                <mat-label>Color</mat-label>
+                <input matInput type="color" [(ngModel)]="colorCode" >
+            </mat-form-field>
+            <mat-form-field appearance="outline" color="accent" class="w-50" style="font-size: 12px;">
+                <mat-label>Color</mat-label>
+                <input matInput type="text" [(ngModel)]="colorName" placeholder="eg:Duke,HRX,Wrogn">
+            </mat-form-field>
+            <!-- <div class="d-flex align-items-center inline-edit__form">
+                <mat-form-field appearance="outline" class=" pb-0"
+                    style="font-size: 12px;padding-bottom: 0;">
+                    <input matInput type="color" [(ngModel)]="newColorCode" placeholder="eg:Duke,HRX,Wrogn">
+                </mat-form-field>
+                <mat-form-field  appearance="outline" class="w-50 pb-0"
+                    style="font-size: 12px;padding-bottom: 0;">
+                    <input matInput type="text" [(ngModel)]="newColorName" placeholder="eg:Duke,HRX,Wrogn">
+                </mat-form-field>
+            </div> -->
+            <div style="float: right;">
+                <button mat-button (click)="isNewAddEnable = false;"><small>Cancel</small></button>
+                <button mat-raised-button class="bg-green" (click)="onNewColorSave()"><small>Save</small></button>
+            </div>
+        </div>
+
+    </div>
+    <div class="brand-list-container ">
+        <mat-list *ngIf="colors?.length" dense class="bg-white rounded-lg shadow py-2">
+            <mat-list-item class="mb-2">
+                
+                <h1>Colors<small class="text-ultra-light px-2">{{colors?.length}}</small></h1>
+            </mat-list-item>
+            <mat-list-item *ngFor="let color of colors;let i=index">
+                <div *ngIf="!color.isEditEnable" class="d-flex align-items-center justify-content-between w-100">
+                    <span class="color-box" [style.background]="color.code" ></span>
+                    <span spellcheck="false">{{color.name | titlecase }}</span>
+
+                    <div>
+                        <button mat-icon-button class="text-light" (click)="color.isEditEnable = true">
+                            <mat-icon class="mat-icon-sm pt-0">edit</mat-icon>
+                        </button>
+                        <button mat-icon-button class="text-light" (click)="onDelete(color)">
+                            <mat-icon class="mat-icon-sm pt-0">delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="color.isEditEnable"
+                    class="inline-edit__list d-flex align-items-center justify-content-between w-100 mb-2">
+                    <div class="d-flex align-items-center">
+                        <mat-form-field *ngIf="color.isEditEnable" appearance="outline" class=" pb-0 mr-1"
+                            style="font-size: 12px;padding-bottom: 0;">
+                            <mat-label>{{color.code}}</mat-label>
+                            <input matInput type="color" [(ngModel)]="color.code" name="color_{{color.code}}" value={{color.code}} >
+                        </mat-form-field>
+                        <mat-form-field *ngIf="color.isEditEnable" appearance="outline" class="w-50 pb-0"
+                            style="font-size: 12px;padding-bottom: 0;">
+                            
+                            <input matInput type="text" [(ngModel)]="color.name" placeholder="eg:Duke,HRX,Wrogn">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button mat-button class="text-light mr-1" (click)="color.isEditEnable = false">
+                            <small>cancel</small>
+                        </button>
+                        <button mat-raised-button class="bg-green" (click)="onSave(color);color.isEditEnable = false">
+                            <small>save</small>
+                        </button>
+                    </div>
+                </div>
+            </mat-list-item>
+        </mat-list>
+        <app-data-missing-instruction *ngIf="!colors?.length" [(instructions)]="COLOR_MISSING">
+        </app-data-missing-instruction>
+    </div>
+</div>

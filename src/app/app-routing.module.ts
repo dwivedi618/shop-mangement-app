@@ -1,22 +1,27 @@
-import { LoginComponent } from './layout/components/login/login.component';
+import { LoginComponent } from './layout/components/auth/login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NewSaleComponent } from './layout/components/new-sale/new-sale.component';
-import { CartComponent } from './layout/components/cart/cart.component';
-import { CustomerListComponent } from './layout/components/customer-list/customer-list.component';
-import { InventoryComponent } from './layout/components/inventory/inventory.component';
+import { CartComponent } from './layout/components/newsell/cart/cart.component';
+import { CustomerListComponent } from './layout/components/customers/customer-list/customer-list.component';
+import { InventoryComponent } from './layout/components/inventories/inventory/inventory.component';
 import { HomeComponent } from './layout/components/home/home.component';
 import { DashboardComponent } from './layout/components/dashboard/dashboard.component';
-import { ProductComponent } from './layout/components/product/product.component';
-import { NewOrderlayoutComponent } from './layout/components/new-orderlayout/new-orderlayout.component';
-import { GeneralSettingsComponent } from './layout/components/general-settings/general-settings.component';
-import { SettingsLayoutComponent } from './layout/components/settings-layout/settings-layout.component';
-import { AppearanceSettingsComponent } from './layout/components/appearance-settings/appearance-settings.component';
+import { ProductComponent } from './layout/components/products/product/product.component';
+import { NewOrderlayoutComponent } from './layout/components/newsell/new-orderlayout/new-orderlayout.component';
+import { GeneralSettingsComponent } from './layout/components/settings/general-settings/general-settings.component';
+import { SettingsLayoutComponent } from './layout/components/settings/settings-layout/settings-layout.component';
+import { AppearanceSettingsComponent } from './layout/components/settings/appearance-settings/appearance-settings.component';
 import { AuthGuard } from './auth.guard';
-import { AccountSettingsComponent } from './layout/components/account-settings/account-settings.component';
-import { SellListComponent } from './layout/components/sell-list/sell-list.component';
+import { AccountSettingsComponent } from './layout/components/settings/account-settings/account-settings.component';
+import { SellListComponent } from './layout/components/sales/sell-list/sell-list.component';
 import { AppSetupComponent } from './layout/components/app-setup/app-setup.component';
+import { NewSaleComponent } from './layout/components/newsell/new-sale/new-sale.component';
+import { BrandComponent } from './layout/components/pconfig/brand/brand.component';
+import { PconfigLayoutComponent } from './layout/components/pconfig/pconfig-layout/pconfig-layout.component';
+import { GarmentsCategoryComponent } from './layout/components/pconfig/garments-category/garments-category.component';
+import { ColorComponent } from './layout/components/pconfig/color/color.component';
+import { SizeComponent } from './layout/components/pconfig/size/size.component';
 
 const routes: Routes = [
   { path: '', component: AppSetupComponent },
@@ -46,11 +51,22 @@ const routes: Routes = [
             { path: 'generalsettings', component: GeneralSettingsComponent, data: { breadcrumb: 'General Settings', icon: 'settings', } },
             { path: 'appearancesettings', component: AppearanceSettingsComponent, data: { breadcrumb: 'Appearance', icon: 'settings', } },
             { path: 'accountsettings', component: AccountSettingsComponent, data: { breadcrumb: 'Accounts', icon: 'admin_panel_settings', } },
+            { path: 'pconfig', component: BrandComponent, data: { breadcrumb: 'Brand', icon: 'workspace_premium', } },
+
             // { path: '', component: AccountSettingsComponent, data: { breadcrumb: 'Accounts', icon: 'admin_panel_settings', } },
-
-
           ]
         },
+        {
+          path: 'pconfig', component: PconfigLayoutComponent, data: {
+            breadcrumb: 'Config', icon: 'build_circle',},
+            children: [
+              { path: 'brand', component: BrandComponent, data: { breadcrumb: 'Brand', icon: 'workspace_premium', } },  
+              { path: 'category', component: GarmentsCategoryComponent, data: { breadcrumb: 'Category', icon: 'category', } },  
+              { path: 'color', component: ColorComponent, data: { breadcrumb: 'Color', icon: 'palette', } },  
+              { path: 'size', component: SizeComponent, data: { breadcrumb: 'Size', icon: 'format_size', } },  
+     
+            ]
+          },
 
     // { path: 'cart',component:CartComponent ,data : {breadcrumb : 'Cart'}},
   ]
