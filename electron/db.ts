@@ -1,3 +1,4 @@
+import { compress } from './utility';
 import { Customer } from './entities/customer';
 import { Product } from './entities/product';
 import { Inventory } from './entities/inventory';
@@ -5,10 +6,29 @@ import { Sell } from './entities/sell';
 import { User } from './entities/user';
 import { Settings } from './entities/settings';
 import { SelledProduct } from './entities/selled-product';
-import { compress } from './utility';
 import { Payment } from './entities/payment';
+import { Brand } from './entities/brand';
+import { Size } from './entities/size';
+import { Color } from './entities/color';
+import { Category } from './entities/category';
+import { SubCategory } from './entities/sub-category';
 
 // const connection = getConnection();
+export let Entities = [
+  Customer,
+  Payment,
+  Product,
+  Inventory,
+  Sell,
+  User,
+  Settings,
+  SelledProduct,
+  Color,
+  Brand,
+  Size,
+  Category,
+  SubCategory
+];
 
 export async function customer(connection, action: string, data?: any) {
   const repository = connection.getRepository(Customer);
@@ -72,18 +92,32 @@ export async function inventory(connection, action: string, data?: any) {
 }
 
 export async function product(connection, action: string, data?: any) {
-  const repository = connection.getRepository(Product);
+  const productRepository = connection.getRepository(Product);
+  const brandRepository = connection.getRepository(Brand);
+  const colorRepository = connection.getRepository(Color);
+  const sizeRepository = connection.getRepository(Size);
+  const categoryRepository = connection.getRepository(Category);
+  const subCategoryRepository = connection.getRepository(SubCategory);
 
   switch (action) {
     case 'create':
+      let color: Color[];
+      let size: Size[];
+      data.color.forEach(async id => color.push(await colorRepository.findOne(id)));
+      data.size.forEach(async id => size.push(await colorRepository.findOne(id)));
+      
       const product = new Product();
       product.name = data.name;
       product.description = data.description;
       product.brand = data.brand;
       product.discountInPercent = data.discountInPercent;
       product.discountInRuppee = data.discountInRuppee;
-      product.grade = data.grade;
-      product.make = data.make;
+      product.stock = data.stock;
+      product.color = color;
+      product.size = size;
+      product.brand = await brandRepository.findOne(data.brand);
+      product.category = await categoryRepository.findOne(data.category);
+      product.subCategory = await subCategoryRepository.findOne(data.subCategory);
       product.sellBy = data.sellBy;
       product.length = data.length;
       product.price = data.price;
@@ -93,19 +127,19 @@ export async function product(connection, action: string, data?: any) {
       product.unit = data.unit;
       product.image = data.image && (await compress(data.image, 500, 500));
 
-      return repository.save(product);
+      return productRepository.save(product);
 
     case 'update':
       const id = data.id;
       delete data.id;
       data.image = data.image && (await compress(data.image, 500, 500));
-      return repository.update(id, data);
+      return productRepository.update(id, data);
 
     case 'fetch':
-      return repository.find(data);
+      return productRepository.find(data);
 
     case 'delete':
-      return repository.remove(data);
+      return productRepository.remove(data);
   }
 }
 
@@ -218,7 +252,113 @@ export async function user(connection, action: string, data?: any) {
 
 export async function settings(connection, action: string, data?: any) {
   const repository = connection.getRepository(Settings);
-  const settings = new Settings();
+
+  switch (action) {
+    case 'create':
+      return repository.save(data);
+
+    case 'update':
+      const id = data.id;
+      delete data.id;
+      return repository.update(id, data);
+
+    case 'fetch':
+      return repository.find(data);
+
+    case 'delete':
+      return repository.remove(data);
+  }
+}
+
+
+
+export async function brand(connection, action: string, data?: any) {
+  const repository = connection.getRepository(Brand);
+
+  switch (action) {
+    case 'create':
+      return repository.save(data);
+
+    case 'update':
+      const id = data.id;
+      delete data.id;
+      return repository.update(id, data);
+
+    case 'fetch':
+      return repository.find(data);
+
+    case 'delete':
+      return repository.remove(data);
+  }
+}
+
+
+
+export async function color(connection, action: string, data?: any) {
+  const repository = connection.getRepository(Color);
+
+  switch (action) {
+    case 'create':
+      return repository.save(data);
+
+    case 'update':
+      const id = data.id;
+      delete data.id;
+      return repository.update(id, data);
+
+    case 'fetch':
+      return repository.find(data);
+
+    case 'delete':
+      return repository.remove(data);
+  }
+}
+
+
+export async function size(connection, action: string, data?: any) {
+  const repository = connection.getRepository(Size);
+
+  switch (action) {
+    case 'create':
+      return repository.save(data);
+
+    case 'update':
+      const id = data.id;
+      delete data.id;
+      return repository.update(id, data);
+
+    case 'fetch':
+      return repository.find(data);
+
+    case 'delete':
+      return repository.remove(data);
+  }
+}
+
+
+export async function category(connection, action: string, data?: any) {
+  const repository = connection.getRepository(Category);
+
+  switch (action) {
+    case 'create':
+      return repository.save(data);
+
+    case 'update':
+      const id = data.id;
+      delete data.id;
+      return repository.update(id, data);
+
+    case 'fetch':
+      return repository.find(data);
+
+    case 'delete':
+      return repository.remove(data);
+  }
+}
+
+
+export async function subCategory(connection, action: string, data?: any) {
+  const repository = connection.getRepository(SubCategory);
 
   switch (action) {
     case 'create':
