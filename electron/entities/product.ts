@@ -1,11 +1,22 @@
-import { Entity, 
+import { 
+      Entity, 
       PrimaryGeneratedColumn, 
       Column, 
       CreateDateColumn, 
       UpdateDateColumn, 
-      OneToMany 
+      OneToOne,
+      OneToMany, 
+      ManyToMany,
+      JoinColumn,
+      JoinTable,
 } from "typeorm";
 import { Inventory } from "./inventory";
+import { Brand } from "./brand";
+import { Size } from "./size";
+import { Color } from "./color";
+import { Category } from "./category";
+import { SubCategory } from "./sub-category";
+
 
 @Entity()
 export class Product {
@@ -18,9 +29,9 @@ export class Product {
       
       @Column({ nullable: true })
       productCode: string;
-      
-      @Column({ nullable: true })
-      brand: string;
+
+      @Column({ type: "text", nullable: true })
+      image: string;
 
       @Column({ type: "float", nullable: true })
       price: number;
@@ -38,23 +49,33 @@ export class Product {
       sellBy: string;
 
       @Column({ nullable: true })
-      grade: string;
-
-      @Column({ nullable: true })
       description: string;
-
-
-      @Column({ nullable: true })
-      make: string;
 
       @Column({ type: "float", nullable: true })
       length: number;
 
       @Column({ nullable: true })
-      size: string;
+      stock: number;
 
-      @Column({ type: "text", nullable: true })
-      image: string;
+      @OneToOne(type => Category)
+      @JoinColumn()
+      category: Category;
+
+      @OneToOne(type => Inventory)
+      @JoinColumn()
+      subCategory: SubCategory;
+
+      @OneToOne(type => Brand)
+      @JoinColumn()
+      brand: Brand;
+
+      @ManyToMany(type => Color)
+      @JoinTable()
+      color: Color[];
+
+      @ManyToMany(type => Size)
+      @JoinTable()
+      size: Size[];
 
       @OneToMany(type => Inventory, inventory => inventory.item)
       inventory: Inventory;

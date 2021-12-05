@@ -9,7 +9,7 @@ enum Status {
     SUCCESS = 1
 }
 
-let isDevMode = false;
+let isDevMode = true;
 
 let win: BrowserWindow;
 let connection: Connection;
@@ -23,11 +23,7 @@ async function createWindow() {
 
         connection = await createConnection({
             type: "sqlite",
-            // host: DbConfig.host,
-            // port: 3306,
-            // username: DbConfig.user,
             database: './psm.sql',
-            // password: DbConfig.password,
             entities: Entities,
             synchronize: true,
             logging: isDevMode
@@ -36,8 +32,9 @@ async function createWindow() {
         app.quit();
     }
 
-    //Getting the screen area of the display
-    const { width, height } = screen.getPrimaryDisplay().workAreaSize
+    //Getting the screen area of the display to pass in
+    //BrowserWindow to open window in full display
+    const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 
     win = new BrowserWindow({
         width,
@@ -118,6 +115,22 @@ ipcMain.handle('database', async (event, arg) => {
             case 'settings':
                 response.data = await settings(connection, action, data);
                 break;
+            case 'brand':
+                response.data = await settings(connection, action, data);
+                break;
+            case 'color':
+                response.data = await settings(connection, action, data);
+                break;
+            case 'size':
+                response.data = await settings(connection, action, data);
+                break;
+            case 'category':
+                response.data = await settings(connection, action, data);
+                break;
+            case 'subCategory':
+                response.data = await settings(connection, action, data);
+                break;
+
         }
 
         return response;
