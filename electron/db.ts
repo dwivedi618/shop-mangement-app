@@ -136,7 +136,7 @@ export async function product(connection, action: string, data?: any) {
       return productRepository.update(id, data);
 
     case 'fetch':
-      return productRepository.find(data);
+      return productRepository.find({ relations: ['brand', 'color', 'size', 'category', 'subCategory'] });
 
     case 'delete':
       return productRepository.remove(data);
