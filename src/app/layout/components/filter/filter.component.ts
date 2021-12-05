@@ -14,7 +14,17 @@ import { DialogService } from 'src/app/services/dialog-service';
 import { IPCService } from 'src/app/services/ipc.service';
 import { Constant } from '../../constant/constant';
 import { Filter } from '../../models/filter';
+import { BrandList } from 'src/app/fakedata/brands';
+import { DefinedCategory } from 'src/app/fakedata/categories';
+import { DefinedColors } from 'src/app/fakedata/colors';
+import { DefinedSizes } from 'src/app/fakedata/sizes';
 
+interface  Category extends DefinedCategory{
+  searchOn?: string;
+  type ?: string,
+  keys ?: string|[]|Number,
+  caseSensitve ?: Boolean,
+} 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
@@ -31,12 +41,17 @@ export class FilterComponent implements OnInit, OnChanges {
   cutomerCategory = Constant.CUSTOMER_CATEGORY;
   cutomerCategoryByGender = Constant.CATEGORY_BY_GENDER;
   alphaObj = Constant.CATEGORY_BY_ALPHABET;
-  // const customerCategoryByAlphabet = alpha.map((x) => String.fromCharCode(x));
+  brands = BrandList.allbrands
+  sizes = DefinedSizes.all
+  colors = DefinedColors.all
+  categories = DefinedCategory.all
   items = [];
   cart = [];
   filters = new Set();
   filtersList: unknown[];
   customerCategoryByAlphabet = [];
+  searchText='';
+  searchPlaceholder='Search Brand'
   constructor(
     private dialogService: DialogService,
     public ipcService: IPCService
@@ -48,13 +63,32 @@ export class FilterComponent implements OnInit, OnChanges {
     this.items = this.data;
   }
   ngOnInit(): void {
-  
+    this.categories.forEach((item)=>{
+      item['searchOn'] = 'category';
+      item['type'] = SearchType.EXACT;
+      item['keys'] = item.name;
+      item['caseSensitve'] = false;
+    })
+    this.brands.forEach((item)=>{
+      item['searchOn'] = 'brand';
+      item['type'] = SearchType.EXACT;
+      item['keys'] = item.name;
+      item['caseSensitve'] = false;
+    })
+    this.colors.forEach((item)=>{
+      item['searchOn'] = 'color';
+      item['type'] = SearchType.EXACT;
+      item['keys'] = item.name;
+      item['caseSensitve'] = false;
+    })
+    // console.table(this.categories);
+    
   }
 
   createAlphabetFilterArray(){
     const ALPHABET_COUNT = 26
     let alpha = Array.from(Array(ALPHABET_COUNT)).map((e, i) => i + 65);
-    console.log('alpha', alpha);
+    // console.log('alpha', alpha);
 
     let alphaFilter = alpha.forEach((element) => {
       console.log('object');
@@ -83,6 +117,7 @@ export class FilterComponent implements OnInit, OnChanges {
       ? this.filters.delete(value)
       : this.filters.add(value);
     this.filtersList = Array.from(this.filters);
+    console.table(this.filtersList)
   }
   removeFilter(value: Filter) {
     this.filters.has(value) ? this.filters.delete(value) : this.filters;
@@ -100,4 +135,9 @@ export class FilterComponent implements OnInit, OnChanges {
     this.filters.clear();
     this.filtersList = null;
   }
+  onSearch(searchText){
+    this.searchText = searchText
+  }
+
+
 }

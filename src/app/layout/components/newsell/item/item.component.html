@@ -1,5 +1,5 @@
 <section *ngIf="isListView" class="items-container grid-view">
-  <div *ngFor="let item of items">
+  <div *ngFor="let item of items|filter:searchText">
     <article class="item shadow" [class.bg-selected]="isAddedToCart(item)" (click)="checkItemDetails()">
       <div class="item-price d-flex">
         <div class="spacer"></div>
@@ -42,7 +42,7 @@
 </section>
 
 <section *ngIf="!isListView" class="items-container-table-view">
-  <div *ngFor="let item of items;let i=index;">
+  <div *ngFor="let item of items|filter:searchText;let i=index;">
     <article class="item-list-view shadow bg-white" [class.bg-selected]="isAddedToCart(item)"
       (click)="checkItemDetails()">
       <div style="width: 2rem;" class="layout">
@@ -85,19 +85,17 @@
           </mat-list-item>
         </mat-list>
       </div>
+
       <div class="price-column">
-        
           <div matLine style="color:var(--light)">Color</div>
             <div class="d-flex">
-              <div class="color-box-sm mr-1 bg-green"></div>
+              <div class="color-box-sm mr-1 bg-green" matTooltip="Green"></div>
               <div class="color-box-sm mr-1 bg-dark"></div>
               <div class="color-box-sm mr-1 bg-selected"></div>
             </div>
-       
       </div>
+      
       <div class="price-column" (click)="$event.stopPropagation();">
-        <!-- <button mat-button class="bg-ultra-light" ><small style="font-size: 10px;">Apply discount</small></button> -->
-     <!-- <app-apply-discount></app-apply-discount> -->
         <mat-list dense>
           <mat-list-item>
             <span matLine style="color:var(--light)">Discount</span>
@@ -108,7 +106,7 @@
       <div class="price-column" (click)="$event.stopPropagation();">
         <mat-list dense>
           <mat-list-item>
-            <span matLine style="color:var(--light)">Price per {{item?.unit || item?.item?.unit}}</span>
+            <span matLine style="color:var(--light)">Price</span>
             <h3 matLine style="font-weight: 600;"> 
               <del class="text-light text-thin">{{item.price | currency : 'INR'}}</del> 
               <span matLine class="">{{((item?.price - (item?.discountInRuppee)) || item?.priceAfterDiscount) | currency : 'INR'}}</span>
@@ -118,11 +116,11 @@
       </div>
       <div class="table-column" (click)="$event.stopPropagation();">
 
-        <button mat-button class="bg-ultra-light" *ngIf="!isAddedToCart(item)" (click)="onSelectItem(item);">
+        <button mat-button class="bg-ultra-light " *ngIf="!isAddedToCart(item)" (click)="onSelectItem(item);">
           <small>Add to cart</small>
           <mat-icon class="mat-icon-sm pt-1">add_shopping_cart</mat-icon>
         </button>
-        <div class="item-count-container" *ngIf="isAddedToCart(item)">
+        <div class="item-count-container shadow-1 bg-white" *ngIf="isAddedToCart(item)">
           <button mat-button #decreamentbtn class="btn-box" (click)="adjustCartItemQuantity(0,item);">
             <mat-icon class="mat-icon-sm pt-1">remove</mat-icon>
           </button>

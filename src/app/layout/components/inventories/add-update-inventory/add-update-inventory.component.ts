@@ -8,6 +8,7 @@ import { Product } from '../../../models/product';
 import { DialogService } from 'src/app/services/dialog-service';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { BrandList } from 'src/app/fakedata/brands';
 
 export interface productDetails{
   id : number,
@@ -31,8 +32,10 @@ export interface productDetails{
 })
 export class AddUpdateInventoryComponent implements OnInit {
   control = new FormControl();
+  searchText = '';
   streets: string[] = ['Champs-Élysées', 'Lombard Street', 'Abbey Road', 'Fifth Avenue'];
   filteredStreets: Observable<string[]>;
+  brands: { id: string; name: string; }[];
 
  
 
@@ -70,9 +73,10 @@ export class AddUpdateInventoryComponent implements OnInit {
       
       console.log("data",data,this.localData)
      }
-
-
-  ngOnInit(): void {
+     
+     
+     ngOnInit(): void {
+    this.brands = BrandList.allbrands;
     this.inventoryForm = this.fb.group({
       id: null,
       item : [''],
@@ -90,7 +94,8 @@ export class AddUpdateInventoryComponent implements OnInit {
     if(this.action == 'update'){
       this.patchInventoryDataInForm()
     }
-    this.fetchProduct();
+    // this.fetchProduct();
+
   }
 
   patchInventoryDataInForm(){

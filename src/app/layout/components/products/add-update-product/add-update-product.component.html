@@ -21,6 +21,61 @@
                     </div>
                     <form [formGroup]="productForm" class="w-100 d-flex" style="align-items: flex-start;">
                         <mat-list dense class="w-100 ">
+                            <mat-list-item >
+                                <span class="strong text-light">Garments Category</span>
+                                <div class="spacer"></div>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Garments Category</mat-label>
+                                    <mat-select formControlName="category">
+                                        <mat-option value=''>Select Garment Category</mat-option>
+                                        <mat-option *ngFor="let list of categories" value={{list.id}}>
+                                            <span>{{list.name}}</span>
+                                        </mat-option>
+                                    </mat-select>               
+                                 </mat-form-field>                       
+                                 
+                            </mat-list-item>
+                            <mat-list-item >
+                                <span class="strong text-light">Brand </span>
+                                <div class="spacer"></div>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Brand</mat-label>
+                                    <mat-select formControlName="brand">
+                                        <mat-option value=''>Select Brand</mat-option>
+                                        <mat-option *ngFor="let list of brands" value={{list.id}}>
+                                            <span>{{list.name}}</span>
+                                        </mat-option>
+                                    </mat-select>               
+                                 </mat-form-field>                       
+                            </mat-list-item>
+                            <mat-list-item >
+                                <span class="strong text-light">Size </span>
+                                <div class="spacer"></div>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Size</mat-label>
+                                    <mat-select formControlName="size" [multiple]="true">
+                                        <!-- <mat-option >Select Size</mat-option> -->
+                                        <mat-option *ngFor="let list of sizes" value={{list.id}}>
+                                            <span>{{list.name}}</span>
+                                        </mat-option>
+                                    </mat-select>               
+                                 </mat-form-field>                       
+                            </mat-list-item>
+                            <mat-list-item >
+                                <span class="strong text-light">Color </span>
+                                <div class="spacer"></div>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Color</mat-label>
+                                    <mat-select formControlName="color" [multiple]="true">
+                                        <mat-option *ngFor="let list of colors" value={{list.id}}>
+                                            <div class="d-flex">
+                                                <span class="color-box mr-1" [style.background]="list.code" ></span>
+                                                <small>{{list.name}}</small>
+                                            </div>
+                                        </mat-option>
+                                    </mat-select>               
+                                 </mat-form-field>                       
+                            </mat-list-item>
                             <mat-list-item>
                                 <span class="strong text-light">Product Name*</span>
                                 <div class="spacer"></div>
@@ -29,22 +84,7 @@
                                     <input matInput placeholder="name" formControlName="name" >
                                 </mat-form-field>
                             </mat-list-item>
-                            <mat-list-item>
-                                <span class="strong text-light">Grade*</span>
-                                <div class="spacer"></div>
-                                <mat-form-field appearance="outline" class="">
-                                    <mat-label>Grade</mat-label>
-                                    <input matInput placeholder="Grade" formControlName="grade" >
-                                </mat-form-field>
-                            </mat-list-item>
-                            <mat-list-item>
-                                <span class="strong text-light">Make*</span>
-                                <div class="spacer"></div>
-                                <mat-form-field appearance="outline" class="">
-                                    <mat-label>Make</mat-label>
-                                    <input matInput placeholder="Make" formControlName="make" >
-                                </mat-form-field>
-                            </mat-list-item>
+                           
                             <mat-list-item>
                                 <span class="strong text-light">Length In Meter</span>
                                 <div class="spacer"></div>
@@ -62,17 +102,7 @@
                                     <input matInput type="number" placeholder="Price" formControlName="price" >
                                 </mat-form-field>
                             </mat-list-item>
-                            <mat-list-item>
-                                <span class="strong text-light">Unit*</span>
-                                <div class="spacer"></div>
-                                <mat-form-field appearance="outline" class="">
-                                    <mat-select formControlName="unit" >
-                                        <mat-option value="">Select</mat-option>
-                                        <mat-option value="piece">Piece</mat-option>
-                                        <mat-option value="meter">Meter</mat-option>
-                                    </mat-select> 
-                                </mat-form-field>
-                            </mat-list-item>
+                            
                             
                           
                            
@@ -81,20 +111,10 @@
                             
 
                                 <mat-list dense class="w-100">
-                                    <!-- <mat-list-item>
-                                        <span class="strong text-light">Sell By (piece/meter)*</span>
-                                        <div class="spacer"></div>
-                                        <mat-form-field appearance="outline" >
-                                            <mat-select formControlName="sellBy">
-                                                <mat-option value="">Select Preference</mat-option>
-                                                <mat-option value="false">Sell by Pieces</mat-option>
-                                                <mat-option value="true">Sell by Meter</mat-option>
-                                            </mat-select>                                 
-                                        </mat-form-field>
-                                    </mat-list-item> -->
+                                   
 
                                     <mat-list-item>
-                                        <span class="strong text-light">Discount In %</span>
+                                        <span class="strong text-light">Discount %</span>
                                         <div class="spacer"></div>
                                         <mat-form-field appearance="outline" class="">
                                             <mat-label>%</mat-label>
@@ -102,11 +122,22 @@
                                         </mat-form-field>
                                     </mat-list-item>
                                     <mat-list-item>
-                                        <span class="strong text-light">Discount In Ruppee</span>
+                                        <span class="strong text-light">Discount ₹</span>
                                         <div class="spacer"></div>
                                         <mat-form-field appearance="outline" class="">
                                             <mat-label>Ruppee</mat-label>
                                             <input matInput type="number" placeholder="INR" formControlName="discountInRuppee" (keyup)="onDiscountChanged(productForm.value.price,$event.target.value,'ruppee')" >
+                                        </mat-form-field>
+                                    </mat-list-item>
+                                    <mat-list-item>
+                                        <span class="strong text-light">Unit*</span>
+                                        <div class="spacer"></div>
+                                        <mat-form-field appearance="outline" class="">
+                                            <mat-select formControlName="unit" >
+                                                <mat-option value="">Select</mat-option>
+                                                <mat-option value="piece">Piece</mat-option>
+                                                <mat-option value="meter">Meter</mat-option>
+                                            </mat-select> 
                                         </mat-form-field>
                                     </mat-list-item>
                                    

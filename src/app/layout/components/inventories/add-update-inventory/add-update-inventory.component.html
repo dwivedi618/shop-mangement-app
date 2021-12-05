@@ -21,28 +21,14 @@
                         <span class="strong text-light">Product</span>
                         <div class="spacer"></div>
                         <mat-form-field appearance="outline">
-                            <!-- <mat-label>Product</mat-label>
+                            <mat-label>Product</mat-label>
                             <mat-select formControlName="item">
                                 <mat-option value=''>select product</mat-option>
                                 <mat-option *ngFor="let product of items" value={{product.id}}>
                                     <span>{{product.name || product.grade}}</span>
                                 </mat-option>
-                            </mat-select> -->
-
-                            <input matInput type="text"
-                            placeholder="Search for a street"
-                            [formControl]="control"
-                            [matAutocomplete]="auto">
-                     <mat-autocomplete #auto="matAutocomplete">
-                       <mat-option *ngFor="let street of filteredStreets | async" [value]="street">
-                         {{street}}
-                       </mat-option>
-                     </mat-autocomplete>
-                         </mat-form-field>
-                       
-                          
-                           
-                            
+                            </mat-select>               
+                         </mat-form-field>                       
                          
                     </mat-list-item>
                     <mat-list-item>

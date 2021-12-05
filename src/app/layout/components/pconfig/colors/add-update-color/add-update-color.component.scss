@@ -1,0 +1,27 @@
+.photo-container{
+    position: relative;
+    min-width: 12rem;
+    min-height: 15rem;
+    border: 1px solid var(--ultra-light) ;
+    overflow: hidden;
+}
+// .photo-container::after{
+//     content : "";
+//     position: absolute;
+//     background-image: url(../../../../assets/images/account_circle_black_48dp.svg) cover no-repeat;
+// }
+.photo-container::before{
+    content: ""; 
+    
+    // background: -webkit-linear-gradient(45deg, #210046, #0017b952); 
+    background: linear-gradient(180deg,#21004671 0%,rgba(0, 0, 0, 0) 90%) ,linear-gradient(0deg,#21004617,rgba(0, 0, 0, 0)); 
+    transition: .5s all;
+    position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;
+}
+    .photo-container:hover::before{
+        content: "";  
+        background: linear-gradient(180deg,#21004623 0%,rgba(0, 0, 0, 0) 90%) ,linear-gradient(0deg,#21004600,rgba(0, 0, 0, 0)); 
+        transition: 1s all;
+        
+    } 
+        

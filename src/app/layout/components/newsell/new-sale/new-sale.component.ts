@@ -50,6 +50,7 @@ export class NewSaleComponent implements OnInit {
     }
   ];
   cart = [];
+  searchText: string;
   constructor(private dialog: MatDialog,
     private router : Router, 
     private alertService : AlertService,
@@ -132,5 +133,8 @@ export class NewSaleComponent implements OnInit {
   onApplyFilter(data){
     console.log("Filter Applied",data)
     this.items = data
+  }
+  onSearch = (searchText:string)=>{
+    this.searchText = searchText
   }
 }

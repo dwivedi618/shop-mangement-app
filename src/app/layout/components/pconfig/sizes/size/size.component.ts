@@ -1,11 +1,14 @@
-import { DefinedSizes } from './../../../../fakedata/sizes';
+import { DefinedSizes } from '../../../../../fakedata/sizes';
 
-import { IPCService } from './../../../../services/ipc.service';
+import { IPCService } from '../../../../../services/ipc.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Component, OnInit } from '@angular/core';
 import { Constant } from 'src/app/layout/constant/constant';
 import { table } from 'console';
 import { Psize } from 'src/app/layout/models/psize';
+import { AddUpdateSizeComponent } from '../add-update-size/add-update-size.component';
+import { MatDialogConfig } from '@angular/material/dialog';
+import { DialogService } from 'src/app/services/dialog-service';
 
 
 interface GarmentSize extends Psize{
@@ -36,7 +39,13 @@ export class SizeComponent implements OnInit {
   garmentSizeList : GarmentSize[] = [];
   isNewAddEnable : Boolean = false;
   isEditEnable : boolean = false;
-  constructor(private alertService : AlertService,private ipcService : IPCService) { }
+  searchText='';
+
+  constructor(
+    private alertService : AlertService,
+    private ipcService : IPCService,
+    private dialogService : DialogService
+    ) { }
 
   ngOnInit(): void {
     this.garmentSizeList = DefinedSizes.all;
@@ -56,7 +65,7 @@ export class SizeComponent implements OnInit {
   onNewSave = ()=> {
     let newGarmentSize:Psize = {  id:0,name : this.newGarmentSize };
     let save = newGarmentSize =>{
-      this.ipcService.database("brand",'create',newGarmentSize)
+      this.ipcService.database("size",'create',newGarmentSize)
       .then(res=>{
         if(res.status){
           this.alertService.alert('Item Added Successfully','close');
@@ -73,7 +82,7 @@ export class SizeComponent implements OnInit {
   onFocusBrandName = (id:Number) =>{
     // alert("id")
     this.garmentSizeList.forEach(brand => {
-      if(brand.id == id){ brand.isEditEnable = true;return}
+      if(brand.id == id){ brand.isEditEnable = true;}
     })
   }
  
@@ -102,6 +111,24 @@ export class SizeComponent implements OnInit {
     .subscribe(result=>{
       result ? deleteBrand() : '';
     })
+  }
+
+  onOpenDialog =()=>{
+    let config: MatDialogConfig = {
+      width: '30rem',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: true,
+      disableClose: true,
+    }
+
+    // this.dialogService.openMatDialog(AddUpdateSizeComponent,{},config)
+    // .subscribe(() => {
+    //   this.getGarmentSizeList();
+    // })
+  }
+  onSearch = (searchText:string)=>{
+    this.searchText = searchText
   }
 }
 

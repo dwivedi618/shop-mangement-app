@@ -1,13 +1,14 @@
-import { DefinedSizes } from './../../../../fakedata/sizes';
 
-import { IPCService } from './../../../../services/ipc.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { Component, OnInit } from '@angular/core';
 import { Constant } from 'src/app/layout/constant/constant';
 import { Pcolor } from 'src/app/layout/models/pcolor';
 import { DefinedColors } from 'src/app/fakedata/colors';
-import { DefinedCategory } from 'src/app/fakedata/categories';
 import { DefinedSubCategory } from 'src/app/fakedata/subcategories';
+import { IPCService } from 'src/app/services/ipc.service';
+import { AddUpdateColorComponent } from '../add-update-color/add-update-color.component';
+import { MatDialogConfig } from '@angular/material/dialog';
+import { DialogService } from 'src/app/services/dialog-service';
 
 interface Colors extends Pcolor{
   isEditEnable?: boolean
@@ -33,30 +34,20 @@ export class ColorComponent implements OnInit {
   isEditEnable : boolean = false;
   colorCode: string = 'rgba(210, 105, 30, 0)';//no color or transparent
   colorName: string;
-  constructor(private alertService : AlertService,private ipcService : IPCService) { }
+  searchText='';
+  constructor(
+    private alertService : AlertService,
+    private ipcService : IPCService,
+    private dialogService : DialogService
+    ) { }
 
   ngOnInit(): void {
     this.colors = DefinedColors.all;
     // this.getBrandList();
-    // this.refineData()
+ 
   }
 
-  refineData(){
-    let beforeRefine = DefinedSubCategory.all;
-    // beforeRefine.forEach(element => {
-    //   element['name'] = element['value'];
-    //   // element['code'] = element['meta'];
-
-    //   delete element.value;
-    //   delete element.pLevel;
-    //   delete element.count;
-    //   delete element.meta;
-    //   return
-
-    // });
-    console.table(beforeRefine);
-    console.log(beforeRefine);
-  }
+ 
 
   getColorList(){
     this.ipcService.database('color','fetch','')
@@ -119,6 +110,24 @@ export class ColorComponent implements OnInit {
     .subscribe(result=>{
       result ? deletecolor() : '';
     })
+  }
+
+  onOpenDialog =()=>{
+    let config: MatDialogConfig = {
+      width: '30rem',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: true,
+      disableClose: true,
+    }
+
+    this.dialogService.openMatDialog(AddUpdateColorComponent,{},config)
+    .subscribe(() => {
+      this.getColorList();
+    })
+  }
+  onSearch = (searchText:string)=>{
+    this.searchText = searchText
   }
 }
 

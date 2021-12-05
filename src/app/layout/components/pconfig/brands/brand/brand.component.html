@@ -48,7 +48,7 @@
            
             <mat-list *ngIf="brands?.length" dense class=" rounded-lg w-100">
             
-                <mat-list-item *ngFor="let brand of brands | filter: searchText : filterMetadata;"  #someVar>
+                <mat-list-item *ngFor="let brand of brands | filter: searchText ;"  #someVar>
                     <div *ngIf="!brand.isEditEnable" class="d-flex align-items-center justify-content-between w-100">
                         <span spellcheck="false">{{brand.name | titlecase }}</span>
                         <div>

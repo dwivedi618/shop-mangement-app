@@ -17,11 +17,11 @@ import { AccountSettingsComponent } from './layout/components/settings/account-s
 import { SellListComponent } from './layout/components/sales/sell-list/sell-list.component';
 import { AppSetupComponent } from './layout/components/app-setup/app-setup.component';
 import { NewSaleComponent } from './layout/components/newsell/new-sale/new-sale.component';
-import { BrandComponent } from './layout/components/pconfig/brand/brand.component';
+import { BrandComponent } from './layout/components/pconfig/brands/brand/brand.component';
 import { PconfigLayoutComponent } from './layout/components/pconfig/pconfig-layout/pconfig-layout.component';
-import { GarmentsCategoryComponent } from './layout/components/pconfig/garments-category/garments-category.component';
-import { ColorComponent } from './layout/components/pconfig/color/color.component';
-import { SizeComponent } from './layout/components/pconfig/size/size.component';
+import { GarmentsCategoryComponent } from './layout/components/pconfig/garment-categories/garments-category/garments-category.component';
+import { ColorComponent } from './layout/components/pconfig/colors/color/color.component';
+import { SizeComponent } from './layout/components/pconfig/sizes/size/size.component';
 
 const routes: Routes = [
   { path: '', component: AppSetupComponent },

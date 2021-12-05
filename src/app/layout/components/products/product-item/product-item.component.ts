@@ -30,6 +30,8 @@ export class ProductItemComponent implements OnInit,OnChanges {
   @ViewChild('decreamentbtn') decreamentbtn;
   @Input() data;
   @Input() cartItems;
+  @Input() searchText;
+
   @Input() view: Boolean;
   @Output() shareCart  = new EventEmitter<any>();
   @Output() onDialogClose  = new EventEmitter<any>();
@@ -40,16 +42,21 @@ export class ProductItemComponent implements OnInit,OnChanges {
   items = [];
   isListView: Boolean;
   cart = [];
+  receivedSearchText: any;
   constructor(private dialog : MatDialog,private dialogService : DialogService) {}
   ngOnChanges() {
     this.isListView = this.view;
     this.items = this.data;
-    // console.log("data ng On changes",this.data, this.isListView)
+    this.receivedSearchText = this.searchText;
+
+    console.log("this.searchText",this.receivedSearchText)
   }
   ngOnInit(): void {
     this.items = this.data;
     this.cart = this.cartItems?.length ? this.cartItems : [];
     this.isListView = this.view;
+    this.receivedSearchText = this.searchText;
+
     // console.log("data",this.data, this.isListView)
   }
 

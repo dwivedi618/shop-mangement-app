@@ -1,0 +1,48 @@
+
+
+
+<mat-sidenav-container class="sidenav-newsale-container">
+    <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="true" position="end">
+        <app-filter ></app-filter>
+    </mat-sidenav>
+
+    <mat-sidenav-content style="position: relative;">
+        <mat-toolbar class="bg-white shadow" style="position: absolute;top:0">  
+            <h3>Sizes<small class="text-ultra-light px-2" id="count"></small></h3>
+            <span class="spacer"></span>
+            <app-search  (onSearch)="onSearch($event)"></app-search>
+            <button mat-raised-button class="ml-1 rounded-lg bg-green" (click)="onOpenDialog()">
+                <mat-icon class="mat-icon-sm pt-1">add_box</mat-icon>
+                <small>Add Size</small>
+            </button>
+        </mat-toolbar>
+           
+          
+            <section class="items-container grid-view">
+                <mat-list *ngIf="garmentSizeList?.length" dense class="rounded-lg w-100 py-2">
+                    <mat-list-item *ngFor="let brand of garmentSizeList | filter:searchText;let i=index">
+                        <div *ngIf="!brand.isEditEnable" class="d-flex align-items-center justify-content-between w-100">
+                            <span spellcheck="false">{{brand.name | titlecase }}</span>
+                            <div>
+                                <button mat-icon-button class="text-light" (click)="brand.isEditEnable = true">
+                                    <mat-icon class="mat-icon-sm pt-0">edit</mat-icon>
+                                </button>
+                                <button mat-icon-button class="text-light" (click)="onDelete(brand)">
+                                    <mat-icon class="mat-icon-sm pt-0">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </mat-list-item>
+                </mat-list>
+            </section>
+            <app-data-missing-instruction *ngIf="!garmentSizeList?.length" [(instructions)]="SIZE_MISSING">
+            </app-data-missing-instruction>
+        
+
+        <mat-toolbar 
+        class="mat-elevation-z16 " 
+        style="position: absolute;bottom: 0;z-index: 15;">
+        </mat-toolbar>
+    </mat-sidenav-content>
+</mat-sidenav-container>

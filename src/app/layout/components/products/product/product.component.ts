@@ -34,6 +34,7 @@ export class ProductComponent implements OnInit {
 
   ];
   cart = [];
+  searchText=''
   constructor(private dialog: MatDialog,
     private dialogService: DialogService,
     private router: Router,
@@ -59,12 +60,8 @@ export class ProductComponent implements OnInit {
     })
   }
 
-  getSearchText(searchText) {
-    console.log(searchText)
-    this.filterOption = searchText
-    function getText() {
-      return this.filterOption
-    }
+  onSearchEvent(searchText) {
+   this.searchText = searchText;
   }
 
   onCartData(cartItems) {

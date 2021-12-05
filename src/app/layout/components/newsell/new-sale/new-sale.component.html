@@ -5,36 +5,16 @@
 
     <mat-sidenav-content style="position: relative;" >
         <mat-toolbar class="bg-white shadow" style="position: absolute;top:0">
-            <!-- <div class="layout w-100">
-                <app-search (onSearch)="getSearchText($event)"></app-search>
-            </div> -->
+           
             <span class="spacer"></span>
-            <button mat-icon-button class="mx-2 rounded-lg" disabled>
-                <mat-icon class="mat-icon-sm pt-0">search</mat-icon>
-            </button>
-            <button mat-icon-button class="mx-2 rounded-lg" >
-                <mat-icon class="mat-icon-sm pt-0">refresh</mat-icon>
-            </button>
+            <app-search (onSearch)="onSearch($event)"></app-search>
+
             <button mat-icon-button class="mx-2 rounded-lg" (click)="isListView = !isListView">
                 <mat-icon class="mat-icon-sm pt-0">{{isListView ? 'view_list' : 'grid_view'}}</mat-icon>
             </button>
-            <button mat-icon-button class="mx-2 rounded-lg" [matMenuTriggerFor]="moreTools">
-                <mat-icon class="mat-icon-sm pt-0">more_vert</mat-icon>
-            </button>
-            <mat-menu #moreTools="matMenu">
-                <mat-list dense>
-                    <mat-list-item>
-                        <mat-icon mat-list-icon>refresh</mat-icon>
-                        <span>Refresh</span>
-                    </mat-list-item>
-                    <mat-list-item>
-                        <mat-icon mat-list-icon>settings</mat-icon>
-                        <span>settings</span>
-                    </mat-list-item>
-                </mat-list>
-            </mat-menu>
+            
         </mat-toolbar>
-        <app-item [(data)]="items" [(cartItems)]="cart" [(view)]="isListView" (shareCart)="onCartData($event)" ></app-item>
+        <app-item [(data)]="items" [(cartItems)]="cart" [(view)]="isListView" (shareCart)="onCartData($event)" [(searchText)]="searchText" ></app-item>
         <app-data-missing-instruction *ngIf="!items?.length" [(instructions)]="newOrderInstruction"></app-data-missing-instruction>
         <mat-toolbar *ngIf="cart?.length"
         class="mat-elevation-z16 " 

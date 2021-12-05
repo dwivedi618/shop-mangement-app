@@ -1,11 +1,10 @@
 
-import { IPCService } from './../../../../services/ipc.service';
-import { Brand } from './../../../models/brand';
+import { IPCService } from './../../../../../services/ipc.service';
+import { Brand } from './../../../../models/brand';
 import { AlertService } from 'src/app/services/alert.service';
 import { AfterViewInit, Component, OnChanges, OnInit, ViewChildren } from '@angular/core';
 import { Constant } from 'src/app/layout/constant/constant';
-import { table } from 'console';
-import { BrandList } from '../../../../fakedata/brands'
+import { BrandList } from '../../../../../fakedata/brands'
 import { DialogService } from 'src/app/services/dialog-service';
 import { AddUpdateBrandComponent } from '../add-update-brand/add-update-brand.component';
 import { MatDialogConfig } from '@angular/material/dialog';

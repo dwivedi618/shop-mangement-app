@@ -1,0 +1,79 @@
+
+
+<mat-sidenav-container class="sidenav-newsale-container">
+    <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="true" position="end">
+        <app-filter ></app-filter>
+        
+        <div *ngIf="isNewAddEnable" class="inline-edit__form d-flex shadow rounded-lg mb-2"
+            style="position: relative;align-items: flex-start;justify-content: space-around;min-width: 50vw;">
+            <div class="p-5 w-100 bg-dark rounded-lg d-flex justify-content-between align-items-center">
+                <mat-form-field appearance="outline" color="accent" class="w-75" style="font-size: 12px;">
+                    <mat-label>Brand</mat-label>
+                    <input matInput type="text" [(ngModel)]="newBrand" placeholder="eg:Duke,HRX,Wrogn">
+                </mat-form-field>
+                <div style="float: right;">
+                    <button mat-button (click)="isNewAddEnable = false;"><small>Cancel</small></button>
+                    <button mat-raised-button class="bg-green" (click)="onNewBrandSave()"><small>Save</small></button>
+                </div>
+            </div>
+    
+        </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content style="position: relative;">
+        <mat-toolbar class="bg-white shadow" style="position: absolute;top:0">  
+            <h3>Garment Category<small class="text-ultra-light px-2" id="count"></small></h3>
+            <span class="spacer"></span>
+            <app-search  (onSearch)="onSearch($event)"></app-search>
+            
+            <button mat-raised-button class="ml-1 rounded-lg bg-green" (click)="onOpenDialog()">
+                <mat-icon class="mat-icon-sm pt-1">add_box</mat-icon>
+                <small>Add Garment Category</small>
+            </button>
+           
+        </mat-toolbar>
+           
+          
+            <section class="items-container grid-view">
+                <mat-list *ngIf="categoryList?.length" dense class="rounded-lg w-100 py-2">
+          
+                    <mat-list-item *ngFor="let brand of categoryList;let i=index">
+                        <div *ngIf="!brand.isEditEnable" class="d-flex align-items-center justify-content-between w-100">
+                            <span spellcheck="false">{{brand.name | titlecase }}</span>
+                            <div>
+                                <button mat-icon-button class="text-light" (click)="brand.isEditEnable = true">
+                                    <mat-icon class="mat-icon-sm pt-0">edit</mat-icon>
+                                </button>
+                                <button mat-icon-button class="text-light" (click)="onDelete(brand)">
+                                    <mat-icon class="mat-icon-sm pt-0">delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div *ngIf="brand.isEditEnable"
+                            class="inline-edit__list d-flex align-items-center justify-content-between w-100 mb-2">
+                            <mat-form-field *ngIf="brand.isEditEnable" appearance="outline" class="w-75 pb-0"
+                                style="font-size: 12px;padding-bottom: 0;">
+                                <input matInput type="text" [(ngModel)]=brand.name placeholder="eg:Duke,HRX,Wrogn">
+                            </mat-form-field>
+                            <div>
+                                <button mat-button class="text-light mr-1" (click)="brand.isEditEnable = false">
+                                    <small>cancel</small>
+                                </button>
+                                <button mat-raised-button class="bg-green" (click)="onSave(brand);brand.isEditEnable = false">
+                                    <small>save</small>
+                                </button>
+                            </div>
+                        </div>
+                    </mat-list-item>
+                </mat-list>
+            </section>
+            <app-data-missing-instruction *ngIf="!categoryList?.length" [(instructions)]="BRAND_MISSING">
+            </app-data-missing-instruction>
+        
+
+        <mat-toolbar 
+        class="mat-elevation-z16 " 
+        style="position: absolute;bottom: 0;z-index: 15;">
+        </mat-toolbar>
+    </mat-sidenav-content>
+</mat-sidenav-container>

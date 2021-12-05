@@ -50,7 +50,7 @@ async function createWindow() {
 
     win.loadURL(AppConfig.indexURL);
 
-    // if(process.env.NODE_ENV === 'development') win.webContents.openDevTools();
+     win.webContents.openDevTools();
     // console.log('node ene',process.env.NODE_ENV);
     
     Menu.setApplicationMenu(null);

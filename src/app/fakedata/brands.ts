@@ -1,11 +1,11 @@
 export class BrandList {
    static allbrands = [
   {
-    "id": "Roadster",
+    "id": "111",
     "name": "Roadster"
   },
   {
-    "id": "H&M",
+    "id": "9999",
     "name": "H&M"
   },
   {

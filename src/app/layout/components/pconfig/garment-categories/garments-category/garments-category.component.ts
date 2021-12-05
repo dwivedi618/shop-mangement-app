@@ -1,12 +1,14 @@
-import { DefinedCategory } from './../../../../fakedata/categories';
-import { Pcategory } from './../../../models/pcategory';
+import { DefinedCategory } from './../../../../../fakedata/categories';
+import { Pcategory } from './../../../../models/pcategory';
 
-import { IPCService } from './../../../../services/ipc.service';
-import { Brand } from './../../../models/brand';
+import { IPCService } from './../../../../../services/ipc.service';
+import { Brand } from './../../../../models/brand';
 import { AlertService } from 'src/app/services/alert.service';
 import { Component, OnInit } from '@angular/core';
 import { Constant } from 'src/app/layout/constant/constant';
-import { table } from 'console';
+import { MatDialogConfig } from '@angular/material/dialog';
+import { DialogService } from 'src/app/services/dialog-service';
+import { AddUpdateCategoryComponent } from '../add-update-category/add-update-category.component';
 
 interface categoryList extends Brand{
   isEditEnable?: boolean
@@ -37,15 +39,20 @@ export class GarmentsCategoryComponent implements OnInit {
   isNewAddEnable : Boolean = false;
   isEditEnable : boolean = false;
   newCategory: string;
-  constructor(private alertService : AlertService,private ipcService : IPCService) { }
+  searchText: string;
+  constructor(
+    private alertService : AlertService,
+    private ipcService : IPCService,
+    private dialogService: DialogService
+    ) { }
 
   ngOnInit(): void {
     this.categoryList = DefinedCategory.all;;
     // this.getBrandList();
   }
 
-  getBrandList(){
-    this.ipcService.database('brand','fetch','')
+  getCategoryList(){
+    this.ipcService.database('category','fetch','')
     .then(res => {
       if(res.status){
         this.categoryList = res.data
@@ -61,7 +68,7 @@ export class GarmentsCategoryComponent implements OnInit {
       .then(res=>{
         if(res.status){
           this.alertService.alert('Item Added Successfully','close');
-          this.getBrandList();
+          this.getCategoryList();
           // this.categoryList.push(newCategory);//test
           this.isNewAddEnable = false;
           this.newGarmentCategory = '';
@@ -83,26 +90,46 @@ export class GarmentsCategoryComponent implements OnInit {
     this.ipcService.database('brand','update',brand)
     .then(res =>{
       if(res.status){
-        this.getBrandList();
+        this.getCategoryList();
         console.log("data ng On changes", res)
       }
     })
   }
-  onDelete = brand =>{ 
-    let deleteBrand = ()=>{
-      this.ipcService.database('brand','delete',brand)
+  onDelete = data =>{ 
+    let deleteC = ()=>{
+      this.ipcService.database('category','delete',data)
       .then(res=>{
         if(res.status){
           this.alertService.alert('Item deleted successfully','close');
-          this.getBrandList();
+          this.getCategoryList();
         }
       })
       this.categoryList.pop()
     }
     this.alertService.alertActionDialog('Delete','Are you sure ?','Yes! Delete')
     .subscribe(result=>{
-      result ? deleteBrand() : '';
+      result ? deleteC() : '';
     })
   }
+
+
+  onOpenDialog =()=>{
+    let config: MatDialogConfig = {
+      width: '30rem',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      hasBackdrop: true,
+      disableClose: true,
+    }
+
+    this.dialogService.openMatDialog(AddUpdateCategoryComponent,{},config)
+    .subscribe(() => {
+      this.getCategoryList();
+    })
+  }
+  onSearch = (searchText:string)=>{
+    this.searchText = searchText
+  }
 }
+
 

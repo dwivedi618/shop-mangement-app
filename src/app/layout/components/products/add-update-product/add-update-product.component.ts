@@ -5,6 +5,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { IPCService } from 'src/app/services/ipc.service';
 import { Product } from '../../../models/product';
+import { BrandList } from 'src/app/fakedata/brands';
+import { DefinedSizes } from 'src/app/fakedata/sizes';
+import { DefinedColors } from 'src/app/fakedata/colors';
+import { DefinedCategory } from 'src/app/fakedata/categories';
+
+
 
 export interface productDetails{
   id : number,
@@ -30,6 +36,15 @@ export class AddUpdateProductComponent implements OnInit {
   productForm : FormGroup
   localData: any;
   action: any;
+  // brands: { id: string; name: string; }[];
+  // sizes: { id: string; name: string; }[];
+  // colors: { id: string; name: string; code: string; }[];
+  // garmentCategory: { id: string; name: string; }[];
+  // categories: { id: string; name: string; }[];
+  brands = BrandList.allbrands
+  sizes = DefinedSizes.all
+  colors = DefinedColors.all
+  categories = DefinedCategory.all
   constructor(
     private fb: FormBuilder,
     private ipcService : IPCService,
@@ -46,11 +61,14 @@ export class AddUpdateProductComponent implements OnInit {
     this.productForm= this.fb.group({
       id : null,
       grade : [],
+      brand : [],
+      color : [],
+      size : [],
+      category : [],
       name : [],
       price : [],
-      brand: [],
+     
       productCode: [],
-      size: [],
       make : [],
       unit : [],
       discountInPercent : [],
@@ -64,6 +82,11 @@ export class AddUpdateProductComponent implements OnInit {
     if(this.action == 'update'){
       this.patchProductDataInForm()
     }
+
+
+
+   
+
   }
 
   patchProductDataInForm(){

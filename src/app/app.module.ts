@@ -61,14 +61,17 @@ import { LoadingScreenComponent } from './layout/components/uicomponents/loading
 import { TakePaymentComponent } from './layout/components/take-payment/take-payment.component';
 import { FilterComponent } from './layout/components/filter/filter.component';
 import { AppSetupComponent } from './layout/components/app-setup/app-setup.component';
-import { BrandComponent } from './layout/components/pconfig/brand/brand.component';
 import { PconfigLayoutComponent } from './layout/components/pconfig/pconfig-layout/pconfig-layout.component';
-import { GarmentsCategoryComponent } from './layout/components/pconfig/garments-category/garments-category.component';
-import { ColorComponent } from './layout/components/pconfig/color/color.component';
-import { SizeComponent } from './layout/components/pconfig/size/size.component';
+import { SizeComponent } from './layout/components/pconfig/sizes/size/size.component';
 import { FilterPipe } from './customPipes/filter.pipe';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-import { AddUpdateBrandComponent } from './layout/components/pconfig/add-update-brand/add-update-brand.component';
+import { AddUpdateBrandComponent } from './layout/components/pconfig/brands/add-update-brand/add-update-brand.component';
+import { BrandComponent } from './layout/components/pconfig/brands/brand/brand.component';
+import { ColorComponent } from './layout/components/pconfig/colors/color/color.component';
+import { GarmentsCategoryComponent } from './layout/components/pconfig/garment-categories/garments-category/garments-category.component';
+import { AddUpdateColorComponent } from './layout/components/pconfig/colors/add-update-color/add-update-color.component';
+import { AddUpdateCategoryComponent } from './layout/components/pconfig/garment-categories/add-update-category/add-update-category.component';
+import { AddUpdateSizeComponent } from './layout/components/pconfig/sizes/add-update-size/add-update-size.component';
 
 
 @NgModule({
@@ -128,6 +131,10 @@ import { AddUpdateBrandComponent } from './layout/components/pconfig/add-update-
     SizeComponent,
     FilterPipe,
     AddUpdateBrandComponent,
+    AddUpdateColorComponent,
+    AddUpdateCategoryComponent,
+    AddUpdateSizeComponent,
+
 
   ],
   imports: [

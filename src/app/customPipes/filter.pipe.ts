@@ -3,11 +3,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({ name: "filter" })
 export class FilterPipe implements PipeTransform {
-  transform(itemList: any, searchKeyword: string,filterMetadata:any) {
+  transform(itemList: any, searchKeyword: string) {
     if (!itemList)
       return [];
     if (!searchKeyword){
-      filterMetadata.count = itemList.length
+      
       return itemList;
     }
     let filteredList = [];
@@ -29,7 +29,7 @@ export class FilterPipe implements PipeTransform {
       });
     }
     console.log("filtered Dataa",filteredList)
-    filterMetadata.count = filteredList.length
+    
     return filteredList;
   }
 }

@@ -35,17 +35,18 @@ export class ItemComponent implements OnInit, OnChanges {
   @Input() cartItems;
   @Input() view: Boolean;
   @Output() shareCart = new EventEmitter<any>();
-
+  @Input() searchText;
 
 
   items = [];
   isListView: Boolean;
   cart = [];
+  receivedSearchText: any;
   constructor(private dialog: MatDialog, private alertService: AlertService) { }
   ngOnChanges() {
     this.isListView = this.view;
     this.items = this.data;
-
+    this.receivedSearchText = this.searchText
     this.cart = this.cartItems?.length ? this.cartItems : [];
 
     // console.log("data ng On changes",this.data, this.isListView)

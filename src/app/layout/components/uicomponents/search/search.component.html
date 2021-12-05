@@ -1,6 +1,6 @@
-<form  class="d-flex w-100  search-container bg-ultra-light rounded-lg">
+<form  class="d-flex w-100  search-container bg-ultra-light rounded-lg" (click)="$event.stopPropagation()">
     <div class="search-input">
-        <input type="search" placeholder="Search" (keyup)="onTyping()" spellcheck="true"
+        <input type="search" placeholder="{{searchPlaceholder || 'Search'}}" (keyup)="onTyping()" spellcheck="true"
         [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" >
         <mat-icon *ngIf="searchText" mat-icon-button   #clearSearch (click)="searchText = '';onTyping()" class="mat-icon-sm pt-1 clear-search-btn text-light">cancel</mat-icon>
     </div>
