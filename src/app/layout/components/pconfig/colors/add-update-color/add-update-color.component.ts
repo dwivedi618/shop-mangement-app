@@ -6,6 +6,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { IPCService } from 'src/app/services/ipc.service';
 
 import { Brand } from 'src/app/layout/models/brand';
+import { Color } from 'electron/entities/color';
 
 @Component({
   selector: 'app-add-update-color',
@@ -13,9 +14,9 @@ import { Brand } from 'src/app/layout/models/brand';
   styleUrls: ['./add-update-color.component.scss']
 })
 export class AddUpdateColorComponent implements OnInit {
-  brandForm : FormGroup
+  colorForm : FormGroup
   imagePreview: string;
-  localData: Brand;
+  localData: Color;
   isLoading = false;
   action: any;
   constructor(
@@ -31,55 +32,54 @@ export class AddUpdateColorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.brandForm = this.fb.group({
+    this.colorForm = this.fb.group({
       id : null,
       name : ['',[Validators.required]],
-      phone : ['',[Validators.required,Validators.maxLength(10)]],
-      address : ['',[Validators.required]],
+      code : [],
       photo : [],
-      gender : ['']
+
 
     })
 
     if(this.action == 'update'){
-      this.patchbrandForm();
+      this.patchcolorForm();
     }
 
   }
 
-  patchbrandForm(){
-    this.brandForm.patchValue({id : this.localData?.id});
-    this.brandForm.patchValue({name : this.localData?.name});
+  patchcolorForm(){
+    this.colorForm.patchValue({id : this.localData?.id});
+    this.colorForm.patchValue({name : this.localData?.name});
 
   }
 
   onImageChange(image : string){
     console.log("image from On Image change",image)
     this.imagePreview = image;
-    this.brandForm.patchValue({photo : image});
+    this.colorForm.patchValue({photo : image});
   }
 
 
   onDone(){
     this.isLoading = true;
-    if(this.brandForm.invalid){
+    if(this.colorForm.invalid){
       console.log("invalid brand Form");
       this.isLoading = false;
 
       return
     }
     let action = this.action == 'add' ? 'create' : 'update' ;
-    let data : Brand = this.brandForm.value;
+    let data : Brand = this.colorForm.value;
     console.log("brand",data)
     //api call to save brand 
-    this.ipcService.database("brand",action ,data).then(res=>{
+    this.ipcService.database("color",action ,data).then(res=>{
       if(res.status){
         let brand = res.data;
         console.log("after ipcservice brand",action,data);
-        if(brand && brand?.id) this.brandForm.patchValue({id : brand?.id });
-        console.log("after brand form ",action,this.brandForm.value);
-        if(this.action == 'update') this.dialogRef.close(this.brandForm.value);
-        if(this.action == 'add') this.dialogRef.close(this.brandForm.value);
+        if(brand && brand?.id) this.colorForm.patchValue({id : brand?.id });
+        console.log("after brand form ",action,this.colorForm.value);
+        if(this.action == 'update') this.dialogRef.close(this.colorForm.value);
+        if(this.action == 'add') this.dialogRef.close(this.colorForm.value);
         this.isLoading = true;
         
       }

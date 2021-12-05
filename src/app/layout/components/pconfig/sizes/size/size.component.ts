@@ -49,11 +49,11 @@ export class SizeComponent implements OnInit {
 
   ngOnInit(): void {
     this.garmentSizeList = DefinedSizes.all;
-    // this.getGarmentSizeList();
+    this.getGarmentSizeList();
   }
 
   getGarmentSizeList(){
-    this.ipcService.database('brand','fetch','')
+    this.ipcService.database('size','fetch','')
     .then(res => {
       if(res.status){
         this.garmentSizeList = res.data
@@ -79,16 +79,16 @@ export class SizeComponent implements OnInit {
     
   }
 
-  onFocusBrandName = (id:Number) =>{
+  onFocussizeName = (id:Number) =>{
     // alert("id")
-    this.garmentSizeList.forEach(brand => {
-      if(brand.id == id){ brand.isEditEnable = true;}
+    this.garmentSizeList.forEach(size => {
+      if(size.id == id){ size.isEditEnable = true;}
     })
   }
  
-  onSave = (brand:GarmentSize) =>{
-    console.table(brand);
-    this.ipcService.database('brand','update',brand)
+  onSave = (size:GarmentSize) =>{
+    console.table(size);
+    this.ipcService.database('size','update',size)
     .then(res =>{
       if(res.status){
         this.getGarmentSizeList();
@@ -96,9 +96,9 @@ export class SizeComponent implements OnInit {
       }
     })
   }
-  onDelete = brand =>{ 
-    let deleteBrand = ()=>{
-      this.ipcService.database('brand','delete',brand)
+  onDelete = size =>{ 
+    let deletesize = ()=>{
+      this.ipcService.database('size','delete',size)
       .then(res=>{
         if(res.status){
           this.alertService.alert('Item deleted successfully','close');
@@ -109,7 +109,7 @@ export class SizeComponent implements OnInit {
     }
     this.alertService.alertActionDialog('Delete','Are you sure ?','Yes! Delete')
     .subscribe(result=>{
-      result ? deleteBrand() : '';
+      result ? deletesize() : '';
     })
   }
 
@@ -122,10 +122,10 @@ export class SizeComponent implements OnInit {
       disableClose: true,
     }
 
-    // this.dialogService.openMatDialog(AddUpdateSizeComponent,{},config)
-    // .subscribe(() => {
-    //   this.getGarmentSizeList();
-    // })
+    this.dialogService.openMatDialog(AddUpdateSizeComponent,{},config)
+    .subscribe(() => {
+      this.getGarmentSizeList();
+    })
   }
   onSearch = (searchText:string)=>{
     this.searchText = searchText

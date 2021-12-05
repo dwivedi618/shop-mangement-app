@@ -6,6 +6,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { IPCService } from 'src/app/services/ipc.service';
 
 import { Brand } from 'src/app/layout/models/brand';
+import { Pcategory } from 'src/app/layout/models/pcategory';
 
 @Component({
   selector: 'app-add-update-category',
@@ -13,7 +14,7 @@ import { Brand } from 'src/app/layout/models/brand';
   styleUrls: ['./add-update-category.component.scss']
 })
 export class AddUpdateCategoryComponent implements OnInit {
-  brandForm : FormGroup
+  categoryForm : FormGroup
   imagePreview: string;
   localData: Brand;
   isLoading = false;
@@ -31,55 +32,56 @@ export class AddUpdateCategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.brandForm = this.fb.group({
+    this.categoryForm = this.fb.group({
       id : null,
       name : ['',[Validators.required]],
-      phone : ['',[Validators.required,Validators.maxLength(10)]],
-      address : ['',[Validators.required]],
-      photo : [],
-      gender : ['']
+     
+      image : [],
+     
 
     })
 
     if(this.action == 'update'){
-      this.patchbrandForm();
+      this.patchcategoryForm();
     }
 
   }
 
-  patchbrandForm(){
-    this.brandForm.patchValue({id : this.localData?.id});
-    this.brandForm.patchValue({name : this.localData?.name});
+  patchcategoryForm(){
+    this.categoryForm.patchValue({id : this.localData?.id});
+    this.categoryForm.patchValue({name : this.localData?.name});
+    this.categoryForm.patchValue({image : this.localData?.image});
+
 
   }
 
   onImageChange(image : string){
     console.log("image from On Image change",image)
     this.imagePreview = image;
-    this.brandForm.patchValue({photo : image});
+    this.categoryForm.patchValue({image : image});
   }
 
 
   onDone(){
     this.isLoading = true;
-    if(this.brandForm.invalid){
+    if(this.categoryForm.invalid){
       console.log("invalid brand Form");
       this.isLoading = false;
 
       return
     }
     let action = this.action == 'add' ? 'create' : 'update' ;
-    let data : Brand = this.brandForm.value;
+    let data : Pcategory = this.categoryForm.value;
     console.log("brand",data)
     //api call to save brand 
     this.ipcService.database("brand",action ,data).then(res=>{
       if(res.status){
         let brand = res.data;
         console.log("after ipcservice brand",action,data);
-        if(brand && brand?.id) this.brandForm.patchValue({id : brand?.id });
-        console.log("after brand form ",action,this.brandForm.value);
-        if(this.action == 'update') this.dialogRef.close(this.brandForm.value);
-        if(this.action == 'add') this.dialogRef.close(this.brandForm.value);
+        if(brand && brand?.id) this.categoryForm.patchValue({id : brand?.id });
+        console.log("after brand form ",action,this.categoryForm.value);
+        if(this.action == 'update') this.dialogRef.close(this.categoryForm.value);
+        if(this.action == 'add') this.dialogRef.close(this.categoryForm.value);
         this.isLoading = true;
         
       }

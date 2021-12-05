@@ -34,10 +34,7 @@ export class AddUpdateBrandComponent implements OnInit {
     this.brandForm = this.fb.group({
       id : null,
       name : ['',[Validators.required]],
-      phone : ['',[Validators.required,Validators.maxLength(10)]],
-      address : ['',[Validators.required]],
-      photo : [],
-      gender : ['']
+      image : [],
 
     })
 
@@ -56,7 +53,7 @@ export class AddUpdateBrandComponent implements OnInit {
   onImageChange(image : string){
     console.log("image from On Image change",image)
     this.imagePreview = image;
-    this.brandForm.patchValue({photo : image});
+    this.brandForm.patchValue({image : image});
   }
 
 

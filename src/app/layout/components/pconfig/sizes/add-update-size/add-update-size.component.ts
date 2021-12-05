@@ -6,7 +6,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { IPCService } from 'src/app/services/ipc.service';
 
-import { Brand } from 'src/app/layout/models/brand';
+import { Pcolor } from 'src/app/layout/models/pcolor';
+import { Psize } from 'src/app/layout/models/psize';
 
 @Component({
   selector: 'app-add-update-size',
@@ -14,9 +15,9 @@ import { Brand } from 'src/app/layout/models/brand';
   styleUrls: ['./add-update-size.component.scss']
 })
 export class AddUpdateSizeComponent implements OnInit {
-  brandForm : FormGroup
+  sizeForm : FormGroup
   imagePreview: string;
-  localData: Brand;
+  localData: Psize;
   isLoading = false;
   action: any;
   constructor(
@@ -27,60 +28,57 @@ export class AddUpdateSizeComponent implements OnInit {
     ) { 
       this.localData = data;
       this.action = data?.id ? 'update' : 'add';
-      console.log('localData brand',data,this.action);
+      console.log('localData size',data,this.action);
       
   }
 
   ngOnInit(): void {
-    this.brandForm = this.fb.group({
+    this.sizeForm = this.fb.group({
       id : null,
       name : ['',[Validators.required]],
-      phone : ['',[Validators.required,Validators.maxLength(10)]],
-      address : ['',[Validators.required]],
-      photo : [],
-      gender : ['']
+    
 
     })
 
     if(this.action == 'update'){
-      this.patchbrandForm();
+      this.patchsizeForm();
     }
 
   }
 
-  patchbrandForm(){
-    this.brandForm.patchValue({id : this.localData?.id});
-    this.brandForm.patchValue({name : this.localData?.name});
+  patchsizeForm(){
+    this.sizeForm.patchValue({id : this.localData?.id});
+    this.sizeForm.patchValue({name : this.localData?.name});
 
   }
 
   onImageChange(image : string){
     console.log("image from On Image change",image)
     this.imagePreview = image;
-    this.brandForm.patchValue({photo : image});
+    this.sizeForm.patchValue({photo : image});
   }
 
 
   onDone(){
     this.isLoading = true;
-    if(this.brandForm.invalid){
-      console.log("invalid brand Form");
+    if(this.sizeForm.invalid){
+      console.log("invalid size Form");
       this.isLoading = false;
 
       return
     }
     let action = this.action == 'add' ? 'create' : 'update' ;
-    let data : Brand = this.brandForm.value;
-    console.log("brand",data)
-    //api call to save brand 
-    this.ipcService.database("brand",action ,data).then(res=>{
+    let data : Pcolor = this.sizeForm.value;
+    console.log("size",data)
+    //api call to save size 
+    this.ipcService.database("size",action ,data).then(res=>{
       if(res.status){
-        let brand = res.data;
-        console.log("after ipcservice brand",action,data);
-        if(brand && brand?.id) this.brandForm.patchValue({id : brand?.id });
-        console.log("after brand form ",action,this.brandForm.value);
-        if(this.action == 'update') this.dialogRef.close(this.brandForm.value);
-        if(this.action == 'add') this.dialogRef.close(this.brandForm.value);
+        let sizeresp = res.data;
+        console.log("after ipcservice size",action,data);
+        if(sizeresp && sizeresp?.id) this.sizeForm.patchValue({id : sizeresp?.id });
+        console.log("after size form ",action,this.sizeForm.value);
+        if(this.action == 'update') this.dialogRef.close(this.sizeForm.value);
+        if(this.action == 'add') this.dialogRef.close(this.sizeForm.value);
         this.isLoading = true;
         
       }

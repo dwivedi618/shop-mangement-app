@@ -10,7 +10,7 @@
     <div class="">
         <div class="d-flex ">
             <div style="margin-bottom: 1rem;">
-                <app-photo-upload [(image)]="brandForm.value.photo" (onImageChange)="onImageChange($event)">
+                <app-photo-upload [(image)]="brandForm.value.image" (onImageChange)="onImageChange($event)">
                 </app-photo-upload>
             </div>
             <form [formGroup]="brandForm" class="w-100" style="font-size: 12px;">
@@ -19,8 +19,9 @@
                     
                     <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Enter Brand Name</mat-label>
-                        <input matInput placeholder="Ex:Nikhil Ojha" formControlName="name">
+                        <input matInput placeholder="Ex:Kaveri," formControlName="name">
                     </mat-form-field>
+                    
                     
                    
                 </div>
