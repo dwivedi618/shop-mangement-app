@@ -2,7 +2,20 @@ import "reflect-metadata";
 import { app, BrowserWindow, ipcMain, screen, Menu} from "electron";
 import {createConnection, Connection } from "typeorm";
 import { AppConfig } from './config/app.conf';
-import { customer, product, inventory, sell, settings, user, payment, Entities } from './db';
+import { 
+    customer, 
+    product, 
+    inventory, 
+    sell, 
+    settings, 
+    user, 
+    payment, 
+    brand,
+    size,
+    color,
+    category,
+    subCategory,
+    Entities } from './db';
 
 enum Status {
     FAILURE = 0,
@@ -116,19 +129,19 @@ ipcMain.handle('database', async (event, arg) => {
                 response.data = await settings(connection, action, data);
                 break;
             case 'brand':
-                response.data = await settings(connection, action, data);
+                response.data = await brand(connection, action, data);
                 break;
             case 'color':
-                response.data = await settings(connection, action, data);
+                response.data = await color(connection, action, data);
                 break;
             case 'size':
-                response.data = await settings(connection, action, data);
+                response.data = await size(connection, action, data);
                 break;
             case 'category':
-                response.data = await settings(connection, action, data);
+                response.data = await category(connection, action, data);
                 break;
             case 'subCategory':
-                response.data = await settings(connection, action, data);
+                response.data = await subCategory(connection, action, data);
                 break;
 
         }
