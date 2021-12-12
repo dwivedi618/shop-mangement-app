@@ -35,6 +35,54 @@
            
           
             <section class="items-container grid-view">
+                <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree w-100">
+                    <!-- This is the tree node template for leaf nodes -->
+                    <!-- There is inline padding applied to this node using styles.
+                      This padding value depends on the mat-icon-button width. -->
+                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                        <button mat-icon-button disabled></button>
+                        {{node.name}}
+                    </mat-tree-node>
+                    <!-- This is the tree node template for expandable nodes -->
+                    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodeToggle matTreeNodePadding>
+                        <div class="mat-tree-node " [class.bg-selected]="treeControl.isExpanded(node)">
+                          <button mat-icon-button matTreeNodeToggle
+                                  [attr.aria-label]="'Toggle ' + node.name">
+                            <mat-icon class="mat-icon-rtl-mirror">
+                              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                            </mat-icon>
+                          </button>
+                          {{node.name}}
+                          
+                          <div class="spacer"></div>
+                          <button mat-button class="bg-white mr-1 " (click)="$event.stopPropagation()"><small>Manage</small></button>
+                        </div>
+                       
+                        <!-- There is inline padding applied to this div using styles.
+                            This padding value depends on the mat-icon-button width.  -->
+                        <div [class.example-tree-invisible]="!treeControl.isExpanded(node)" [class.bg-ultra-light]="treeControl.isExpanded(node)"
+                            role="group">
+                          <ng-container matTreeNodeOutlet></ng-container>
+                      </div>
+                      <div style="padding-left: 120px;font-size: 12px;" *ngIf="treeControl.isExpanded(node)" (click)="$event.stopPropagation()" [class.bg-ultra-light]="treeControl.isExpanded(node)">
+                        <div *ngIf="node.isEditEnable">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Add Sub Category of {{node.name}}</mat-label>
+                                <input matInput type="text" autocomplete="off">
+                            </mat-form-field>
+                            <button mat-button class="bg-ultra-light mr-1 ml-1" (click)="node.isEditEnable = false">cancel</button>
+                            <button mat-button class="bg-green" (click)="node.isEditEnable = false">Save</button>
+                        </div>
+                        <div *ngIf="!node.isEditEnable" class="pb-4" >
+                            <button mat-button class="bg-green" (click)="node.isEditEnable = true"><mat-icon class="mat-icon-sm pt-1">add_box</mat-icon> <small>Add Sub Category of<strong> {{node.name}}</strong></small> </button>
+                        </div>
+                    </div>
+
+                    </mat-nested-tree-node>
+                  </mat-tree>
+                  
+              
+                  
                 <mat-list *ngIf="categoryList?.length" dense class="rounded-lg w-100 py-2">
           
                     <mat-list-item *ngFor="let brand of categoryList;let i=index">

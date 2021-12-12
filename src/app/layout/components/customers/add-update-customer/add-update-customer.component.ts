@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { IPCService } from 'src/app/services/ipc.service';
 import { Customer } from '../../../models/customer';
+import { forkJoin, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-update-customer',
@@ -15,6 +16,10 @@ export class AddUpdateCustomerComponent implements OnInit {
   localData: Customer;
   isLoading = false;
   action: any;
+  categories: any;
+  brands: any;
+  sizes: any;
+  colors: any;
   constructor(
     private fb: FormBuilder,
     private ipcService: IPCService,
@@ -41,6 +46,7 @@ export class AddUpdateCustomerComponent implements OnInit {
     if(this.action == 'update'){
       this.patchCustomerForm();
     }
+  
 
   }
 
@@ -53,6 +59,10 @@ export class AddUpdateCustomerComponent implements OnInit {
     this.customerForm.patchValue({gender : this.localData?.gender});
 
   }
+
+
+
+  
 
   onImageChange(image : string){
     console.log("image from On Image change",image)

@@ -28,7 +28,7 @@
                                     <mat-label>Garments Category</mat-label>
                                     <mat-select formControlName="category">
                                         <mat-option value=''>Select Garment Category</mat-option>
-                                        <mat-option *ngFor="let list of categories" value={{list.id}}>
+                                        <mat-option *ngFor="let list of categories" [value]="list.id">
                                             <span>{{list.name}}</span>
                                         </mat-option>
                                     </mat-select>               
@@ -42,7 +42,7 @@
                                     <mat-label>Brand</mat-label>
                                     <mat-select formControlName="brand">
                                         <mat-option value=''>Select Brand</mat-option>
-                                        <mat-option *ngFor="let list of brands" value={{list.id}}>
+                                        <mat-option *ngFor="let list of brands" [value]='list.id'>
                                             <span>{{list.name}}</span>
                                         </mat-option>
                                     </mat-select>               
@@ -55,7 +55,7 @@
                                     <mat-label>Size</mat-label>
                                     <mat-select formControlName="size" [multiple]="true">
                                         <!-- <mat-option >Select Size</mat-option> -->
-                                        <mat-option *ngFor="let list of sizes" value={{list.id}}>
+                                        <mat-option *ngFor="let list of sizes" [value]='list.id'>
                                             <span>{{list.name}}</span>
                                         </mat-option>
                                     </mat-select>               
@@ -67,7 +67,7 @@
                                 <mat-form-field appearance="outline">
                                     <mat-label>Color</mat-label>
                                     <mat-select formControlName="color" [multiple]="true">
-                                        <mat-option *ngFor="let list of colors" value={{list.id}}>
+                                        <mat-option *ngFor="let list of colors" [value]="list.id">
                                             <div class="d-flex">
                                                 <span class="color-box mr-1" [style.background]="list.code" ></span>
                                                 <small>{{list.name}}</small>

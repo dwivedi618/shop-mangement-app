@@ -1,16 +1,17 @@
 import { DefinedCategory } from './../../../../../fakedata/categories';
-import { Pcategory } from './../../../../models/pcategory';
 
 import { IPCService } from './../../../../../services/ipc.service';
-import { Brand } from './../../../../models/brand';
+import { Pcategory } from './../../../../models/pcategory';
 import { AlertService } from 'src/app/services/alert.service';
 import { Component, OnInit } from '@angular/core';
 import { Constant } from 'src/app/layout/constant/constant';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { DialogService } from 'src/app/services/dialog-service';
 import { AddUpdateCategoryComponent } from '../add-update-category/add-update-category.component';
+import { NestedTreeControl } from '@angular/cdk/tree';
+import { MatTreeNestedDataSource } from '@angular/material/tree';
 
-interface categoryList extends Brand{
+interface CategoryList extends Pcategory{
   isEditEnable?: boolean
 }
 @Component({
@@ -19,7 +20,6 @@ interface categoryList extends Brand{
   styleUrls: ['./garments-category.component.scss']
 })
 export class GarmentsCategoryComponent implements OnInit {
-  BRAND_MISSING = Constant.BRAND_MISSING
   newGarmentCategory : string
   
   data= [
@@ -35,20 +35,49 @@ export class GarmentsCategoryComponent implements OnInit {
 
  
   ]
-  categoryList : categoryList[] = [];
+  TREE_DATA = [
+    {
+      name: 'Fruit',
+      children: [{name: 'Apple'}, {name: 'Banana'}, {name: 'Fruit loops'}],
+    },
+    {
+      name: 'Vegetables',
+      children: [
+        {
+          name: 'Green',
+          children: [{name: 'Broccoli'}, {name: 'Brussels sprouts'}],
+        },
+        {
+          name: 'Orange',
+          children: [{name: 'Pumpkins'}, {name: 'Carrots'}],
+        },
+      ],
+    },
+  ];
+  categoryList : CategoryList[] = [];
   isNewAddEnable : Boolean = false;
   isEditEnable : boolean = false;
   newCategory: string;
   searchText: string;
+  treeControl = new NestedTreeControl<any>(node => node.children);
+  dataSource = new MatTreeNestedDataSource<any>();
+  hasChild = (_: number, node: any) => !!node.children && node.children.length > 0;
   constructor(
     private alertService : AlertService,
     private ipcService : IPCService,
     private dialogService: DialogService
-    ) { }
+    ) {
+
+     }
 
   ngOnInit(): void {
-    this.categoryList = DefinedCategory.all;;
-    // this.getBrandList();
+    this.categoryList = DefinedCategory.all;
+    this.categoryList.forEach(item => item['isEditEnable'] = false)
+    this.dataSource.data = this.categoryList;
+
+    // this.getCategoryList();
+    console.log(this.treeControl);
+    
   }
 
   getCategoryList(){
@@ -61,21 +90,16 @@ export class GarmentsCategoryComponent implements OnInit {
     })
   }
 
-  onNewSave = ()=> {
-    let newCategory:Pcategory = { id: 0, name : this.newGarmentCategory };
-    let save = newCategory =>{
-      this.ipcService.database("brand",'create',newCategory)
+  onNewSave = (newCategory)=> {
+      this.ipcService.database("category",'create',newCategory)
       .then(res=>{
         if(res.status){
           this.alertService.alert('Item Added Successfully','close');
           this.getCategoryList();
-          // this.categoryList.push(newCategory);//test
           this.isNewAddEnable = false;
           this.newGarmentCategory = '';
         }
       })
-    }
-    
   }
 
   onFocusBrandName = (id:Number) =>{
@@ -85,9 +109,9 @@ export class GarmentsCategoryComponent implements OnInit {
     })
   }
  
-  onSave = (brand:categoryList) =>{
-    console.table(brand);
-    this.ipcService.database('brand','update',brand)
+  onSave = (data:CategoryList) =>{
+    console.table(data);
+    this.ipcService.database('category','update',data)
     .then(res =>{
       if(res.status){
         this.getCategoryList();
@@ -130,6 +154,8 @@ export class GarmentsCategoryComponent implements OnInit {
   onSearch = (searchText:string)=>{
     this.searchText = searchText
   }
+
+  
 }
 
 

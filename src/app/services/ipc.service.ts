@@ -30,6 +30,19 @@ export class IPCService {
         }
     }
 
+    async allConfigDropdown() {
+        try {
+            let category = await ipcRenderer.invoke('database', ['category', 'fetch', ''])
+            let brand = await ipcRenderer.invoke('database', ['brand', 'fetch', ''])
+            let size = await ipcRenderer.invoke('database', ['size', 'fetch', ''])
+            let color = await ipcRenderer.invoke('database', ['color', 'fetch', ''])
+            return Promise.all([category,brand,size,color])
+
+        } catch ( err ) {
+            console.error(err);
+        }
+    }
+
     upload(image: string) {
         ipcRenderer.invoke('upload', image)
         .then(res => {

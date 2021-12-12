@@ -2,11 +2,13 @@ export class DefinedCategory{
     static all = [
       {
         "id": "Tshirts",
-        "name": "Tshirts"
+        "name": "Tshirts",
+        "children": [{name: 'Apple'}, {name: 'Banana'}, {name: 'Fruit loops'}],
       },
       {
         "id": "Sharee",
-        "name": "Sharee"
+        "name": "Sharee",
+        "children":[{}]
       },
       {
         "id": "Tops",

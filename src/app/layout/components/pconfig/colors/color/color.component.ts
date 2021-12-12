@@ -42,8 +42,8 @@ export class ColorComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.colors = DefinedColors.all;
-    // this.getBrandList();
+    // this.colors = DefinedColors.all;
+    this.getColorList();
  
   }
 

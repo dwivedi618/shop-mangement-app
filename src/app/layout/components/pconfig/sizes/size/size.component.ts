@@ -48,7 +48,7 @@ export class SizeComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.garmentSizeList = DefinedSizes.all;
+    // this.garmentSizeList = DefinedSizes.all;
     this.getGarmentSizeList();
   }
 

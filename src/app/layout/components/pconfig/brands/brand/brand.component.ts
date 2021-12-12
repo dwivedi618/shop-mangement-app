@@ -76,6 +76,7 @@ export class BrandComponent implements OnInit,OnChanges,AfterViewInit {
 
   ngOnInit(): void {
     this.brands = BrandList.allbrands;
+    // this.getBrandList()
   }
   
   getBrandList(){

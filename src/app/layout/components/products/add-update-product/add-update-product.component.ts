@@ -54,7 +54,8 @@ export class AddUpdateProductComponent implements OnInit {
       this.localData = data || null;
       this.action = this.localData?.action || 'add';
       
-      console.log("data",data,this.localData)
+      console.log("data",data,this.localData);
+
      }
 
   ngOnInit(): void {
@@ -79,24 +80,38 @@ export class AddUpdateProductComponent implements OnInit {
       image : []
     })
 
+    this.patchProductDataInForm()
     if(this.action == 'update'){
-      this.patchProductDataInForm()
+      setTimeout(() => {
+      }, 0);
     }
+    this.getAllDropdown();
 
-
-
-   
-
+  }
+  private getAllDropdown(){
+    this.ipcService.allConfigDropdown().then(res=>{
+      console.log("inside add update product",res);
+      let [category,brand,size,color] = res;
+      console.log('category',category.data);
+      console.log('brand',brand.data);
+      console.log('size',size.data);
+      console.log('color',color.data);
+      this.categories = category.data
+      this.brands = brand.data
+      this.sizes = size.data
+      this.colors= color.data
+    })
+    
   }
 
   patchProductDataInForm(){
     this.productForm.patchValue({id : this.localData?.id})
     this.productForm.patchValue({name : this.localData?.name})
-    this.productForm.patchValue({brand : this.localData?.brand})
     this.productForm.patchValue({productCode : this.localData?.productCode})
-    this.productForm.patchValue({size : this.localData?.size})
-    this.productForm.patchValue({grade : this.localData?.grade})
-    this.productForm.patchValue({make : this.localData?.make})
+    this.productForm.patchValue({category : this.localData?.category?.id})
+    this.productForm.patchValue({brand : this.localData?.brand?.id as string})
+    this.productForm.patchValue({size : this.localData?.size?.id})
+    this.productForm.patchValue({color : this.localData?.color?.id})
     this.productForm.patchValue({price : this.localData?.price})
     this.productForm.patchValue({unit : this.localData?.unit})
     this.productForm.patchValue({discountInPercent : this.localData?.discountInPercent})

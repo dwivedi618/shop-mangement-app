@@ -17,7 +17,7 @@ export class AddUpdateCategoryComponent implements OnInit {
   categoryForm : FormGroup
   imagePreview: string;
   localData: Brand;
-  isLoading = false;
+  isLoading = false
   action: any;
   constructor(
     private fb: FormBuilder,
@@ -35,10 +35,7 @@ export class AddUpdateCategoryComponent implements OnInit {
     this.categoryForm = this.fb.group({
       id : null,
       name : ['',[Validators.required]],
-     
       image : [],
-     
-
     })
 
     if(this.action == 'update'){
@@ -51,8 +48,6 @@ export class AddUpdateCategoryComponent implements OnInit {
     this.categoryForm.patchValue({id : this.localData?.id});
     this.categoryForm.patchValue({name : this.localData?.name});
     this.categoryForm.patchValue({image : this.localData?.image});
-
-
   }
 
   onImageChange(image : string){
@@ -72,18 +67,17 @@ export class AddUpdateCategoryComponent implements OnInit {
     }
     let action = this.action == 'add' ? 'create' : 'update' ;
     let data : Pcategory = this.categoryForm.value;
-    console.log("brand",data)
+    console.log("data:form",data)
     //api call to save brand 
-    this.ipcService.database("brand",action ,data).then(res=>{
+    this.ipcService.database("category",action ,data).then(res=>{
       if(res.status){
         let brand = res.data;
-        console.log("after ipcservice brand",action,data);
+        console.log("after ipcservice categpry",action,data);
         if(brand && brand?.id) this.categoryForm.patchValue({id : brand?.id });
         console.log("after brand form ",action,this.categoryForm.value);
         if(this.action == 'update') this.dialogRef.close(this.categoryForm.value);
         if(this.action == 'add') this.dialogRef.close(this.categoryForm.value);
         this.isLoading = true;
-        
       }
     })
 

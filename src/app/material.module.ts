@@ -25,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTreeModule} from '@angular/material/tree';
 @NgModule({
   declarations: [],
   imports: [
@@ -53,7 +54,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatSelectModule,
     MatSlideToggleModule,
     MatTooltipModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTreeModule
   
   ],
   exports: [
@@ -82,7 +84,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatSelectModule,
     MatSlideToggleModule,
     MatTooltipModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTreeModule
   ]
 })
 export class MaterialModule { }
