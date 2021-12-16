@@ -149,6 +149,8 @@ ipcMain.handle('database', async (event, arg) => {
         return response;
     } catch (err) {
         console.log('Error in db handler:', err);
+        console.log('Request from frontend--->>>',arg);
+        
         throw new Error(`Request could not be resolved.\n Error: ${err}`)
     }
 });

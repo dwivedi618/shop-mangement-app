@@ -3,8 +3,10 @@ import {
     Entity, 
     PrimaryGeneratedColumn, 
     CreateDateColumn, 
-    UpdateDateColumn 
+    UpdateDateColumn, 
+    OneToMany
 } from "typeorm";
+import { SubCategory } from "./sub-category";
 
 @Entity()
 export class Category {
@@ -17,6 +19,11 @@ export class Category {
 
     @Column({type: "text", nullable: true})
     image: string; 
+
+    @OneToMany(type => SubCategory, subCategory => subCategory.category, {
+        cascade: true
+    })
+    subCategroies: SubCategory []
 
     @CreateDateColumn()
     createdAt: Date;
