@@ -84,7 +84,7 @@ export async function inventory(connection, action: string, data?: any) {
       return inventoryRepository.save(inventory);
 
     case 'fetch':
-      return inventoryRepository.find({ relations: ['item'] });
+      return inventoryRepository.find();
 
     case 'delete':
       return inventoryRepository.remove(data);
@@ -101,10 +101,10 @@ export async function product(connection, action: string, data?: any) {
 
   switch (action) {
     case 'create':
-      let color: Color[];
-      let size: Size[];
-      data.color.forEach(async id => color.push(await colorRepository.findOne(id)));
-      data.size.forEach(async id => size.push(await colorRepository.findOne(id)));
+      let colors: Color[];
+      let sizes: Size[];
+      data.colors.forEach(async id => colors.push(await colorRepository.findOne(id)));
+      data.sizes.forEach(async id => sizes.push(await sizeRepository.findOne(id)));
       
       const product = new Product();
       product.name = data.name;
@@ -113,8 +113,8 @@ export async function product(connection, action: string, data?: any) {
       product.discountInPercent = data.discountInPercent;
       product.discountInRuppee = data.discountInRuppee;
       product.stock = data.stock;
-      product.color = color;
-      product.size = size;
+      product.colors = colors;
+      product.sizes = sizes;
       product.brand = await brandRepository.findOne(data.brand);
       product.category = await categoryRepository.findOne(data.category);
       product.subCategory = await subCategoryRepository.findOne(data.subCategory);
@@ -122,7 +122,6 @@ export async function product(connection, action: string, data?: any) {
       product.length = data.length;
       product.price = data.price;
       product.productCode = data.productCode;
-      product.size = data.size;
       product.price = data.price;
       product.unit = data.unit;
       product.image = data.image && (await compress(data.image, 500, 500));
@@ -136,7 +135,7 @@ export async function product(connection, action: string, data?: any) {
       return productRepository.update(id, data);
 
     case 'fetch':
-      return productRepository.find({ relations: ['brand', 'color', 'size', 'category', 'subCategory'] });
+      return productRepository.find();
 
     case 'delete':
       return productRepository.remove(data);

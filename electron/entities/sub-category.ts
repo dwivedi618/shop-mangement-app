@@ -1,10 +1,13 @@
+import { category } from "db";
 import { 
     Column, 
     Entity, 
     PrimaryGeneratedColumn, 
     CreateDateColumn, 
-    UpdateDateColumn 
+    UpdateDateColumn, 
+    ManyToOne
 } from "typeorm";
+import { Category } from "./category";
 
 @Entity()
 export class SubCategory {
@@ -15,8 +18,8 @@ export class SubCategory {
     @Column({unique: true, nullable: true})
     name: string;
 
-    @Column({type: "text", nullable: true})
-    image: string; 
+    @ManyToOne(type => Category, category => category.subCategroies)
+    category: Category;
 
     @CreateDateColumn()
     createdAt: Date;

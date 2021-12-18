@@ -57,25 +57,35 @@ export class Product {
       @Column({ nullable: true })
       stock: number;
 
-      @OneToOne(type => Category)
+      @OneToOne(type => Category, {
+            eager: true
+      })
       @JoinColumn()
       category: Category;
 
-      @OneToOne(type => Inventory)
+      @OneToOne(type => SubCategory, {
+            eager: true
+      })
       @JoinColumn()
       subCategory: SubCategory;
 
-      @OneToOne(type => Brand)
+      @OneToOne(type => Brand, {
+            eager: true
+      })
       @JoinColumn()
       brand: Brand;
 
-      @ManyToMany(type => Color)
+      @ManyToMany(type => Color, {
+            eager: true
+      })
       @JoinTable()
-      color: Color[];
+      colors: Color[];
 
-      @ManyToMany(type => Size)
+      @ManyToMany(type => Size, {
+            eager: true
+      })
       @JoinTable()
-      size: Size[];
+      sizes: Size[];
 
       @OneToMany(type => Inventory, inventory => inventory.item)
       inventory: Inventory;
