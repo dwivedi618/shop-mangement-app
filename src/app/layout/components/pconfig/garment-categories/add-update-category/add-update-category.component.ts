@@ -1,12 +1,13 @@
 
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { IPCService } from 'src/app/services/ipc.service';
 
 import { Brand } from 'src/app/layout/models/brand';
 import { Pcategory } from 'src/app/layout/models/pcategory';
+import { subCategory } from 'electron/db';
 
 @Component({
   selector: 'app-add-update-category',
@@ -36,6 +37,11 @@ export class AddUpdateCategoryComponent implements OnInit {
       id : null,
       name : ['',[Validators.required]],
       image : [],
+      subCategories : this.fb.array([
+        this.fb.group({
+          name : []
+        })
+      ])
     })
 
     if(this.action == 'update'){
@@ -43,6 +49,8 @@ export class AddUpdateCategoryComponent implements OnInit {
     }
 
   }
+
+  get subCategories() {return this.categoryForm.get('subCategoies') as FormArray}
 
   patchcategoryForm(){
     this.categoryForm.patchValue({id : this.localData?.id});

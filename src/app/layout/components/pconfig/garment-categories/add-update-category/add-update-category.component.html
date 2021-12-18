@@ -21,6 +21,13 @@
                         <mat-label>Enter Garment Category</mat-label>
                         <input matInput placeholder="Ex:Sharee" formControlName="name">
                     </mat-form-field>
+
+                    <div *ngFor="let subcat of subCategories">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Enter {{categoryForm.value.name}} Sub Category</mat-label>
+                            <input matInput placeholder="Ex:Sharee" formControlName="name">
+                        </mat-form-field>
+                    </div>
                     
                    
                 </div>
