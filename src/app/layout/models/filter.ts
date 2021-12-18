@@ -9,4 +9,5 @@ export class Filter {
   type: SearchType;
   keys: Array<any> | string;
   caseSensitve : boolean
+  primaryFilter?: boolean
 }

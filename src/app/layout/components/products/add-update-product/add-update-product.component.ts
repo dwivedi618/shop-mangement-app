@@ -63,8 +63,8 @@ export class AddUpdateProductComponent implements OnInit {
       id : null,
       grade : [],
       brand : [],
-      color : [],
-      size : [],
+      colors : [],
+      sizes : [],
       category : [],
       name : [],
       price : [],
@@ -101,7 +101,6 @@ export class AddUpdateProductComponent implements OnInit {
       this.sizes = size.data
       this.colors= color.data
     })
-    
   }
 
   patchProductDataInForm(){
@@ -110,8 +109,8 @@ export class AddUpdateProductComponent implements OnInit {
     this.productForm.patchValue({productCode : this.localData?.productCode})
     this.productForm.patchValue({category : this.localData?.category?.id})
     this.productForm.patchValue({brand : this.localData?.brand?.id as string})
-    this.productForm.patchValue({size : this.localData?.size?.id})
-    this.productForm.patchValue({color : this.localData?.color?.id})
+    this.productForm.patchValue({sizes : this.localData?.size?.id})
+    this.productForm.patchValue({colors : this.localData?.color?.id})
     this.productForm.patchValue({price : this.localData?.price})
     this.productForm.patchValue({unit : this.localData?.unit})
     this.productForm.patchValue({discountInPercent : this.localData?.discountInPercent})

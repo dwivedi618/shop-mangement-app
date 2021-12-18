@@ -16,7 +16,7 @@
         <mat-selection-list dense>
             <mat-list-option [selected]="isFilterSelected(category)" *ngFor="let category of categories | filter:searchText"
                 (click)="onFilterSelection(category)">
-                <small class="strong text-light">{{category.name }}</small>
+                <small class="strong text-light">{{category.name | uppercase}}</small>
             </mat-list-option>
         </mat-selection-list>
     </mat-expansion-panel>
@@ -32,7 +32,7 @@
         <mat-selection-list dense>
             <mat-list-option [selected]="isFilterSelected(category)" *ngFor="let brand of brands | filter:searchText"
                 (click)="onFilterSelection(brand)">
-                <small class="strong text-light">{{brand.name }}</small>
+                <small class="strong text-light">{{brand.name | uppercase}}</small>
             </mat-list-option>
         </mat-selection-list>
     </mat-expansion-panel>
@@ -50,7 +50,7 @@
                 (click)="onFilterSelection(color)">
                 <div class="d-flex">
                     <span class="color-box mr-1" [style.background]="color.code" ></span>
-                    <small class="strong text-light">{{color.name}}</small>
+                    <small class="strong text-light">{{color.name | uppercase}}</small>
                 </div>
             </mat-list-option>
         </mat-selection-list>
@@ -64,7 +64,7 @@
         <mat-selection-list dense>
             <mat-list-option [selected]="isFilterSelected(category)"
                 *ngFor="let category of cutomerCategoryByGender" (click)="onFilterSelection(category)">
-                <small class="strong text-light">{{category.keys }}</small>
+                <small class="strong text-light">{{category.keys | uppercase }}</small>
             </mat-list-option>
         </mat-selection-list>
     </mat-expansion-panel>
@@ -92,7 +92,7 @@
         style="display: flex;align-items: flex-start;justify-content: flex-start;flex-wrap: wrap;flex-direction: row;">
         <button mat-raised-button color="primary" [style.background]="filter.code" *ngFor="let filter of filtersList" class="mr-1 mb-1"
             style="padding: 0 4px 0px 16px">
-            <small class="mr-1">{{filter.keys}}</small>
+            <small class="mr-1">{{filter.keys | uppercase}}</small>
             <mat-icon class="mat-icon-sm pt-1" (click)="removeFilter(filter)">clear</mat-icon>
         </button>
     </div>

@@ -34,7 +34,7 @@ export class ProductComponent implements OnInit {
 
   ];
   cart = [];
-  searchText=''
+  searchText:string | Array<{}>
   constructor(private dialog: MatDialog,
     private dialogService: DialogService,
     private router: Router,
@@ -55,7 +55,6 @@ export class ProductComponent implements OnInit {
   openAddUpdateProduct() {
     this.dialogService.addUpdateProduct('').subscribe((data) => {
       console.log("after close",data);
-      
       this.fetchProduct();
     })
   }

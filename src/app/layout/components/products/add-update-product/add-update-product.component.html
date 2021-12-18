@@ -53,7 +53,7 @@
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline">
                                     <mat-label>Size</mat-label>
-                                    <mat-select formControlName="size" [multiple]="true">
+                                    <mat-select formControlName="sizes" [multiple]="true">
                                         <!-- <mat-option >Select Size</mat-option> -->
                                         <mat-option *ngFor="let list of sizes" [value]='list.id'>
                                             <span>{{list.name}}</span>
@@ -66,7 +66,7 @@
                                 <div class="spacer"></div>
                                 <mat-form-field appearance="outline">
                                     <mat-label>Color</mat-label>
-                                    <mat-select formControlName="color" [multiple]="true">
+                                    <mat-select formControlName="colors" [multiple]="true">
                                         <mat-option *ngFor="let list of colors" [value]="list.id">
                                             <div class="d-flex">
                                                 <span class="color-box mr-1" [style.background]="list.code" ></span>

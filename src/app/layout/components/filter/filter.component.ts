@@ -41,10 +41,10 @@ export class FilterComponent implements OnInit, OnChanges {
   cutomerCategory = Constant.CUSTOMER_CATEGORY;
   cutomerCategoryByGender = Constant.CATEGORY_BY_GENDER;
   alphaObj = Constant.CATEGORY_BY_ALPHABET;
-  brands = BrandList.allbrands
-  sizes = DefinedSizes.all
-  colors = DefinedColors.all
-  categories = DefinedCategory.all
+  // brands = BrandList.allbrands
+  // sizes = DefinedSizes.all
+  // colors = DefinedColors.all
+  // categories = DefinedCategory.all
   items = [];
   cart = [];
   filters = new Set();
@@ -52,6 +52,10 @@ export class FilterComponent implements OnInit, OnChanges {
   customerCategoryByAlphabet = [];
   searchText='';
   searchPlaceholder='Search Brand'
+  categories: any;
+  brands: any;
+  sizes: any;
+  colors: any;
   constructor(
     private dialogService: DialogService,
     public ipcService: IPCService
@@ -63,26 +67,44 @@ export class FilterComponent implements OnInit, OnChanges {
     this.items = this.data;
   }
   ngOnInit(): void {
-    this.categories.forEach((item)=>{
-      item['searchOn'] = 'category';
-      item['type'] = SearchType.EXACT;
-      item['keys'] = item.name;
-      item['caseSensitve'] = false;
-    })
-    this.brands.forEach((item)=>{
-      item['searchOn'] = 'brand';
-      item['type'] = SearchType.EXACT;
-      item['keys'] = item.name;
-      item['caseSensitve'] = false;
-    })
-    this.colors.forEach((item)=>{
-      item['searchOn'] = 'color';
-      item['type'] = SearchType.EXACT;
-      item['keys'] = item.name;
-      item['caseSensitve'] = false;
-    })
+
     // console.table(this.categories);
+    this.getAllDropdown()
     
+  }
+
+  private getAllDropdown(){
+    this.ipcService.allConfigDropdown().then(res=>{
+      console.log("inside add update product",res);
+      let [category,brand,size,color] = res;
+      console.log('category',category.data);
+      console.log('brand',brand.data);
+      console.log('size',size.data);
+      console.log('color',color.data);
+      this.categories = category.data
+      this.brands = brand.data
+      this.sizes = size.data
+      this.colors= color.data
+
+      this.categories.forEach((item)=>{
+        item['searchOn'] = 'category';
+        item['type'] = SearchType.EXACT;
+        item['keys'] = item.name;
+        item['caseSensitve'] = false;
+      })
+      this.brands.forEach((item)=>{
+        item['searchOn'] = 'brand';
+        item['type'] = SearchType.EXACT;
+        item['keys'] = item.name;
+        item['caseSensitve'] = false;
+      })
+      this.colors.forEach((item)=>{
+        item['searchOn'] = 'color';
+        item['type'] = SearchType.EXACT;
+        item['keys'] = item.name;
+        item['caseSensitve'] = false;
+      })
+    })
   }
 
   createAlphabetFilterArray(){
