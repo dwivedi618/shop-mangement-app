@@ -1,13 +1,14 @@
-
 import { 
     Column, 
     Entity, 
     PrimaryGeneratedColumn, 
     CreateDateColumn, 
     UpdateDateColumn, 
-    ManyToOne
+    ManyToOne,
+    OneToMany
 } from "typeorm";
 import { Category } from "./category";
+import { Product } from "./product";
 
 @Entity()
 export class SubCategory {
@@ -20,6 +21,9 @@ export class SubCategory {
 
     @ManyToOne(type => Category, category => category.subCategroies)
     category: Category;
+
+    @OneToMany(type => Product, product => product.subCategory)
+    products: Product[];
 
     @CreateDateColumn()
     createdAt: Date;

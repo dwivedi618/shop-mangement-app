@@ -5,8 +5,9 @@ import {
     CreateDateColumn, 
     UpdateDateColumn, 
     OneToMany
-} from "typeorm";
-import { SubCategory } from "./sub-category";
+} from 'typeorm';
+import { SubCategory } from './sub-category';
+import { Product } from './product';
 
 @Entity()
 export class Category {
@@ -23,7 +24,10 @@ export class Category {
     @OneToMany(type => SubCategory, subCategory => subCategory.category, {
         cascade: true
     })
-    subCategroies: SubCategory []
+    subCategroies: SubCategory [];
+
+    @OneToMany(type => Product, product => product.category)
+    products: Product[];
 
     @CreateDateColumn()
     createdAt: Date;

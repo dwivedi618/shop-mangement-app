@@ -9,6 +9,7 @@ import {
       ManyToMany,
       JoinColumn,
       JoinTable,
+      ManyToOne
 } from "typeorm";
 import { Inventory } from "./inventory";
 import { Brand } from "./brand";
@@ -24,7 +25,7 @@ export class Product {
       @PrimaryGeneratedColumn()
       id: number;
       
-      @Column({ unique: true, nullable: true })
+      @Column({ nullable: true })
       name: string;
       
       @Column({ nullable: true })
@@ -57,22 +58,19 @@ export class Product {
       @Column({ nullable: true })
       stock: number;
 
-      @OneToOne(type => Category, {
+      @ManyToOne(type => Category, category => category.products, {
             eager: true
       })
-      @JoinColumn()
       category: Category;
 
-      @OneToOne(type => SubCategory, {
+      @ManyToOne(type => SubCategory, subCategory => subCategory.products, {
             eager: true
       })
-      @JoinColumn()
       subCategory: SubCategory;
 
-      @OneToOne(type => Brand, {
+      @ManyToOne(type => Brand, brand => brand.products, {
             eager: true
       })
-      @JoinColumn()
       brand: Brand;
 
       @ManyToMany(type => Color, {

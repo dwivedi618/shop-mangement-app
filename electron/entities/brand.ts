@@ -1,9 +1,11 @@
+import { Product } from "./product";
 import { 
     Column, 
     Entity, 
     PrimaryGeneratedColumn, 
     CreateDateColumn, 
-    UpdateDateColumn 
+    UpdateDateColumn,
+    OneToMany
 } from "typeorm";
 
 @Entity()
@@ -17,6 +19,9 @@ export class Brand {
 
     @Column({type: "text", nullable: true})
     image: string; 
+
+    @OneToMany(type => Product, product => product.brand)
+    products: Product[];
 
     @CreateDateColumn()
     createdAt: Date;

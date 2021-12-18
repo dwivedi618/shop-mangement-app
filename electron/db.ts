@@ -47,7 +47,6 @@ export async function customer(connection, action: string, data?: any) {
       customer.address = data.address || customer.address;
       if (data.hasOwnProperty('photo')) customer.photo = data.photo;
       cust = await repository.save(customer);
-      console.log('cuuuuussssssssttttttt', cust);
 
       return cust;
 
@@ -101,8 +100,8 @@ export async function product(connection, action: string, data?: any) {
 
   switch (action) {
     case 'create':
-      let colors: Color[];
-      let sizes: Size[];
+      let colors: Color[] = [];
+      let sizes: Size[] = [];
       data.colors.forEach(async id => colors.push(await colorRepository.findOne(id)));
       data.sizes.forEach(async id => sizes.push(await sizeRepository.findOne(id)));
       
@@ -147,7 +146,6 @@ export async function sell(connection, action: string, data?: any) {
 
   switch (action) {
     case 'create':
-      console.log('Inside create--------->>>>>>>>>>', data);
       const productRepository = connection.getRepository(Product);
       const customerRepository = connection.getRepository(Customer);
       const selledProducts: SelledProduct[] = [];

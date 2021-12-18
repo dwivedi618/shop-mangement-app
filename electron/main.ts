@@ -94,11 +94,13 @@ app.on('window-all-closed', () => {
  * Handle requests on renderer invocation
  */
 ipcMain.handle('database', async (event, arg) => {
+    const response = {
+        status: Status.SUCCESS,
+        data: null
+    }
     try {
-        const response = {
-            status: Status.SUCCESS,
-            data: null
-        }
+        console.log('Request from frontend--->>>',arg);
+
         const [item, action, data] = arg;
         switch (item) {
             case 'customer':
@@ -149,9 +151,8 @@ ipcMain.handle('database', async (event, arg) => {
         return response;
     } catch (err) {
         console.log('Error in db handler:', err);
-        console.log('Request from frontend--->>>',arg);
-        
-        throw new Error(`Request could not be resolved.\n Error: ${err}`)
+        response.status = Status.FAILURE;
+        return response;
     }
 });
 
