@@ -5,7 +5,7 @@
         <div class="spacer"></div>
         <span class="strong px-2 my-1">{{((item?.price - (item?.price*item?.discountInPercent)/100) || item?.priceAfterDiscount) | currency : 'INR'}}</span>
       </div>
-      <img class="thumbnail-lg" src="{{(item?.image || item?.item?.image) || 'assets/images/pexels-markus-winkler-3812433.jpg'}}" alt="">
+      <img class="thumbnail-lg" src="{{(item?.image || item?.item?.image) || 'assets/images/alt_product.png'}}" alt="">
       <div class="card-item-details w-100">
         <mat-list dense class="w-100">
           <mat-list-item class="text-wrap-sm">
@@ -48,7 +48,7 @@
       <div style="width: 2rem;" class="layout">
         <span class="strong">{{i+1}}</span>
       </div>
-      <img class="thumbnail-sm" src="{{(item?.image || item?.item?.image) || 'assets/images/pexels-markus-winkler-3812433.jpg'}}" alt="">
+      <img class="thumbnail-sm" src="{{(item?.image || item?.item?.image) || 'assets/images/alt_product.png'}}" alt="">
       <div class="list-view-details">
         <mat-list dense>
           <mat-list-item class=" text-wrap-sm">
@@ -81,19 +81,17 @@
         <mat-list dense>
           <mat-list-item>
             <span matLine style="color:var(--light)">Size</span>
-            <h3 matLine style="font-weight: 600;"> S,M,XL,XXL</h3>
+            <h3 matLine style="font-weight: 600;"><small *ngFor="let size of item?.sizes" class="mr-1">{{size?.name | uppercase}}</small></h3>
           </mat-list-item>
         </mat-list>
       </div>
-
       <div class="price-column">
-          <div matLine style="color:var(--light)">Color</div>
-            <div class="d-flex">
-              <div class="color-box-sm mr-1 bg-green" matTooltip="Green"></div>
-              <div class="color-box-sm mr-1 bg-dark"></div>
-              <div class="color-box-sm mr-1 bg-selected"></div>
-            </div>
-      </div>
+        <div matLine style="color:var(--light)">Color</div>
+          <div class="d-flex">
+            <div *ngFor="let color of item?.colors" class="color-box-sm mr-1 " [style.background]="color.code"></div>
+            
+          </div>
+    </div>
       
       <div class="price-column" (click)="$event.stopPropagation();">
         <mat-list dense>

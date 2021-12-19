@@ -61,16 +61,14 @@ export class AddUpdateProductComponent implements OnInit {
   ngOnInit(): void {
     this.productForm= this.fb.group({
       id : null,
-      grade : [],
       brand : [],
       colors : [],
       sizes : [],
       category : [],
+      stock:[],
       name : [],
       price : [],
-     
       productCode: [],
-      make : [],
       unit : [],
       discountInPercent : [],
       discountInRuppee : [],
@@ -109,8 +107,10 @@ export class AddUpdateProductComponent implements OnInit {
     this.productForm.patchValue({productCode : this.localData?.productCode})
     this.productForm.patchValue({category : this.localData?.category?.id})
     this.productForm.patchValue({brand : this.localData?.brand?.id as string})
-    this.productForm.patchValue({sizes : this.localData?.size?.id})
-    this.productForm.patchValue({colors : this.localData?.color?.id})
+    this.productForm.patchValue({sizes : this.localData?.sizes?.id})
+    this.productForm.patchValue({colors : this.localData?.colors?.id})
+    this.productForm.patchValue({stock : this.localData?.stock})
+
     this.productForm.patchValue({price : this.localData?.price})
     this.productForm.patchValue({unit : this.localData?.unit})
     this.productForm.patchValue({discountInPercent : this.localData?.discountInPercent})

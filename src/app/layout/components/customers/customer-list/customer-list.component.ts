@@ -27,7 +27,18 @@ export class CustomerListComponent implements OnInit {
   cutomerCategory = Constant.CUSTOMER_CATEGORY
   cutomerCategoryByGender = Constant.CATEGORY_BY_GENDER
   cutomerCategoryByAlphabet = Constant.CATEGORY_BY_ALPHABET
-  items = [];
+  items = [
+    {
+        "id": 1,
+        "name": "shivam dwivedi",
+        "photo": null,
+        "phone": "7827458618",
+        "gender": "male",
+        "address": "Bankatiya",
+        "createdAt": "2021-12-19T05:36:34.000Z",
+        "updatedAt": "2021-12-19T05:36:34.000Z"
+    }
+];
   cart = [];
   filters = new Set();
   filtersList: unknown[];

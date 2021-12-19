@@ -40,14 +40,14 @@
                                 </mat-list-item>
 
                                 <mat-list-item>
-                                    <span class="strong text-light">Grade</span>
+                                    <span class="strong text-light">Brand</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">{{localData?.grade || 'unknown'}}</span>
+                                    <span class="strong">{{localData?.brand?.name || '--'}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
-                                    <span class="strong text-light">Make</span>
+                                    <span class="strong text-light">Category</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">{{localData?.make || 'unknown'}}</span>
+                                    <span class="strong">{{localData?.category?.name || 'unknown'}}</span>
                                 </mat-list-item>
                                 <mat-list-item>
                                     <span class="strong text-light">Length in meter</span>
@@ -55,10 +55,11 @@
                                     <span class="strong">{{localData?.length || 'unknown'}}</span>
                                 </mat-list-item>
 
+                                
                                 <mat-list-item>
-                                    <span class="strong text-light">size</span>
+                                    <span class="strong text-light">Stock</span>
                                     <div class="spacer"></div>
-                                    <span class="strong">{{localData?.size || 'unknown'}}</span>
+                                    <span class="strong">{{localData?.stock || 'unknown'}}</span>
                                 </mat-list-item>
 
 

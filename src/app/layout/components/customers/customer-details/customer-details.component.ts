@@ -28,6 +28,9 @@ export interface CustomerDetails{
 export class CustomerDetailsComponent implements OnInit {
   customerForm : FormGroup
   localData: any;
+  alt_photo_male = 'assets/images/male_avatar.png';
+  alt_photo_female = 'assets/images/female_avatar.png';
+
 
   customerPurchaseHistory = []
   constructor(
@@ -38,6 +41,14 @@ export class CustomerDetailsComponent implements OnInit {
     ) {
       this.localData = data || null;
       console.log("data",data)
+      if(!this.localData.photo){
+        if(this.localData?.gender == 'FEMALE'){
+          this.localData.photo = this.alt_photo_female 
+        }else{
+          this.localData.photo = this.alt_photo_male 
+
+        }
+      }
      }
 
      ngOnInit(): void {

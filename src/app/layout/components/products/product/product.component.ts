@@ -30,9 +30,81 @@ export class ProductComponent implements OnInit {
 
   ];
   items = [
-   
-
-  ];
+    {
+        "id": 1,
+        "name": "c1 B1 S,M,XL",
+        "productCode": null,
+        "image": null,
+        "price": 10000,
+        "discountInPercent": null,
+        "discountInRuppee": null,
+        "unit": null,
+        "sellBy": null,
+        "description": "No de",
+        "length": null,
+        "stock": 5,
+        "createdAt": "2021-12-18T14:42:54.000Z",
+        "updatedAt": "2021-12-18T14:42:54.000Z",
+        "category": {
+            "id": 1,
+            "name": "C1",
+            "image": null,
+            "createdAt": "2021-12-18T14:40:22.000Z",
+            "updatedAt": "2021-12-18T14:40:22.000Z"
+        },
+        "subCategory": null,
+        "brand": {
+            "id": 1,
+            "name": "B1",
+            "image": null,
+            "createdAt": "2021-12-18T14:40:07.000Z",
+            "updatedAt": "2021-12-18T14:40:07.000Z"
+        },
+        "colors": [
+            {
+                "id": 1,
+                "name": "red",
+                "code": "#cb2525",
+                "createdAt": "2021-12-18T14:40:50.000Z",
+                "updatedAt": "2021-12-18T14:40:50.000Z"
+            },
+            {
+                "id": 2,
+                "name": "Blue",
+                "code": "#5837cd",
+                "createdAt": "2021-12-18T14:41:09.000Z",
+                "updatedAt": "2021-12-18T14:41:09.000Z"
+            },
+            {
+                "id": 3,
+                "name": "Black",
+                "code": "#000000",
+                "createdAt": "2021-12-18T14:41:24.000Z",
+                "updatedAt": "2021-12-18T14:41:24.000Z"
+            }
+        ],
+        "sizes": [
+            {
+                "id": 1,
+                "name": "S",
+                "createdAt": "2021-12-18T14:41:35.000Z",
+                "updatedAt": "2021-12-18T14:41:35.000Z"
+            },
+            {
+                "id": 2,
+                "name": "M",
+                "createdAt": "2021-12-18T14:41:42.000Z",
+                "updatedAt": "2021-12-18T14:41:42.000Z"
+            },
+            {
+                "id": 3,
+                "name": "XL",
+                "createdAt": "2021-12-18T14:41:48.000Z",
+                "updatedAt": "2021-12-18T14:41:48.000Z"
+            }
+        ]
+    }
+]
   cart = [];
   searchText:string | Array<{}>
   constructor(private dialog: MatDialog,
