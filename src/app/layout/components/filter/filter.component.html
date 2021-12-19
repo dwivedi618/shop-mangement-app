@@ -30,7 +30,7 @@
         </div>
 
         <mat-selection-list dense>
-            <mat-list-option [selected]="isFilterSelected(category)" *ngFor="let brand of brands | filter:searchText"
+            <mat-list-option [selected]="isFilterSelected(brand)" *ngFor="let brand of brands | filter:searchText"
                 (click)="onFilterSelection(brand)">
                 <small class="strong text-light">{{brand.name | uppercase}}</small>
             </mat-list-option>

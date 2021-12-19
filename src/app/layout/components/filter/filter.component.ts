@@ -1,5 +1,4 @@
 import { SearchType } from './../../models/filter';
-
 import {
   Component,
   EventEmitter,
@@ -19,7 +18,7 @@ import { DefinedCategory } from 'src/app/fakedata/categories';
 import { DefinedColors } from 'src/app/fakedata/colors';
 import { DefinedSizes } from 'src/app/fakedata/sizes';
 
-interface  Category extends DefinedCategory{
+interface  Category extends DefinedCategory {
   searchOn?: string;
   type ?: string,
   keys ?: string|[]|Number,
@@ -47,7 +46,7 @@ export class FilterComponent implements OnInit, OnChanges {
   // categories = DefinedCategory.all
   items = [];
   cart = [];
-  filters = new Set();
+  filters = new Map();
   filtersList: unknown[];
   customerCategoryByAlphabet = [];
   searchText='';
@@ -77,10 +76,10 @@ export class FilterComponent implements OnInit, OnChanges {
     this.ipcService.allConfigDropdown().then(res=>{
       console.log("inside add update product",res);
       let [category,brand,size,color] = res;
-      console.log('category',category.data);
-      console.log('brand',brand.data);
-      console.log('size',size.data);
-      console.log('color',color.data);
+      // console.log('category',category.data);
+      // console.log('brand',brand.data);
+      // console.log('size',size.data);
+      // console.log('color',color.data);
       this.categories = category.data
       this.brands = brand.data
       this.sizes = size.data
@@ -135,19 +134,19 @@ export class FilterComponent implements OnInit, OnChanges {
     //   keys : value.keys,
     //   caseSensitve : value?.caseSensitve || false,
     // }
-    this.filters.has(value)
-      ? this.filters.delete(value)
-      : this.filters.add(value);
+    this.filters.has(value.searchOn)
+      ? this.filters.get(value.searchOn).add(value.keys)
+      : this.filters.set(value.searchOn,new Set(value.keys));
     this.filtersList = Array.from(this.filters);
     console.table(this.filtersList)
   }
   removeFilter(value: Filter) {
-    this.filters.has(value) ? this.filters.delete(value) : this.filters;
+    this.filters.has(value.searchOn) ? this.filters.delete(value) : this.filters;
     this.filtersList = Array.from(this.filters);
   }
 
-  isFilterSelected(value: Filter) {
-    return this.filters.has(value) ? true : false;
+  isFilterSelected(value: Filter) {    
+    return this.filters.has(value.searchOn) ? true : false;
   }
 
   onApplyFilter() {
