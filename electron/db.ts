@@ -359,7 +359,7 @@ export async function subCategory(connection, action: string, data?: any) {
 
   switch (action) {
     case 'create':
-      data.category = await categoryRepository.finOne(data.categoryId);
+      data.category = await categoryRepository.findOne(data.categoryId);
       return repository.save(data);
 
     case 'update':
