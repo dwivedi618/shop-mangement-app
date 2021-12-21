@@ -23,9 +23,9 @@ export class Category {
 
     @OneToMany(type => SubCategory, subCategory => subCategory.category, {
         cascade: true,
-        eager:true
+        eager: true
     })
-    subCategroies: SubCategory [];
+    subCategories: SubCategory [];
 
     @OneToMany(type => Product, product => product.category)
     products: Product[];
