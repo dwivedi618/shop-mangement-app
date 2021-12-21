@@ -335,9 +335,10 @@ export async function size(connection, action: string, data?: any) {
 
 export async function category(connection, action: string, data?: any) {
   const repository = connection.getRepository(Category);
-
+  const categoryRepository = connection.getRepository(Category);
   switch (action) {
     case 'create':
+      data.category = await categoryRepository.finOne(data.categoryId);
       return repository.save(data);
 
     case 'update':
