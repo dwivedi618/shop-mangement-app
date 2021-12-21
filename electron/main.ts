@@ -62,6 +62,7 @@ async function createWindow() {
 
     win.loadURL(AppConfig.indexURL);
 
+    console.log(process.env.NODE_ENV, isDevMode);
     if( isDevMode ) {
         win.webContents.openDevTools();
         //soft reload only reload webContent
