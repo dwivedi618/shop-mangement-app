@@ -111,7 +111,7 @@ export class TakePaymentComponent implements OnInit {
     this.isSavingOrder = true;
     this.alertService.alertActionDialog('Are you sure?',Constant.PAYMENT_SUBMIT_WARNING_MSG,'Yes , Save')
     .subscribe( data => {
-      console.log("payment  -----",data);
+      console.log("payment  -----NEW ",data);
       let payment = <any>{}
       payment.amount = this.amount
       payment.sellId = this.localData?.id

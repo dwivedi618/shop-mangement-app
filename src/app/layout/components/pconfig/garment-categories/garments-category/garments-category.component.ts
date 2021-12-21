@@ -21,6 +21,7 @@ interface CategoryList extends Pcategory {
 })
 export class GarmentsCategoryComponent implements OnInit {
   newGarmentCategory: string;
+  subCategoryName : string;
 
   data = [
     { id: 1, name: 'HRX', isEditEnable: false },
@@ -60,10 +61,11 @@ export class GarmentsCategoryComponent implements OnInit {
   isEditEnable: boolean = false;
   newCategory: string;
   searchText: string;
-  treeControl = new NestedTreeControl<any>((node) => node.subCategroies);
+  treeControl = new NestedTreeControl<any>((node) => node.subCategories);
   dataSource = new MatTreeNestedDataSource<any>();
   hasChild = (_: number, node: any) =>
-    !!node.subCategroies && node.subCategroies.length > 0;
+    !!node.subCategories && node.subCategories.length > 0;
+  newSubCategory: { categoryId: any; name: any; };
   constructor(
     private alertService: AlertService,
     private ipcService: IPCService,
@@ -155,4 +157,21 @@ export class GarmentsCategoryComponent implements OnInit {
   onSearch = (searchText: string) => {
     this.searchText = searchText;
   };
+
+  onInputChange(categoryId,newSubCategory){
+    console.log("new subcategort",categoryId,newSubCategory);
+    this.newSubCategory = { categoryId : categoryId , name : newSubCategory }
+    console.log("data 1",this.newSubCategory);
+    
+  }
+
+  onSubmitSubCategory(){
+    this.ipcService.database('subCategory','create',this.newSubCategory).then(res =>{
+      if (res.status) {
+        // this.alertService.alert('Item deleted successfully', 'close');
+        this.getCategoryList();
+      }
+    })
+  }
+
 }
