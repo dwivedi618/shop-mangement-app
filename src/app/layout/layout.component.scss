@@ -68,3 +68,25 @@ box-shadow:  -20px 20px 60px #d06700,
              20px -20px 60px #ff8b00;
  }
  
+ .text-gradient {
+  // font-size: 4em;
+  font-weight: bold;
+  // text-align: center;
+  // color: darkblue;
+}
+@supports (--css: variables) {
+  .text-gradient {
+    background: linear-gradient(to right, rgb(71, 71, 71), rgb(56, 55, 56));
+    color: transparent;
+    -webkit-background-clip: text;
+            background-clip: text;
+  }
+}
+.text-gradient::-moz-selection {
+  color: white;
+  background: darkorchid;
+}
+.text-gradient::selection {
+  color: white;
+  background: darkorchid;
+}

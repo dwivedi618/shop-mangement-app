@@ -83,7 +83,7 @@
                   
               
                   
-                <mat-list *ngIf="categoryList?.length" dense class="rounded-lg w-100 py-2">
+                <!-- <mat-list *ngIf="categoryList?.length" dense class="rounded-lg w-100 py-2">
           
                     <mat-list-item *ngFor="let brand of categoryList;let i=index">
                         <div *ngIf="!brand.isEditEnable" class="d-flex align-items-center justify-content-between w-100">
@@ -113,7 +113,7 @@
                             </div>
                         </div>
                     </mat-list-item>
-                </mat-list>
+                </mat-list> -->
             </section>
             <app-data-missing-instruction *ngIf="!categoryList?.length" [(instructions)]="BRAND_MISSING">
             </app-data-missing-instruction>
