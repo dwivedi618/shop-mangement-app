@@ -2,6 +2,7 @@ import "reflect-metadata";
 import { app, BrowserWindow, ipcMain, screen, Menu} from "electron";
 import {createConnection, Connection } from "typeorm";
 import { AppConfig } from './config/app.conf';
+import * as path from 'path';
 import { 
     customer, 
     product, 
@@ -22,7 +23,7 @@ enum Status {
     SUCCESS = 1
 }
 
-let isDevMode = true;
+let isDevMode = process.env.NODE_ENV === 'dev' ? true : false;
 
 let win: BrowserWindow;
 let connection: Connection;
@@ -61,7 +62,12 @@ async function createWindow() {
 
     win.loadURL(AppConfig.indexURL);
 
-    if( isDevMode ) win.webContents.openDevTools();
+    if( isDevMode ) {
+        win.webContents.openDevTools();
+        require('electron-reload')(__dirname, {
+            electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
+          });
+    }
     // console.log('node ene',process.env.NODE_ENV);
     
     Menu.setApplicationMenu(null);
