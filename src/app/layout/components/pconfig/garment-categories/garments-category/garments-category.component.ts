@@ -60,10 +60,10 @@ export class GarmentsCategoryComponent implements OnInit {
   isEditEnable: boolean = false;
   newCategory: string;
   searchText: string;
-  treeControl = new NestedTreeControl<any>((node) => node.subCategory);
+  treeControl = new NestedTreeControl<any>((node) => node.subCategroies);
   dataSource = new MatTreeNestedDataSource<any>();
   hasChild = (_: number, node: any) =>
-    !!node.subCategory && node.subCategory.length > 0;
+    !!node.subCategroies && node.subCategroies.length > 0;
   constructor(
     private alertService: AlertService,
     private ipcService: IPCService,

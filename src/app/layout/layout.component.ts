@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceListComponent } from './components/service-list/service-list.component';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AlertService } from '../services/alert.service';
+import { ActivatedPathService } from '../services/activated-path.service';
 
 @Component({
   selector: 'app-layout',
@@ -17,7 +18,7 @@ export class LayoutComponent implements OnInit {
     { path : 'neworder',icon :'add', name : 'Sell Product' },
     // { path : 'dashboard',icon :'grid_view', name : 'Dashboard' },
     { path : 'product',icon :'dry_cleaning', name : 'Product' },
-    { path : 'inventory',icon :'inventory', name : 'Inventory' },
+    // { path : 'inventory',icon :'inventory', name : 'Inventory' },
     { path : 'customer',icon :'groups', name : 'Customer' },
     { path : 'sale',icon :'sell', name : 'Sell History' },
     { path : 'pconfig',icon :'build_circle', name : 'Configuration' },
@@ -46,6 +47,7 @@ export class LayoutComponent implements OnInit {
     private activatedRoute:ActivatedRoute,
     private alert : AlertService,
     private router : Router,
+    private activatedPathService:ActivatedPathService
     ) { 
       let links = this.primaryLinks
       this.router.events.subscribe((routerEvent) => {
@@ -55,7 +57,7 @@ export class LayoutComponent implements OnInit {
             let allPath = routerEvent.url.split('/');
             this.currentPath = allPath[allPath.length - 1] || ''
             this.beforeCurrentPath = allPath[allPath.length - 2] || ''
-
+            this.activatedPathService.setData([this.currentPath,this.beforeCurrentPath])
 
             console.log(this.currentPath);
             if(this.currentPath === 'cart'){

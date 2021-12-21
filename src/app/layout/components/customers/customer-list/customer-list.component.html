@@ -1,6 +1,6 @@
 <mat-sidenav-container class="sidenav-newsale-container">
     <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="true" position="end">
-       <app-filter [(data)]="items" (onFilter)="onApplyFilter($event)"></app-filter>
+       <!-- <app-filter [(data)]="items" (onFilter)="onApplyFilter($event)"></app-filter> -->
     </mat-sidenav>
 
     <mat-sidenav-content style="position: relative;">
@@ -39,7 +39,5 @@
         </mat-toolbar>
         <app-customer [(data)]="items"   [(view)]="isListView" (shareCart)="onCartData($event)" (onDialogClose)="onDialogClose($event)"></app-customer>
         <app-data-missing-instruction *ngIf="!items?.length" [(instructions)]="CUSTOMER_MISSING"></app-data-missing-instruction>
-
-        
     </mat-sidenav-content>
 </mat-sidenav-container>

@@ -4,7 +4,7 @@
     <div class="spacer"></div>
 </mat-toolbar>
 <mat-accordion style="margin-top: 3rem;" class="shadow">
-    <mat-expansion-panel class="shadow mat-elevation-z0">
+    <mat-expansion-panel   class="shadow mat-elevation-z0">
         <mat-expansion-panel-header>
             <small class="strong">Garments Category</small>
             <div class="spacer"></div>
@@ -20,7 +20,7 @@
             </mat-list-option>
         </mat-selection-list>
     </mat-expansion-panel>
-    <mat-expansion-panel class="shadow mat-elevation-z0">
+    <mat-expansion-panel *ngIf="isFilterAvailable('brand')" class="shadow mat-elevation-z0">
         <mat-expansion-panel-header>
             <small class="strong">Brands</small>
             <div class="spacer"></div>
@@ -36,7 +36,7 @@
             </mat-list-option>
         </mat-selection-list>
     </mat-expansion-panel>
-    <mat-expansion-panel class="shadow mat-elevation-z0">
+    <mat-expansion-panel  class="shadow mat-elevation-z0">
         <mat-expansion-panel-header>
             <small class="strong">Colors</small>
             <div class="spacer"></div>
@@ -55,7 +55,7 @@
             </mat-list-option>
         </mat-selection-list>
     </mat-expansion-panel>
-    <mat-expansion-panel class="shadow mat-elevation-z0">
+    <mat-expansion-panel  class="shadow mat-elevation-z0">
         <mat-expansion-panel-header>
             <small class="strong">Gender</small>
             <div class="spacer"></div>
@@ -68,7 +68,7 @@
             </mat-list-option>
         </mat-selection-list>
     </mat-expansion-panel>
-    <mat-expansion-panel class="shadow mat-elevation-z0">
+    <mat-expansion-panel *ngIf="isFilterAvailable('alphabet')" class="shadow mat-elevation-z0">
         <mat-expansion-panel-header>
             <small class="strong">Name Start With</small>
             <div class="spacer"></div>

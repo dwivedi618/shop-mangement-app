@@ -17,6 +17,7 @@ import { BrandList } from 'src/app/fakedata/brands';
 import { DefinedCategory } from 'src/app/fakedata/categories';
 import { DefinedColors } from 'src/app/fakedata/colors';
 import { DefinedSizes } from 'src/app/fakedata/sizes';
+import { ActivatedPathService } from 'src/app/services/activated-path.service';
 
 interface  Category extends DefinedCategory {
   searchOn?: string;
@@ -40,6 +41,10 @@ export class FilterComponent implements OnInit, OnChanges {
   cutomerCategory = Constant.CUSTOMER_CATEGORY;
   cutomerCategoryByGender = Constant.CATEGORY_BY_GENDER;
   alphaObj = Constant.CATEGORY_BY_ALPHABET;
+  filterConfig = Constant.FILTER_CONFIG.product
+  ALL_FILTERS = Constant.ALL_FILTERS
+
+  
   // brands = BrandList.allbrands
   // sizes = DefinedSizes.all
   // colors = DefinedColors.all
@@ -55,9 +60,14 @@ export class FilterComponent implements OnInit, OnChanges {
   brands: any;
   sizes: any;
   colors: any;
+  previousPath: undefined;
+  currentPath: undefined;
+  beforeCurrentPath: any;
+  productFilter: { filterOn: string; availableFilter: string[]; };
   constructor(
     private dialogService: DialogService,
-    public ipcService: IPCService
+    public ipcService: IPCService,
+    private activatedPathService : ActivatedPathService
   ) {
     this.createAlphabetFilterArray();
   }
@@ -69,6 +79,15 @@ export class FilterComponent implements OnInit, OnChanges {
 
     // console.table(this.categories);
     this.getAllDropdown()
+
+    this.activatedPathService.getData().subscribe((activePath:any)=>{
+      const [currentPath,beforeCurrentPath] = activePath;
+      this.currentPath = currentPath
+      this.beforeCurrentPath = beforeCurrentPath
+      if(this.currentPath === 'product' || this.beforeCurrentPath === 'product' || this.currentPath === 'neworder'){
+        // this.availableFilter ss= 
+      }
+    })
     
   }
 
@@ -112,7 +131,7 @@ export class FilterComponent implements OnInit, OnChanges {
     // console.log('alpha', alpha);
 
     let alphaFilter = alpha.forEach((element) => {
-      console.log('object');
+      // console.log('object');
       let obj: any = this.alphaObj;
       obj.keys = String.fromCharCode(element);
       this.customerCategoryByAlphabet.push({ ...obj });
@@ -160,5 +179,14 @@ export class FilterComponent implements OnInit, OnChanges {
     this.searchText = searchText
   }
 
+  async isFilterAvailable(selectedFilter:string){
+    const filterName = selectedFilter.toLowerCase();
+    const res = this.ALL_FILTERS.find(filter => filter.filterName = filterName);
+    // const res2 = res.canApplyOn.find(component => component == (this.currentPath || this.beforeCurrentPath));
+    // console.log("res1",res);
+    // console.log("res2",res2);
+
+    return res ? true : false;
+  }
 
 }

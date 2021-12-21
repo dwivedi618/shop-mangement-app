@@ -14,7 +14,7 @@ export class Constant {
     text2: '',
     action: '../customer',
   };
-  
+
   static PRODUCT_MISSING = {
     text1: 'Product not available!',
     text2: '',
@@ -59,42 +59,73 @@ export class Constant {
   // Filter
   static CUSTOMER_CATEGORY = [
     {
-        keys: 'New',
-        searchOn: 'date',
-        caseSensitive: false,
-        type: SearchType.SUBSTRING,
-      },
+      keys: 'New',
+      searchOn: 'date',
+      caseSensitive: false,
+      type: SearchType.SUBSTRING,
+    },
   ];
   static CATEGORY_BY_GENDER = [
     {
-     
       keys: 'Male',
       searchOn: 'gender',
       caseSensitive: false,
       type: SearchType.EXACT,
     },
     {
-      
       keys: 'Female',
       searchOn: 'gender',
       caseSensitive: false,
       type: SearchType.EXACT,
     },
     {
-  
       keys: 'Other',
       searchOn: 'gender',
       caseSensitive: false,
       type: SearchType.EXACT,
     },
   ];
-  static CATEGORY_BY_ALPHABET = 
-    {
-      keys: 'A',
-      searchOn: 'name',
-      caseSensitive: false,
-      type: SearchType.STARTWITH,
-    }
+  static CATEGORY_BY_ALPHABET = {
+    keys: 'A',
+    searchOn: 'name',
+    caseSensitive: false,
+    type: SearchType.STARTWITH,
+  };
 
-  
+  // filters configuration
+
+  static FILTER_CONFIG = {
+    product: {
+      filterOn: 'product',
+      availableFilter: ['Garments Category', 'Brands', 'Colors', 'Sizes'],
+    },
+    customer: {
+      filterOn: 'product',
+      availableFilter: ['Garments Category', 'Brands', 'Colors', 'Sizes'],
+    },
+  };
+
+  static ALL_FILTERS = [
+   
+    {
+      filterName: 'category',
+      canApplyOn: ['product', 'neworder', 'category'],
+    },
+    {
+      filterName: 'brand',
+      canApplyOn: ['product', 'neworder', 'brand'],
+    },
+    {
+      filterName: 'size',
+      canApplyOn: ['product', 'neworder', 'size'],
+    },
+    {
+      filterName: 'color',
+      canApplyOn: ['product', 'neworder', 'color'],
+    },
+    {
+      filterName: 'alphabet',
+      canApplyOn: ['product', 'neworder', 'customer','inventory'],
+    },
+  ];
 }

@@ -50,7 +50,7 @@ export class AddUpdateCategoryComponent implements OnInit {
 
   }
 
-  get subCategories() {return this.categoryForm.get('subCategoies') as FormArray}
+  get subCategories() {return this.categoryForm.get('subCategories') as FormArray}
 
   patchcategoryForm(){
     this.categoryForm.patchValue({id : this.localData?.id});
