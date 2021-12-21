@@ -64,9 +64,8 @@ async function createWindow() {
 
     if( isDevMode ) {
         win.webContents.openDevTools();
-        require('electron-reload')(__dirname, {
-            electron: path.join(__dirname, 'node_modules', '.bin', 'electron')
-          });
+        //soft reload only reload webContent
+        require('electron-reload')(__dirname)
     }
     // console.log('node ene',process.env.NODE_ENV);
     
