@@ -182,7 +182,7 @@ export async function sell(connection, action: string, data?: any) {
         selledproduct.item = product;
         selledproduct.quantity = items[i].quantity;
         selledproduct.price = product.price;
-        selledproduct.fixedDiscount = product.discountInPercent;
+        selledproduct.fixedDiscount = product.discountInPercent || 0;
         selledproduct.specialDiscount = items[i].specialDiscount;
 
         selledProducts.push(selledproduct);

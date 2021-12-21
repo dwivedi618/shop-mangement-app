@@ -19,7 +19,7 @@ export class SubCategory {
     @Column({unique: true, nullable: true})
     name: string;
 
-    @ManyToOne(type => Category, category => category.subCategroies)
+    @ManyToOne(type => Category, category => category.subCategories)
     category: Category;
 
     @OneToMany(type => Product, product => product.subCategory)
