@@ -9,6 +9,7 @@ import { BrandList } from 'src/app/fakedata/brands';
 import { DefinedSizes } from 'src/app/fakedata/sizes';
 import { DefinedColors } from 'src/app/fakedata/colors';
 import { DefinedCategory } from 'src/app/fakedata/categories';
+import { Pcategory } from 'src/app/layout/models/pcategory';
 
 
 
@@ -36,15 +37,22 @@ export class AddUpdateProductComponent implements OnInit {
   productForm : FormGroup
   localData: any;
   action: any;
+  categories : Pcategory[] =[];
+  brands: any;
+  sizes: any;
+  colors: any;
+  isViewLoading: boolean=true;
+  colorsIDs: any[];
+  sizesIDs: any[];
   // brands: { id: string; name: string; }[];
   // sizes: { id: string; name: string; }[];
   // colors: { id: string; name: string; code: string; }[];
   // garmentCategory: { id: string; name: string; }[];
   // categories: { id: string; name: string; }[];
-  brands = BrandList.allbrands
-  sizes = DefinedSizes.all
-  colors = DefinedColors.all
-  categories = DefinedCategory.all
+  // brands = BrandList.allbrands
+  // sizes = DefinedSizes.all
+  // colors = DefinedColors.all
+  // categories = DefinedCategory.all
   constructor(
     private fb: FormBuilder,
     private ipcService : IPCService,
@@ -52,9 +60,23 @@ export class AddUpdateProductComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data : Product
     ) {
       this.localData = data || null;
+       if(this.localData?.colors){
+        this.colorsIDs=[]
+        this.localData.colors.forEach(color => {
+          this.colorsIDs.push(color.id)
+        });
+      }
+      if(this.localData?.sizes){
+        this.sizesIDs=[]
+        this.localData.colors.forEach(color => {
+          this.sizesIDs.push(color.id)
+        });
+      }
       this.action = this.localData?.action || 'add';
       
       console.log("data",data,this.localData);
+      this.getAllDropdown();
+
 
      }
 
@@ -65,6 +87,7 @@ export class AddUpdateProductComponent implements OnInit {
       colors : [],
       sizes : [],
       category : [],
+      subCategory : [],
       stock:[],
       name : [],
       price : [],
@@ -78,26 +101,26 @@ export class AddUpdateProductComponent implements OnInit {
       image : []
     })
 
-    this.patchProductDataInForm()
     if(this.action == 'update'){
-      setTimeout(() => {
-      }, 0);
+      this.patchProductDataInForm();
     }
-    this.getAllDropdown();
+    setTimeout(() => {
+      this.isViewLoading = false;
+    }, 1000);
 
   }
   private getAllDropdown(){
     this.ipcService.allConfigDropdown().then(res=>{
       console.log("inside add update product",res);
-      let [category,brand,size,color] = res;
+      let [category,brand,size,color] = res ?? [];
       console.log('category',category.data);
       console.log('brand',brand.data);
       console.log('size',size.data);
       console.log('color',color.data);
-      this.categories = category.data
-      this.brands = brand.data
-      this.sizes = size.data
-      this.colors= color.data
+      this.categories = category?.data
+      this.brands = brand?.data
+      this.sizes = size?.data
+      this.colors= color?.data
     })
   }
 
@@ -106,9 +129,11 @@ export class AddUpdateProductComponent implements OnInit {
     this.productForm.patchValue({name : this.localData?.name})
     this.productForm.patchValue({productCode : this.localData?.productCode})
     this.productForm.patchValue({category : this.localData?.category?.id})
+    this.productForm.patchValue({subCategory : this.localData?.subCategory?.id})
+
     this.productForm.patchValue({brand : this.localData?.brand?.id as string})
-    this.productForm.patchValue({sizes : this.localData?.sizes?.id})
-    this.productForm.patchValue({colors : this.localData?.colors?.id})
+    this.productForm.patchValue({sizes : this.sizesIDs})
+    this.productForm.patchValue({colors : this.colorsIDs})
     this.productForm.patchValue({stock : this.localData?.stock})
 
     this.productForm.patchValue({price : this.localData?.price})
@@ -157,6 +182,17 @@ export class AddUpdateProductComponent implements OnInit {
     console.log("On image change in product ",image)
   }
 
+  getSubCategories(categoryId){
+    const selectedCategory = this.categories.find(el=> el.id == categoryId);
+    console.log("selectedCategory",selectedCategory)
+    console.log("this.categories",this.categories)
+
+    if(selectedCategory && selectedCategory.subCategories){
+      return selectedCategory.subCategories
+    }else {
+      return []
+    }
+  }
   
 }
 

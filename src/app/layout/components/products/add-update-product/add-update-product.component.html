@@ -10,7 +10,7 @@
     </button>
 </mat-toolbar>
 <div mat-dialog-content class="">
-    <div class="">
+    <div class="" *ngIf="!isViewLoading">
 
         <section class="container" style="min-height: 65vh;">
             <div style="min-height: 50vh;" class="mange-stock-tab">
@@ -29,6 +29,20 @@
                                     <mat-select formControlName="category">
                                         <mat-option value=''>Select Garment Category</mat-option>
                                         <mat-option *ngFor="let list of categories" [value]="list.id">
+                                            <span>{{list.name}}</span>
+                                        </mat-option>
+                                    </mat-select>               
+                                 </mat-form-field>                       
+                                 
+                            </mat-list-item>
+                            <mat-list-item *ngIf="productForm.value.category" >
+                                <span class="strong text-light">Garments Sub Category</span>
+                                <div class="spacer"></div>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Garments Sub Category</mat-label>
+                                    <mat-select formControlName="subCategory">
+                                        <mat-option value=''>Select Garment Category</mat-option>
+                                        <mat-option *ngFor="let list of getSubCategories(productForm.value.category)" [value]="list.id">
                                             <span>{{list.name}}</span>
                                         </mat-option>
                                     </mat-select>               
@@ -162,6 +176,9 @@
                 </div>
             </div>
         </section>
+    </div>
+    <div *ngIf="isViewLoading" class="layout" style="min-height: 65vh;">
+        <mat-spinner diameter='30'></mat-spinner>
     </div>
 
 </div>
