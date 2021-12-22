@@ -1,7 +1,7 @@
 <mat-toolbar class="bg-dark rounded-lg dialog-toolbar" style="margin: -24px -24px 24px -24px;padding: 0 .4rem;">
     <button mat-button [mat-dialog-close]="false" class="bg-dark"><span>Cancel</span></button>
     <div class="spacer"></div>
-    <small>{{action | titlecase}} Brand</small>
+    <small>{{action | titlecase}} Garment Category</small>
     <div class="spacer"></div>
     <button mat-raised-button class="bg-green" (click)="onDone()"><span>{{isLoading? 'Please wait...' :
             'Done'}}</span></button>
@@ -22,6 +22,7 @@
                         <input matInput placeholder="Ex:Sharee" formControlName="name">
                     </mat-form-field>
                     <div formArrayName="subCategories">
+                        <h3>Sub Categories</h3>
                         <div *ngFor="let subcat of subCategories.controls;let subIndex = index;">
                             <div [formGroupName]="subIndex">
                                 <mat-form-field appearance="outline" class="w-100">

@@ -8,6 +8,7 @@ import { IPCService } from 'src/app/services/ipc.service';
 import { Brand } from 'src/app/layout/models/brand';
 import { Pcategory } from 'src/app/layout/models/pcategory';
 import { subCategory } from 'electron/db';
+import { Category } from 'electron/entities/category';
 
 @Component({
   selector: 'app-add-update-category',
@@ -17,7 +18,7 @@ import { subCategory } from 'electron/db';
 export class AddUpdateCategoryComponent implements OnInit {
   categoryForm : FormGroup
   imagePreview: string;
-  localData: Brand;
+  localData: Category;
   isLoading = false
   action: any;
   constructor(
@@ -28,7 +29,7 @@ export class AddUpdateCategoryComponent implements OnInit {
     ) { 
       this.localData = data;
       this.action = data?.id ? 'update' : 'add';
-      console.log('localData brand',data,this.action);
+      console.log('localData ',data,this.action);
       
   }
 
@@ -56,6 +57,14 @@ export class AddUpdateCategoryComponent implements OnInit {
     this.categoryForm.patchValue({id : this.localData?.id});
     this.categoryForm.patchValue({name : this.localData?.name});
     this.categoryForm.patchValue({image : this.localData?.image});
+    //patch subCategories [{}]
+    this.localData.subCategories.forEach(subCat => {
+      let subCategory = this.fb.group({
+        name : subCat.name,
+        id : subCat.id,
+      })
+      this.subCategories.push(subCategory)
+    })
   }
 
   onImageChange(image : string){
