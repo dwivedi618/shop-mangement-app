@@ -72,6 +72,7 @@ import { GarmentsCategoryComponent } from './layout/components/pconfig/garment-c
 import { AddUpdateColorComponent } from './layout/components/pconfig/colors/add-update-color/add-update-color.component';
 import { AddUpdateCategoryComponent } from './layout/components/pconfig/garment-categories/add-update-category/add-update-category.component';
 import { AddUpdateSizeComponent } from './layout/components/pconfig/sizes/add-update-size/add-update-size.component';
+import { ProductFilterPipe } from './customPipes/product-filter.pipe';
 
 
 @NgModule({
@@ -134,6 +135,7 @@ import { AddUpdateSizeComponent } from './layout/components/pconfig/sizes/add-up
     AddUpdateColorComponent,
     AddUpdateCategoryComponent,
     AddUpdateSizeComponent,
+    ProductFilterPipe,
 
 
   ],

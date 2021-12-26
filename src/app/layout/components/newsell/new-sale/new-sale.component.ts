@@ -31,24 +31,200 @@ export class NewSaleComponent implements OnInit {
     { path: 'sale', icon: 'sale', name: 'Shoots' },
   
   ];
-  items = [
+  items =[
     {
-      id: 1,
-      name: "Jeans",
-      brand: null,
-      price: 897,
-      discountInPercent: 0,
-      discountInRuppee: 0,
-      unit: 'meter',
-      sellBy: false,
-      grade: "grade 1",
-      description: "no decription",
-      productCode: null,
-      make: "make 1",
-      length: null,
-      size: null,
+        "id": 1,
+        "name": "c1 B1 S,M,XL",
+        "productCode": null,
+        "image": null,
+        "price": 10000,
+        "discountInPercent": null,
+        "discountInRuppee": null,
+        "unit": null,
+        "sellBy": null,
+        "description": "No de",
+        "length": null,
+        "stock": 5,
+        "createdAt": "2021-12-18T14:42:54.000Z",
+        "updatedAt": "2021-12-18T14:42:54.000Z",
+        "category": {
+            "id": 1,
+            "name": "C1",
+            "image": null,
+            "createdAt": "2021-12-18T14:40:22.000Z",
+            "updatedAt": "2021-12-18T14:40:22.000Z",
+            "subCategories": [
+                {
+                    "id": 11,
+                    "name": "C12",
+                    "createdAt": "2021-12-22T09:38:46.000Z",
+                    "updatedAt": "2021-12-22T09:38:46.000Z"
+                },
+                {
+                    "id": 6,
+                    "name": "c11",
+                    "createdAt": "2021-12-22T05:44:18.000Z",
+                    "updatedAt": "2021-12-22T05:44:18.000Z"
+                }
+            ]
+        },
+        "subCategory": null,
+        "brand": {
+            "id": 1,
+            "name": "B1",
+            "image": null,
+            "createdAt": "2021-12-18T14:40:07.000Z",
+            "updatedAt": "2021-12-18T14:40:07.000Z"
+        },
+        "colors": [
+            {
+                "id": 1,
+                "name": "red",
+                "code": "#cb2525",
+                "createdAt": "2021-12-18T14:40:50.000Z",
+                "updatedAt": "2021-12-18T14:40:50.000Z"
+            },
+            {
+                "id": 2,
+                "name": "Blue",
+                "code": "#5837cd",
+                "createdAt": "2021-12-18T14:41:09.000Z",
+                "updatedAt": "2021-12-18T14:41:09.000Z"
+            },
+            {
+                "id": 3,
+                "name": "Black",
+                "code": "#000000",
+                "createdAt": "2021-12-18T14:41:24.000Z",
+                "updatedAt": "2021-12-18T14:41:24.000Z"
+            }
+        ],
+        "sizes": [
+            {
+                "id": 1,
+                "name": "S",
+                "createdAt": "2021-12-18T14:41:35.000Z",
+                "updatedAt": "2021-12-18T14:41:35.000Z"
+            },
+            {
+                "id": 2,
+                "name": "M",
+                "createdAt": "2021-12-18T14:41:42.000Z",
+                "updatedAt": "2021-12-18T14:41:42.000Z"
+            },
+            {
+                "id": 3,
+                "name": "XL",
+                "createdAt": "2021-12-18T14:41:48.000Z",
+                "updatedAt": "2021-12-18T14:41:48.000Z"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "red blue new sub new",
+        "productCode": null,
+        "image": null,
+        "price": 100000,
+        "discountInPercent": null,
+        "discountInRuppee": null,
+        "unit": "piece",
+        "sellBy": null,
+        "description": null,
+        "length": null,
+        "stock": 10,
+        "createdAt": "2021-12-22T16:13:31.000Z",
+        "updatedAt": "2021-12-22T16:13:31.000Z",
+        "category": {
+            "id": 3,
+            "name": "New",
+            "image": null,
+            "createdAt": "2021-12-21T16:13:18.000Z",
+            "updatedAt": "2021-12-21T16:13:18.000Z",
+            "subCategories": [
+                {
+                    "id": 9,
+                    "name": "new 4",
+                    "createdAt": "2021-12-22T06:07:37.000Z",
+                    "updatedAt": "2021-12-22T06:07:37.000Z"
+                },
+                {
+                    "id": 10,
+                    "name": "new 5",
+                    "createdAt": "2021-12-22T06:13:46.000Z",
+                    "updatedAt": "2021-12-22T06:13:46.000Z"
+                },
+                {
+                    "id": 4,
+                    "name": "new sub 5",
+                    "createdAt": "2021-12-21T17:06:41.000Z",
+                    "updatedAt": "2021-12-21T17:06:41.000Z"
+                },
+                {
+                    "id": 1,
+                    "name": "subNew",
+                    "createdAt": "2021-12-21T16:13:18.000Z",
+                    "updatedAt": "2021-12-21T16:13:18.000Z"
+                },
+                {
+                    "id": 5,
+                    "name": "vinak",
+                    "createdAt": "2021-12-22T05:37:24.000Z",
+                    "updatedAt": "2021-12-22T05:37:24.000Z"
+                }
+            ]
+        },
+        "subCategory": {
+            "id": 1,
+            "name": "subNew",
+            "createdAt": "2021-12-21T16:13:18.000Z",
+            "updatedAt": "2021-12-21T16:13:18.000Z"
+        },
+        "brand": {
+            "id": 1,
+            "name": "B1",
+            "image": null,
+            "createdAt": "2021-12-18T14:40:07.000Z",
+            "updatedAt": "2021-12-18T14:40:07.000Z"
+        },
+        "colors": [
+            {
+                "id": 1,
+                "name": "red",
+                "code": "#cb2525",
+                "createdAt": "2021-12-18T14:40:50.000Z",
+                "updatedAt": "2021-12-18T14:40:50.000Z"
+            },
+            {
+                "id": 2,
+                "name": "Blue",
+                "code": "#5837cd",
+                "createdAt": "2021-12-18T14:41:09.000Z",
+                "updatedAt": "2021-12-18T14:41:09.000Z"
+            }
+        ],
+        "sizes": [
+            {
+                "id": 1,
+                "name": "S",
+                "createdAt": "2021-12-18T14:41:35.000Z",
+                "updatedAt": "2021-12-18T14:41:35.000Z"
+            },
+            {
+                "id": 2,
+                "name": "M",
+                "createdAt": "2021-12-18T14:41:42.000Z",
+                "updatedAt": "2021-12-18T14:41:42.000Z"
+            },
+            {
+                "id": 3,
+                "name": "XL",
+                "createdAt": "2021-12-18T14:41:48.000Z",
+                "updatedAt": "2021-12-18T14:41:48.000Z"
+            }
+        ]
     }
-  ];
+]
   cart = [];
   searchText: string;
   constructor(private dialog: MatDialog,

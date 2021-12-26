@@ -9,6 +9,7 @@ import { DialogService } from 'src/app/services/dialog-service';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { BrandList } from 'src/app/fakedata/brands';
+import { Brand } from 'src/app/layout/models/brand';
 
 export interface productDetails{
   id : number,
@@ -35,7 +36,7 @@ export class AddUpdateInventoryComponent implements OnInit {
   searchText = '';
   streets: string[] = ['Champs-Élysées', 'Lombard Street', 'Abbey Road', 'Fifth Avenue'];
   filteredStreets: Observable<string[]>;
-  brands: { id: string; name: string; }[];
+  brands: Brand
 
  
 
@@ -76,7 +77,7 @@ export class AddUpdateInventoryComponent implements OnInit {
      
      
      ngOnInit(): void {
-    this.brands = BrandList.allbrands;
+    // this.brands = BrandList.allbrands;
     this.inventoryForm = this.fb.group({
       id: null,
       item : [''],

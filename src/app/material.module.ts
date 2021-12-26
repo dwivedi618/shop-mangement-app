@@ -27,6 +27,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [],
   imports: [
@@ -57,7 +58,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatTooltipModule,
     MatAutocompleteModule,
     MatTreeModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   
   ],
   exports: [
@@ -88,7 +89,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatTooltipModule,
     MatAutocompleteModule,
     MatTreeModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ScrollingModule
+
   ]
 })
 export class MaterialModule { }

@@ -37,7 +37,7 @@
 
             <table mat-table [dataSource]="dataSource1" multiTemplateDataRows class="mat-elevation-z0">
                 <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-                    <th mat-header-cell *matHeaderCellDef>  </th>
+                    <th mat-header-cell *matHeaderCellDef> </th>
                     <td mat-cell *matCellDef="let element"> <button *ngIf="column != 'action'" mat-icon-button>
                             <mat-icon class="mat-icon-rtl-mirror">
                                 {{expandedElement === element ? 'expand_more' : 'chevron_right'}}
@@ -56,9 +56,19 @@
                     <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
                         <div class="example-element-detail"
                             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                            
+
                             <div class="example-element-description">
-                                <span class="strong text-uppercase">Sub Categories of {{element.name}}</span>
+                                <div class="d-flex align-items-center">
+                                    <span class="strong text-uppercase">Sub Categories of {{element.name}}</span>
+                                    <div *ngIf="!element.isEditEnable">
+                                        <button mat-button class="text-green ml-1"
+                                            matTooltip="Add Sub Category of {{element.name}} "
+                                            (click)="element.isEditEnable = true;subCategoryName=''">
+                                            <mat-icon class="mat-icon-sm pt-1">add_box</mat-icon> <small class="mr-1">Add
+                                            more</small>
+                                        </button>
+                                    </div>
+                                </div>
                                 <div *ngFor="let subcat of element.subCategories" class="py-1">
                                     <span class="text-light">{{subcat.name | titlecase}}</span>
                                 </div>
@@ -66,23 +76,20 @@
                             This padding value depends on the mat-icon-button width.  -->
 
                                 <div style="font-size: 12px;" class="w-100" (click)="$event.stopPropagation()">
-                                    <div *ngIf="element.isEditEnable" class="mt-2 d-flex align-items-center w-100 mat-form-field-margin-0">
+                                    <div *ngIf="element.isEditEnable"
+                                        class="mt-2 d-flex align-items-center w-100 mat-form-field-margin-0">
                                         <mat-form-field appearance="outline" class="">
                                             <mat-label>Add Sub Category of {{element.name}}</mat-label>
                                             <input matInput type="text" autocomplete="off" [(ngModel)]="subCategoryName"
                                                 (change)="onInputChange(element.id,$event.target.value)">
                                         </mat-form-field>
                                         <div class="spacer"></div>
-                                        <button mat-button class="bg-ultra-light mr-1 ml-1" (click)="element.isEditEnable = false;">cancel</button>
+                                        <button mat-button class="bg-ultra-light mr-1 ml-1"
+                                            (click)="element.isEditEnable = false;">cancel</button>
                                         <button mat-button class="bg-green"
                                             (click)="onSubmitSubCategory();element.isEditEnable = false;">Save</button>
                                     </div>
-                                    <div *ngIf="!element.isEditEnable" class="pb-4" >
-                                        <button mat-button class="bg-green" (click)="element.isEditEnable = true;subCategoryName=''">
-                                            <mat-icon class="mat-icon-sm pt-1">add_box</mat-icon> <small>Add Sub
-                                                Category of<strong> {{element.name}} </strong></small>
-                                        </button>
-                                    </div>
+                                    
                                 </div>
 
                                 <!-- <span class="example-element-description-attribution"> -- Wikipedia </span> -->

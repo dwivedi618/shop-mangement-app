@@ -38,7 +38,9 @@ export class ItemComponent implements OnInit, OnChanges {
   @Input() searchText;
 
 
-  items = [];
+  items = [
+    
+  ];
   isListView: Boolean;
   cart = [];
   receivedSearchText: any;

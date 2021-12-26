@@ -18,6 +18,7 @@ import { DefinedCategory } from 'src/app/fakedata/categories';
 import { DefinedColors } from 'src/app/fakedata/colors';
 import { DefinedSizes } from 'src/app/fakedata/sizes';
 import { ActivatedPathService } from 'src/app/services/activated-path.service';
+import { FilterService } from 'src/app/services/filter.service';
 
 interface  Category extends DefinedCategory {
   searchOn?: string;
@@ -45,21 +46,21 @@ export class FilterComponent implements OnInit, OnChanges {
   ALL_FILTERS = Constant.ALL_FILTERS
 
   
-  // brands = BrandList.allbrands
-  // sizes = DefinedSizes.all
-  // colors = DefinedColors.all
-  // categories = DefinedCategory.all
+  brands = BrandList.allbrands
+  sizes = DefinedSizes.all
+  colors = DefinedColors.all
+  categories = DefinedCategory.all
   items = [];
   cart = [];
   filters = new Map();
-  filtersList: unknown[];
+  filtersList: any[] = [];
   customerCategoryByAlphabet = [];
-  searchText='';
+  searchText : string | [] | Map<string,Set<string>> = '';
   searchPlaceholder='Search Brand'
-  categories: any;
-  brands: any;
-  sizes: any;
-  colors: any;
+  // categories: any;
+  // brands: any;
+  // sizes: any;
+  // colors: any;
   previousPath: undefined;
   currentPath: undefined;
   beforeCurrentPath: any;
@@ -67,7 +68,8 @@ export class FilterComponent implements OnInit, OnChanges {
   constructor(
     private dialogService: DialogService,
     public ipcService: IPCService,
-    private activatedPathService : ActivatedPathService
+    private activatedPathService : ActivatedPathService,
+    private filterService : FilterService
   ) {
     this.createAlphabetFilterArray();
   }
@@ -88,6 +90,25 @@ export class FilterComponent implements OnInit, OnChanges {
         // this.availableFilter ss= 
       }
     })
+
+    // this.categories.forEach((item)=>{
+    //   item['searchOn'] = 'category';
+    //   item['type'] = SearchType.EXACT;
+    //   item['keys'] = item.name;
+    //   item['caseSensitve'] = false;
+    // })
+    // this.brands.forEach((item)=>{
+    //   item['searchOn'] = 'brand';
+    //   item['type'] = SearchType.EXACT;
+    //   item['keys'] = item.name;
+    //   item['caseSensitve'] = false;
+    // })
+    // this.colors.forEach((item)=>{
+    //   item['searchOn'] = 'colors';
+    //   item['type'] = SearchType.EXACT;
+    //   item['keys'] = item.name;
+    //   item['caseSensitve'] = false;
+    // })
     
   }
 
@@ -117,7 +138,7 @@ export class FilterComponent implements OnInit, OnChanges {
         item['caseSensitve'] = false;
       })
       this.colors.forEach((item)=>{
-        item['searchOn'] = 'color';
+        item['searchOn'] = 'colors';
         item['type'] = SearchType.EXACT;
         item['keys'] = item.name;
         item['caseSensitve'] = false;
@@ -147,33 +168,37 @@ export class FilterComponent implements OnInit, OnChanges {
   }
 
   onFilterSelection(value: Filter) {
-    // const filterObj : Filter = {
-    //   searchOn : value.searchOn,
-    //   type : value.type || SearchType.SUBSTRING,
-    //   keys : value.keys,
-    //   caseSensitve : value?.caseSensitve || false,
-    // }
     this.filters.has(value.searchOn)
-      ? this.filters.get(value.searchOn).add(value.keys)
-      : this.filters.set(value.searchOn,new Set(value.keys));
-    this.filtersList = Array.from(this.filters);
-    console.table(this.filtersList)
+    ? (this.filters.get(value.searchOn).has(value.keys) 
+      ? this.filters.get(value.searchOn).delete(value.keys) 
+      : this.filters.get(value.searchOn).add(value.keys))
+    : this.filters.set(value.searchOn,new Set([value.keys]))
+    
+    let allFilterKeys = [];
+    this.filters.forEach(values => allFilterKeys = [...allFilterKeys,...values])
+    this.filtersList = allFilterKeys
+    console.log(this.filtersList);
+    this.filterService.setData(this.filters);
+    
+
   }
   removeFilter(value: Filter) {
     this.filters.has(value.searchOn) ? this.filters.delete(value) : this.filters;
     this.filtersList = Array.from(this.filters);
   }
 
-  isFilterSelected(value: Filter) {    
-    return this.filters.has(value.searchOn) ? true : false;
+  isFilterSelected(value: string) {    
+    return this.filtersList.find(item=>item == value) ? true : false
   }
 
   onApplyFilter() {
+    // this.searchText = this.filters
     this.onFilter.emit(this.items);
   }
   onResetFilter() {
     this.filters.clear();
-    this.filtersList = null;
+    this.filterService.setData(null);
+    this.filtersList = [];
   }
   onSearch(searchText){
     this.searchText = searchText

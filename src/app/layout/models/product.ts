@@ -8,19 +8,19 @@ export interface Product{
       price: number;
       discountPercent : number;
       discountAmount : number;
-      unit : string;
-      sellBy : boolean;
-      description: string;
-      productCode : string ;
+      unit? : string;
+      sellBy ?: boolean;
+      description?: string;
+      productCode ?: string ;
       length : string;
       image?: any;  
-      color?: Pcolor;
+      colors?: Pcolor;
       brand?: Brand;
       sizes?: Psize;
       category?: Pcategory;
-      gender : string;
-      primaryColour : string; 
-      colorVariantAvailable : Boolean | string;
+      gender? : string;
+      primaryColour? : string; 
+      colorVariantAvailable ?: Boolean | string;
       season? : string
       
 }

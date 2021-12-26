@@ -2,7 +2,7 @@
     <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="true" position="end">
         <mat-toolbar class="shadow" style="position: absolute;top: 0;z-index: 5;background: white;">
             <div class="spacer"></div>
-            <small>Order Bill</small>
+            <small>Bill</small>
             <div class="spacer"></div>
         </mat-toolbar>
         <div class="d-flex flex-column" style="margin-top: 3rem;">
@@ -39,12 +39,12 @@
 
             <mat-accordion class="shadow" style="position: relative;width: inherit;">
                 <mat-expansion-panel class="mat-elevation-z0">
-                    <mat-expansion-panel-header>
+                    <mat-expansion-panel-header matTooltip="Discount on Total Amount">
                         <div class="spacer"></div>
                         <small>Apply Discount</small>
                         <div class="spacer"></div>
                     </mat-expansion-panel-header>
-
+                    <p class="text-thin"><mat-icon class="mat-icon-sm pt-1 mr-1">info</mat-icon>Discount On Total Amount</p>
                     <mat-form-field class="mr-1" appearance="outline" style="font-size: 10px;width: 48%;">
                         <mat-label>Discount In %</mat-label>
                         <input matInput type="text" placeholder="%" [(ngModel)]="discountInPercent"
@@ -99,6 +99,8 @@
 
     <mat-sidenav-content style="position: relative;">
         <mat-toolbar class="bg-white shadow" style="position: absolute;top:0">
+            <small class="text-green" >Billing Items<span class="text-ultra-light px-2" id="count"></span></small>
+
             <!-- <div class="layout w-100">
                 <app-search (onSearch)="getSearchText($event)"></app-search>
             </div> -->

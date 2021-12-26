@@ -39,6 +39,13 @@ export class LayoutComponent implements OnInit {
     { path : 'pconfig/color',icon :'palette', name : 'Color' },
     { path : 'pconfig/size',icon :'format_size', name : 'Size' }
   ] 
+
+  newSellLinks = [
+    { path : 'dashboard',icon :'keyboard_arrow_left', name : 'Exit Sell' },
+    { path : 'neworder',icon :'add', name : 'Sell Product' },
+  ] 
+
+
   currentPath: string;
   beforeCurrentPath: string;
 
@@ -67,6 +74,9 @@ export class LayoutComponent implements OnInit {
             }
             else if(this.currentPath === 'pconfig' || this.beforeCurrentPath === 'pconfig'){
               this.primaryLinks = this.pconfigLinks
+            }
+            else if(this.currentPath === 'neworder' || this.beforeCurrentPath === 'neworder'){
+              this.primaryLinks = this.newSellLinks
             }
             else{
               this.primaryLinks = links

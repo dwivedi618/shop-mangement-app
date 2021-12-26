@@ -63,7 +63,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 }
 .shadow-1{
     border-radius: 4px;
-    box-shadow: 0 12px 18px 2px rgba(34,0,51,.04),0 6px 22px 4px rgba(7,48,114,.12),0 6px 10px -4px rgba(14,13,26,.12);
+    box-shadow: 0 12px 18px 2px rgba(34,0,51,.04),0 6px 22px 4px rgba(7,48,114,.12),0 6px 10px -4px rgba(14,13,26,.12)!important;
 }
 .activeLink{
     font-weight: 200!important;
@@ -122,10 +122,13 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 }
 .bg-white{
     
-    background: var(--white);
+    background: var(--white)!important;
 }
 .text-light{
     color: var(--light);
+}
+.text-green{
+    color: var(--green);
 }
 .text-ultra-light{
     color: var(--light);
@@ -528,7 +531,7 @@ input[type="color"]::-webkit-color-swatch {
     border-radius: 4px;
 }
 .color-box-sm{
-    width: 1rem;
-    height: 1rem;
+    width: .8rem;
+    height: .8rem;
     border-radius: 4px; 
 }

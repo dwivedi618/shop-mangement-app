@@ -12,6 +12,10 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { FilterService } from 'src/app/services/filter.service';
+import { Product } from 'src/app/layout/models/product';
+import { AlertService } from 'src/app/services/alert.service';
+import { IPCService } from 'src/app/services/ipc.service';
 
 
 export interface CardItem {
@@ -38,12 +42,18 @@ export class ProductItemComponent implements OnInit,OnChanges {
 
 
 
-
+  showInfo : boolean = true;
   items = [];
   isListView: Boolean;
   cart = [];
   receivedSearchText: any;
-  constructor(private dialog : MatDialog,private dialogService : DialogService) {}
+  filter: Map<string, Set<string>>;
+  filterQuery: Map<string, Set<string>>;
+  constructor(private dialog : MatDialog,
+    private dialogService : DialogService,
+    private alertService : AlertService,
+    private ipcService : IPCService,
+    private filterService:FilterService) {}
   ngOnChanges() {
     this.isListView = this.view;
     this.items = this.data;
@@ -58,6 +68,10 @@ export class ProductItemComponent implements OnInit,OnChanges {
     this.receivedSearchText = this.searchText;
 
     // console.log("data",this.data, this.isListView)
+    this.filterService.getData().subscribe((filter:Map<string,Set<string>>)=>{
+      this.filterQuery = filter
+    })
+    setTimeout(()=>{ this.showInfo = false },5000)
   }
 
   onSelectItem(selectedItem) {
@@ -79,6 +93,23 @@ export class ProductItemComponent implements OnInit,OnChanges {
     selectedItem.action = 'update'
     this.dialogService.addUpdateProduct(selectedItem).subscribe(result=>{
       this.onDialogClose.emit(result)
+    })
+  }
+
+  onDelete = product =>{
+    const data = product; 
+    let deleteItem = ()=>{
+      this.ipcService.database('product','delete',data)
+      .then(res=>{
+        if(res.status){
+          this.alertService.alert('Item deleted successfully','close');
+          this.items = this.items.filter(item => item.id != product.id)
+        }
+      })
+    }
+    this.alertService.alertActionDialog('Delete','Are you sure ?','Yes! Delete')
+    .subscribe(result=>{
+      result ? deleteItem() : '';
     })
   }
 }

@@ -1,10 +1,15 @@
 
 import { Component, OnInit } from '@angular/core';
+import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Constant } from 'src/app/layout/constant/constant';
+import { Filter } from 'src/app/layout/models/filter';
+import { Product } from 'src/app/layout/models/product';
 import { DialogService } from 'src/app/services/dialog-service';
+import { FilterService } from 'src/app/services/filter.service';
 import { IPCService } from 'src/app/services/ipc.service';
+import { isArray } from 'util';
 
 @Component({
   selector: 'app-product',
@@ -21,14 +26,6 @@ export class ProductComponent implements OnInit {
   filterOption: any
   value: any;
   isListView = false;
-  garmentsCategory = [
-    { path: 'activity', icon: 'grid_view', name: 'Saree' },
-    { path: 'chats', icon: 'dry_cleaning', name: 'Pants' },
-    { path: 'calls', icon: 'inventory', name: 'Shirts' },
-    { path: 'groups', icon: 'groups', name: 'Shoes' },
-    { path: 'sale', icon: 'sale', name: 'Shoots' },
-
-  ];
   items = [
     {
         "id": 1,
@@ -50,7 +47,21 @@ export class ProductComponent implements OnInit {
             "name": "C1",
             "image": null,
             "createdAt": "2021-12-18T14:40:22.000Z",
-            "updatedAt": "2021-12-18T14:40:22.000Z"
+            "updatedAt": "2021-12-18T14:40:22.000Z",
+            "subCategories": [
+                {
+                    "id": 11,
+                    "name": "C12",
+                    "createdAt": "2021-12-22T09:38:46.000Z",
+                    "updatedAt": "2021-12-22T09:38:46.000Z"
+                },
+                {
+                    "id": 6,
+                    "name": "c11",
+                    "createdAt": "2021-12-22T05:44:18.000Z",
+                    "updatedAt": "2021-12-22T05:44:18.000Z"
+                }
+            ]
         },
         "subCategory": null,
         "brand": {
@@ -103,6 +114,110 @@ export class ProductComponent implements OnInit {
                 "updatedAt": "2021-12-18T14:41:48.000Z"
             }
         ]
+    },
+    {
+        "id": 2,
+        "name": "red blue new sub new",
+        "productCode": null,
+        "image": null,
+        "price": 100000,
+        "discountInPercent": null,
+        "discountInRuppee": null,
+        "unit": "piece",
+        "sellBy": null,
+        "description": null,
+        "length": null,
+        "stock": 10,
+        "createdAt": "2021-12-22T16:13:31.000Z",
+        "updatedAt": "2021-12-22T16:13:31.000Z",
+        "category": {
+            "id": 3,
+            "name": "New",
+            "image": null,
+            "createdAt": "2021-12-21T16:13:18.000Z",
+            "updatedAt": "2021-12-21T16:13:18.000Z",
+            "subCategories": [
+                {
+                    "id": 9,
+                    "name": "new 4",
+                    "createdAt": "2021-12-22T06:07:37.000Z",
+                    "updatedAt": "2021-12-22T06:07:37.000Z"
+                },
+                {
+                    "id": 10,
+                    "name": "new 5",
+                    "createdAt": "2021-12-22T06:13:46.000Z",
+                    "updatedAt": "2021-12-22T06:13:46.000Z"
+                },
+                {
+                    "id": 4,
+                    "name": "new sub 5",
+                    "createdAt": "2021-12-21T17:06:41.000Z",
+                    "updatedAt": "2021-12-21T17:06:41.000Z"
+                },
+                {
+                    "id": 1,
+                    "name": "subNew",
+                    "createdAt": "2021-12-21T16:13:18.000Z",
+                    "updatedAt": "2021-12-21T16:13:18.000Z"
+                },
+                {
+                    "id": 5,
+                    "name": "vinak",
+                    "createdAt": "2021-12-22T05:37:24.000Z",
+                    "updatedAt": "2021-12-22T05:37:24.000Z"
+                }
+            ]
+        },
+        "subCategory": {
+            "id": 1,
+            "name": "subNew",
+            "createdAt": "2021-12-21T16:13:18.000Z",
+            "updatedAt": "2021-12-21T16:13:18.000Z"
+        },
+        "brand": {
+            "id": 1,
+            "name": "B1",
+            "image": null,
+            "createdAt": "2021-12-18T14:40:07.000Z",
+            "updatedAt": "2021-12-18T14:40:07.000Z"
+        },
+        "colors": [
+            {
+                "id": 1,
+                "name": "red",
+                "code": "#cb2525",
+                "createdAt": "2021-12-18T14:40:50.000Z",
+                "updatedAt": "2021-12-18T14:40:50.000Z"
+            },
+            {
+                "id": 2,
+                "name": "Blue",
+                "code": "#5837cd",
+                "createdAt": "2021-12-18T14:41:09.000Z",
+                "updatedAt": "2021-12-18T14:41:09.000Z"
+            }
+        ],
+        "sizes": [
+            {
+                "id": 1,
+                "name": "S",
+                "createdAt": "2021-12-18T14:41:35.000Z",
+                "updatedAt": "2021-12-18T14:41:35.000Z"
+            },
+            {
+                "id": 2,
+                "name": "M",
+                "createdAt": "2021-12-18T14:41:42.000Z",
+                "updatedAt": "2021-12-18T14:41:42.000Z"
+            },
+            {
+                "id": 3,
+                "name": "XL",
+                "createdAt": "2021-12-18T14:41:48.000Z",
+                "updatedAt": "2021-12-18T14:41:48.000Z"
+            }
+        ]
     }
 ]
   cart = [];
@@ -110,10 +225,52 @@ export class ProductComponent implements OnInit {
   constructor(private dialog: MatDialog,
     private dialogService: DialogService,
     private router: Router,
-    private ipcService: IPCService
+    private ipcService: IPCService,
+    private filterService : FilterService
   ) { }
   ngOnInit(): void {
     this.fetchProduct();
+    // this.filterService.getData().subscribe((filter:Map<string,Set<string>>) =>{
+    //   console.log("filter",filter);
+    //   if(!filter){
+    //     this.fetchProduct();
+    //     return 
+    //   }
+    //   let itemList = this.items;
+    //   let filteredList = [];
+    //   itemList.forEach(item => {
+    //     let product = item
+    //     let filterMap = filter;
+    //     filterMap.forEach((values,key)=>{
+    //       let foundkeyValue : Array<string> = [];
+    //       if(Array.isArray(product[key])){
+    //         let allKeyValue = product[key] as Array<{}>;
+    //         allKeyValue.forEach((element:{})=>foundkeyValue.push(element['name']))
+    //         console.log("isArray",foundkeyValue)
+    //       }else { 
+    //         foundkeyValue.push(product[key].name)
+    //         // foundkeyValue = Array.from(product[key].name)
+    //         console.log("converting to isArray",foundkeyValue);
+    //       }
+    //       let itemSearchOn = new Set(foundkeyValue);
+          
+    //       // console.log(`typeof  is ${typeof product[key]}`,product[key])
+    //       // foundkeyValue = product[key].name ;
+    //       // console.log(`searching ${foundkeyValue} in key ${key} of values ${values}`);
+
+    //       // one filter 'key' has many 'values'
+    //       values.forEach((value:string) => {
+    //         if(itemSearchOn.has(value)){
+    //           filteredList.push(item);
+    //           console.log(`found ${value}`,item)
+    //           return
+    //         }       
+    //       });
+    //     })
+       
+    //   });
+    //   this.items = filteredList
+    // })
   }
 
   private fetchProduct() {

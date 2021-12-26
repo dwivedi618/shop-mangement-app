@@ -15,6 +15,16 @@
                 <p matLine [class.activeLink]="rla.isActive" class="text-gradient"> {{link.name | uppercase}}</p>
             </a>
         </mat-nav-list>
+        <mat-nav-list dense style="padding-top:0">
+            <a *ngIf="this.currentPath === 'cart'" mat-list-item  routerLink="./neworder" class="layout" 
+                routerLinkActive="bg-mygradient-secondary" #rla="routerLinkActive" >
+                <div matListIcon >
+                    <mat-icon  [class.activeLink]="rla.isActive">keyboard_arrow_left</mat-icon>
+    
+                </div>
+                    <p matLine [class.activeLink]="rla.isActive" class="text-gradient"> Exit Cart</p>
+            </a>
+        </mat-nav-list>
         <div class="spacer"></div>
         <figure *ngIf="this.currentPath === 'cart'" class="m-0 p-0">
             <img class="" style="width: inherit;" src="assets/images/onlineshopping.svg" alt=""
@@ -22,20 +32,20 @@
         </figure>
         <div *ngIf="this.currentPath === 'cart'" class="d-flex flex-column w-100 text-light" >
             <mat-list dense style="font-weight: 200!important;">
-                <mat-list-item>
-                    <mat-icon matListIcon >checked</mat-icon>
+                <mat-list-item class="text-green">
+                    <mat-icon matListIcon >check_circle_outline</mat-icon>
                     <p matLine > Adjust Item</p>
                 </mat-list-item>
                 <mat-list-item>
-                    <mat-icon matListIcon >checked</mat-icon>
+                    <mat-icon matListIcon >check_circle_outline</mat-icon>
                     <p matLine > Add customer</p>
                 </mat-list-item>
                 <mat-list-item>
-                    <mat-icon matListIcon >checked</mat-icon>
+                    <mat-icon matListIcon >pending</mat-icon>
                     <p matLine > Take payment</p>
                 </mat-list-item>
                 <mat-list-item>
-                    <mat-icon matListIcon >checked</mat-icon>
+                    <mat-icon matListIcon >pending</mat-icon>
                     <p matLine > Finish</p>
                 </mat-list-item>
             </mat-list>
@@ -48,9 +58,9 @@
                         height="250">
                 </figure>
                 <div class="d-flex flex-column">
-                    <span class="strong">R.K. JWELLERS <span
+                    <span class="strong">R.P. JWELLERS <span
                             >&</span></span>
-                    <small style="font-size: .7rem;">KHUSI SAREE COLLECTION</small>
+                    <small style="font-size: .7rem;">KHUSHI SAREE COLLECTION</small>
                 </div>
             </div>
         </div>

@@ -36,10 +36,10 @@ const routes: Routes = [
       { path: 'customer', component: CustomerListComponent, data: { breadcrumb: 'Customer', icon: 'groups' } },
       { path: 'sale', component: SellListComponent, data: { breadcrumb: 'Sale', icon: 'sell' } },
       {
-        path: 'neworder', component: NewOrderlayoutComponent, data: { breadcrumb: 'New Order', icon: 'add', },
+        path: 'neworder', component: NewOrderlayoutComponent, data: { breadcrumb: 'New Sell', icon: 'add', },
         children: [
           { path: '', component: NewSaleComponent },
-          { path: 'neworder', component: NewSaleComponent, data: { breadcrumb: 'New Order', icon: 'add', } },
+          { path: 'neworder', component: NewSaleComponent, data: { breadcrumb: 'New Sell', icon: 'add', } },
           { path: 'cart', component: CartComponent, data: { breadcrumb: 'Cart', icon: 'shopping_cart' } },
         ]
       },
