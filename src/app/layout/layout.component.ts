@@ -42,7 +42,7 @@ export class LayoutComponent implements OnInit {
 
   newSellLinks = [
     { path : 'dashboard',icon :'keyboard_arrow_left', name : 'Exit Sell' },
-    { path : 'neworder',icon :'add', name : 'Sell Product' },
+    // { path : 'neworder',icon :'add', name : 'Sell Product' },
   ] 
 
 

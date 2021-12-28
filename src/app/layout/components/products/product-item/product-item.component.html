@@ -33,17 +33,9 @@
 </section>
 
 <section *ngIf="!isListView" class="items-container-table-view">
-  <mat-card *ngIf="showInfo" style="height: 5rem;padding: 0;position: relative;" class="p-0  item-list-view shadow-1">
-    <img class="thumbnail-background" style="height: inherit;"  src="assets/images/wallpaper/pexels-eberhard-grossgasteiger-1612351.jpg" alt="">
-    <div style="position: absolute;top: 20%;" class="d-flex w-100  ">
-        <mat-icon style="color: ivory;margin-left: 1rem;">info</mat-icon>
-        <p>Manage Your Product Details,Price,Stock </p>
-      <div class="spacer"></div>
-      <button mat-icon-button style="color: ivory;" (click)="showInfo = false">
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
-  </mat-card>     
+  
+  <app-page-info [(pageInfo)]="pageInfo"></app-page-info>
+
   <div *ngFor="let item of items|filter:searchText | productFilter:filterQuery ;let i=index;">
     <article class="item-list-view shadow bg-white" (click)="openProductItemDetails(item)">
       <div style="width: 2rem;" class="layout">

@@ -13,6 +13,8 @@
 
             </div>
                 <p matLine [class.activeLink]="rla.isActive" class="text-gradient"> {{link.name | uppercase}}</p>
+                <mat-icon *ngIf="link.path == 'pconfig' || link.path == 'settings'" matTooltip="{{link.path == 'pconfig'? 'category | brand | color | size' : 'appearance | account'}}">chevron_right</mat-icon>
+
             </a>
         </mat-nav-list>
         <mat-nav-list dense style="padding-top:0">

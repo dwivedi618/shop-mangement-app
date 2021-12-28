@@ -43,6 +43,7 @@ export class ProductItemComponent implements OnInit,OnChanges {
 
 
   showInfo : boolean = true;
+  pageInfo : string = 'To create product you must first enter garments category,brand,colors and sizes into the system. This page allows you to add, edit and delete product.'
   items = [];
   isListView: Boolean;
   cart = [];
@@ -71,7 +72,6 @@ export class ProductItemComponent implements OnInit,OnChanges {
     this.filterService.getData().subscribe((filter:Map<string,Set<string>>)=>{
       this.filterQuery = filter
     })
-    setTimeout(()=>{ this.showInfo = false },5000)
   }
 
   onSelectItem(selectedItem) {

@@ -19,6 +19,7 @@ interface Brands extends Brand{
 export class BrandComponent implements OnInit,OnChanges,AfterViewInit {
   @ViewChildren('someVar') filteredItems;
   filterMetadata = { count: 0 };
+  isListView = false;
 
   count = 0
   count1 = 0
@@ -156,5 +157,9 @@ export class BrandComponent implements OnInit,OnChanges,AfterViewInit {
 
   onSearch = (searchText:string)=>{
     return this.searchText = searchText
+  }
+  onDialogClose(data){
+    console.log("after close**********************",data);
+      this.getBrandList();
   }
 }

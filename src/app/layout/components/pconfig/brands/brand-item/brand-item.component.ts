@@ -1,3 +1,4 @@
+
 import { MatDialog } from '@angular/material/dialog';
 import {
   Component,
@@ -9,13 +10,10 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { ItemDetailsComponent } from '../../newsell/item-details/item-details.component';
 import { DialogService } from 'src/app/services/dialog-service';
 import { IPCService } from 'src/app/services/ipc.service';
-import { Constant } from '../../../constant/constant';
-import { Customer } from '../../../models/customer';
-import { AddUpdateCustomerComponent } from '../add-update-customer/add-update-customer.component';
 import { AlertService } from 'src/app/services/alert.service';
+import { AddUpdateBrandComponent } from '../add-update-brand/add-update-brand.component';
 
 export interface CardItem {
   id: number;
@@ -25,11 +23,11 @@ export interface CardItem {
   mrp: any;
 }
 @Component({
-  selector: 'app-customer',
-  templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.scss']
+  selector: 'app-brand-item',
+  templateUrl: './brand-item.component.html',
+  styleUrls: ['./brand-item.component.scss']
 })
-export class CustomerComponent implements OnInit ,OnChanges{
+export class BrandItemComponent implements OnInit, OnChanges {
 
   
   @ViewChild('decreamentbtn') decreamentbtn;
@@ -40,7 +38,7 @@ export class CustomerComponent implements OnInit ,OnChanges{
   @Output() onDialogClose  = new EventEmitter<any>();
   items = [];
   isListView: Boolean;
-  pageInfo = 'Mange customer '
+  pageInfo = 'Mange brands '
   actionOnCustomerSelection ;
   customerSelection = [];
   constructor(
@@ -69,7 +67,7 @@ export class CustomerComponent implements OnInit ,OnChanges{
   openAddUpdateCustomer(selectedCustomer){
     let customer = selectedCustomer
     customer.action = 'update'
-    this.dialogService.checkCustomer(AddUpdateCustomerComponent,customer).subscribe(data=>{
+    this.dialogService.checkCustomer(AddUpdateBrandComponent,customer).subscribe(data=>{
       console.log("customer update",data);
       this.onDialogClose.emit(data)
     })

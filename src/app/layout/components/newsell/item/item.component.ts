@@ -41,6 +41,7 @@ export class ItemComponent implements OnInit, OnChanges {
   items = [
     
   ];
+  pageInfo : string = 'To create a bill, add product to cart , add your customer and take payment'
   isListView: Boolean;
   cart = [];
   receivedSearchText: any;

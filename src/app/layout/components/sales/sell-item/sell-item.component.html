@@ -5,7 +5,7 @@
           <div class="spacer"></div>
           <span class="strong px-2 my-1" >{{item?.mrp | currency : 'INR'}}</span>
         </div>
-        <img class="thumbnail-lg" src="{{item?.image || 'assets/images/cool-background.png'}}" alt="">
+        <img class="thumbnail-lg" src="{{item?.image || 'assets/images/3dicons/wallet.png'}}" alt="">
         <div class="card-item-details w-100">
           <mat-list dense class="w-100">
             <mat-list-item class="text-wrap-sm">
@@ -31,12 +31,13 @@
   </section>
   
   <section *ngIf="!isListView" class="items-container-table-view">
+    <app-page-info [(pageInfo)]="pageInfo"></app-page-info>
     <div *ngFor="let item of items;let i=index;">
       <article class="item-list-view shadow bg-white"   (click)="openProductItemDetails(item)">
         <div style="width: 2rem;" class="layout">
           <span class="strong">{{i+1}}</span>
         </div>
-        <img class="thumbnail-sm" src="{{item?.image || 'assets/images/cool-background.png'}}" alt="">
+        <img class="thumbnail-sm" src="{{item?.image || 'assets/images/3dicons/wallet.png'}}" alt="">
         <div class="list-view-details">
           <mat-list dense>
             <mat-list-item class="text-wrap-sm">
@@ -52,7 +53,7 @@
         <div class="price-column">
           <mat-list dense>
             <mat-list-item>
-              <span matLine style="color:var(--light)">Customer</span>
+              <span matLine style="color:var(--light)">Sold To</span>
               
               <h3 matLine style="font-weight: 600;"> 
                 <span class="text-light">{{item?.customer?.name | titlecase}}</span> 
@@ -73,12 +74,27 @@
           </mat-list>
         </div>
         <div class="table-column" (click)="$event.stopPropagation();">
+          <div class="d-flex align-items-center">
+            <div class="spacer"></div>
+            <button mat-icon-button class="rounded-lg bg-ultra-light" matTooltip="Edit | View | Delete" [matMenuTriggerFor]="menu">
+              <mat-icon class="mat-icon-sm pt-0">more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="onSelectItem(item);">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item  (click)="openProductItemDetails(item)">
+                <mat-icon>moving</mat-icon>
+                <span class="pr-4">View Details</span>
+              </button>
+              <button mat-menu-item (click)="onDelete(item)">
+                <mat-icon>delete</mat-icon>
+                <span>Remove</span>
+              </button>
+            </mat-menu>
+          </div>
   
-          <button mat-button class="bg-ultra-light"  (click)="onSelectItem(item);">
-            <small>Manage</small>
-            <!-- <mat-icon class="mat-icon-sm pt-1">dry_cleaning</mat-icon> -->
-          </button>
-         
         </div>
       </article>
     </div>

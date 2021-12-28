@@ -13,6 +13,8 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { IPCService } from 'src/app/services/ipc.service';
+import { AlertService } from 'src/app/services/alert.service';
 
 
 export interface CardItem {
@@ -37,11 +39,16 @@ export class SellItemComponent implements OnInit,OnChanges {
 
 
 
-
+  showInfo : boolean = true;
+  pageInfo : string = 'Sell history , Garment , sold to which customer recollect payment due,check receipt'
   items = [];
   isListView: Boolean;
   cart = [];
-  constructor(private dialog : MatDialog,private dialogService : DialogService) {}
+  constructor(private dialog : MatDialog,
+    private dialogService : DialogService,
+    private ipcService: IPCService,
+    private alertService : AlertService
+    ) {}
   ngOnChanges() {
     this.isListView = this.view;
     this.items = this.data;
@@ -86,6 +93,23 @@ export class SellItemComponent implements OnInit,OnChanges {
     selectedItem.cartItem = selectedItem.selledProducts
     this.dialogService.openTakePayment(selectedItem).subscribe(result=>{
       this.onDialogClose.emit(result)
+    })
+  }
+
+  onDelete = selectedItem =>{
+    const data = selectedItem; 
+    let deleteItem = ()=>{
+      this.ipcService.database('sell','delete',data)
+      .then(res=>{
+        if(res.status){
+          this.alertService.alert('Item deleted successfully','close');
+          this.items = this.items.filter(item => item.id != data.id)
+        }
+      })
+    }
+    this.alertService.alertActionDialog('Delete','Are you sure ?','Yes! Delete')
+    .subscribe(result=>{
+      result ? deleteItem() : '';
     })
   }
 }
