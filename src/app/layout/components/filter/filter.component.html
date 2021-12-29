@@ -15,7 +15,7 @@
 
         <mat-selection-list dense>
             <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport" style="height: 30vh;">
-                <mat-list-option  *cdkVirtualFor="let category of categories | filter:searchText"
+                <mat-list-option  *cdkVirtualFor="let category of categories | filter:searchText" [selected]="isFilterSelected(category.name)"
                     (click)="onFilterSelection(category)">
                     <small class=" text-thin text-uppercase">{{category.name | uppercase}}</small>
                 </mat-list-option>
@@ -33,7 +33,7 @@
 
         <mat-selection-list dense>
             <cdk-virtual-scroll-viewport appendOnly itemSize="50" class="example-viewport" style="height: 30vh;">
-            <mat-list-option  *ngFor="let brand of brands | filter:searchText"
+            <mat-list-option  *ngFor="let brand of brands | filter:searchText" [selected]="isFilterSelected(brand.name)"
                 (click)="onFilterSelection(brand)">
                 <small class="text-uppercase text-thin">{{brand.name | uppercase}}</small>
             </mat-list-option>

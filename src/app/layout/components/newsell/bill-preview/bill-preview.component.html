@@ -25,8 +25,8 @@
                                 <td></td>
                                 <td class="w-50" align="right">
                                     <div style="text-align: right;">
-                                        <span class="strong">R.K. JWELLERS <span>&</span></span><br>
-                                        <small style="font-size: .7rem;">KHUSI SAREE COLLECTION</small>
+                                        <span class="strong">R.P. JWELLERS <span>&</span></span><br>
+                                        <small style="font-size: .7rem;">KHUSHI SAREE COLLECTION</small>
                                     </div>
 
                                 </td>
@@ -96,7 +96,7 @@
                             </thead>
                             <tbody>
                                 <tr align="center" *ngFor="let item of localData?.cartItem">
-                                    <td align="left">{{item?.item?.grade || item?.item?.make || item.name }}</td>
+                                    <td align="left">{{(item?.item?.name || item?.item?.category?.name || item.name) | titlecase}}</td>
                                     <td>{{item?.quantity }}</td>
                                     <td align="left">
                                         <span style="margin-left: 20%;"> 
