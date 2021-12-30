@@ -6,21 +6,25 @@ export interface Product{
       readonly id : number;
       name: string;
       price: number;
-      discountPercent : number;
-      discountAmount : number;
+      discountInPercent : number;
+      discountInRuppee : number;
       unit? : string;
       sellBy ?: boolean;
       description?: string;
       productCode ?: string ;
       length : string;
       image?: any;  
-      colors?: Pcolor;
+      colors?: Pcolor[];
       brand?: Brand;
-      sizes?: Psize;
+      sizes?: Psize[];
       category?: Pcategory;
       gender? : string;
       primaryColour? : string; 
       colorVariantAvailable ?: Boolean | string;
-      season? : string
+      season? : string;
+      stock?:number;
+      subCategory:any;
+      createdAt?:string | Date;
+      updatedAt?:string | Date;
       
 }

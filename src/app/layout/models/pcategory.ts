@@ -3,4 +3,6 @@ export interface Pcategory{
     name: string;
     image?:string;
     subCategories?:Array<{}>;
+    createdAt?:string | Date;
+    updatedAt?:string | Date;
 }

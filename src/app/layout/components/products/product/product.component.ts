@@ -1,15 +1,15 @@
 
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Constant } from 'src/app/layout/constant/constant';
-import { Filter } from 'src/app/layout/models/filter';
 import { Product } from 'src/app/layout/models/product';
 import { DialogService } from 'src/app/services/dialog-service';
 import { FilterService } from 'src/app/services/filter.service';
 import { IPCService } from 'src/app/services/ipc.service';
-import { isArray } from 'util';
+
 
 @Component({
   selector: 'app-product',
@@ -22,11 +22,11 @@ export class ProductComponent implements OnInit {
     text2 : Constant.PRODUCT_MISSING_INS2,
     action : '../product'
   }
-  
+
   filterOption: any
   value: any;
   isListView = false;
-  items = [
+  items:Product[] = [
     {
         "id": 1,
         "name": "c1 B1 S,M,XL",
@@ -222,7 +222,11 @@ export class ProductComponent implements OnInit {
 ]
   cart = [];
   searchText:string | Array<{}>
-  constructor(private dialog: MatDialog,
+  filterQuery: Map<string, Set<string>>;
+  itemsCopy:Product[] = [];
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private dialog: MatDialog,
     private dialogService: DialogService,
     private router: Router,
     private ipcService: IPCService,
@@ -230,53 +234,40 @@ export class ProductComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.fetchProduct();
-    // this.filterService.getData().subscribe((filter:Map<string,Set<string>>) =>{
-    //   console.log("filter",filter);
-    //   if(!filter){
-    //     this.fetchProduct();
-    //     return 
-    //   }
-    //   let itemList = this.items;
-    //   let filteredList = [];
-    //   itemList.forEach(item => {
-    //     let product = item
-    //     let filterMap = filter;
-    //     filterMap.forEach((values,key)=>{
-    //       let foundkeyValue : Array<string> = [];
-    //       if(Array.isArray(product[key])){
-    //         let allKeyValue = product[key] as Array<{}>;
-    //         allKeyValue.forEach((element:{})=>foundkeyValue.push(element['name']))
-    //         console.log("isArray",foundkeyValue)
-    //       }else { 
-    //         foundkeyValue.push(product[key].name)
-    //         // foundkeyValue = Array.from(product[key].name)
-    //         console.log("converting to isArray",foundkeyValue);
-    //       }
-    //       let itemSearchOn = new Set(foundkeyValue);
-          
-    //       // console.log(`typeof  is ${typeof product[key]}`,product[key])
-    //       // foundkeyValue = product[key].name ;
-    //       // console.log(`searching ${foundkeyValue} in key ${key} of values ${values}`);
+    this.filterService.getData().subscribe((filter:Map<string,Set<string>>)=>{
+      this.filterQuery = filter;
+      if(!filter){ 
+        return this.items = this.itemsCopy;
+        console.log("clear filter",filter);
+      }
+      this.filterService.applyFilter(this.itemsCopy,filter);
+    })
+    this.filterService.getFilteredList().subscribe((filteredList:Product[]) =>{
+      console.log("itemfilteredList product",filteredList);
+      this.items = filteredList
+    })
+    
+    this.breakpointObserver.observe([
+      '(max-width: 1168px)'
+        ]).subscribe(result => {
+          if (result.matches) {
+            console.log("media Query Matches");
+            
+            this.isListView = true
+          } else {
+            // if necessary:
+            console.log("media Query Matches Not Matched")
 
-    //       // one filter 'key' has many 'values'
-    //       values.forEach((value:string) => {
-    //         if(itemSearchOn.has(value)){
-    //           filteredList.push(item);
-    //           console.log(`found ${value}`,item)
-    //           return
-    //         }       
-    //       });
-    //     })
+          }
+        });
        
-    //   });
-    //   this.items = filteredList
-    // })
   }
 
   private fetchProduct() {
     this.ipcService.database('product', 'fetch', '').then((res) => {
       if(res.status){
         this.items = res.data;
+        this.itemsCopy = res.data;
         console.log("ftech product", res);
       }
     })

@@ -7,17 +7,21 @@
       </div>
       <img class="thumbnail-lg" src="{{(item?.image || item?.item?.image) || 'assets/images/alt_product.png'}}" alt="">
       <div class="card-item-details w-100">
-        <mat-list dense class="w-100">
-          <mat-list-item class="text-wrap-sm">
-            <h3 matLine> {{item?.name}} </h3>
-            <p matLine class="">
-              <small> {{item?.code}} </small>
-              <small class="">{{item?.description}} </small>
-            </p>
+        <mat-list dense>
+          <mat-list-item class=" text-wrap-sm">
+            <h3 matLine> {{(item?.name || item?.item?.name) | titlecase}} </h3>
+            <div matLine class="" style="color: var(--light);">
+              <span matLine class="text-thin text-white">Size: <small *ngFor="let size of item?.sizes" class="mr-1">{{size?.name |
+                uppercase}}</small></span>
+              <div class="d-flex" matTooltip="Colors">
+                <div *ngFor="let color of (item?.colors || item?.item?.colors)" class="color-box-sm mr-1" [style.background]="color.code">
+                </div>
+              </div>
+            </div>
           </mat-list-item>
         </mat-list>
       </div>
-      <mat-toolbar style="padding: 0 5px;" [class.bg-selected]="isAddedToCart(item)"
+      <mat-toolbar style="padding: 0 5px;" [class.bg-selected]="isAddedToCart(item)" class="bg-white"
         (click)="$event.stopPropagation();">
         <div class="spacer"></div>
         <button mat-button class="bg-ultra-light w-100" *ngIf="!isAddedToCart(item)" (click)="onSelectItem(item)">
@@ -55,10 +59,10 @@
           <mat-list-item class=" text-wrap-sm">
             <h3 matLine> {{(item?.name || item?.item?.name) | titlecase}} </h3>
             <div matLine class="" style="color: var(--light);">
-              <span> {{item?.code}}</span>
-              <span class="">{{item?.description}} </span>
+              <span matLine class="text-thin">Size: <small *ngFor="let size of item?.sizes" class="mr-1">{{size?.name |
+                uppercase}}</small></span>
               <div class="d-flex" matTooltip="Colors">
-                <div *ngFor="let color of (item?.colors || item?.item?.colors)" class="color-box-sm mr-1 " [style.background]="color.code">
+                <div *ngFor="let color of (item?.colors || item?.item?.colors)" class="color-box-sm mr-1" [style.background]="color.code">
                 </div>
               </div>
             </div>
@@ -69,7 +73,7 @@
       <div class="price-column">
         <mat-list dense>
           <mat-list-item>
-            <span matLine style="color:var(--light)">Garment Category</span>
+            <span matLine style="color:var(--light)" class="text-uppercase text-thin">Category</span>
             <h3 matLine style="font-weight: 600;">  {{(item.category?.name || item?.item?.category?.name) | titlecase}}</h3>
           </mat-list-item>
         </mat-list>
@@ -77,36 +81,29 @@
       <div class="price-column">
         <mat-list dense>
           <mat-list-item>
-            <span matLine style="color:var(--light)">Brand</span>
+            <span matLine style="color:var(--light)" class="text-uppercase text-thin">Brand</span>
             <h3 matLine style="font-weight: 600;">  {{(item.brand?.name || item?.item?.brand?.name) | titlecase}}</h3>
           </mat-list-item>
         </mat-list>
       </div>
-      <div class="price-column">
-        <mat-list dense>
-          <mat-list-item>
-            <span matLine style="color:var(--light)">Size</span>
-            <h3 matLine style="font-weight: 600;"><small *ngFor="let size of (item?.item?.sizes || item?.sizes)" class="mr-1">{{(size?.name || item?.size?.name) | uppercase}}</small></h3>
-          </mat-list-item>
-        </mat-list>
-      </div>
-
-      
-      <div class="price-column" (click)="$event.stopPropagation();">
+     
+      <!-- <div class="price-column" (click)="$event.stopPropagation();">
         <mat-list dense>
           <mat-list-item>
             <span matLine style="color:var(--light)">Discount</span>
             <h3 matLine style="font-weight: 600;"> {{(item?.discountInPercent || item?.item?.discountInPercent)}}% | {{((item?.price*item.discountInPercent)/100) || ((item?.item?.price*item?.item?.discountInPercent)/100) | currency : 'INR'}}</h3>
           </mat-list-item>
         </mat-list>
-      </div>
+      </div> -->
       <div class="price-column" (click)="$event.stopPropagation();">
         <mat-list dense>
           <mat-list-item>
-            <span matLine style="color:var(--light)">Price</span>
+            <!-- <span matLine style="color:var(--light)">Price</span> -->
             <h3 matLine style="font-weight: 600;"> 
-              <del class="text-light text-thin">{{item.price | currency : 'INR'}}</del> 
+              <!-- <del class="text-light text-thin">{{item.price | currency : 'INR'}}</del>  -->
               <span matLine class="">{{((item?.price - (item?.discountInRuppee)) || item?.priceAfterDiscount) | currency : 'INR'}}</span>
+              <span class="text-uppercase text-thin "> {{((item?.discountInPercent || item?.item?.discountInPercent) || '0')}}%  OFF </span>
+
             </h3>
           </mat-list-item>
         </mat-list>

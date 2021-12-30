@@ -178,7 +178,7 @@ export class FilterComponent implements OnInit, OnChanges {
     this.filters.forEach(values => allFilterKeys = [...allFilterKeys,...values])
     this.filtersList = allFilterKeys
     console.log(this.filtersList);
-    this.filterService.setData(this.filters);
+    // this.filterService.setData(this.filters);
     
 
   }
@@ -193,6 +193,9 @@ export class FilterComponent implements OnInit, OnChanges {
 
   onApplyFilter() {
     // this.searchText = this.filters
+    // this.items = this.items
+    this.filterService.setData(this.filters);
+
     this.onFilter.emit(this.items);
   }
   onResetFilter() {
