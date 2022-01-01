@@ -104,8 +104,8 @@ export async function product(connection, action: string, data?: any) {
       let colors: Color[] = [];
       let sizes: Size[] = [];
       let product: Product;
-      data.colors.forEach(async id => colors.push(await colorRepository.findOne(id)));
-      data.sizes.forEach(async id => sizes.push(await sizeRepository.findOne(id)));
+      data.colors && data.colors.forEach(async id => colors.push(await colorRepository.findOne(id)));
+      data.sizes && data.sizes.forEach(async id => sizes.push(await sizeRepository.findOne(id)));
       
       if(action === 'update'){
         product = await productRepository.findOne(data.id)
@@ -119,8 +119,8 @@ export async function product(connection, action: string, data?: any) {
       product.discountInPercent = data.discountInPercent;
       product.discountInRuppee = data.discountInRuppee;
       product.stock = data.stock;
-      product.colors = colors;
-      product.sizes = sizes;
+      product.colors = colors.length > 0? colors: null ;
+      product.sizes = sizes.length > 0? sizes: null;
       product.brand = await brandRepository.findOne(data.brand);
       product.category = await categoryRepository.findOne(data.category);
       product.subCategory = await subCategoryRepository.findOne(data.subCategory);
