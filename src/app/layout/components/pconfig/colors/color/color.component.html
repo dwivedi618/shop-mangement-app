@@ -2,29 +2,7 @@
 <mat-sidenav-container class="sidenav-newsale-container">
     <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="true" position="end">
         <!-- <app-filter [(data)]="colors" ></app-filter> -->
-        <h3></h3>
-        <!-- <div *ngIf="!isNewAddEnable" class="py-2 mb-2">
-            <button mat-raised-button class="bg-dark w-100" (click)="isNewAddEnable = true;">
-                <mat-icon class="mat-icon-sm pt-1">add</mat-icon>
-                <small>Add Brand</small>
-            </button>
-        </div> -->
-        
-    
-        <div *ngIf="isNewAddEnable" class="inline-edit__form d-flex shadow rounded-lg mb-2"
-            style="position: relative;align-items: flex-start;justify-content: space-around;min-width: 50vw;">
-            <div class="p-5 w-100 bg-dark rounded-lg d-flex justify-content-between align-items-center">
-                <mat-form-field appearance="outline" color="accent" class="w-75" style="font-size: 12px;">
-                    <mat-label>Brand</mat-label>
-                    <input matInput type="text" [(ngModel)]="newBrand" placeholder="eg:Duke,HRX,Wrogn">
-                </mat-form-field>
-                <div style="float: right;">
-                    <button mat-button (click)="isNewAddEnable = false;"><small>Cancel</small></button>
-                    <button mat-raised-button class="bg-green" (click)="onNewBrandSave()"><small>Save</small></button>
-                </div>
-            </div>
-    
-        </div>
+       
     </mat-sidenav>
 
     <mat-sidenav-content style="position: relative;">
@@ -32,7 +10,9 @@
             <h3>Colors<small class="text-ultra-light px-2" id="count"></small></h3>
             <span class="spacer"></span>
             <app-search  (onSearch)="onSearch($event)"></app-search>
-            
+            <button mat-icon-button class="mx-2 rounded-lg" (click)="isListView = !isListView">
+                <mat-icon class="mat-icon-sm pt-0">{{isListView ? 'view_list' : 'grid_view'}}</mat-icon>
+            </button>
             <button mat-raised-button class="ml-1 rounded-lg bg-green" (click)="onOpenDialog()">
                 <mat-icon class="mat-icon-sm pt-1">add_box</mat-icon>
                 <small>Add Color</small>
@@ -40,8 +20,9 @@
            
         </mat-toolbar>
            
+        <app-color-item [(data)]="colors"   [(view)]="isListView" (onDialogClose)="onDialogClose($event)"></app-color-item>
           
-            <section class="items-container grid-view">
+            <!-- <section class="items-container grid-view">
                 <mat-list *ngIf="colors?.length" dense class=" rounded-lg w-100 py-2">
                     
                     <mat-list-item *ngFor="let color of colors|filter : searchText;let i=index">
@@ -83,7 +64,7 @@
                         </div>
                     </mat-list-item>
                 </mat-list>
-            </section>
+            </section> -->
             <app-data-missing-instruction *ngIf="!colors?.length" [(instructions)]="COLOR_MISSING">
             </app-data-missing-instruction>
         

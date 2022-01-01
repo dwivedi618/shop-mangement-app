@@ -1,4 +1,5 @@
 
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -24,7 +25,10 @@ export class CartComponent implements OnInit {
   discountInPercent: number;
   cartAmount: number;
   finalPayableAmount: number
-  constructor(private dialog: MatDialog, private dialogService: DialogService,private router : Router) { }
+  constructor(private dialog: MatDialog, 
+    private dialogService: DialogService,
+    private router : Router,
+    private breakpointObserver: BreakpointObserver) { }
   ngOnInit(): void {
     console.log("NG ON IN IT TTTTTTTTTTTTTTT");
 
@@ -35,6 +39,21 @@ export class CartComponent implements OnInit {
     console.log("load cart from local storage", loadCart)
 
     // this.onTakePayment()
+    this.breakpointObserver.observe([
+      '(max-width: 1168px)'
+        ]).subscribe(result => {
+          if (result.matches) {
+            console.log("media Query Matches");
+            
+            this.isListView = true
+          } else {
+            // if necessary:
+            this.isListView = false
+
+            console.log("media Query Matches Not Matched")
+
+          }
+        });
   }
   checkCustomer() {
     let data = <any>{action : 'add'};

@@ -1,5 +1,4 @@
 
-
 import { MatDialog } from '@angular/material/dialog';
 import {
   Component,
@@ -14,7 +13,7 @@ import {
 import { DialogService } from 'src/app/services/dialog-service';
 import { IPCService } from 'src/app/services/ipc.service';
 import { AlertService } from 'src/app/services/alert.service';
-import { AddUpdateSizeComponent } from '../add-update-size/add-update-size.component';
+import { AddUpdateColorComponent } from '../add-update-color/add-update-color.component';
 
 export interface CardItem {
   id: number;
@@ -24,11 +23,11 @@ export interface CardItem {
   mrp: any;
 }
 @Component({
-  selector: 'app-size-item',
-  templateUrl: './size-item.component.html',
-  styleUrls: ['./size-item.component.scss']
+  selector: 'app-color-item',
+  templateUrl: './color-item.component.html',
+  styleUrls: ['./color-item.component.scss']
 })
-export class SizeItemComponent implements OnInit ,OnChanges{
+export class ColorItemComponent implements OnInit ,OnChanges{
 
   
   @ViewChild('decreamentbtn') decreamentbtn;
@@ -39,7 +38,7 @@ export class SizeItemComponent implements OnInit ,OnChanges{
   @Output() onDialogClose  = new EventEmitter<any>();
   items = [];
   isListView: Boolean;
-  pageInfo = 'Mange sizes '
+  pageInfo = 'Mange colors '
   actionOnCustomerSelection ;
   customerSelection = [];
   constructor(
@@ -68,7 +67,7 @@ export class SizeItemComponent implements OnInit ,OnChanges{
   openAddUpdateCustomer(selectedCustomer){
     let customer = selectedCustomer
     customer.action = 'update'
-    this.dialogService.checkCustomer(AddUpdateSizeComponent,customer).subscribe(data=>{
+    this.dialogService.checkCustomer(AddUpdateColorComponent,customer).subscribe(data=>{
       console.log("customer update",data);
       this.onDialogClose.emit(data)
     })
@@ -107,3 +106,4 @@ export class SizeItemComponent implements OnInit ,OnChanges{
   
   
 }
+

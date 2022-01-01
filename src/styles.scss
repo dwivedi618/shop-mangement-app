@@ -202,16 +202,22 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     padding: 0 12px;
 }
 .px-3{
-    padding: 0 18px;
+    padding: 0 18px!important;
 }
 .py-1{
-    padding: 6px 0;
+    padding: 6px 0!important;
 }
 .py-4{
-    padding: 24px 0;
+    padding: 24px 0!important;
 }
 .p-2{
-    padding: 12px;
+    padding: 12px!important;
+}
+.p-3{
+    padding: 18px!important;
+}
+.p-5{
+    padding: 30px!important;
 }
 .pb-0{
     padding-bottom: 0px!important;

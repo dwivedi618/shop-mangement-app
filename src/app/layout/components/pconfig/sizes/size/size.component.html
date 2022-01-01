@@ -10,6 +10,9 @@
         <mat-toolbar class="bg-white shadow" style="position: absolute;top:0">  
             <h3>Sizes<small class="text-ultra-light px-2" id="count"></small></h3>
             <span class="spacer"></span>
+            <button mat-icon-button class="mx-2 rounded-lg" (click)="isListView = !isListView">
+                <mat-icon class="mat-icon-sm pt-0">{{isListView ? 'view_list' : 'grid_view'}}</mat-icon>
+            </button>
             <app-search  (onSearch)="onSearch($event)"></app-search>
             <button mat-raised-button class="ml-1 rounded-lg bg-green" (click)="onOpenDialog()">
                 <mat-icon class="mat-icon-sm pt-1">add_box</mat-icon>
@@ -17,7 +20,7 @@
             </button>
         </mat-toolbar>
            
-          
+<!--           
             <section class="items-container grid-view">
                 <mat-list *ngIf="garmentSizeList?.length" dense class="rounded-lg w-100 py-2">
                     <mat-list-item *ngFor="let brand of garmentSizeList | filter:searchText;let i=index">
@@ -35,7 +38,9 @@
                         
                     </mat-list-item>
                 </mat-list>
-            </section>
+            </section> -->
+        <app-size-item [(data)]="garmentSizeList"   [(view)]="isListView" (onDialogClose)="onDialogClose($event)"></app-size-item>
+
             <app-data-missing-instruction *ngIf="!garmentSizeList?.length" [(instructions)]="SIZE_MISSING">
             </app-data-missing-instruction>
         

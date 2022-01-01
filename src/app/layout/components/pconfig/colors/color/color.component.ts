@@ -22,14 +22,64 @@ interface Colors extends Pcolor{
 export class ColorComponent implements OnInit {
   COLOR_MISSING = Constant.COLOR_MISSING
   newColorCode : string
-  
+  isListView : boolean = false;
   data= [
     { id: 1 , name : 'Orange Red',code :'#EABABB',isEditEnable : false},
     { id: 2 , name : 'Red',code :'#fbb000',isEditEnable : false},
     { id: 3 , name : 'white',code :'#cccccc',isEditEnable : false},
 
   ]
-  colors : Colors[] = [];
+  colors : Colors[] = [
+    {
+        "id": 1,
+        "name": "red",
+        "code": "#cb2525",
+        "createdAt": "2021-12-18T14:40:50.000Z",
+        "updatedAt": "2021-12-18T14:40:50.000Z"
+    },
+    {
+        "id": 2,
+        "name": "Blue",
+        "code": "#5837cd",
+        "createdAt": "2021-12-18T14:41:09.000Z",
+        "updatedAt": "2021-12-18T14:41:09.000Z"
+    },
+    {
+        "id": 3,
+        "name": "Black",
+        "code": "#000000",
+        "createdAt": "2021-12-18T14:41:24.000Z",
+        "updatedAt": "2021-12-18T14:41:24.000Z"
+    },
+    {
+        "id": 4,
+        "name": "Green",
+        "code": "#00a853",
+        "createdAt": "2021-12-26T16:38:54.000Z",
+        "updatedAt": "2021-12-26T16:38:54.000Z"
+    },
+    {
+        "id": 5,
+        "name": "Brown",
+        "code": "#ad775e",
+        "createdAt": "2021-12-26T16:39:13.000Z",
+        "updatedAt": "2021-12-26T16:39:13.000Z"
+    },
+    {
+        "id": 6,
+        "name": "Yellow",
+        "code": "#f5d400",
+        "createdAt": "2021-12-26T16:39:51.000Z",
+        "updatedAt": "2021-12-26T16:39:51.000Z"
+    },
+    {
+        "id": 7,
+        "name": "Orange",
+        "code": "#f78318",
+        "createdAt": "2021-12-26T16:40:22.000Z",
+        "updatedAt": "2021-12-26T16:40:22.000Z"
+    }
+];
   isNewAddEnable : Boolean = false;
   isEditEnable : boolean = false;
   colorCode: string = 'rgba(210, 105, 30, 0)';//no color or transparent
@@ -128,6 +178,10 @@ export class ColorComponent implements OnInit {
   }
   onSearch = (searchText:string)=>{
     this.searchText = searchText
+  }
+  onDialogClose(data){
+    console.log("after close**********************",data);
+      this.getColorList();
   }
 }
 

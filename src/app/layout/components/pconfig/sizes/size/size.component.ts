@@ -21,7 +21,9 @@ interface GarmentSize extends Psize{
 })
 export class SizeComponent implements OnInit {
   SIZE_MISSING = Constant.SIZE_MISSING
-  newGarmentSize : string
+  newGarmentSize : string;
+  isListView : boolean = false;
+
   
   data= [
     { id: 1 , name : 'HRX',isEditEnable : false},
@@ -36,7 +38,32 @@ export class SizeComponent implements OnInit {
 
  
   ]
-  garmentSizeList : GarmentSize[] = [];
+  garmentSizeList : GarmentSize[] = [
+    {
+        "id": 1,
+        "name": "S",
+        "createdAt": "2021-12-18T14:41:35.000Z",
+        "updatedAt": "2021-12-18T14:41:35.000Z"
+    },
+    {
+        "id": 2,
+        "name": "M",
+        "createdAt": "2021-12-18T14:41:42.000Z",
+        "updatedAt": "2021-12-18T14:41:42.000Z"
+    },
+    {
+        "id": 3,
+        "name": "XL",
+        "createdAt": "2021-12-18T14:41:48.000Z",
+        "updatedAt": "2021-12-18T14:41:48.000Z"
+    },
+    {
+        "id": 4,
+        "name": "All Size",
+        "createdAt": "2021-12-26T19:35:00.000Z",
+        "updatedAt": "2021-12-26T19:35:00.000Z"
+    }
+];
   isNewAddEnable : Boolean = false;
   isEditEnable : boolean = false;
   searchText='';
@@ -129,6 +156,11 @@ export class SizeComponent implements OnInit {
   }
   onSearch = (searchText:string)=>{
     this.searchText = searchText
+  }
+
+  onDialogClose(data){
+    console.log("after close**********************",data);
+      this.getGarmentSizeList();
   }
 }
 

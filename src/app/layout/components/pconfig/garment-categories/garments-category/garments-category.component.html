@@ -23,18 +23,12 @@
             <h3>Garment Category<small class="text-ultra-light px-2" id="count"></small></h3>
             <span class="spacer"></span>
             <app-search (onSearch)="onSearch($event)"></app-search>
-
             <button mat-raised-button class="ml-1 rounded-lg bg-green" (click)="onOpenDialog({})">
                 <mat-icon class="mat-icon-sm pt-1">add_box</mat-icon>
                 <small>Add Garment Category</small>
             </button>
-
         </mat-toolbar>
-
-
         <section class="items-container grid-view">
-
-
             <table mat-table [dataSource]="dataSource1" multiTemplateDataRows class="mat-elevation-z0">
                 <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
                     <th mat-header-cell *matHeaderCellDef> </th>
@@ -45,8 +39,27 @@
                         </button>{{element[column]}}
                         <div *ngIf="column == 'action'" class="w-100 d-flex">
                             <div class="spacer"></div>
-                            <button mat-button class="bg-white mr-1 "
-                                (click)="$event.stopPropagation();onOpenDialog(element)"><small>Manage</small></button>
+                            <div class="table-column" (click)="$event.stopPropagation();">
+                                <div class="d-flex align-items-center">
+                                    <div class="spacer"></div>
+                                    <button mat-icon-button class="rounded-lg bg-ultra-light" matTooltip="Edit | View | Delete"
+                                        [matMenuTriggerFor]="menu">
+                                        <mat-icon class="mat-icon-sm pt-0">more_vert</mat-icon>
+                                    </button>
+                                    <mat-menu #menu="matMenu">
+                                        <button mat-menu-item (click)="onOpenDialog(element)">
+                                            <mat-icon>edit</mat-icon>
+                                            <span>Edit</span>
+                                        </button>
+                                        
+                                        <button mat-menu-item (click)="onDelete(element)">
+                                            <mat-icon>delete</mat-icon>
+                                            <span>Remove</span>
+                                        </button>
+                                    </mat-menu>
+                                </div>
+                
+                            </div>
                         </div>
                     </td>
                 </ng-container>
@@ -57,11 +70,11 @@
                         <div class="example-element-detail"
                             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
-                            <div class="example-element-description">
-                                <div class="d-flex align-items-center">
-                                    <span class="strong text-uppercase">Sub Categories of {{element.name}}</span>
+                            <div class="example-element-description w-100 bg-ultra-light p-5">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span class="text-thin text-uppercase">Sub Categories of <span class="strong">{{element.name}}</span></span>
                                     <div *ngIf="!element.isEditEnable">
-                                        <button mat-button class="text-green ml-1"
+                                        <button mat-raised-button class=" ml-1 bg-green"
                                             matTooltip="Add Sub Category of {{element.name}} "
                                             (click)="element.isEditEnable = true;subCategoryName=''">
                                             <mat-icon class="mat-icon-sm pt-1">add_box</mat-icon> <small class="mr-1">Add
@@ -69,8 +82,52 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div *ngFor="let subcat of element.subCategories" class="py-1">
-                                    <span class="text-light">{{subcat.name | titlecase}}</span>
+                                <div class="bg-white rounded-lg">
+                                    
+                                    <div *ngFor="let subcat of element.subCategories" class="py-1 d-flex w-100 " >
+                                        <div *ngIf="!subcat.isEditEnable" class="w-100 d-flex align-items-center justify-content-between w-100">
+                                            <div class="table-column" style="text-align: start;"> 
+                                                <span class="text-light">{{subcat.name | titlecase}}</span>
+                                            </div>
+                                            <div class="table-column" (click)="$event.stopPropagation();">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="spacer"></div>
+                                                    <button mat-icon-button class="rounded-lg bg-ultra-light" matTooltip="Edit | Delete"
+                                                        [matMenuTriggerFor]="menu">
+                                                        <mat-icon class="mat-icon-sm pt-0">more_vert</mat-icon>
+                                                    </button>
+                                                    <mat-menu #menu="matMenu">
+                                                        <button mat-menu-item (click)="subcat.isEditEnable = true">
+                                                            <mat-icon>edit</mat-icon>
+                                                            <span>Edit</span>
+                                                        </button>
+                                                       
+                                                        <button mat-menu-item (click)="onDelete(item)">
+                                                            <mat-icon>delete</mat-icon>
+                                                            <span>Remove</span>
+                                                        </button>
+                                                    </mat-menu>
+                                                </div>
+                                
+                                            </div>
+                                        </div>
+                                        <div *ngIf="subcat.isEditEnable" style="font-size: 12px;" class="w-100 px-2" (click)="$event.stopPropagation()">
+                                            <div 
+                                                class="mt-2 d-flex align-items-center w-100 mat-form-field-margin-0">
+                                                <mat-form-field appearance="outline" class="">
+                                                    <mat-label>Add Sub Category of {{subcat.name}}</mat-label>
+                                                    <input matInput type="text" autocomplete="off" [(ngModel)]="subcat.name"
+                                                        (change)="onSubCatInputChange(subcat.id,$event.target.value)">
+                                                </mat-form-field>
+                                                <div class="spacer"></div>
+                                                <button mat-button class="bg-ultra-light mr-1 ml-1"
+                                                    (click)="subcat.isEditEnable = false;">cancel</button>
+                                                <button mat-button class="bg-green"
+                                                    (click)="onSubmitSubCategory();subcat.isEditEnable = false;">Update</button>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- There is inline padding applied to this div using styles.
                             This padding value depends on the mat-icon-button width.  -->

@@ -1,11 +1,11 @@
 <section *ngIf="isListView" class="items-container grid-view">
     <div *ngFor="let item of items">
-      <article class="item shadow"   (click)="openCustomerDetails(item)">
+      <article class="item shadow">
         <div class="item-price d-flex">
           <div class="spacer"></div>
           <span class="strong px-2 my-1" >{{item.phone || 'unknown'}}</span>
         </div>
-        <img class="thumbnail-lg" src="{{item?.photo || 'assets/images/3dicons/brand.png'}}" alt="">
+        <img class="thumbnail-lg" src="{{item?.photo || 'assets/images/3dicons/sheild.png'}}" alt="">
         <div class="card-item-details w-100">
           <mat-list dense class="w-100">
             <mat-list-item class="text-wrap-sm">
@@ -33,11 +33,11 @@
   <section *ngIf="!isListView" class="items-container-table-view">
     <app-page-info [(pageInfo)]="pageInfo"></app-page-info>
     <div *ngFor="let item of items;let i=index;">
-      <article class="item-list-view shadow "   (click)="openCustomerDetails(item)">
+      <article class="item-list-view shadow ">
         <div style="width: 2rem;" class="layout">
           <span class="strong">{{i+1}}</span>
         </div>
-        <img class="thumbnail-sm" src="{{item?.photo || 'assets/images/3dicons/brand.png'}}" alt="">
+        <img class="thumbnail-sm" src="{{item?.photo || 'assets/images/3dicons/sheild.png'}}" alt="">
         <div class="list-view-details">
           <mat-list dense>
             <mat-list-item class=" text-wrap-sm">
@@ -72,10 +72,7 @@
                 <mat-icon>edit</mat-icon>
                 <span>Edit</span>
               </button>
-              <button mat-menu-item  (click)="openCustomerDetails(item)">
-                <mat-icon>moving</mat-icon>
-                <span class="pr-4">View Details</span>
-              </button>
+              
               <button mat-menu-item (click)="onDelete(item)">
                 <mat-icon>delete</mat-icon>
                 <span>Remove</span>

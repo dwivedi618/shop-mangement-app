@@ -233,7 +233,7 @@ export class GarmentsCategoryComponent implements OnInit {
   dataSource = new MatTreeNestedDataSource<any>();
   hasChild = (_: number, node: any) =>
     !!node.subCategories && node.subCategories.length >= 0;
-  newSubCategory: { categoryId: any; name: any; };
+  newSubCategory: any;
   constructor(
     private alertService: AlertService,
     private ipcService: IPCService,
@@ -242,7 +242,10 @@ export class GarmentsCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoryList = DefinedCategory.all;
-    this.categoryList.forEach((item) => (item['isEditEnable'] = false));
+    this.categoryList.forEach((item) => {
+      item['isEditEnable'] = false
+      item.subCategories.forEach(sub => sub['isEditEnable'] = false)
+    });
     this.dataSource.data = this.categoryList;
     this.dataSource1 = this.TREE_DATA
 
@@ -313,7 +316,7 @@ export class GarmentsCategoryComponent implements OnInit {
 
   onOpenDialog = (data:Category) => {
     let config: MatDialogConfig = {
-      width: '30rem',
+      width: '50rem',
       maxWidth: '100vw',
       maxHeight: '100vh',
       hasBackdrop: true,
@@ -335,11 +338,22 @@ export class GarmentsCategoryComponent implements OnInit {
     console.log("new subcategort",categoryId,newSubCategory);
     this.newSubCategory = { categoryId : categoryId , name : newSubCategory }
     console.log("data 1",this.newSubCategory);
-    
+  }
+
+  onSubCatInputChange(subCategoryId,newName:string){
+    console.log("new subcategort",subCategoryId,newName);
+    this.newSubCategory = { id : subCategoryId , name : newName }
+    console.log("data 1",this.newSubCategory);
   }
 
   onSubmitSubCategory(){
-    this.ipcService.database('subCategory','create',this.newSubCategory).then(res =>{
+    let action : string = 'create' || 'update'
+    if(this.newSubCategory.id){
+      action = 'update';
+    }else {
+      action = 'create';
+    }
+    this.ipcService.database('subCategory',action,this.newSubCategory).then(res =>{
       if (res.status) {
         console.log("subcategory add res",res);
         // const resData = res.data

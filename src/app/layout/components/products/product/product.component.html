@@ -21,8 +21,8 @@
             </button>
 
         </mat-toolbar>
-        <app-product-item [(data)]="items" [cartItems]="cart" [(view)]="isListView" [(searchText)]="searchText"
-        (shareCart)="onCartData($event)" (onDialogClose)="onDialogClose($event)"
+        <app-product-item [(data)]="items"  [(view)]="isListView" [(searchText)]="searchText"
+        (onDialogClose)="onDialogClose($event)"
          ></app-product-item>
 
         <app-data-missing-instruction *ngIf="!items?.length" [(instructions)]="missingDataInstruction"></app-data-missing-instruction>

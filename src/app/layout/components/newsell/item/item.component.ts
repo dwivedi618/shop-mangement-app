@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { ItemDetailsComponent } from '../item-details/item-details.component';
 import { AlertService } from 'src/app/services/alert.service';
+import { FilterService } from 'src/app/services/filter.service';
 
 export interface CardItem {
   id: number;
@@ -45,20 +46,24 @@ export class ItemComponent implements OnInit, OnChanges {
   isListView: Boolean;
   cart = [];
   receivedSearchText: any;
-  constructor(private dialog: MatDialog, private alertService: AlertService) { }
+  filterQuery: Map<string, Set<string>>;
+  constructor(private dialog: MatDialog, private alertService: AlertService,private filterService : FilterService) { }
   ngOnChanges() {
-    this.isListView = this.view;
     this.items = this.data;
+    this.isListView = this.view;
     this.receivedSearchText = this.searchText
     this.cart = this.cartItems?.length ? this.cartItems : [];
 
-    // console.log("data ng On changes",this.data, this.isListView)
+    console.log("data ng On changes new sale",this.data, this.isListView)
   }
   ngOnInit(): void {
     this.items = this.data;
     this.cart = this.cartItems?.length ? this.cartItems : [];
     this.isListView = this.view;
     // console.log("data",this.data, this.isListView)
+    this.filterService.getData().subscribe((filter:Map<string,Set<string>>)=>{
+      this.filterQuery = filter
+    })
   }
 
   onSelectItem(selectedItem) {

@@ -76,6 +76,7 @@ import { ProductFilterPipe } from './customPipes/product-filter.pipe';
 import { PageInfoComponent } from './layout/components/uicomponents/page-info/page-info.component';
 import { BrandItemComponent } from './layout/components/pconfig/brands/brand-item/brand-item.component';
 import { SizeItemComponent } from './layout/components/pconfig/sizes/size-item/size-item.component';
+import { ColorItemComponent } from './layout/components/pconfig/colors/color-item/color-item.component';
 
 
 @NgModule({
@@ -142,6 +143,7 @@ import { SizeItemComponent } from './layout/components/pconfig/sizes/size-item/s
     PageInfoComponent,
     BrandItemComponent,
     SizeItemComponent,
+    ColorItemComponent,
 
 
   ],

@@ -1,1 +1,86 @@
-<p>size-item works!</p>
+<section *ngIf="isListView" class="items-container grid-view">
+    <div *ngFor="let item of items">
+      <article class="item shadow">
+        <div class="item-price d-flex">
+          <div class="spacer"></div>
+          <span class="strong px-2 my-1" >{{item.phone || 'unknown'}}</span>
+        </div>
+        <img class="thumbnail-lg" src="{{item?.photo || 'assets/images/3dicons/brand.png'}}" alt="">
+        <div class="card-item-details w-100">
+          <mat-list dense class="w-100">
+            <mat-list-item class="text-wrap-sm">
+              <h3 matLine> {{item.name}} </h3>
+              <p matLine class="">
+                <small> {{item.code}} </small>
+                <small class="">{{item.address}} </small>
+              </p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <mat-toolbar style="padding: 0 5px;"   (click)="$event.stopPropagation();">
+          <div class="spacer"></div>
+            <button mat-button class="bg-ultra-light w-100"  (click)="onSelectItem(item)">
+                <small>Manage</small>
+                <!-- <mat-icon class="mat-icon-sm pt-1">read_more</mat-icon> -->
+            </button>
+            
+          <div class="spacer"></div>
+        </mat-toolbar>
+      </article>
+    </div>
+  </section>
+  
+  <section *ngIf="!isListView" class="items-container-table-view">
+    <app-page-info [(pageInfo)]="pageInfo"></app-page-info>
+    <div *ngFor="let item of items;let i=index;">
+      <article class="item-list-view shadow " >
+        <div style="width: 2rem;" class="layout">
+          <span class="strong">{{i+1}}</span>
+        </div>
+        <img class="thumbnail-sm" src="{{item?.photo || 'assets/images/3dicons/brand.png'}}" alt="">
+        <div class="list-view-details">
+          <mat-list dense>
+            <mat-list-item class=" text-wrap-sm">
+              <h3 matLine> {{item.name | titlecase}} </h3>
+              <!-- <p matLine class="" style="color: var(--light);">
+                <span class="">{{item.address | titlecase}} </span>
+                <small matLine>Pending {{item.debt | currency :'INR'}} </small>
+              </p> -->
+            
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div class="spacer"></div>
+  
+        
+        <!-- <div class="date-column">
+          <mat-list dense>
+            <mat-list-item>
+              <span matLine style="color:var(--light)">Added on</span>
+              <h3 matLine style="font-weight: 600;"> {{(item?.createdAt | date:'short') || 'Unknown'}}</h3>
+            </mat-list-item>
+          </mat-list>
+        </div> -->
+        <div class="table-column" (click)="$event.stopPropagation();">
+          <div class="d-flex align-items-center">
+            <div class="spacer"></div>
+            <button mat-icon-button class="rounded-lg bg-ultra-light" matTooltip="Edit | View | Delete" [matMenuTriggerFor]="menu">
+              <mat-icon class="mat-icon-sm pt-0">more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="onSelectItem(item);">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              
+              <button mat-menu-item (click)="onDelete(item)">
+                <mat-icon>delete</mat-icon>
+                <span>Remove</span>
+              </button>
+            </mat-menu>
+          </div>
+  
+        </div>
+      </article>
+    </div>
+  </section>

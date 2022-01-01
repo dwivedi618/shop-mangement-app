@@ -50,6 +50,8 @@ export class AddUpdateColorComponent implements OnInit {
   patchcolorForm(){
     this.colorForm.patchValue({id : this.localData?.id});
     this.colorForm.patchValue({name : this.localData?.name});
+    this.colorForm.patchValue({code : this.localData?.code});
+
 
   }
 

@@ -12,7 +12,7 @@ export interface Product{
       sellBy ?: boolean;
       description?: string;
       productCode ?: string ;
-      length : string;
+      length : string | number;
       image?: any;  
       colors?: Pcolor[];
       brand?: Brand;
