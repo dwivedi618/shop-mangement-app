@@ -100,12 +100,19 @@ export async function product(connection, action: string, data?: any) {
 
   switch (action) {
     case 'create':
+    case 'update':
       let colors: Color[] = [];
       let sizes: Size[] = [];
+      let product: Product;
       data.colors.forEach(async id => colors.push(await colorRepository.findOne(id)));
       data.sizes.forEach(async id => sizes.push(await sizeRepository.findOne(id)));
       
-      const product = new Product();
+      if(action === 'update'){
+        product = await productRepository.findOne(data.id)
+      }else {
+        product = new Product();
+      }
+       new Product();
       product.name = data.name;
       product.description = data.description;
       product.brand = data.brand;
@@ -126,12 +133,7 @@ export async function product(connection, action: string, data?: any) {
       product.image = data.image && (await compress(data.image, 500, 500));
 
       return productRepository.save(product);
-
-    case 'update':
-      const id = data.id;
-      delete data.id;
-      data.image = data.image && (await compress(data.image, 500, 500));
-      return productRepository.update(id, data);
+     
 
     case 'fetch':
       return productRepository.find();
@@ -334,21 +336,26 @@ export async function size(connection, action: string, data?: any) {
 
 
 export async function category(connection, action: string, data?: any) {
-  const repository = connection.getRepository(Category);
+  const categoryRepository = connection.getRepository(Category);
+  const subcategoryRepository = connection.getRepository(SubCategory);
+
   switch (action) {
     case 'create':
-      return repository.save(data);
+      return categoryRepository.save(data);
 
     case 'update':
-      const id = data.id;
-      delete data.id;
-      return repository.update(id, data);
+      const category = await categoryRepository.findOne( data.id );
+      if(!category) throw new Error('Invalid category id');
+      category.name = data.name;
+      category.image = data.image;
+
+      return categoryRepository.save(category);
 
     case 'fetch':
-      return repository.find(data);
+      return categoryRepository.find(data);
 
     case 'delete':
-      return repository.remove(data);
+      return categoryRepository.remove(data);
   }
 }
 
