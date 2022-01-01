@@ -16,7 +16,9 @@ import {
     color,
     category,
     subCategory,
-    Entities } from './db';
+    Entities,
+    dashboard
+} from './db';
 
 enum Status {
     FAILURE = 0,
@@ -167,9 +169,11 @@ ipcMain.handle('backup', async (event, arg) => {
     console.log(event, arg);
 });
 
-// ipcMain.handle('update', async (event, arg) => {
-//     console.log(event, arg);
-// });
+ipcMain.handle('dashboard', async (event, arg) => {
+    console.log(event, arg);
+    const [ range ] = arg;
+    return await dashboard(connection, range);
+});
 
 // ipcMain.handle('delete', async (event, arg) => {
 //     console.log(event, arg);

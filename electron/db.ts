@@ -382,3 +382,28 @@ export async function subCategory(connection, action: string, data?: any) {
       return repository.remove(data);
   }
 }
+
+
+/**
+ * Fetch all the data related to the selled category
+ * @param connection Connection to data
+ */
+export async function dashboard(connection, range) {
+  const categoryRepository = connection.getRepository(Category);
+  let where = 'true';
+  if(range) {
+    if(Array.isArray(range))
+      where = `sp.createAt BETWEEN ${range[0]} AND  {range[1]}`;
+    else 
+      where = `sp.createdAt = ${range}`
+  }
+  const query = `
+  SELECT count(*) as count, c.name as category
+  FROM selled_product sp
+    INNER JOIN product p ON p.id = sp.productId
+    INNER JOIN categoty c ON c.id = p.categoryId
+  WHERE ${where}
+  GROUP BY c.id
+  `;
+  return categoryRepository.query(query);
+}
