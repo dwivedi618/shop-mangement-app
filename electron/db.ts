@@ -119,8 +119,8 @@ export async function product(connection, action: string, data?: any) {
       product.discountInPercent = data.discountInPercent;
       product.discountInRuppee = data.discountInRuppee;
       product.stock = data.stock;
-      product.colors = colors.length > 0? colors: null ;
-      product.sizes = sizes.length > 0? sizes: null;
+      product.colors = (colors.length > 0) ? colors: null ;
+      product.sizes = (sizes.length > 0) ? sizes: null;
       product.brand = await brandRepository.findOne(data.brand);
       product.category = await categoryRepository.findOne(data.category);
       product.subCategory = await subCategoryRepository.findOne(data.subCategory);
@@ -177,7 +177,8 @@ export async function sell(connection, action: string, data?: any) {
       //Creating selled products and linking with sell object.
       for (let i = 0; i < items.length; i++) {
         const product = await productRepository.findOne(items[i].id);
-
+        product.stock = product.stock - 1;
+        await productRepository.save(product);
         //Create a new selled product for each item
         const selledproduct = new SelledProduct();
         selledproduct.sell = sell;
