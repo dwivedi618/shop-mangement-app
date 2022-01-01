@@ -90,6 +90,7 @@ export class TakePaymentComponent implements OnInit {
       sell.paymentMode = this.paymentMode || 'cash';
       sell.receiptNumber = this.receiptNumber;
       sell.description = this.description;
+      sell.discount = this.localData?.discountInRuppee || 0 ;
       
 
       console.log("before save sell",sell)
