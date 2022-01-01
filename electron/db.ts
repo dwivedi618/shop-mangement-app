@@ -177,11 +177,7 @@ export async function sell(connection, action: string, data?: any) {
       //Creating selled products and linking with sell object.
       for (let i = 0; i < items.length; i++) {
         const product = await productRepository.findOne(items[i].id);
-        console.log('ppppppppppppppppppppppppppppppppppp===========',product);
-        
         product.stock = product.stock - items[i].quantity;
-        console.log('ppppppppppppppppppppppppppppppppppp===========after',product);
-
         await productRepository.save(product);
         //Create a new selled product for each item
         const selledproduct = new SelledProduct();
@@ -395,19 +391,21 @@ export async function subCategory(connection, action: string, data?: any) {
 export async function dashboard(connection, range) {
   const categoryRepository = connection.getRepository(Category);
   let where = 'true';
+  
   if(range) {
     if(Array.isArray(range))
-      where = `sp.createAt BETWEEN ${range[0]} AND  {range[1]}`;
-    else 
-      where = `sp.createdAt = ${range}`
-  }
-  const query = `
-  SELECT count(*) as count, c.name as category
-  FROM selled_product sp
-    INNER JOIN product p ON p.id = sp.productId
-    INNER JOIN categoty c ON c.id = p.categoryId
-  WHERE ${where}
-  GROUP BY c.id
-  `;
+      where = `date(sell.selledDate) BETWEEN ${new Date(range[0]).toISOString().substring(0, 10)} AND  ${new Date(range[1]).toISOString().substring(0, 10)}`;
+      else 
+      where = `date(sell.selledDate) = ${new Date(range).toISOString().substring(0, 10)}`
+    }
+    const query = `
+    SELECT count(*) as count, c.id as categoryId
+    FROM sell
+    INNER JOIN selled_product sp ON sp.sellId = sell.id
+    INNER JOIN product p ON p.id = sp.itemId
+    INNER JOIN category c ON c.id = p.categoryId
+    WHERE ${where}
+    GROUP BY c.id
+    `;
   return categoryRepository.query(query);
 }
