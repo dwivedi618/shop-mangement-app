@@ -15,10 +15,11 @@
           <app-search></app-search>
         </div> -->
         <span class="spacer"></span>
-        <button mat-stroked-button class="bg-mygradient-primary" >
+        <!-- <button mat-stroked-button class="bg-mygradient-primary" >
           <mat-icon class="mat-icon-sm pt-1">dry_cleaning</mat-icon>
           <small class="" style="padding-right: 6px;">{{serviceType | titlecase}}</small>
-        </button>
+        </button> -->
+        <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)">Dark theme</mat-slide-toggle>
     </mat-toolbar>
   </header>
   

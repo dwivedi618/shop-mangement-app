@@ -12,7 +12,7 @@
                 <mat-icon  [class.activeLink]="rla.isActive">{{link.icon}}</mat-icon>
 
             </div>
-                <p matLine [class.activeLink]="rla.isActive" class="text-gradient"> {{link.name | uppercase}}</p>
+                <p matLine [class.activeLink]="rla.isActive" > {{link.name | uppercase}}</p>
                 <mat-icon *ngIf="link.path == 'pconfig' || link.path == 'settings'" matTooltip="{{link.path == 'pconfig'? 'category | brand | color | size' : 'appearance | account'}}">chevron_right</mat-icon>
 
             </a>
@@ -34,7 +34,7 @@
         </figure>
         <div *ngIf="this.currentPath === 'cart'" class="d-flex flex-column w-100 text-light" >
             <mat-list dense style="font-weight: 200!important;">
-                <mat-list-item class="text-green">
+                <mat-list-item >
                     <mat-icon matListIcon >check_circle_outline</mat-icon>
                     <p matLine > Adjust Item</p>
                 </mat-list-item>

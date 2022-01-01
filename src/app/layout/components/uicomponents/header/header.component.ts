@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -8,11 +10,14 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   isFullScreen = true;
   serviceType: any;
-  constructor() { }
+  isDarkTheme: Observable<boolean>;
+  constructor( private themeService : ThemeService) { }
 
   ngOnInit(): void {
     let service = localStorage.getItem('serviceType')
     this.serviceType = JSON.parse(service) ;
+    this.isDarkTheme = this.themeService.isDarkTheme;
+
   }
 
   goBack(){
@@ -22,5 +27,8 @@ export class HeaderComponent implements OnInit {
   goFarward(){
     window.history.forward()
 
+  }
+  toggleDarkTheme(checked: boolean) {
+    this.themeService.setDarkTheme(checked);
   }
 }
