@@ -177,7 +177,11 @@ export async function sell(connection, action: string, data?: any) {
       //Creating selled products and linking with sell object.
       for (let i = 0; i < items.length; i++) {
         const product = await productRepository.findOne(items[i].id);
-        product.stock = product.stock - 1;
+        console.log('ppppppppppppppppppppppppppppppppppp===========',product);
+        
+        product.stock = product.stock - items[i].quantity;
+        console.log('ppppppppppppppppppppppppppppppppppp===========after',product);
+
         await productRepository.save(product);
         //Create a new selled product for each item
         const selledproduct = new SelledProduct();
