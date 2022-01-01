@@ -321,7 +321,7 @@ export class ProductComponent implements OnInit {
     let lastMonth = new Date(date2);
     console.log("today",today);
     console.log("lastMonth",lastMonth);
-    let dateRange = [date2,today]
+    let dateRange = [lastMonth,today]
     console.log("dateRange",dateRange);
     this.ipcService.dashboard(dateRange).then((res) => {
       if(res.status){
