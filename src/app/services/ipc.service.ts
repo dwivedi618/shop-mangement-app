@@ -20,8 +20,6 @@ export class IPCService {
      * @param data {any} It may be condition or data to save pr update
      */
 
-    
-
     async database(item: string, action: string, data?: any) {
         try {
             return await ipcRenderer.invoke('database', [item, action, data])
@@ -30,6 +28,22 @@ export class IPCService {
         }
     }
 
+        /**
+     * @description This function will commincate with main process
+     * for the dashboard service
+     * @param range [ date ] Name of the item to fetch dashboard data to date range
+    
+     */
+
+         async dashboard(range) {
+            try {
+                return await ipcRenderer.invoke('dashboard', [range])
+            } catch ( err ) {
+                console.error(err);
+            }
+        }
+
+        
     async allConfigDropdown() {
         try {
             let category = await ipcRenderer.invoke('database', ['category', 'fetch', ''])

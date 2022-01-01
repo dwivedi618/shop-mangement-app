@@ -48,12 +48,12 @@
         <span class="strong">{{i+1}}</span>
       </div>
       <img class="thumbnail-sm" src="{{item?.image || 'assets/images/alt_product.png'}}" alt="">
+      
       <div class="list-view-details">
         <mat-list dense>
           <mat-list-item class="text-wrap-sm">
             <h3 matLine> {{item?.name | titlecase}} </h3>
             <div matLine class="" style="color: var(--light);">
-              <span> {{item?.code}}</span>
               <span matLine class="text-thin">Size: <small *ngFor="let size of item?.sizes" class="mr-1">{{size?.name |
                   uppercase}}</small></span>
               <!-- <span class="">{{item?.description}} </span> -->
@@ -61,6 +61,7 @@
                 <div *ngFor="let color of item?.colors" class="color-box-sm mr-1 " [style.background]="color.code">
                 </div>
               </div>
+             
             </div>
           </mat-list-item>
         </mat-list>
@@ -83,7 +84,16 @@
           </mat-list-item>
         </mat-list>
       </div>
-
+      <div class="price-column">
+        <mat-list dense>
+          <mat-list-item>
+            <button mat-button class="rounded-pill">
+              <span *ngIf="item?.stock" [class.text-green]="item?.stock > 0"><small >In Stock </small><small>{{item?.stock}}</small></span>
+              <span *ngIf="!item?.stock" [class.text-danger]="!item?.stock"><small >Out of Stock </small></span>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </div>
       <div class="price-column">
         <mat-list dense>
           <mat-list-item>

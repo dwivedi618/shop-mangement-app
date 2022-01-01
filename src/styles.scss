@@ -133,6 +133,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 .text-green{
     color: var(--green);
 }
+.text-danger{
+    color: orange;
+}
 .text-ultra-light{
     color: var(--light);
     font-size: 1.2rem;
@@ -188,6 +191,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 }
 .rounded-lg{
     border-radius: 4px!important;
+}
+.rounded-pill{
+    border-radius: 5rem!important;
 }
 .spacer{
     flex: 1 1 auto;
@@ -424,6 +430,11 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 }
 .item-list-view .price-column{
     min-width: 7.5rem;
+    text-align: right;
+    font-size: 12px;
+}
+.item-list-view .price-column-sm{
+    min-width: 4.5rem;
     text-align: right;
     font-size: 12px;
 }
