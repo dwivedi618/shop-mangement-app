@@ -389,7 +389,9 @@ export async function subCategory(connection, action: string, data?: any) {
  * @param connection Connection to data
  */
 export async function dashboard(connection, range) {
-  const repository = connection.getRepository();
+  const categoryRepository = connection.getRepository(Category);
+  const customerRepository = connection.getRepository(Customer);
+
   let where = 'true';
   const data = {
     category,
@@ -400,7 +402,7 @@ export async function dashboard(connection, range) {
     if(Array.isArray(range)){
       let startDate = dateOnlyString(range[0]);
       let endDate = dateOnlyString(range[1]);
-      where = `date(sell.selledDate) BETWEEN ${startDate} AND  ${endDate}`;
+      where = `(date(sell.selledDate) BETWEEN ${startDate} AND  ${endDate})`;
     }
     let query = `
     SELECT
@@ -419,18 +421,18 @@ export async function dashboard(connection, range) {
       GROUP BY c.id,c.name, p.id) as inner
     GROUP BY inner.categoryId, inner.name
     `;
-    data.category = await repository.query(query);
+    data.category = await categoryRepository.query(query);
 
     query = `
     SELECT 
-      sum(s.finalPayableAmount - s.receivedAmount) as dueAmount,
+      sum(sell.finalPayableAmount - sell.receivedAmount) as dueAmount,
       c.name as name
-    FROM sell s
-      INNER JOIN customer c ON s.customerId = c.id
-    where ${where} AND (s.finalPayableAmount - s.receivedAmount) > 0
+    FROM sell
+      INNER JOIN customer c ON sell.customerId = c.id
+    where ${where} AND (sell.finalPayableAmount - sell.receivedAmount) > 0
     `;
 
-    data.customer = await repository.query(query);
+    data.customer = await customerRepository.query(query);
     console.log('aaaaaaaaa------------------',data);
     return data;      
 }
