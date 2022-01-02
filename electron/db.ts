@@ -391,10 +391,12 @@ export async function subCategory(connection, action: string, data?: any) {
 export async function dashboard(connection, range) {
   const categoryRepository = connection.getRepository(Category);
   const customerRepository = connection.getRepository(Customer);
+  const sellRepository = connection.getRepository(Sell);
 
   let where = 'true';
   const data = {
     category,
+    sell,
     customer
   };
   
@@ -434,6 +436,17 @@ export async function dashboard(connection, range) {
     `;
 
     data.customer = await customerRepository.query(query);
+    
+    query = `
+    SELECT 
+      sum(sell.finalPayableAmount) as totalIncome
+    FROM sell
+    where ${where}
+    `;
+
+    data.sell = await customerRepository.query(query);
+    
+    
     console.log('aaaaaaaaa------------------',data);
     return data;      
 }
