@@ -177,8 +177,8 @@ export async function sell(connection, action: string, data?: any) {
       //Creating selled products and linking with sell object.
       for (let i = 0; i < items.length; i++) {
         const product = await productRepository.findOne(items[i].id);
-        product.stock = product.stock - items[i].quantity;
-        await productRepository.save(product);
+        // product.stock = product.stock - items[i].quantity;
+        // await productRepository.save(product);
         //Create a new selled product for each item
         const selledproduct = new SelledProduct();
         selledproduct.sell = sell;
@@ -406,15 +406,15 @@ export async function dashboard(connection, range) {
     let query = `
     SELECT
       sum(inner.count) as selledProductCount,
-      sum(ifnull(inner.productCount, 0)) as productCount,
+      sum(ifnull(inner.stock, 0)) as productCount,
       inner.name as name
     FROM 
       (SELECT 
-        sum(ifnull(sp.id, 0)) as count,
-        sum(ifnull(p.stock, 0)) as productCount,
+        sum(ifnull(sp.quantity, 0)) as count,
         c.name as name,
         c.id as categoryId,
-        p.id as productId
+        p.id as productId,
+        p.stock as stock
       FROM category c
         LEFT JOIN product p ON p.categoryId = c.id
         LEFT JOIN selled_product sp ON sp.itemId = p.id
