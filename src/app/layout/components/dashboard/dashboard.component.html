@@ -5,7 +5,7 @@
 
     <mat-sidenav-content style="position: relative;">
         <mat-toolbar class="bg-white shadow" style="position: absolute;top:0">
-            <h4 class="">Sales Analytics By Garment Category</h4>
+            <h5 class="" style="font-size: 1rem;">Sales Analytics By Garment Category</h5>
             <span class="spacer"></span>
             
             <div class="" (click)="$event.stopPropagation();">
@@ -21,12 +21,9 @@
                   <mat-menu #menu="matMenu" (click)="$event.stopPropagation();">
                     <button mat-menu-item *ngFor="let option of dateRangeDropdowns" (click)="onSelectDate(option)">
                       <mat-icon class="mat-icon-sm pt-1">{{option.icon}}</mat-icon>
-                      <span>{{option.label}}</span>
+                      <span [class.text-danger]="option.label == (selectedDateLable | async)">{{option.label}}</span>
                     </button>
-                    <!-- <button mat-menu-item>
-                        <mat-icon class="mat-icon-sm pt-1">date_range</mat-icon>
-                        <span>Choose custom Range</span>
-                      </button> -->
+                   
                       <button mat-menu-item>
                         <mat-form-field appearance="fill" class="pb-1">
                             <mat-label>Enter a date range</mat-label>
@@ -76,7 +73,7 @@
                             <ul class="px-2">
                                 <li  class="layout">
                                     <div style="position: relative;">
-                                        <mat-progress-spinner class="mx-2 shadow-2" style="border-radius: 50%;"
+                                        <mat-progress-spinner class="mx-2 shadow-2" style="border-radius: 50%;" diameter='80'
                                             [color]="primary" [mode]="mode" [value]="card.percent < 100 ? card.percent : '100' ">
                                         </mat-progress-spinner>
                                         <span style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);">

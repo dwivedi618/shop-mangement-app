@@ -395,23 +395,23 @@ export async function dashboard(connection, range) {
   let where = 'true';
   const data = {
     category,
-    sell,
     customer
   };
   
     if(Array.isArray(range)){
       let startDate = dateOnlyString(range[0]);
       let endDate = dateOnlyString(range[1]);
-      where = `(date(sell.selledDate) BETWEEN ${startDate} AND  ${endDate})`;
+      where = `(date(sell.selledDate) BETWEEN '${startDate}' AND  '${endDate}')`;
     }
     let query = `
     SELECT
       sum(inner.count) as selledProductCount,
-      sum(ifnull(inner.productId, 0)) as productCount,
+      sum(ifnull(inner.productCount, 0)) as productCount,
       inner.name as name
     FROM 
       (SELECT 
         sum(ifnull(sp.id, 0)) as count,
+        sum(ifnull(p.stock, 0)) as productCount,
         c.name as name,
         c.id as categoryId,
         p.id as productId
@@ -430,6 +430,7 @@ export async function dashboard(connection, range) {
     FROM sell
       INNER JOIN customer c ON sell.customerId = c.id
     where ${where} AND (sell.finalPayableAmount - sell.receivedAmount) > 0
+    GROUP BY c.name
     `;
 
     data.customer = await customerRepository.query(query);

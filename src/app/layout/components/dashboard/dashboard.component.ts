@@ -297,8 +297,9 @@ range = new FormGroup({
 
   localStorage.removeItem('currentCartDD')
   localStorage.removeItem('currentCustomer')
-  // this.getCategoryList();
-  // this.fetchDashboardReport([]);
+  let dateRange = [new Date(),new Date()]
+  this.getCategoryList();
+  this.fetchDashboardReport(dateRange);
   // this.clockInterval = setInterval(this.clock,1000);
   this.salesAnalytics.forEach(sale => {
     sale['label'] = this.getCategoryName(sale.categoryId);
@@ -328,12 +329,13 @@ range = new FormGroup({
     console.log("dateRange",dateRange);
     this.ipcService.dashboard(dateRange).then((res) => {
       console.log("ftech dashboard********************************", res);
-      this.salesAnalytics = res;
+      this.salesAnalytics = res.category;
       this.salesAnalytics.forEach(sale => {
-        sale['label'] = this.getCategoryName(sale.categoryId);
+        sale['label'] = sale['name'];
         sale['total'] = sale.productCount;
         sale['sold'] = sale.selledProductCount;
-        sale['percent'] = (sale.selledProductCount / sale.productCount )* 100 +'%';
+        sale['percent'] = (((sale.selledProductCount / sale.productCount) || 0 )* 100)+'';
+
       });
 
       if(res.status){
@@ -357,7 +359,7 @@ range = new FormGroup({
     let startDate = new Date(res);
     let dateLabel = option.label+'';
     this.selectedDateLable.next(dateLabel);
-    let dateRange = [startDate ,date]
+    let dateRange = [startDate ,new Date()]
     this.fetchDashboardReport(dateRange)
 
   }
