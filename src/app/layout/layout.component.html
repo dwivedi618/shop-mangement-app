@@ -3,18 +3,15 @@
     <mat-sidenav #drawer class="sidenav" [mode]="'side'" [opened]="true">
         <div class="column-nav-layout" >
         <mat-nav-list dense style="padding-top:0">
-
             <!-- <button mat-button (click)="testLoader()">test loader</button> -->
 
             <a mat-list-item *ngFor="let link of primaryLinks" routerLink="{{link.path}}" class="layout" 
             routerLinkActive="bg-mygradient-secondary" #rla="routerLinkActive" >
             <div matListIcon >
                 <mat-icon  [class.activeLink]="rla.isActive">{{link.icon}}</mat-icon>
-
             </div>
                 <p matLine [class.activeLink]="rla.isActive" class="text-gradient"> {{link.name | uppercase}}</p>
                 <mat-icon *ngIf="link.path == 'pconfig' || link.path == 'settings'" matTooltip="{{link.path == 'pconfig'? 'category | brand | color | size' : 'appearance | account'}}">chevron_right</mat-icon>
-
             </a>
         </mat-nav-list>
         <mat-nav-list dense style="padding-top:0">
@@ -22,7 +19,6 @@
                 routerLinkActive="bg-mygradient-secondary" #rla="routerLinkActive" >
                 <div matListIcon >
                     <mat-icon  [class.activeLink]="rla.isActive">keyboard_arrow_left</mat-icon>
-    
                 </div>
                     <p matLine [class.activeLink]="rla.isActive" class="text-gradient"> Exit Cart</p>
             </a>

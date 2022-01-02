@@ -16,7 +16,7 @@ export class LayoutComponent implements OnInit {
    */
   primaryLinks = [
     { path : 'neworder',icon :'add', name : 'Sell Product' },
-    // { path : 'dashboard',icon :'grid_view', name : 'Dashboard' },
+    { path : 'dashboard',icon :'grid_view', name : 'Dashboard' },
     { path : 'product',icon :'dry_cleaning', name : 'Product' },
     // { path : 'inventory',icon :'inventory', name : 'Inventory' },
     { path : 'customer',icon :'groups', name : 'Customer' },

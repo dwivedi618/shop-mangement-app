@@ -234,7 +234,6 @@ export class ProductComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.fetchProduct();
-    this.fetchDashboardReport();
     this.filterService.getData().subscribe((filter:Map<string,Set<string>>)=>{
       this.filterQuery = filter;
       if(!filter){ 
@@ -315,20 +314,5 @@ export class ProductComponent implements OnInit {
     this.items = data
   }
 
-  private fetchDashboardReport() {
-    let today = new Date();
-    let date2 = '01-12-2021'
-    let lastMonth = new Date(date2);
-    console.log("today",today);
-    console.log("lastMonth",lastMonth);
-    let dateRange = [lastMonth,today]
-    console.log("dateRange",dateRange);
-    this.ipcService.dashboard(dateRange).then((res) => {
-      if(res.status){
-        this.items = res.data;
-        this.itemsCopy = res.data;
-        console.log("ftech dashboard", res);
-      }
-    })
-  }
+  
 }
