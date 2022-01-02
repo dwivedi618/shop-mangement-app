@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { IPCService } from 'src/app/services/ipc.service';
 import { GarmentsCategoryComponent } from '../pconfig/garment-categories/garments-category/garments-category.component';
 
@@ -274,24 +275,31 @@ export class DashboardComponent implements OnInit {
 ]
   
 dateRangeDropdowns = [
-  { label : 'Today', icon : 'today' },
-  { label : 'Yesterday',icon : 'calender_today' },
-  { label : 'Last 7 days' ,icon : 'calender_view_week'},
-  { label : 'Last 30 days',icon : 'calender_month' },
+  { label : 'Today', days: 0,icon : 'today' },
+  { label : 'Yesterday',days: 1,icon : 'calender_today' },
+  { label : 'Last 7 days' , days: 7,icon : 'calender_view_week'},
+  { label : 'Last 30 days',days: 30,icon : 'calender_month' },
+  { label : 'Last 60 days',days: 60,icon : 'calender_month' },
+  { label : 'Last 90 days',days: 90,icon : 'calender_month' },
+  { label : 'Last 6 Months',days: 180,icon : 'calender_month' },
+  { label : 'Last Year',days: 356,icon : 'calender_month' },
 
 ]
 range = new FormGroup({
   start: new FormControl(),
   end: new FormControl(),
 });
+
+  selectedDateLable = new BehaviorSubject('Today');
   constructor(private ipcService : IPCService) { }
 
   ngOnInit(): void {
 
   localStorage.removeItem('currentCartDD')
   localStorage.removeItem('currentCustomer')
+  let dateRange = [new Date(),new Date()]
   this.getCategoryList();
-  this.fetchDashboardReport();
+  this.fetchDashboardReport(dateRange);
   // this.clockInterval = setInterval(this.clock,1000);
   this.salesAnalytics.forEach(sale => {
     sale['label'] = this.getCategoryName(sale.categoryId);
@@ -315,24 +323,19 @@ range = new FormGroup({
   getCategoryName(categoryId){
     return this.categoryList.find(list => list.id == categoryId)?.name
   }
-  private fetchDashboardReport() {
-    let today = new Date();
-    let date2 = '01-12-2021'
-    let lastMonth = new Date(date2);
-    console.log("today",today);
-    console.log("lastMonth",lastMonth);
-    
-    let dateRange = [this.range.value.start,this.range.value.end]
-    
+  private fetchDashboardReport(DateRange) {
+
+    let dateRange = DateRange
     console.log("dateRange",dateRange);
     this.ipcService.dashboard(dateRange).then((res) => {
       console.log("ftech dashboard********************************", res);
-      this.salesAnalytics = res;
+      this.salesAnalytics = res.category;
       this.salesAnalytics.forEach(sale => {
-        sale['label'] = this.getCategoryName(sale.categoryId);
+        sale['label'] = sale['name'];
         sale['total'] = sale.productCount;
         sale['sold'] = sale.selledProductCount;
-        sale['percent'] = (sale.selledProductCount / sale.productCount )* 100 +'%';
+        sale['percent'] = (((sale.selledProductCount / sale.productCount) || 0 )* 100)+'';
+
       });
 
       if(res.status){
@@ -341,6 +344,23 @@ range = new FormGroup({
     })
   }
   onCustomDateApply(){
-    this.fetchDashboardReport()
+    let startDate = this.range.value.start.toLocaleDateString().substring(0,10)
+    let endDate = this.range.value.end.toLocaleDateString().substring(0,10)
+    let dateLabel = startDate +"  " + 'To' +"  "+ endDate
+    this.selectedDateLable.next(dateLabel);
+    let dateRange = [this.range.value.start ,this.range.value.end ]
+    this.fetchDashboardReport(dateRange)
+  }
+
+  onSelectDate(option){
+    let days = option.days;
+    let date = new Date();
+    let res = date.setTime(date.getTime() - (days * 24 * 60 * 60 * 1000));
+    let startDate = new Date(res);
+    let dateLabel = option.label+'';
+    this.selectedDateLable.next(dateLabel);
+    let dateRange = [startDate ,new Date()]
+    this.fetchDashboardReport(dateRange)
+
   }
 }

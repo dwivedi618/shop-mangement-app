@@ -170,10 +170,6 @@ ipcMain.handle('backup', async (event, arg) => {
 });
 
 ipcMain.handle('dashboard', async (event, arg) => {
-    const response = {
-        status: Status.SUCCESS,
-        data: null
-    }
     const [ range ] = arg;
     return dashboard(connection, range);
 });
