@@ -420,6 +420,7 @@ export async function dashboard(connection, range) {
       FROM category c
         LEFT JOIN product p ON p.categoryId = c.id
         LEFT JOIN selled_product sp ON sp.itemId = p.id
+        INNER JOIN sell ON sell.id = sp.sellId AND ${where}
       GROUP BY c.id,c.name, p.id) as inner
     GROUP BY inner.categoryId, inner.name
     `;
@@ -431,7 +432,7 @@ export async function dashboard(connection, range) {
       c.name as name
     FROM sell
       INNER JOIN customer c ON sell.customerId = c.id
-    where ${where} AND (sell.finalPayableAmount - sell.receivedAmount) > 0
+    WHERE ${where} AND (sell.finalPayableAmount - sell.receivedAmount) > 0
     GROUP BY c.name
     `;
 
@@ -441,7 +442,7 @@ export async function dashboard(connection, range) {
     SELECT 
       sum(sell.finalPayableAmount) as totalIncome
     FROM sell
-    where ${where}
+    WHERE ${where}
     `;
 
     data.sell = await customerRepository.query(query);
