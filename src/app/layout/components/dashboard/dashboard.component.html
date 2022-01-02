@@ -4,17 +4,63 @@
     </mat-sidenav>
 
     <mat-sidenav-content style="position: relative;">
-        <section class="dashboard_card_container grid-view">
-            <div *ngFor="let card of dashboardCards">
+        <mat-toolbar class="bg-white shadow" style="position: absolute;top:0">
+            <h4 class="">Sales Analytics By Garment Category</h4>
+            <span class="spacer"></span>
+            
+            <div class="" (click)="$event.stopPropagation();">
+                <div class="d-flex align-items-center">
+                  <div class="spacer"></div>
+                  <button mat-button class="rounded-lg bg-ultra-light date-column" matTooltip="Date Range"  
+                    [matMenuTriggerFor]="menu">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small>Today</small>
+                        <mat-icon class="mat-icon-sm pt-1">arrow_drop_down</mat-icon>
+                    </div>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item *ngFor="let option of dateRangeDropdowns">
+                      <mat-icon class="mat-icon-sm pt-1">{{option.icon}}</mat-icon>
+                      <span>{{option.label}}</span>
+                    </button>
+                    <button mat-menu-item >
+                        <mat-icon class="mat-icon-sm pt-1">date_range</mat-icon>
+                        <span>Choose custom Range</span>
+                      </button>
+                      <mat-form-field appearance="fill" class="pb-1">
+                        <mat-label>Enter a date range</mat-label>
+                        <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                          <input matStartDate formControlName="start" placeholder="Start date">
+                          <input matEndDate formControlName="end" placeholder="End date">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <!-- <mat-date-range-picker #picker></mat-date-range-picker> -->
+                        <mat-date-range-picker #picker>
+                            <mat-date-range-picker-actions>
+                              <button mat-button matDateRangePickerCancel>Cancel</button>
+                              <button mat-raised-button color="primary" matDateRangePickerApply (click)="onCustomDateApply()">Apply</button>
+                            </mat-date-range-picker-actions>
+                          </mat-date-range-picker>
+                        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                      </mat-form-field>
+                  </mat-menu>
+                </div>
+        
+              </div>
 
-                <mat-card class="dashboard_card " [class.landscape]="card.label == 'Product'">
+        </mat-toolbar>
+       
+        <section class="dashboard_card_container grid-view">
+            <div *ngFor="let card of salesAnalytics">
+                <mat-card class="dashboard_card " >
                     <mat-card-header>
                         <img class="layout icon-container" mat-card-avatar src="assets/images/3dicons/chart.png" alt="">
                         <mat-card-title class="text-thin text-uppercase">{{card.label}}</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
-                        <div class="py-4 d-flex">
-                            <ul>
+                        <div class="py-4 d-flex align-items-center justify-content-between">
+                            <ul class="px-2">
                                 <li >
                                     <span>Total</span>
                                     <span class="ml-1 p-2">{{card?.total || '0'}}</span>
@@ -24,11 +70,11 @@
                                     <span class="ml-1 p-2">{{card?.sold || '0'}}</span>
                                 </li> 
                             </ul>
-                            <ul>
+                            <ul class="px-2">
                                 <li  class="layout">
                                     <div style="position: relative;">
                                         <mat-progress-spinner class="mx-2 shadow-2" style="border-radius: 50%;"
-                                            [color]="primary" [mode]="mode" [value]="card.percent">
+                                            [color]="primary" [mode]="mode" [value]="card.percent < 100 ? card.percent : '100' ">
                                         </mat-progress-spinner>
                                         <span style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);">
                                             <small class="icon-container p-2">{{card?.percent/100 || '0' | percent}}</small>
@@ -39,11 +85,11 @@
                             </ul>
                         </div>
                     </mat-card-content>
-                    <mat-card-actions>
+                    <!-- <mat-card-actions>
                         <button mat-button class="w-100">
                             <small class="text-thin">Last 24 Hours</small>
                         </button>
-                    </mat-card-actions>
+                    </mat-card-actions> -->
                 </mat-card>
             </div>
         </section>

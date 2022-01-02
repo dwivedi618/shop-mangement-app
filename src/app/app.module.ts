@@ -78,6 +78,7 @@ import { BrandItemComponent } from './layout/components/pconfig/brands/brand-ite
 import { SizeItemComponent } from './layout/components/pconfig/sizes/size-item/size-item.component';
 import { ColorItemComponent } from './layout/components/pconfig/colors/color-item/color-item.component';
 import { ClockComponent } from './layout/components/uicomponents/clock/clock.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
@@ -169,7 +170,8 @@ import { ClockComponent } from './layout/components/uicomponents/clock/clock.com
     },
     { provide: MatDialogRef, useValue: {} },
 
-    { provide: MAT_DIALOG_DATA, useValue: {} }
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    MatDatepickerModule
   ],
   bootstrap: [AppComponent]
 })

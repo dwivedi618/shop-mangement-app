@@ -28,6 +28,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [],
   imports: [
@@ -59,6 +61,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatAutocompleteModule,
     MatTreeModule,
     MatProgressSpinnerModule,
+    MatDatepickerModule
   
   ],
   exports: [
@@ -90,7 +93,10 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatAutocompleteModule,
     MatTreeModule,
     MatProgressSpinnerModule,
-    ScrollingModule
+    ScrollingModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+    
 
   ]
 })
