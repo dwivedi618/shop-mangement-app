@@ -1,26 +1,17 @@
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-clock',
+  templateUrl: './clock.component.html',
+  styleUrls: ['./clock.component.scss']
 })
-export class DashboardComponent implements OnInit,OnDestroy {
+export class ClockComponent implements OnInit,OnDestroy {
   daysofweek = ['sun', 'mon', 'tus', 'wed', 'thu', 'fri', 'sat'];
   month =['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
   today = new Date();
   daytoday = this.today.getDay();
   clockInterval : any
-  dashboardCards = [
-    { id:1,label:'Product',total:'100',stock:'20',sold:'80' , percent:80 },
-    { id:1,label:'Customer',total:'7',inStock:null,sold:null },
-
-    { id:1,label:'Brand',total:'7',percent:45 },
-    { id:1,label:'Category',total:'7' },
-  ]
-  mode: ProgressSpinnerMode = 'determinate';
-  value = 50;
   
   constructor() { }
 
@@ -61,3 +52,4 @@ ngOnDestroy(){
 }
   
 }
+

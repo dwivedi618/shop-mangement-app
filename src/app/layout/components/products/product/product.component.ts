@@ -324,10 +324,10 @@ export class ProductComponent implements OnInit {
     let dateRange = [lastMonth,today]
     console.log("dateRange",dateRange);
     this.ipcService.dashboard(dateRange).then((res) => {
+      console.log("ftech dashboard********************************", res);
       if(res.status){
         this.items = res.data;
         this.itemsCopy = res.data;
-        console.log("ftech dashboard", res);
       }
     })
   }

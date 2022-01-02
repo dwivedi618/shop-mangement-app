@@ -77,6 +77,7 @@ import { PageInfoComponent } from './layout/components/uicomponents/page-info/pa
 import { BrandItemComponent } from './layout/components/pconfig/brands/brand-item/brand-item.component';
 import { SizeItemComponent } from './layout/components/pconfig/sizes/size-item/size-item.component';
 import { ColorItemComponent } from './layout/components/pconfig/colors/color-item/color-item.component';
+import { ClockComponent } from './layout/components/uicomponents/clock/clock.component';
 
 
 @NgModule({
@@ -144,6 +145,7 @@ import { ColorItemComponent } from './layout/components/pconfig/colors/color-ite
     BrandItemComponent,
     SizeItemComponent,
     ColorItemComponent,
+    ClockComponent,
 
 
   ],

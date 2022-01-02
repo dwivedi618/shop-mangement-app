@@ -299,6 +299,14 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 .strong{
     font-weight: 600!important;
 }
+.thumbnail-sm{
+    height: 2rem;
+    width: 2rem;
+    border-radius: 0.2rem;
+    flex-shrink: 0;
+    object-fit: cover;
+    transition: all 0.2s linear
+  }
 .thumbnail-md{
     height: 6rem;
     width: 6rem;
@@ -364,6 +372,35 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     max-height: calc(100% - 8rem);
     overflow-y: auto;
 }
+.dashboard_card_container{
+    padding: 1rem 0;
+    margin: 1rem 0rem 2rem 0rem;
+    max-height: calc(100% - 8rem);
+    overflow-y: auto;
+}
+.dashboard_card{
+    position: relative;
+    display: block;
+    min-width: 5rem;
+    min-height: 5rem;
+    margin: 1rem;
+    cursor: pointer;
+    // overflow: hidden;
+    transition: all 0.2s linear
+}
+.dashboard_card_container .dashboard_card::before{
+    // content: ""; 
+    // backdrop-filter: blur(5px);
+    // background: -webkit-linear-gradient(45deg, #210046, #0016b900); 
+    // background: linear-gradient(45deg, #210046c4, #0016b900); 
+    // position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0rem;
+}
+.dashboard_card_container.grid-view{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+    }
 .grid-view{
     display: flex;
     flex-wrap: wrap;
@@ -383,7 +420,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 .item:is(.active,:hover){
   background: var(--ultra-light);
 }
-.item::before{
+.items-container .item::before{
     content: ""; 
     // backdrop-filter: blur(5px);
     background: -webkit-linear-gradient(45deg, #210046, #0016b900); 
@@ -561,3 +598,29 @@ input[type="color"]::-webkit-color-swatch {
     height: .8rem;
     border-radius: 4px; 
 }
+
+.bg-mygradient-1{
+    background: #67B26F!important;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #4ca2cd, #67B26F)!important;  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #4ca2cd, #67B26F)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  }
+  .bg-mygradient-2{
+  background: #3a6186!important;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #89253e, #3a6186)!important;  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #89253e, #3a6186)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  .bg-mygradient-3{
+    color: white!important;
+    background: #00d2ff!important;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff)!important;  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #3a7bd5, #00d2ff)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  }
+  .bg-mygradient-4{
+    color: white!important;
+  background: #DE6262;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #FFB88C, #DE6262);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  }

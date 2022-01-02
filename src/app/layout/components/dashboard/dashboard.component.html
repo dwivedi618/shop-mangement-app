@@ -1,33 +1,56 @@
-<section class="dashboard-section inner_banner layout">
-    <div class="">
-       
-        <div class="layout">
-            
-            <div class="clock">
-                <div class="layout">
-                    <div class="content">
-                        <p class='days'>
-                            <span *ngFor="let day of daysofweek;let i=index" [style.color]="++i == daytoday ? 'white' : ''">{{ day | uppercase}}</span>&nbsp;
-                        <br>
-                        <p class='text'><span id='hours'></span>:<span id='min'></span>:<span
-                                id='sec'></span>&nbsp;&nbsp;<span id='time'></span></p>
-                        <p class="text-center">
-                            {{today | date}}
-                        </p>
-                    </div>
-                </div>
+<mat-sidenav-container class="sidenav-newsale-container">
+    <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="false" position="end">
+        <!-- <app-filter [(data)]="items" (onFilter)="onApplyFilter($event)"></app-filter> -->
+    </mat-sidenav>
+
+    <mat-sidenav-content style="position: relative;">
+        <section class="dashboard_card_container grid-view">
+            <div *ngFor="let card of dashboardCards">
+
+                <mat-card class="dashboard_card " [class.landscape]="card.label == 'Product'">
+                    <mat-card-header>
+                        <img class="layout icon-container" mat-card-avatar src="assets/images/3dicons/chart.png" alt="">
+                        <mat-card-title class="text-thin text-uppercase">{{card.label}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="py-4 d-flex">
+                            <ul>
+                                <li >
+                                    <span>Total</span>
+                                    <span class="ml-1 p-2">{{card?.total || '0'}}</span>
+                                </li>
+                                <li >
+                                    <span>Sold</span>
+                                    <span class="ml-1 p-2">{{card?.sold || '0'}}</span>
+                                </li> 
+                            </ul>
+                            <ul>
+                                <li  class="layout">
+                                    <div style="position: relative;">
+                                        <mat-progress-spinner class="mx-2 shadow-2" style="border-radius: 50%;"
+                                            [color]="primary" [mode]="mode" [value]="card.percent">
+                                        </mat-progress-spinner>
+                                        <span style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);">
+                                            <small class="icon-container p-2">{{card?.percent/100 || '0' | percent}}</small>
+                                        </span>
+                                    </div>
+                                </li>
+                               
+                            </ul>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button class="w-100">
+                            <small class="text-thin">Last 24 Hours</small>
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
             </div>
-        </div>
-    </div>
-    <div class="login-help">
-        <button mat-mini-fab color="acct" routerLink="/neworder">
-            <mat-icon>add</mat-icon>
-        </button>
-        <!-- <mat-menu #loginHelp="matMenu" class="layout">
-            <a mat-menu-item>
-                <mat-icon mat-list-icon>admin_panel_settings</mat-icon>
-                <span>Switch to Admin</span>
-            </a>
-        </mat-menu> -->
-    </div>
-</section>
+        </section>
+        <!-- <app-clock></app-clock> -->
+
+
+        <!-- <app-customer [(data)]="items"   [(view)]="isListView" (shareCart)="onCartData($event)" (onDialogClose)="onDialogClose($event)"></app-customer> -->
+        <!-- <app-data-missing-instruction *ngIf="!items?.length" [(instructions)]="CUSTOMER_MISSING"></app-data-missing-instruction> -->
+    </mat-sidenav-content>
+</mat-sidenav-container>
