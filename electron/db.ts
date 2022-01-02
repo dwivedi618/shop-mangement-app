@@ -399,13 +399,19 @@ export async function dashboard(connection, range) {
       where = `date(sell.selledDate) = ${new Date(range).toISOString().substring(0, 10)}`
     }
     const query = `
-    SELECT count(*) as count, c.id as categoryId
-    FROM sell
-    INNER JOIN selled_product sp ON sp.sellId = sell.id
-    INNER JOIN product p ON p.id = sp.itemId
-    INNER JOIN category c ON c.id = p.categoryId
-    WHERE ${where}
-    GROUP BY c.id
-    `;
-  return categoryRepository.query(query);
+    SELECT 
+      count(distinct p.id) as productCount,
+      count(distinct sp.id) as selledProductCount, 
+      c.id as categoryId
+    FROM category c
+      LEFT JOIN product p ON p.categoryId = c.id
+      LEFT JOIN selled_product sp ON sp.itemId = p.id
+      LEFT JOIN sell ON sell.id = sp.sellId
+      GROUP BY c.id
+      `;
+      // WHERE ${where}
+      let a = await categoryRepository.query(query);
+      console.log('aaaaaaaaa------------------',a);
+      return a;
+      
 }
