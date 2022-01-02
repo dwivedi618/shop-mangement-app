@@ -1,4 +1,4 @@
-import { compress } from './utility';
+import { compress, dateOnlyString } from './utility';
 import { Customer } from './entities/customer';
 import { Product } from './entities/product';
 import { Inventory } from './entities/inventory';
@@ -389,29 +389,48 @@ export async function subCategory(connection, action: string, data?: any) {
  * @param connection Connection to data
  */
 export async function dashboard(connection, range) {
-  const categoryRepository = connection.getRepository(Category);
+  const repository = connection.getRepository();
   let where = 'true';
+  const data = {
+    category,
+    sell,
+    customer
+  };
   
-  if(range) {
-    if(Array.isArray(range))
-      where = `date(sell.selledDate) BETWEEN ${new Date(range[0]).toISOString().substring(0, 10)} AND  ${new Date(range[1]).toISOString().substring(0, 10)}`;
-      else 
-      where = `date(sell.selledDate) = ${new Date(range).toISOString().substring(0, 10)}`
+    if(Array.isArray(range)){
+      let startDate = dateOnlyString(range[0]);
+      let endDate = dateOnlyString(range[1]);
+      where = `date(sell.selledDate) BETWEEN ${startDate} AND  ${endDate}`;
     }
-    const query = `
+    let query = `
+    SELECT
+      sum(inner.count) as selledProductCount,
+      sum(ifnull(inner.productId, 0)) as productCount,
+      inner.name as name
+    FROM 
+      (SELECT 
+        sum(ifnull(sp.id, 0)) as count,
+        c.name as name,
+        c.id as categoryId,
+        p.id as productId
+      FROM category c
+        LEFT JOIN product p ON p.categoryId = c.id
+        LEFT JOIN selled_product sp ON sp.itemId = p.id
+      GROUP BY c.id,c.name, p.id) as inner
+    GROUP BY inner.categoryId, inner.name
+    `;
+    data.category = await repository.query(query);
+
+    query = `
     SELECT 
-      count(distinct p.id) as productCount,
-      count(distinct sp.id) as selledProductCount, 
-      c.id as categoryId
-    FROM category c
-      LEFT JOIN product p ON p.categoryId = c.id
-      LEFT JOIN selled_product sp ON sp.itemId = p.id
-      LEFT JOIN sell ON sell.id = sp.sellId
-      GROUP BY c.id
-      `;
-      // WHERE ${where}
-      let a = await categoryRepository.query(query);
-      console.log('aaaaaaaaa------------------',a);
-      return a;
-      
+      sum(s.finalPayableAmount - s.receivedAmount) as dueAmount,
+      c.name as name
+    FROM sell s
+      INNER JOIN customer c ON s.customerId = c.id
+    where ${where} AND (s.finalPayableAmount - s.receivedAmount) > 0
+    `;
+
+    data.customer = await repository.query(query);
+    console.log('aaaaaaaaa------------------',data);
+    return data;      
 }
