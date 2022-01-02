@@ -72,7 +72,7 @@ details {
     background: linear-gradient(80deg, rgba(36, 40, 48, 0.5) 0%, rgba(36, 40, 48, 0) 100%);
 }
 .icon-container{
-    border-radius: 50px;
+  border-radius: 20rem;
   background: linear-gradient(225deg, #e6e6e6, #ffffff);
   box-shadow:  -7px 7px 13px #d9d9d9, 
                7px -7px 13px #ffffff;
@@ -87,7 +87,13 @@ details {
   }
   .dashboard_card{
     min-height: 10rem;
-    min-width: 15rem;
+    min-width: 10rem;
+    background:#F5F5F5; 
+    box-shadow: 0px 30px 30px -20px rgba(0,0,0,0.1);
+  }
+  .dashboard_list{
+    height: 2.2rem;
+    // min-width: 10rem;
     background:#F5F5F5; 
     box-shadow: 0px 30px 30px -20px rgba(0,0,0,0.1);
   }
@@ -109,4 +115,35 @@ details {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.dashboard_card_container .grid-view{
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    width: calc(100vw - 40rem)!important;
+    // background:coral;
+}
+.dashboard_card_container .list-view{
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    
+    justify-content: flex-start;
+}
+
+.customer_list_container{
+    box-sizing: border-box!important;
+    position: relative;
+    display: flex;
+    align-items: center;
+    
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 25rem;
+    // max-height: calc(100% - 8rem)
+    height: calc(100vh - 12rem)!important;
+    overflow-y: auto;
 }

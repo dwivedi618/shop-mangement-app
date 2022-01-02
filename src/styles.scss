@@ -204,6 +204,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 .px-5{
     padding: 0 30px;
 }
+.px-4{
+    padding: 0 24px;
+}
 .px-2{
     padding: 0 12px;
 }
@@ -215,6 +218,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 }
 .py-4{
     padding: 24px 0!important;
+}
+.p-1{
+    padding: 6px!important;
 }
 .p-2{
     padding: 12px!important;
@@ -373,9 +379,10 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     overflow-y: auto;
 }
 .dashboard_card_container{
+    position: relative;
     padding: 1rem 0;
     margin: 3rem 0rem 2rem 0rem;
-    max-height: calc(100% - 8rem);
+    height: calc(100% - 8rem);
     overflow-y: auto;
 }
 .dashboard_card{
@@ -395,12 +402,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     // background: linear-gradient(45deg, #210046c4, #0016b900); 
     // position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0rem;
 }
-.dashboard_card_container .grid-view{
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-    }
+
 .grid-view{
     display: flex;
     flex-wrap: wrap;

@@ -245,33 +245,9 @@ export class DashboardComponent implements OnInit {
         "sold": 1,
         "percent": "100%"
     },
-    {
-        "productCount": 30,
-        "selledProductCount": 0,
-        "categoryId": 6,
-        "label": "Coat",
-        "total": 0,
-        "sold": 0,
-        "percent": "NaN%"
-    },
-    {
-        "productCount": 0,
-        "selledProductCount": 0,
-        "categoryId": 7,
-        "label": "T-shirts",
-        "total": 0,
-        "sold": 0,
-        "percent": "NaN%"
-    },
-    {
-        "productCount": 0,
-        "selledProductCount": 0,
-        "categoryId": 9,
-        "label": "Paint",
-        "total": 0,
-        "sold": 0,
-        "percent": "NaN%"
-    }
+    
+   
+   
 ]
   
 dateRangeDropdowns = [
@@ -291,6 +267,21 @@ range = new FormGroup({
 });
 
   selectedDateLable = new BehaviorSubject('Today');
+  customerDues = [
+    {
+        "dueAmount": 3000,
+        "name": "Alka Dwivedi"
+    },
+    {
+        "dueAmount": 16000,
+        "name": "Manoj Dwivedi"
+    },
+    {
+        "dueAmount": 27400,
+        "name": "shivam dwivedi"
+    }
+];
+  totalIncome = 52000 ;
   constructor(private ipcService : IPCService) { }
 
   ngOnInit(): void {
@@ -329,13 +320,15 @@ range = new FormGroup({
     console.log("dateRange",dateRange);
     this.ipcService.dashboard(dateRange).then((res) => {
       console.log("ftech dashboard********************************", res);
-      this.salesAnalytics = res.category;
-      this.salesAnalytics.forEach(sale => {
+      this.salesAnalytics = res.category || [];
+      this.customerDues = res.customer || [];
+      this.totalIncome = res.sell[0].totalIncome || 0
+
+      this.salesAnalytics.forEach((sale,index) => {
         sale['label'] = sale['name'];
         sale['total'] = sale.productCount;
         sale['sold'] = sale.selledProductCount;
         sale['percent'] = (((sale.selledProductCount / sale.productCount) || 0 )* 100)+'';
-
       });
 
       if(res.status){

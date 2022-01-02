@@ -51,46 +51,94 @@
 
         </mat-toolbar>
        
-        <section class="dashboard_card_container grid-view">
-            <div *ngFor="let card of salesAnalytics">
-                <mat-card class="dashboard_card " >
-                    <mat-card-header>
-                        <img class="layout icon-container" mat-card-avatar src="assets/images/3dicons/chart.png" alt="">
-                        <mat-card-title class="text-thin text-uppercase">{{card.label}}</mat-card-title>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <div class="py-4 d-flex align-items-center justify-content-between">
-                            <ul class="px-2">
-                                <li >
-                                    <span>Total</span>
-                                    <span class="ml-1 p-2">{{card?.total || '0'}}</span>
-                                </li>
-                                <li >
-                                    <span>Sold</span>
-                                    <span class="ml-1 p-2">{{card?.sold || '0'}}</span>
-                                </li> 
-                            </ul>
-                            <ul class="px-2">
-                                <li  class="layout">
-                                    <div style="position: relative;">
-                                        <mat-progress-spinner class="mx-2 shadow-2" style="border-radius: 50%;" diameter='80'
-                                            [color]="primary" [mode]="mode" [value]="card.percent < 100 ? card.percent : '100' ">
-                                        </mat-progress-spinner>
-                                        <span style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);">
-                                            <small class="icon-container p-2">{{card?.percent/100 || '0' | percent}}</small>
-                                        </span>
-                                    </div>
-                                </li>
-                               
-                            </ul>
+        <section class="dashboard_card_container">
+            <div class="d-flex -100" style="justify-content: space-between;align-items: flex-start;">
+                <div class="grid-view" >
+                    <div *ngFor="let card of salesAnalytics">
+                        <mat-card class="dashboard_card " >
+                            <mat-card-header>
+                                <img class="layout icon-container" mat-card-avatar src="assets/images/3dicons/chart.png" alt="">
+                                <mat-card-title class="text-thin text-uppercase">{{card.label}}</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <ul class="p-0">
+                                        <li >
+                                            <span>Total</span>
+                                            <span class="ml-1 p-2">{{card?.total || '0'}}</span>
+                                        </li>
+                                        <li >
+                                            <span>Sold</span>
+                                            <span class="ml-1 p-2">{{card?.sold || '0'}}</span>
+                                        </li> 
+                                    </ul>
+                                    <ul class="p-0">
+                                        <li  class="layout">
+                                            <div style="position: relative;">
+                                                <mat-progress-spinner class="mx-2 shadow-2" style="border-radius: 50%;" diameter='60'
+                                                    [color]="primary" [mode]="mode" [value]="card.percent < 100 ? card.percent : '100' ">
+                                                </mat-progress-spinner>
+                                                <span class="icon-container layout" style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);width: 2.5rem;height: 2.5rem;">
+                                                    <small class="p-1">{{card?.percent/100 || '0' | percent}}</small>
+                                                </span>
+                                            </div>
+                                        </li>
+                                       
+                                    </ul>
+                                </div>
+                            </mat-card-content>
+                            <!-- <mat-card-actions>
+                                <button mat-button class="w-100">
+                                    <small class="text-thin">Last 24 Hours</small>
+                                </button>
+                            </mat-card-actions> -->
+                        </mat-card>
+                    </div>
+                </div>
+                <div class="customer_list_container mr-1 bg-ultra-light rounded-lg">
+                    <div class="d-flex justify-content-between align-items-center w-100 px-5 mt-2 mb-2" style="box-sizing: border-box;">
+                        <strong>Customers</strong> 
+                        <small>Pending</small>
+                    </div>
+                    
+                    <div *ngFor="let card of customerDues" class="mb-2">
+                        <mat-card class="dashboard_list " >
+                            <div class="d-flex justify-content-space-around align-items-center">
+                                <div class="icon-container p-1" style="height: 2rem;width: 2rem;position: relative;">
+                                    <img style="width:inherit;height:inherit" src="assets/images/3dicons/boy.png" alt="">
+                                </div>
+                                <div class="date-column">
+                                    <small class="text-light">{{card.name | titlecase}}</small>
+                                </div>
+                                <div class="date-column">
+                                    <span class="ml-1 text-danger">{{(card?.dueAmount || '0') | currency :'INR'}}</span>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+
+                    <div class="rounded-lg w-100" style="position: absolute;bottom: 0;">
+                        <div class="d-flex justify-content-between align-items-center w-100 px-5 mt-2 mb-2" style="box-sizing: border-box;">
+                            <strong>Total Income</strong> 
+                            <small>{{selectedDateLable | async }}</small>
                         </div>
-                    </mat-card-content>
-                    <!-- <mat-card-actions>
-                        <button mat-button class="w-100">
-                            <small class="text-thin">Last 24 Hours</small>
-                        </button>
-                    </mat-card-actions> -->
-                </mat-card>
+                        
+                        <div  class="">
+                            <mat-card class="dashboard_list " >
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="icon-container p-1" style="height: 2rem;width: 2rem;position: relative;">
+                                        <img style="width:inherit;height:inherit" src="assets/images/3dicons/wallet.png" alt="">
+                                    </div>
+                                    <div class="date-column">
+                                        <span class="ml-1 text-danger">{{(totalIncome || '0') | currency :'INR'}}</span>
+                                    </div>
+                                </div>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+
+                
             </div>
         </section>
         <!-- <app-clock></app-clock> -->
