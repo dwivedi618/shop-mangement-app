@@ -33,7 +33,7 @@ const sharp = require('sharp');
     }
 
 
-    export async function dateOnlyString(date: Date){
+    export function dateOnlyString(date: Date){
         return `${new Date(date).toISOString().substring(0, 10)}`;
     }
 // }
