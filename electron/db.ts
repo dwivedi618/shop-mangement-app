@@ -440,7 +440,7 @@ export async function dashboard(connection, range) {
     
     query = `
     SELECT 
-      sum(sell.finalPayableAmount) as totalIncome
+      sum(ifnull(sell.finalPayableAmount,0)) as totalIncome
     FROM sell
     WHERE ${where}
     `;
