@@ -38,7 +38,7 @@ export class ColorItemComponent implements OnInit ,OnChanges{
   @Output() onDialogClose  = new EventEmitter<any>();
   items = [];
   isListView: Boolean;
-  pageInfo = 'Mange colors '
+  pageInfo = 'Manage colors '
   actionOnCustomerSelection ;
   customerSelection = [];
   constructor(

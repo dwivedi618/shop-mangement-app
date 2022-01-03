@@ -39,7 +39,7 @@ export class SizeItemComponent implements OnInit ,OnChanges{
   @Output() onDialogClose  = new EventEmitter<any>();
   items = [];
   isListView: Boolean;
-  pageInfo = 'Mange sizes '
+  pageInfo = 'Manage sizes '
   actionOnCustomerSelection ;
   customerSelection = [];
   constructor(
