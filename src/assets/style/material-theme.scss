@@ -18,4 +18,4 @@ $theme: mat-light-theme($primary, $accent, $warn);
     $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   
     @include angular-material-theme($dark-theme);
-  }
+}

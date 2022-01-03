@@ -38,11 +38,11 @@ export class AddUpdateCategoryComponent implements OnInit {
       id : null,
       name : ['',[Validators.required]],
       image : [],
-      subCategories : this.fb.array([
-        this.fb.group({
-          name : []
-        })
-      ])
+      // subCategories : this.fb.array([
+      //   this.fb.group({
+      //     name : []
+      //   })
+      // ])
     })
 
     if(this.action == 'update'){
@@ -58,13 +58,13 @@ export class AddUpdateCategoryComponent implements OnInit {
     this.categoryForm.patchValue({name : this.localData?.name});
     this.categoryForm.patchValue({image : this.localData?.image});
     //patch subCategories [{}]
-    this.localData.subCategories.forEach(subCat => {
-      let subCategory = this.fb.group({
-        name : subCat.name,
-        id : subCat.id,
-      })
-      this.subCategories.push(subCategory)
-    })
+    // this.localData.subCategories.forEach(subCat => {
+    //   let subCategory = this.fb.group({
+    //     name : subCat.name,
+    //     id : subCat.id,
+    //   })
+    //   this.subCategories.push(subCategory)
+    // })
   }
 
   onImageChange(image : string){

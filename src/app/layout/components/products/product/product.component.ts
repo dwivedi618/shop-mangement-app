@@ -272,6 +272,8 @@ export class ProductComponent implements OnInit {
       }
     })
   }
+
+
   openAddUpdateProduct() {
     this.dialogService.addUpdateProduct('').subscribe((data) => {
       console.log("after close",data);
@@ -311,4 +313,6 @@ export class ProductComponent implements OnInit {
     console.log("Filter Applied",data)
     this.items = data
   }
+
+  
 }

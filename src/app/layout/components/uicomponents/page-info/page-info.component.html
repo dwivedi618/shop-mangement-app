@@ -1,11 +1,11 @@
-<mat-card *ngIf="showInfo" style="height: 5rem;padding: 0;position: relative;overflow: hidden;" class="p-0 layout item-list-view shadow card_page_info">
+<mat-card *ngIf="showInfo" style="height: 5rem;padding: 0;position: relative;overflow: hidden;" class="p-0 layout item-list-view shadow card_page_info text-white">
     <img class="thumbnail-background" style="height: inherit;" src="assets/images/wallpaper/pexels-eberhard-grossgasteiger-1612351.jpg" alt="">
     <div style="position: absolute;top: 0%;bottom: 0;" class="d-flex w-100 layout">
         <div class="d-flex w-100 ">
-            <mat-icon style="color: ivory;margin-left: 1rem;">info</mat-icon>
+            <mat-icon style="margin-left: 1rem;">info</mat-icon>
             <p class="text-thin ml-1">{{pageInfo }}</p>
             <div class="spacer"></div>
-            <button mat-icon-button style="color: ivory;" (click)="showInfo = false">
+            <button mat-icon-button  (click)="showInfo = false">
                 <mat-icon>close</mat-icon>
             </button>
         </div>

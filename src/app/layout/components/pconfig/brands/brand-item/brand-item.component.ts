@@ -38,7 +38,7 @@ export class BrandItemComponent implements OnInit, OnChanges {
   @Output() onDialogClose  = new EventEmitter<any>();
   items = [];
   isListView: Boolean;
-  pageInfo = 'Mange brands '
+  pageInfo = 'Manage brands '
   actionOnCustomerSelection ;
   customerSelection = [];
   constructor(

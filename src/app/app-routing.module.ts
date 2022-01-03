@@ -26,7 +26,7 @@ import { SizeComponent } from './layout/components/pconfig/sizes/size/size.compo
 const routes: Routes = [
   { path: '', component: AppSetupComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', component: HomeComponent, data: { breadcrumb: 'Home' }  ,canActivate: [AuthGuard]},
+  // { path: '', component: HomeComponent, data: { breadcrumb: 'Home' }  ,canActivate: [AuthGuard]},
   {
     path: '', component: LayoutComponent, canActivate: [AuthGuard],
     children: [

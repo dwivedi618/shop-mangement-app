@@ -1,4 +1,4 @@
-import { compress } from './utility';
+import { compress, dateOnlyString } from './utility';
 import { Customer } from './entities/customer';
 import { Product } from './entities/product';
 import { Inventory } from './entities/inventory';
@@ -100,20 +100,27 @@ export async function product(connection, action: string, data?: any) {
 
   switch (action) {
     case 'create':
+    case 'update':
       let colors: Color[] = [];
       let sizes: Size[] = [];
-      data.colors.forEach(async id => colors.push(await colorRepository.findOne(id)));
-      data.sizes.forEach(async id => sizes.push(await sizeRepository.findOne(id)));
+      let product: Product;
+      data.colors && data.colors.forEach(async id => colors.push(await colorRepository.findOne(id)));
+      data.sizes && data.sizes.forEach(async id => sizes.push(await sizeRepository.findOne(id)));
       
-      const product = new Product();
+      if(action === 'update'){
+        product = await productRepository.findOne(data.id)
+      }else {
+        product = new Product();
+      }
+       new Product();
       product.name = data.name;
       product.description = data.description;
       product.brand = data.brand;
       product.discountInPercent = data.discountInPercent;
       product.discountInRuppee = data.discountInRuppee;
       product.stock = data.stock;
-      product.colors = colors;
-      product.sizes = sizes;
+      product.colors = (colors.length > 0) ? colors: null ;
+      product.sizes = (sizes.length > 0) ? sizes: null;
       product.brand = await brandRepository.findOne(data.brand);
       product.category = await categoryRepository.findOne(data.category);
       product.subCategory = await subCategoryRepository.findOne(data.subCategory);
@@ -126,12 +133,7 @@ export async function product(connection, action: string, data?: any) {
       product.image = data.image && (await compress(data.image, 500, 500));
 
       return productRepository.save(product);
-
-    case 'update':
-      const id = data.id;
-      delete data.id;
-      data.image = data.image && (await compress(data.image, 500, 500));
-      return productRepository.update(id, data);
+     
 
     case 'fetch':
       return productRepository.find();
@@ -175,7 +177,8 @@ export async function sell(connection, action: string, data?: any) {
       //Creating selled products and linking with sell object.
       for (let i = 0; i < items.length; i++) {
         const product = await productRepository.findOne(items[i].id);
-
+        // product.stock = product.stock - items[i].quantity;
+        // await productRepository.save(product);
         //Create a new selled product for each item
         const selledproduct = new SelledProduct();
         selledproduct.sell = sell;
@@ -334,21 +337,26 @@ export async function size(connection, action: string, data?: any) {
 
 
 export async function category(connection, action: string, data?: any) {
-  const repository = connection.getRepository(Category);
+  const categoryRepository = connection.getRepository(Category);
+  const subcategoryRepository = connection.getRepository(SubCategory);
+
   switch (action) {
     case 'create':
-      return repository.save(data);
+      return categoryRepository.save(data);
 
     case 'update':
-      const id = data.id;
-      delete data.id;
-      return repository.update(id, data);
+      const category = await categoryRepository.findOne( data.id );
+      if(!category) throw new Error('Invalid category id');
+      category.name = data.name;
+      category.image = data.image;
+
+      return categoryRepository.save(category);
 
     case 'fetch':
-      return repository.find(data);
+      return categoryRepository.find(data);
 
     case 'delete':
-      return repository.remove(data);
+      return categoryRepository.remove(data);
   }
 }
 
@@ -373,4 +381,73 @@ export async function subCategory(connection, action: string, data?: any) {
     case 'delete':
       return repository.remove(data);
   }
+}
+
+
+/**
+ * Fetch all the data related to the selled category
+ * @param connection Connection to data
+ */
+export async function dashboard(connection, range) {
+  const categoryRepository = connection.getRepository(Category);
+  const customerRepository = connection.getRepository(Customer);
+  const sellRepository = connection.getRepository(Sell);
+
+  let where = 'true';
+  const data = {
+    category,
+    sell,
+    customer
+  };
+  
+    if(Array.isArray(range)){
+      let startDate = dateOnlyString(range[0]);
+      let endDate = dateOnlyString(range[1]);
+      where = `(date(sell.selledDate) BETWEEN '${startDate}' AND  '${endDate}')`;
+    }
+    let query = `
+    SELECT
+      sum(inner.count) as selledProductCount,
+      sum(ifnull(inner.stock, 0)) as productCount,
+      inner.name as name
+    FROM 
+      (SELECT 
+        sum(ifnull(sp.quantity, 0)) as count,
+        c.name as name,
+        c.id as categoryId,
+        p.id as productId,
+        p.stock as stock
+      FROM category c
+        LEFT JOIN product p ON p.categoryId = c.id
+        LEFT JOIN selled_product sp ON sp.itemId = p.id
+        INNER JOIN sell ON sell.id = sp.sellId AND ${where}
+      GROUP BY c.id,c.name, p.id) as inner
+    GROUP BY inner.categoryId, inner.name
+    `;
+    data.category = await categoryRepository.query(query);
+
+    query = `
+    SELECT 
+      sum(sell.finalPayableAmount - sell.receivedAmount) as dueAmount,
+      c.name as name
+    FROM sell
+      INNER JOIN customer c ON sell.customerId = c.id
+    WHERE ${where} AND (sell.finalPayableAmount - sell.receivedAmount) > 0
+    GROUP BY c.name
+    `;
+
+    data.customer = await customerRepository.query(query);
+    
+    query = `
+    SELECT 
+      sum(sell.finalPayableAmount) as totalIncome
+    FROM sell
+    WHERE ${where}
+    `;
+
+    data.sell = await customerRepository.query(query);
+    
+    
+    console.log('aaaaaaaaa------------------',data);
+    return data;      
 }

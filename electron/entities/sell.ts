@@ -56,7 +56,5 @@ export class Sell {
     selledDate: Date;
     
     @UpdateDateColumn()
-    updatedAt: Date;
-
-    
+    updatedAt: Date;   
 }

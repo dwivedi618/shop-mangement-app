@@ -6,7 +6,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content style="position: relative;">
-        <mat-toolbar class="bg-white shadow" style="position: absolute;top:0">  
+        <mat-toolbar class="shadow" style="position: absolute;top:0;border-radius: 0;">  
             <h3>Colors<small class="text-ultra-light px-2" id="count"></small></h3>
             <span class="spacer"></span>
             <app-search  (onSearch)="onSearch($event)"></app-search>
@@ -22,49 +22,7 @@
            
         <app-color-item [(data)]="colors"   [(view)]="isListView" (onDialogClose)="onDialogClose($event)"></app-color-item>
           
-            <!-- <section class="items-container grid-view">
-                <mat-list *ngIf="colors?.length" dense class=" rounded-lg w-100 py-2">
-                    
-                    <mat-list-item *ngFor="let color of colors|filter : searchText;let i=index">
-                        <div *ngIf="!color.isEditEnable" class="d-flex align-items-center justify-content-between w-100">
-                            <span class="color-box" [style.background]="color.code" ></span>
-                            <span spellcheck="false">{{color.name | titlecase }}</span>
-        
-                            <div>
-                                <button mat-icon-button class="text-light" (click)="color.isEditEnable = true">
-                                    <mat-icon class="mat-icon-sm pt-0">edit</mat-icon>
-                                </button>
-                                <button mat-icon-button class="text-light" (click)="onDelete(color)">
-                                    <mat-icon class="mat-icon-sm pt-0">delete</mat-icon>
-                                </button>
-                            </div>
-                        </div>
-                        <div *ngIf="color.isEditEnable"
-                            class="inline-edit__list d-flex align-items-center justify-content-between w-100 mb-2">
-                            <div class="d-flex align-items-center">
-                                <mat-form-field *ngIf="color.isEditEnable" appearance="outline" class=" pb-0 mr-1"
-                                    style="font-size: 12px;padding-bottom: 0;">
-                                    <mat-label>{{color.code}}</mat-label>
-                                    <input matInput type="color" [(ngModel)]="color.code" name="color_{{color.code}}" value={{color.code}} >
-                                </mat-form-field>
-                                <mat-form-field *ngIf="color.isEditEnable" appearance="outline" class="w-50 pb-0"
-                                    style="font-size: 12px;padding-bottom: 0;">
-                                    
-                                    <input matInput type="text" [(ngModel)]="color.name" placeholder="eg:Duke,HRX,Wrogn">
-                                </mat-form-field>
-                            </div>
-                            <div>
-                                <button mat-button class="text-light mr-1" (click)="color.isEditEnable = false">
-                                    <small>cancel</small>
-                                </button>
-                                <button mat-raised-button class="bg-green" (click)="onSave(color);color.isEditEnable = false">
-                                    <small>save</small>
-                                </button>
-                            </div>
-                        </div>
-                    </mat-list-item>
-                </mat-list>
-            </section> -->
+           
             <app-data-missing-instruction *ngIf="!colors?.length" [(instructions)]="COLOR_MISSING">
             </app-data-missing-instruction>
         

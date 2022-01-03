@@ -22,7 +22,7 @@ export class Category {
     image: string; 
 
     @OneToMany(type => SubCategory, subCategory => subCategory.category, {
-        cascade: true,
+        // cascade: true,
         eager: true
     })
     subCategories: SubCategory [];

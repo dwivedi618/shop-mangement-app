@@ -313,6 +313,22 @@ export class GarmentsCategoryComponent implements OnInit {
         result ? deleteC() : '';
       });
   };
+  onDeleteSubCategory = (data) => {
+    let deleteC = () => {
+      this.ipcService.database('subCategory', 'delete', data).then((res) => {
+        if (res.status) {
+          this.alertService.alert('Item deleted successfully', 'close');
+          this.getCategoryList();
+        }
+      });
+      // this.categoryList.pop();
+    };
+    this.alertService
+      .alertActionDialog('Delete', 'Are you sure ?', 'Yes! Delete')
+      .subscribe((result) => {
+        result ? deleteC() : '';
+      });
+  };
 
   onOpenDialog = (data:Category) => {
     let config: MatDialogConfig = {

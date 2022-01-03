@@ -1,8 +1,7 @@
-<!-- <app-search></app-search> -->
 <section *ngIf="isListView" class="items-container grid-view">
 
   <div *ngFor="let item of items|filter:searchText">
-    <article class="item shadow" (click)="openProductItemDetails(item)">
+    <mat-card class="item shadow p-0" (click)="openProductItemDetails(item)">
       <div class="item-price d-flex">
         <div class="spacer"></div>
         <span class="strong px-2 my-1">{{item?.price | currency : 'INR'}}</span>
@@ -34,96 +33,105 @@
 
         <div class="spacer"></div>
       </mat-toolbar>
-    </article>
+    </mat-card>
   </div>
 </section>
 
-<section *ngIf="!isListView" class="items-container-table-view">
+<section *ngIf="!isListView" class="items-container-table-view" >
 
   <app-page-info [(pageInfo)]="pageInfo"></app-page-info>
 
-  <div *ngFor="let item of items|filter:searchText ;let i=index;">
-    <article class="item-list-view shadow bg-white" (click)="openProductItemDetails(item)">
-      <div style="width: 2rem;" class="layout">
-        <span class="strong">{{i+1}}</span>
-      </div>
-      <img class="thumbnail-sm" src="{{item?.image || 'assets/images/alt_product.png'}}" alt="">
-      <div class="list-view-details">
-        <mat-list dense>
-          <mat-list-item class="text-wrap-sm">
-            <h3 matLine> {{item?.name | titlecase}} </h3>
-            <div matLine class="" style="color: var(--light);">
-              <span> {{item?.code}}</span>
-              <span matLine class="text-thin">Size: <small *ngFor="let size of item?.sizes" class="mr-1">{{size?.name |
-                  uppercase}}</small></span>
-              <!-- <span class="">{{item?.description}} </span> -->
-              <div class="d-flex" matTooltip="Colors">
-                <div *ngFor="let color of item?.colors" class="color-box-sm mr-1 " [style.background]="color.code">
-                </div>
-              </div>
-            </div>
-          </mat-list-item>
-        </mat-list>
-      </div>
-
-      <div class="spacer"></div>
-      <div class="price-column ">
-        <mat-list dense>
-          <mat-list-item>
-            <span matLine style="color:var(--light)" class="text-thin text-uppercase">Category</span>
-            <h3 matLine style="font-weight: 600;"> {{item?.category?.name | titlecase}}</h3>
-          </mat-list-item>
-        </mat-list>
-      </div>
-      <div class="price-column ">
-        <mat-list dense>
-          <mat-list-item>
-            <span matLine style="color:var(--light)" class="text-thin text-uppercase">Brand</span>
-            <h3 matLine style="font-weight: 600;"> {{item.brand?.name | titlecase}}</h3>
-          </mat-list-item>
-        </mat-list>
-      </div>
-
-      <div class="price-column">
-        <mat-list dense>
-          <mat-list-item>
-            <!-- <span matLine style="color:var(--light)">Sell Price</span> -->
-            <h3 matLine style="font-weight: 600;">
-              <!-- <del class="text-light text-thin">{{item?.price | currency : 'INR'}}</del> -->
-              <div matLine class="">
-                {{(item?.price - (item?.price*item?.discountInPercent)/100) | currency :'INR'}}
-
-              </div>
-              <span class="text-uppercase text-thin "> {{item?.discountInPercent || '0'}}% OFF </span>
-            </h3>
-          </mat-list-item>
-        </mat-list>
-      </div>
-
-      <div class="" (click)="$event.stopPropagation();">
-        <div class="d-flex align-items-center">
-          <div class="spacer"></div>
-          <button mat-icon-button class="rounded-lg bg-ultra-light" matTooltip="Edit | View | Delete"
-            [matMenuTriggerFor]="menu">
-            <mat-icon class="mat-icon-sm pt-0">more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="onSelectItem(item);">
-              <mat-icon>edit</mat-icon>
-              <span>Edit</span>
-            </button>
-            <button mat-menu-item (click)="openProductItemDetails(item)">
-              <mat-icon>moving</mat-icon>
-              <span class="pr-4">View Details</span>
-            </button>
-            <button mat-menu-item (click)="onDelete(item)">
-              <mat-icon>delete</mat-icon>
-              <span>Remove</span>
-            </button>
-          </mat-menu>
+  <div >
+    <mat-card *ngFor="let item of items|filter:searchText ;let i=index;">
+      <article class="item-list-view shadow" (click)="openProductItemDetails(item)">
+        
+        <div style="width: 2rem;" class="layout ">
+          <span class="strong">{{i+1}}</span>
         </div>
-
-      </div>
-    </article>
+        <img class="thumbnail-sm" src="{{item?.image || 'assets/images/alt_product.png'}}" alt="Image">
+        
+        <div class="list-view-details">
+          <mat-list dense>
+            <mat-list-item class="text-wrap-sm">
+              <h3 matLine> {{item?.name | titlecase}} </h3>
+              <div matLine class="" style="color: var(--light);">
+                <span matLine class="text-thin">Size: <small *ngFor="let size of item?.sizes" class="mr-1">{{size?.name |
+                    uppercase}}</small></span>
+                <div class="d-flex" matTooltip="Colors">
+                  <div *ngFor="let color of item?.colors" class="color-box-sm mr-1 " [style.background]="color.code">
+                  </div>
+                </div>
+               
+              </div>
+            </mat-list-item>
+          </mat-list>
+        </div>
+  
+        <div class="spacer"></div>
+        <div class="price-column ">
+          <mat-list dense>
+            <mat-list-item>
+              <span matLine style="color:var(--light)" class="text-thin text-uppercase">Category</span>
+              <h3 matLine style="font-weight: 600;"> {{item?.category?.name | titlecase}}</h3>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div class="price-column ">
+          <mat-list dense>
+            <mat-list-item>
+              <span matLine style="color:var(--light)" class="text-thin text-uppercase">Brand</span>
+              <h3 matLine style="font-weight: 600;"> {{item.brand?.name | titlecase}}</h3>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div class="price-column">
+          <mat-list dense>
+            <mat-list-item>
+              <button mat-button class="rounded-pill">
+                <span *ngIf="item?.stock" [class.text-green]="item?.stock > 0"><small >In Stock </small><small>{{item?.stock}}</small></span>
+                <span *ngIf="!item?.stock" [class.text-danger]="!item?.stock"><small >Out of Stock </small></span>
+              </button>
+            </mat-list-item>
+          </mat-list>
+        </div>
+        <div class="price-column">
+          <mat-list dense>
+            <mat-list-item>
+              <h3 matLine style="font-weight: 600;">
+                <div matLine class="">
+                  {{(item?.price - (item?.price*item?.discountInPercent)/100) | currency :'INR'}}
+                </div>
+                <span class="text-uppercase text-thin "> {{item?.discountInPercent || '0'}}% OFF </span>
+              </h3>
+            </mat-list-item>
+          </mat-list>
+        </div>
+  
+        <div class="" (click)="$event.stopPropagation();">
+          <div class="d-flex align-items-center">
+            <div class="spacer"></div>
+            <button mat-icon-button class="rounded-lg bg-ultra-light" matTooltip="Edit | View | Delete"
+              [matMenuTriggerFor]="menu">
+              <mat-icon class="mat-icon-sm pt-0">more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="onSelectItem(item);">
+                <mat-icon>edit</mat-icon>
+                <span>Edit</span>
+              </button>
+              <button mat-menu-item (click)="openProductItemDetails(item)">
+                <mat-icon>moving</mat-icon>
+                <span class="pr-4">View Details</span>
+              </button>
+              <button mat-menu-item (click)="onDelete(item)">
+                <mat-icon>delete</mat-icon>
+                <span>Remove</span>
+              </button>
+            </mat-menu>
+          </div>
+  
+        </div>
+      </article>
+    </mat-card>
   </div>
 </section>

@@ -74,13 +74,15 @@ export class Product {
       brand: Brand;
 
       @ManyToMany(type => Color, {
-            eager: true
+            eager: true,
+            nullable: true
       })
       @JoinTable()
       colors: Color[];
 
       @ManyToMany(type => Size, {
-            eager: true
+            eager: true,
+            nullable: true
       })
       @JoinTable()
       sizes: Size[];

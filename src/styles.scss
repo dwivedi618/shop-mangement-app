@@ -87,7 +87,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     background: var(--dark-3);
 }
 .bg-ultra-light{
-    color: var(--dark);
+    // color: var(--dark);
     background: var(--ultra-light);
 }
 .bg-light{
@@ -135,6 +135,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 .text-green{
     color: var(--green);
 }
+.text-danger{
+    color: orange;
+}
 .text-ultra-light{
     color: var(--light);
     font-size: 1.2rem;
@@ -159,6 +162,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 // MATERIAL OVERWRITE CSS
     mat-toolbar {
         max-height: 48px!important;
+        border-radius: none!important;
     }
     mat-toolbar.dialog-toolbar{
         min-width: calc(100% + 48px);
@@ -191,6 +195,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 .rounded-lg{
     border-radius: 4px!important;
 }
+.rounded-pill{
+    border-radius: 5rem!important;
+}
 .spacer{
     flex: 1 1 auto;
 }
@@ -199,6 +206,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 }
 .px-5{
     padding: 0 30px;
+}
+.px-4{
+    padding: 0 24px;
 }
 .px-2{
     padding: 0 12px;
@@ -211,6 +221,9 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 }
 .py-4{
     padding: 24px 0!important;
+}
+.p-1{
+    padding: 6px!important;
 }
 .p-2{
     padding: 12px!important;
@@ -267,7 +280,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     margin: 0;
 } 
 .p-0{
-    padding: 0;
+    padding: 0px!important;
 }
 .text-uppercase{
     text-transform:uppercase ;
@@ -295,6 +308,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 .strong{
     font-weight: 600!important;
 }
+
 .thumbnail-md{
     height: 6rem;
     width: 6rem;
@@ -322,8 +336,8 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
   }
 
   .thumbnail-sm{
-    height: 4rem;
-    width: 4rem;
+    height: 2rem;
+    width: 2rem;
     border-radius: 0.2rem;
     flex-shrink: 0;
     object-fit: cover;
@@ -355,11 +369,36 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 //   ITEM CARD PRICE TAG DETAILS
 .items-container{
     
-    padding: 1rem 0;
+    padding: 1rem;
     margin: 3rem 0rem 2rem 0rem;
     max-height: calc(100% - 8rem);
     overflow-y: auto;
 }
+.dashboard_card_container{
+    position: relative;
+    padding: 1rem 0;
+    margin: 3rem 0rem 2rem 0rem;
+    height: calc(100% - 8rem);
+    overflow-y: auto;
+}
+.dashboard_card{
+    position: relative;
+    display: block;
+    min-width: 5rem;
+    min-height: 5rem;
+    margin: 1rem;
+    cursor: pointer;
+    // overflow: hidden;
+    transition: all 0.2s linear
+}
+.dashboard_card_container .dashboard_card::before{
+    // content: ""; 
+    // backdrop-filter: blur(5px);
+    // background: -webkit-linear-gradient(45deg, #210046, #0016b900); 
+    // background: linear-gradient(45deg, #210046c4, #0016b900); 
+    // position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0rem;
+}
+
 .grid-view{
     display: flex;
     flex-wrap: wrap;
@@ -371,7 +410,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     display: block;
     min-width: 5rem;
     min-height: 5rem;
-    margin: 1rem;
+    margin: 0rem 1rem 1rem 0rem;
     cursor: pointer;
     overflow: hidden;
     transition: all 0.2s linear
@@ -379,7 +418,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 .item:is(.active,:hover){
   background: var(--ultra-light);
 }
-.item::before{
+.items-container .item::before{
     content: ""; 
     // backdrop-filter: blur(5px);
     background: -webkit-linear-gradient(45deg, #210046, #0016b900); 
@@ -403,12 +442,12 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     background: linear-gradient(0deg, #21004646, rgba(0, 0, 0, 0)); 
 }
 .card-item-details mat-list-item  h3,p{ 
-   color: white;
+//    color: white;
    font-size: 1rem;
    font-weight: 600;
 }
 .list-view-details mat-list-item  h3,p{ 
-    color: light;
+    // color: light;
     font-size: 1rem;
     font-weight: 600;
  }
@@ -418,7 +457,8 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    margin: 1rem;
+    // margin: 1rem;
+    margin:1rem 0;
     width:  calc(90% -3rem );
     // min-width: var(--item-list-view-width );
     padding-right: 1rem;
@@ -426,6 +466,11 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 }
 .item-list-view .price-column{
     min-width: 7.5rem;
+    text-align: right;
+    font-size: 12px;
+}
+.item-list-view .price-column-sm{
+    min-width: 4.5rem;
     text-align: right;
     font-size: 12px;
 }
@@ -439,8 +484,19 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
   }
   .items-container-table-view{
     margin: 3rem 0rem 2rem 0rem;
+    padding: 0 1rem;
     max-height: calc(100% - 6rem);
     overflow-y: auto;
+  }
+  .items-container-table-view mat-card{
+    padding: 0px;
+    margin-bottom: 1rem;
+    box-shadow: none!important;
+  }
+  .items-container mat-card{
+    padding: 0px;
+    margin-bottom: 1rem;
+    box-shadow: none!important;
   }
 .table-column{
     min-width: 6rem;
@@ -552,3 +608,29 @@ input[type="color"]::-webkit-color-swatch {
     height: .8rem;
     border-radius: 4px; 
 }
+
+.bg-mygradient-1{
+    background: #67B26F!important;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #4ca2cd, #67B26F)!important;  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #4ca2cd, #67B26F)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  }
+  .bg-mygradient-2{
+  background: #3a6186!important;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #89253e, #3a6186)!important;  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #89253e, #3a6186)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  .bg-mygradient-3{
+    color: white!important;
+    background: #00d2ff!important;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff)!important;  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #3a7bd5, #00d2ff)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  }
+  .bg-mygradient-4{
+    color: white!important;
+  background: #DE6262;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #FFB88C, #DE6262);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+  }

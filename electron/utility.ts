@@ -31,4 +31,9 @@ const sharp = require('sharp');
         }
 
     }
+
+
+    export function dateOnlyString(date: Date){
+        return `${new Date(date).toISOString().substring(0, 10)}`;
+    }
 // }
