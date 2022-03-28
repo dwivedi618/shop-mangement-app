@@ -19,7 +19,6 @@ export class DashboardComponent implements OnInit {
     // { id:1,label:'Category',total:'7' },
   ]
 
-  mode: ProgressSpinnerMode = 'determinate';
   value = 50;
   categoryList= [
     {

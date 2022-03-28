@@ -1,0 +1,33 @@
+<mat-card class="dashboard_card" >
+    <mat-card-header>
+        <img class="layout icon-container" mat-card-avatar src="assets/images/3dicons/chart.png" alt="">
+        <mat-card-title class="text-thin text-uppercase">{{data.label}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="d-flex align-items-center justify-content-between">
+            <ul class="p-0">
+                <li >
+                    <span>Total</span>
+                    <span class="ml-1 p-2">{{data?.total || '0'}}</span>
+                </li>
+                <li >
+                    <span>Sold</span>
+                    <span class="ml-1 p-2">{{data?.sold || '0'}}</span>
+                </li> 
+            </ul>
+            <ul class="p-0">
+                <li  class="layout">
+                    <ng-container>
+                        <app-progress [percent]="data?.percent"></app-progress>
+                    </ng-container>
+                </li>
+               
+            </ul>
+        </div>
+    </mat-card-content>
+    <!-- <mat-card-actions>
+        <button mat-button class="w-100">
+            <small class="text-thin">Last 24 Hours</small>
+        </button>
+    </mat-card-actions> -->
+</mat-card>

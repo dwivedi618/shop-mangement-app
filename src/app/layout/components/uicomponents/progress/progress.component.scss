@@ -1,0 +1,19 @@
+::ng-deep .mat-progress-spinner circle {
+    fill: rgb(0 0 0 / 4%) !important;
+    transform-origin: center;
+    transition: stroke-dashoffset 225ms linear;
+}
+
+.shadow-2 {
+    box-shadow: 0px 30px 30px -20px rgba(0, 0, 0, 0.1);
+}
+
+.icon-container {
+    border-radius: 20rem;
+    background: linear-gradient(225deg, #e6e6e6, #ffffff);
+    box-shadow: -7px 7px 13px #d9d9d9, 7px -7px 13px #ffffff;
+}
+
+.text-dark-50 {
+    color: rgba(0, 0, 0, 0.5);
+}

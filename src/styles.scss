@@ -1,3 +1,7 @@
+// <link href="../node_modules/material-design-icons/iconfont/material-icons.css" rel="stylesheet">
+@import '../node_modules/material-design-icons/iconfont/material-icons.css';
+@import "~@fontsource/material-icons/index.css";
+@import "./assets/style/material-theme.scss";
 
 /* VARIABLES*/
 @import './assets/style/_variable.scss';
@@ -8,10 +12,6 @@
 
 
 
-// <link href="../node_modules/material-design-icons/iconfont/material-icons.css" rel="stylesheet">
-@import '../node_modules/material-design-icons/iconfont/material-icons.css';
-@import "~@fontsource/material-icons/index.css";
-@import "./assets/style/material-theme.scss";
 
 .material-icons {
     font-family: 'Material Icons';

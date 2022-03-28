@@ -1,3 +1,4 @@
+import { ProgressComponent } from './layout/components/uicomponents/progress/progress.component';
 import { MaterialModule } from './material.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -80,7 +81,7 @@ import { ColorItemComponent } from './layout/components/pconfig/colors/color-ite
 import { ThemeService } from './services/theme.service';
 import { ClockComponent } from './layout/components/uicomponents/clock/clock.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-
+import { DashboardCardComponent } from './layout/components/uicomponents/dashboard-card/dashboard-card.component';
 
 @NgModule({
   declarations: [
@@ -148,8 +149,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     SizeItemComponent,
     ColorItemComponent,
     ClockComponent,
-
-
+    DashboardCardComponent,
+    ProgressComponent
   ],
   imports: [
     BrowserModule,
