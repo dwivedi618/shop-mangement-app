@@ -1,6 +1,6 @@
 <mat-sidenav-container class="sidenav-newsale-container">
     <mat-sidenav class="sidenav-checkout" [mode]="'side'" [opened]="true" position="end">
-        <mat-toolbar class="shadow" style="position: absolute;top: 0;z-index: 5;background: white;">
+        <mat-toolbar color="primary" class="shadow" style="position: absolute;top: 0;z-index: 5;border-radius: 0;">
             <div class="spacer"></div>
             <small>Bill</small>
             <div class="spacer"></div>
@@ -44,7 +44,8 @@
                         <small>Apply Discount</small>
                         <div class="spacer"></div>
                     </mat-expansion-panel-header>
-                    <p class="text-thin"><mat-icon class="mat-icon-sm pt-1 mr-1">info</mat-icon>Discount On Total Amount</p>
+                    <mat-card class="shadow">
+                        <p class="text-thin"><mat-icon class="mat-icon-sm pt-1 mr-1 text-light">info</mat-icon><small class="text-light">Discount On Total Amount</small></p>
                     <mat-form-field class="mr-1" appearance="outline" style="font-size: 10px;width: 48%;">
                         <mat-label>Discount In %</mat-label>
                         <input matInput type="text" placeholder="%" [(ngModel)]="discountInPercent"
@@ -56,9 +57,10 @@
                         <input matInput type="text" placeholder="INR" [(ngModel)]="discountInRuppee"
                             (ngModelChange)="onDiscountChanged(cartAmount,$event,'ruppee')">
                     </mat-form-field>
-                    <button mat-button (click)="discountInRuppee = 0;discountInPercent = 0" class="w-100 bg-ultra-light">
-                        <small class="text-light px-2">clear</small>
+                    <button mat-stroked-button color="primary" (click)="discountInRuppee = 0;discountInPercent = 0" class="w-100">
+                        <small class="px-2 text-uppercase">clear</small>
                     </button>
+                    </mat-card>
 
 
 
@@ -86,20 +88,13 @@
                 </mat-list-item>
             </mat-list>
         </div>
-        <mat-toolbar style="position: absolute;bottom: 0;z-index: 5;background: white">
-            <!-- <button mat-stroked-button class="bg-ultra-light w-100 mr-1">
-                <span class="text-uppercase">Cancel</span>
-            </button>
-            <button mat-button class="bg-green w-100" (click)="onTakePayment()">
-                <span class=" text-uppercase">Take Payment</span>
-            </button> -->
-
+        <mat-toolbar style="position: absolute;bottom: 0;z-index: 5;">
         </mat-toolbar>
     </mat-sidenav>
 
     <mat-sidenav-content style="position: relative;">
-        <mat-toolbar class="bg-white shadow" style="position: absolute;top:0">
-            <small class="text-green" >Billing Items<span class="text-ultra-light px-2" id="count"></span></small>
+        <mat-toolbar class="shadow" style="position: absolute;top:0;border-radius: 0;">
+            <small >Billing Items<span class="text-ultra-light px-2" id="count"></span></small>
 
             <!-- <div class="layout w-100">
                 <app-search (onSearch)="getSearchText($event)"></app-search>

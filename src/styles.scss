@@ -1,34 +1,18 @@
 
-@font-face {
-    font-family: "Inter";
-    src: url(./assets/font/Inter/static/Inter-ExtraLight.ttf) format("truetype");
-    font-weight: 200;
-    font-style: normal;
-}
-@font-face {
-    font-family: "Inter";
-    src: url(./assets/font/Inter/static/Inter-Light.ttf) format("truetype");
-    font-weight: 300;
-    font-style: normal;
-}
-@font-face {
-    font-family: "Inter";
-    src:url(./assets/font/Inter/static/Inter-Regular.ttf) format("truetype");
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Inter";
-    src: url(./assets/font/Inter/static/Inter-SemiBold.ttf) format("truetype");
-    font-weight: 600;
-    font-style: normal;
-}
 /* VARIABLES*/
 @import './assets/style/_variable.scss';
+@import './assets/style/typography.scss';
+@import './assets/style/gradients.scss';
+@import './assets/style/helper.scss';
+@import './assets/style/backgrounds.scss';
+
+
+
 // <link href="../node_modules/material-design-icons/iconfont/material-icons.css" rel="stylesheet">
 @import '../node_modules/material-design-icons/iconfont/material-icons.css';
 @import "~@fontsource/material-icons/index.css";
+@import "./assets/style/material-theme.scss";
+
 .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
@@ -70,60 +54,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     color: rgb(255, 255, 255)!important;
 }
 
-// BACKGROUD
-.bg-blue{
-    color: var(--white);
-    background: var(--blue);
-}
-.bg-dark{
-    color: var(--white);
 
-    background: var(--dark);
-}
-.bg-dark-secondary{
-    color: var(--white);
-    background: var(--dark-3);
-}
-.bg-ultra-light{
-    color: var(--dark);
-    background: var(--ultra-light);
-}
-.bg-light{
-    background: var(--light);
-}
-.bg-mygradient-primary{
-    color: white!important;
-    background: #00d2ff!important;  /* fallback for old browsers */
-//   background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff)!important;  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(45deg, #3a7bd5, #00d2ff)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-  }
-  .bg-mygradient-secondary{
-  color: white!important;
-  background: #DE6262!important;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #FFB88C, #DE6262)!important;  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #FFB88C, #DE6262)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-  }
-  .bg-selected{
-    // color: white!important;
-    background: #ffb88caf!important;  /* fallback for old browsers */
-    background: linear-gradient(45deg, #ffb88caf, #de626238)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-    }
-  
-.bg-green{
-    color: var(--white)!important;
-    background: var(--green);
-}
-.bg-light-green{
-    color: var(--white)!important;
-    background: var(--light-green);
-}
-.bg-white{
-    
-    background: var(--white)!important;
-}
 .text-light{
     color: var(--light);
 }
@@ -160,6 +91,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 // MATERIAL OVERWRITE CSS
     mat-toolbar {
         max-height: 48px!important;
+        border-radius: none!important;
     }
     mat-toolbar.dialog-toolbar{
         min-width: calc(100% + 48px);
@@ -173,146 +105,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     .mat-icon-sm{
         font-size: 1rem;
     }
-.w-100{
-    width: 100%!important;
-}
-.w-75{
-    width: 75%!important;
-}
-.w-50{
-    width: 50%;
-}
-.h-100{
-    height: 100%;
-}
 
-.text-center{
-    text-align: center;
-}
-.rounded-lg{
-    border-radius: 4px!important;
-}
-.rounded-pill{
-    border-radius: 5rem!important;
-}
-.spacer{
-    flex: 1 1 auto;
-}
-.pt-1{
-    padding-top: 6px;
-}
-.px-5{
-    padding: 0 30px;
-}
-.px-4{
-    padding: 0 24px;
-}
-.px-2{
-    padding: 0 12px;
-}
-.px-3{
-    padding: 0 18px!important;
-}
-.py-1{
-    padding: 6px 0!important;
-}
-.py-4{
-    padding: 24px 0!important;
-}
-.p-1{
-    padding: 6px!important;
-}
-.p-2{
-    padding: 12px!important;
-}
-.p-3{
-    padding: 18px!important;
-}
-.p-5{
-    padding: 30px!important;
-}
-.pb-0{
-    padding-bottom: 0px!important;
-}
-.pb-2{
-    padding-bottom: 6px!important;
-}
-.pb-3{
-    padding-bottom: 12px!important;
-}
-.pb-4{
-    padding-bottom: 18px!important;
-}
-.pb-5{
-    padding-bottom: 24px!important;
-}
-.p-5{
-    padding: 30px;
-}
-.py-2{
-    padding: 12px 0;
-}
-.mr-1{
-    margin-right: 6px!important;
-}
-.ml-1{
-    margin-left:6px!important;
-}
-.my-1{
-    margin: 6px 0;
-}
-.mt-1{
-    margin-top: 6px!important;
-}
-.mt-2{
-    margin-top: 12px!important;
-}
-.mb-2{
-    margin-bottom: 12px!important;
-}
-.mb-1{
-    margin-bottom: 6px!important;
-}
-.m-0{
-    margin: 0;
-} 
-.p-0{
-    padding: 0;
-}
-.text-uppercase{
-    text-transform:uppercase ;
-}
-.d-flex,.row{
-    display: flex;
-    align-items: center;
-}
-.flex-column{
-    flex-direction: column;
-}
-.justify-content-start{
-    justify-content: start;
-}
-.align-items-center{
-    align-items: center;
-}
-.justify-content-between{
-    justify-content:space-between;
-}
-.fancy-text{
-    letter-spacing: 5px;
-    font-weight: 600;
-}
-.strong{
-    font-weight: 600!important;
-}
-.thumbnail-sm{
-    height: 2rem;
-    width: 2rem;
-    border-radius: 0.2rem;
-    flex-shrink: 0;
-    object-fit: cover;
-    transition: all 0.2s linear
-  }
 .thumbnail-md{
     height: 6rem;
     width: 6rem;
@@ -340,8 +133,8 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
   }
 
   .thumbnail-sm{
-    height: 4rem;
-    width: 4rem;
+    height: 2rem;
+    width: 2rem;
     border-radius: 0.2rem;
     flex-shrink: 0;
     object-fit: cover;
@@ -373,7 +166,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
 //   ITEM CARD PRICE TAG DETAILS
 .items-container{
     
-    padding: 1rem 0;
+    padding: 1rem;
     margin: 3rem 0rem 2rem 0rem;
     max-height: calc(100% - 8rem);
     overflow-y: auto;
@@ -414,7 +207,7 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     display: block;
     min-width: 5rem;
     min-height: 5rem;
-    margin: 1rem;
+    margin: 0rem 1rem 1rem 0rem;
     cursor: pointer;
     overflow: hidden;
     transition: all 0.2s linear
@@ -446,12 +239,12 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     background: linear-gradient(0deg, #21004646, rgba(0, 0, 0, 0)); 
 }
 .card-item-details mat-list-item  h3,p{ 
-   color: white;
+//    color: white;
    font-size: 1rem;
    font-weight: 600;
 }
 .list-view-details mat-list-item  h3,p{ 
-    color: light;
+    // color: light;
     font-size: 1rem;
     font-weight: 600;
  }
@@ -461,7 +254,8 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    margin: 1rem;
+    // margin: 1rem;
+    margin:1rem 0;
     width:  calc(90% -3rem );
     // min-width: var(--item-list-view-width );
     padding-right: 1rem;
@@ -487,8 +281,19 @@ body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif;}
   }
   .items-container-table-view{
     margin: 3rem 0rem 2rem 0rem;
+    padding: 0 1rem;
     max-height: calc(100% - 6rem);
     overflow-y: auto;
+  }
+  .items-container-table-view mat-card{
+    padding: 0px;
+    margin-bottom: 1rem;
+    box-shadow: none!important;
+  }
+  .items-container mat-card{
+    padding: 0px;
+    margin-bottom: 1rem;
+    box-shadow: none!important;
   }
 .table-column{
     min-width: 6rem;
@@ -601,28 +406,4 @@ input[type="color"]::-webkit-color-swatch {
     border-radius: 4px; 
 }
 
-.bg-mygradient-1{
-    background: #67B26F!important;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #4ca2cd, #67B26F)!important;  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #4ca2cd, #67B26F)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-  }
-  .bg-mygradient-2{
-  background: #3a6186!important;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #89253e, #3a6186)!important;  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #89253e, #3a6186)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  }
-  .bg-mygradient-3{
-    color: white!important;
-    background: #00d2ff!important;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff)!important;  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #3a7bd5, #00d2ff)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-  }
-  .bg-mygradient-4{
-    color: white!important;
-  background: #DE6262;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #FFB88C, #DE6262);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-  }
+

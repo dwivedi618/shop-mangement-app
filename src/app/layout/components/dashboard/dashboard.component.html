@@ -4,7 +4,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content style="position: relative;">
-        <mat-toolbar class="bg-white shadow" style="position: absolute;top:0">
+        <mat-toolbar class="shadow" style="position: absolute;top:0">
             <h5 class="" style="font-size: 1rem;">Sales Analytics By Garment Category</h5>
             <span class="spacer"></span>
             
@@ -55,7 +55,7 @@
             <div class="d-flex -100" style="justify-content: space-between;align-items: flex-start;">
                 <div class="grid-view" >
                     <div *ngFor="let card of salesAnalytics">
-                        <mat-card class="dashboard_card " >
+                        <mat-card class="dashboard_card" >
                             <mat-card-header>
                                 <img class="layout icon-container" mat-card-avatar src="assets/images/3dicons/chart.png" alt="">
                                 <mat-card-title class="text-thin text-uppercase">{{card.label}}</mat-card-title>
@@ -95,14 +95,14 @@
                         </mat-card>
                     </div>
                 </div>
-                <div class="customer_list_container mr-1 bg-ultra-light rounded-lg">
-                    <div class="d-flex justify-content-between align-items-center w-100 px-5 mt-2 mb-2" style="box-sizing: border-box;">
+                <mat-card class="customer_list_container mr-1 bg-ultra-light rounded-lg mat-elevation-z0">
+                    <div class="d-flex justify-content-between align-items-center w-100 mt-2 mb-2" style="box-sizing: border-box;">
                         <strong>Customers</strong> 
                         <small>Pending</small>
                     </div>
                     
                     <div *ngFor="let card of customerDues" class="mb-2">
-                        <mat-card class="dashboard_list " >
+                        <mat-card class="dashboard_list" >
                             <div class="d-flex justify-content-space-around align-items-center">
                                 <div class="icon-container p-1" style="height: 2rem;width: 2rem;position: relative;">
                                     <img style="width:inherit;height:inherit" src="assets/images/3dicons/boy.png" alt="">
@@ -136,7 +136,7 @@
                             </mat-card>
                         </div>
                     </div>
-                </div>
+                </mat-card>
 
                 
             </div>

@@ -1,0 +1,54 @@
+// BACKGROUD
+.bg-blue{
+    color: var(--white);
+    background: var(--blue);
+}
+.bg-dark{
+    color: var(--white);
+
+    background: var(--dark);
+}
+.bg-dark-secondary{
+    color: var(--white);
+    background: var(--dark-3);
+}
+.bg-ultra-light{
+    // color: var(--dark);
+    background: var(--ultra-light);
+}
+.bg-light{
+    background: var(--light);
+}
+.bg-mygradient-primary{
+    color: white!important;
+    background: #00d2ff!important;  /* fallback for old browsers */
+//   background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff)!important;  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(45deg, #3a7bd5, #00d2ff)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  }
+  .bg-mygradient-secondary{
+  color: white!important;
+  background: #DE6262!important;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #FFB88C, #DE6262)!important;  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #FFB88C, #DE6262)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  }
+  .bg-selected{
+    // color: white!important;
+    background: #ffb88caf!important;  /* fallback for old browsers */
+    background: linear-gradient(45deg, #ffb88caf, #de626238)!important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
+    }
+  
+.bg-green{
+    color: var(--white)!important;
+    background: var(--green);
+}
+.bg-light-green{
+    color: var(--white)!important;
+    background: var(--light-green);
+}
+.bg-white{
+    
+    background: var(--white)!important;
+}

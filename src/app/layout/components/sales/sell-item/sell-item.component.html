@@ -1,18 +1,23 @@
 <section *ngIf="isListView" class="items-container grid-view">
     <div *ngFor="let item of items" >
-      <article class="item shadow"   (click)="openProductItemDetails(item)">
+      <mat-card class="item shadow"   (click)="openProductItemDetails(item)">
         <div class="item-price d-flex">
           <div class="spacer"></div>
-          <span class="strong px-2 my-1" >{{item?.mrp | currency : 'INR'}}</span>
+          
+            <strong matLine 
+            [class.text-danger]="(item?.receivedAmount != item?.finalPayableAmount)" 
+            [class.text-green]="(item?.receivedAmount == item?.finalPayableAmount)"
+            class="text-uppercase mt-1 mr-1" matTooltip="{{(item?.finalPayableAmount - item?.receivedAmount )? ((item?.finalPayableAmount - item?.receivedAmount ) | currency:'INR'): 'No Dues'}}" >{{(item?.receivedAmount == item?.finalPayableAmount) ? 'Paid' : 'Due' }}</strong>
+          
         </div>
         <img class="thumbnail-lg" src="{{item?.image || 'assets/images/3dicons/wallet.png'}}" alt="">
         <div class="card-item-details w-100">
           <mat-list dense class="w-100">
             <mat-list-item class="text-wrap-sm">
-              <h3 matLine> {{item?.name}} </h3>
-              <p matLine class="">
-                <small> {{item?.code}} </small>
-                <small class="">{{item?.description}} </small>
+              <h3 matLine> {{item?.receiptNumber | uppercase }} </h3>
+              <p matLine class="" style="color: var(--light);">
+                <span >Bill </span>
+                <span class="text-danger">{{item?.finalPayableAmount | currency:'INR'}} </span>
               </p>
             </mat-list-item>
           </mat-list>
@@ -26,14 +31,14 @@
            
           <div class="spacer"></div>
         </mat-toolbar>
-      </article>
+      </mat-card>
     </div>
   </section>
   
   <section *ngIf="!isListView" class="items-container-table-view">
     <app-page-info [(pageInfo)]="pageInfo"></app-page-info>
-    <div *ngFor="let item of items;let i=index;">
-      <article class="item-list-view shadow bg-white"   (click)="openProductItemDetails(item)">
+    <mat-card *ngFor="let item of items;let i=index;">
+      <article class="item-list-view shadow"   (click)="openProductItemDetails(item)">
         <div style="width: 2rem;" class="layout">
           <span class="strong">{{i+1}}</span>
         </div>
@@ -43,8 +48,8 @@
             <mat-list-item class="text-wrap-sm">
               <h3 matLine> {{item?.receiptNumber | uppercase }} </h3>
               <p matLine class="" style="color: var(--light);">
-                <span> {{item?.paymentMode | uppercase}} </span>
-                <span class="">{{item?.receivedAmount | currency:'INR'}} </span>
+                <span >Bill </span>
+                <span class="text-danger">{{item?.finalPayableAmount | currency:'INR'}} </span>
               </p>
             </mat-list-item>
           </mat-list>
@@ -53,27 +58,36 @@
         <div class="price-column">
           <mat-list dense>
             <mat-list-item>
-              <span matLine style="color:var(--light)">Sold To</span>
+              <span matLine style="color:var(--light)" class="text-thin text-uppercase">Sold To</span>
               
-              <h3 matLine style="font-weight: 600;"> 
-                <span class="text-light">{{item?.customer?.name | titlecase}}</span> 
-                <!-- <span matLine class="">{{(item?.receivedAmount == item?.finalPayableAmount) ? 'Paid' : 'Due' }}</span> -->
-              </h3>
+              
+                <span matLine class="">{{item?.customer?.name | titlecase}}</span> 
+                <p matLine>
+                  <span class="text-thin"> {{item?.paymentMode | uppercase}} </span>
+                  <span class="text-danger">{{item?.receivedAmount | currency:'INR'}} </span>
+                </p>
+              
             </mat-list-item>
           </mat-list>
+        </div>
+        <div class="price-column">
+          <strong matLine 
+          [class.text-danger]="(item?.receivedAmount != item?.finalPayableAmount)" 
+          [class.text-green]="(item?.receivedAmount == item?.finalPayableAmount)"
+          class="text-uppercase" matTooltip="{{(item?.finalPayableAmount - item?.receivedAmount )? ((item?.finalPayableAmount - item?.receivedAmount ) | currency:'INR'): 'No Dues'}}" >{{(item?.receivedAmount == item?.finalPayableAmount) ? 'Paid' : 'Due' }}</strong>
         </div>
         <div class="price-column">
           <mat-list dense>
             <mat-list-item>
               <span matLine style="color:var(--light)">Date</span>
               <h3 matLine style="font-weight: 600;"> 
-                <span class="text-light">{{item?.selledDate | date : 'medium'}}</span> 
+                <span class="">{{item?.selledDate | date}}</span> 
                 <!-- <span matLine class="">{{(item?.price - (item?.price*item?.discountInPercent)/100) | currency : 'INR'}}</span> -->
               </h3>
             </mat-list-item>
           </mat-list>
         </div>
-        <div class="table-column" (click)="$event.stopPropagation();">
+        <div class="" (click)="$event.stopPropagation();">
           <div class="d-flex align-items-center">
             <div class="spacer"></div>
             <button mat-icon-button class="rounded-lg bg-ultra-light" matTooltip="Edit | View | Delete" [matMenuTriggerFor]="menu">
@@ -97,5 +111,5 @@
   
         </div>
       </article>
-    </div>
+    </mat-card>
   </section>

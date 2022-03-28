@@ -28,7 +28,7 @@
 
 <section *ngIf="!isListView" class="items-container-table-view">
     <app-page-info [(pageInfo)]="pageInfo"></app-page-info>
-    <div *ngFor="let item of items;let i=index;">
+    <mat-card *ngFor="let item of items;let i=index;">
         <article class="item-list-view shadow ">
             <div style="width: 2rem;" class="layout">
                 <span class="strong">{{i+1}}</span>
@@ -55,7 +55,7 @@
 
 
            
-            <div class="table-column" (click)="$event.stopPropagation();">
+            <div class="" (click)="$event.stopPropagation();">
                 <div class="d-flex align-items-center">
                     <div class="spacer"></div>
                     <button mat-icon-button class="rounded-lg bg-ultra-light" matTooltip="Edit | View | Delete"
@@ -77,5 +77,5 @@
 
             </div>
         </article>
-    </div>
+    </mat-card>
 </section>
